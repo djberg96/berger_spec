@@ -1,357 +1,367 @@
 require 'rake'
+require 'rake/clean'
 require 'rake/testtask'
 
-desc "Runs the test suite for the core classes"
-Rake::TestTask.new('test_core') do |t|
-   files = FileList['test/core/**/tc*']
-   files.delete_if{ |f| File.basename(f) == 'tc_detach.rb' }
-   t.test_files = files
-   t.warning = true
-end
+CLEAN.include("**/*.rbc")
 
-desc "Runs the test suite for the Array class"
-Rake::TestTask.new('test_array') do |t|
-   files = FileList['test/core/Array/*/*.rb']
-   t.test_files = files
-   t.warning = true
-end
+namespace "test" do
+  desc "Runs the test suite for the core classes"
+  Rake::TestTask.new('core') do |t|
+     files = FileList['test/core/**/tc*']
+     files.delete_if{ |f| File.basename(f) == 'tc_detach.rb' }
+     t.test_files = files
+     t.warning = true
+  end
 
-desc "Runs the test suite for the Bignum class"
-Rake::TestTask.new('test_bignum') do |t|
-   t.test_files = FileList['test/core/Bignum/*/*.rb']
-   t.warning = true
-end
+  namespace "core" do
+    desc "Runs the test suite for the Array class"
+    Rake::TestTask.new('array') do |t|
+       files = FileList['test/core/Array/*/*.rb']
+       t.test_files = files
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Binding class"
-Rake::TestTask.new('test_binding') do |t|
-   t.test_files = FileList['test/core/Binding/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Bignum class"
+    Rake::TestTask.new('bignum') do |t|
+       t.test_files = FileList['test/core/Bignum/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Class module"
-Rake::TestTask.new('test_class') do |t|
-   t.test_files = FileList['test/core/Class/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Binding class"
+    Rake::TestTask.new('binding') do |t|
+       t.test_files = FileList['test/core/Binding/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Comparable module"
-Rake::TestTask.new('test_comparable') do |t|
-   t.test_files = FileList['test/core/Comparable/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Class module"
+    Rake::TestTask.new('class') do |t|
+       t.test_files = FileList['test/core/Class/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Dir class"
-Rake::TestTask.new('test_dir') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/Dir/*/*.rb']
-end
+    desc "Runs the test suite for the Comparable module"
+    Rake::TestTask.new('comparable') do |t|
+       t.test_files = FileList['test/core/Comparable/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Enumerable class"
-Rake::TestTask.new('test_enumerable') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/Enumerable/*/*.rb']
-end
+    desc "Runs the test suite for the Dir class"
+    Rake::TestTask.new('dir') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/Dir/*/*.rb']
+    end
 
-desc "Runs the test suite for the Errno class"
-Rake::TestTask.new('test_errno') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/Errno/*/*.rb']
-end
+    desc "Runs the test suite for the Enumerable class"
+    Rake::TestTask.new('enumerable') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/Enumerable/*/*.rb']
+    end
 
-desc "Runs the test suite for the Exception class"
-Rake::TestTask.new('test_exception') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/Exception/*/*.rb']
-end
+    desc "Runs the test suite for the Errno class"
+    Rake::TestTask.new('errno') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/Errno/*/*.rb']
+    end
 
-desc "Runs the test suite for the FalseClass class"
-Rake::TestTask.new('test_false') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/FalseClass/*/*.rb']
-end
+    desc "Runs the test suite for the Exception class"
+    Rake::TestTask.new('exception') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/Exception/*/*.rb']
+    end
 
-desc "Runs the test suite for the File class"
-Rake::TestTask.new('test_file') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/File/*/*.rb']
-end
+    desc "Runs the test suite for the FalseClass class"
+    Rake::TestTask.new('false') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/FalseClass/*/*.rb']
+    end
 
-desc "Runs the test suite for the File::Stat class"
-Rake::TestTask.new('test_file_stat') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/FileStat/*/*.rb']
-end
+    desc "Runs the test suite for the File class"
+    Rake::TestTask.new('file') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/File/*/*.rb']
+    end
 
-desc "Runs the test suite for the Fixnum class"
-Rake::TestTask.new('test_fixnum') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/Fixnum/*/*.rb']
-end
+    desc "Runs the test suite for the File::Stat class"
+    Rake::TestTask.new('file_stat') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/FileStat/*/*.rb']
+    end
 
-desc "Runs the test suite for the Float class"
-Rake::TestTask.new('test_float') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/Float/*/*.rb']
-end
+    desc "Runs the test suite for the Fixnum class"
+    Rake::TestTask.new('fixnum') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/Fixnum/*/*.rb']
+    end
 
-desc "Runs the test suite for the GC module"
-Rake::TestTask.new('test_gc') do |t|
-   t.test_files = FileList['test/core/GC/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Float class"
+    Rake::TestTask.new('float') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/Float/*/*.rb']
+    end
 
-desc "Runs the test suite for the Hash class"
-Rake::TestTask.new('test_hash') do |t|
-   t.test_files = FileList['test/core/Hash/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the GC module"
+    Rake::TestTask.new('gc') do |t|
+       t.test_files = FileList['test/core/GC/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Integer class"
-Rake::TestTask.new('test_integer') do |t|
-   t.test_files = FileList['test/core/Integer/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Hash class"
+    Rake::TestTask.new('hash') do |t|
+       t.test_files = FileList['test/core/Hash/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the IO class"
-Rake::TestTask.new('test_io') do |t|
-   t.test_files = FileList['test/core/IO/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Integer class"
+    Rake::TestTask.new('integer') do |t|
+       t.test_files = FileList['test/core/Integer/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Kernel module"
-Rake::TestTask.new('test_kernel') do |t|
-   t.test_files = FileList['test/core/Kernel/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the IO class"
+    Rake::TestTask.new('io') do |t|
+       t.test_files = FileList['test/core/IO/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Marshal class"
-Rake::TestTask.new('test_marshal') do |t|
-   t.test_files = FileList['test/core/Marshal/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Kernel module"
+    Rake::TestTask.new('kernel') do |t|
+       t.test_files = FileList['test/core/Kernel/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the MatchData class"
-Rake::TestTask.new('test_matchdata') do |t|
-   t.test_files = FileList['test/core/MatchData/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Marshal class"
+    Rake::TestTask.new('marshal') do |t|
+       t.test_files = FileList['test/core/Marshal/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Math module"
-Rake::TestTask.new('test_math') do |t|
-   t.test_files = FileList['test/core/Math/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the MatchData class"
+    Rake::TestTask.new('matchdata') do |t|
+       t.test_files = FileList['test/core/MatchData/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Method class"
-Rake::TestTask.new('test_method') do |t|
-   t.test_files = FileList['test/core/Method/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Math module"
+    Rake::TestTask.new('math') do |t|
+       t.test_files = FileList['test/core/Math/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for miscellaneous variables and constants"
-Rake::TestTask.new('test_misc') do |t|
-   t.test_files = FileList['test/core/Misc/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Method class"
+    Rake::TestTask.new('method') do |t|
+       t.test_files = FileList['test/core/Method/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Module object"
-Rake::TestTask.new('test_module') do |t|
-   t.test_files = FileList['test/core/Module/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for miscellaneous variables and constants"
+    Rake::TestTask.new('misc') do |t|
+       t.test_files = FileList['test/core/Misc/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the NilClass class"
-Rake::TestTask.new('test_nil') do |t|
-   t.test_files = FileList['test/core/NilClass/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Module object"
+    Rake::TestTask.new('module') do |t|
+       t.test_files = FileList['test/core/Module/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Numeric class"
-Rake::TestTask.new('test_numeric') do |t|
-   t.test_files = FileList['test/core/Numeric/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the NilClass class"
+    Rake::TestTask.new('nil') do |t|
+       t.test_files = FileList['test/core/NilClass/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Object class"
-Rake::TestTask.new('test_object') do |t|
-   t.test_files = FileList['test/core/Object/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Numeric class"
+    Rake::TestTask.new('numeric') do |t|
+       t.test_files = FileList['test/core/Numeric/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the ObjectSpace class"
-Rake::TestTask.new('test_objectspace') do |t|
-   t.test_files = FileList['test/core/ObjectSpace/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Object class"
+    Rake::TestTask.new('object') do |t|
+       t.test_files = FileList['test/core/Object/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Process module"
-Rake::TestTask.new('test_process') do |t|
-   t.test_files = FileList['test/core/Process/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the ObjectSpace class"
+    Rake::TestTask.new('objectspace') do |t|
+       t.test_files = FileList['test/core/ObjectSpace/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Process::GID module"
-Rake::TestTask.new('test_process_gid') do |t|
-   t.test_files = FileList['test/core/ProcessGID/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Process module"
+    Rake::TestTask.new('process') do |t|
+       t.test_files = FileList['test/core/Process/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Process::Sys module"
-Rake::TestTask.new('test_process_sys') do |t|
-   t.test_files = FileList['test/core/ProcessSys/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Process::GID module"
+    Rake::TestTask.new('process_gid') do |t|
+       t.test_files = FileList['test/core/ProcessGID/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Process::UID module"
-Rake::TestTask.new('test_process_uid') do |t|
-   t.test_files = FileList['test/core/ProcessUID/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Process::Sys module"
+    Rake::TestTask.new('process_sys') do |t|
+       t.test_files = FileList['test/core/ProcessSys/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Range class"
-Rake::TestTask.new('test_range') do |t|
-   t.test_files = FileList['test/core/Range/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Process::UID module"
+    Rake::TestTask.new('process_uid') do |t|
+       t.test_files = FileList['test/core/ProcessUID/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Regexp class"
-Rake::TestTask.new('test_regexp') do |t|
-   t.test_files = FileList['test/core/Regexp/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Range class"
+    Rake::TestTask.new('range') do |t|
+       t.test_files = FileList['test/core/Range/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Signal class"
-Rake::TestTask.new('test_signal') do |t|
-   t.test_files = FileList['test/core/Signal/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Regexp class"
+    Rake::TestTask.new('regexp') do |t|
+       t.test_files = FileList['test/core/Regexp/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the String class"
-Rake::TestTask.new('test_string') do |t|
-   t.test_files = FileList['test/core/String/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Signal class"
+    Rake::TestTask.new('signal') do |t|
+       t.test_files = FileList['test/core/Signal/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Struct class"
-Rake::TestTask.new('test_struct') do |t|
-   t.test_files = FileList['test/core/Struct/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the String class"
+    Rake::TestTask.new('string') do |t|
+       t.test_files = FileList['test/core/String/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Symbol class"
-Rake::TestTask.new('test_symbol') do |t|
-   t.test_files = FileList['test/core/Symbol/*/*.rb']
-   t.warning = true
-end
+    desc "Runs the test suite for the Struct class"
+    Rake::TestTask.new('struct') do |t|
+       t.test_files = FileList['test/core/Struct/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Thread class"
-Rake::TestTask.new('test_thread') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/Thread/*/*.rb']
-end
+    desc "Runs the test suite for the Symbol class"
+    Rake::TestTask.new('symbol') do |t|
+       t.test_files = FileList['test/core/Symbol/*/*.rb']
+       t.warning = true
+    end
 
-desc "Runs the test suite for the Time class"
-Rake::TestTask.new('test_time') do |t|
-   files = FileList['test/core/Time/*/*.rb']
-   t.test_files = files
-   t.warning = true
-end
+    desc "Runs the test suite for the Thread class"
+    Rake::TestTask.new('thread') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/Thread/*/*.rb']
+    end
 
-desc "Runs the test suite for the TrueClass class"
-Rake::TestTask.new('test_true') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/TrueClass/*/*.rb']
-end
+    desc "Runs the test suite for the Time class"
+    Rake::TestTask.new('time') do |t|
+       files = FileList['test/core/Time/*/*.rb']
+       t.test_files = files
+       t.warning = true
+    end
 
-desc "Runs the test suite for the UnboundMethod class"
-Rake::TestTask.new('test_unbound_method') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/core/UnboundMethod/*/*.rb']
-end
+    desc "Runs the test suite for the TrueClass class"
+    Rake::TestTask.new('true') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/TrueClass/*/*.rb']
+    end
 
-## Test tasks for the stdlib ##
+    desc "Runs the test suite for the UnboundMethod class"
+    Rake::TestTask.new('unbound_method') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/core/UnboundMethod/*/*.rb']
+    end
+  end
 
-desc "Run the test suite for all stdlib packages"
-Rake::TestTask.new('test_stdlib') do |t|
-   t.libs << 'lib'
-   t.warning = true
+  ## Test tasks for the stdlib ##
 
-   files = FileList['test/stdlib/*/*.rb']
-   if RUBY_PLATFORM.match('mswin')
+  desc "Run the test suite for all stdlib packages"
+  Rake::TestTask.new('stdlib') do |t|
+    t.libs << 'lib'
+    t.warning = true
+
+    files = FileList['test/stdlib/*/*.rb']
+
+    if File::ALT_SEPARATOR
       files.delete_if{ |f| File.basename(f) == 'tc_etc.rb' }
-   end
+    end
 
-   t.test_files = files
-end
+    t.test_files = files
+  end
 
-desc "Run the test suite for the English package"
-Rake::TestTask.new('test_english') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/stdlib/English/*.rb']
-end
+  namespace "stdlib" do
+    desc "Run the test suite for the English package"
+    Rake::TestTask.new('english') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/stdlib/English/*.rb']
+    end
 
-unless RUBY_PLATFORM.match('mswin')
-   desc "Run the test suite for the Etc library"
-   Rake::TestTask.new('test_etc') do |t|
-      t.libs << 'lib'
-      t.warning = true
-      t.test_files = FileList['test/stdlib/Etc/*.rb']
-   end
-end
+    unless File::ALT_SEPARATOR
+       desc "Run the test suite for the Etc library"
+       Rake::TestTask.new('etc') do |t|
+          t.libs << 'lib'
+          t.warning = true
+          t.test_files = FileList['test/stdlib/Etc/*.rb']
+       end
+    end
 
-desc "Run the test suite for the OpenStruct library"
-Rake::TestTask.new('test_openstruct') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/stdlib/OpenStruct/*.rb']
-end
+    desc "Run the test suite for the OpenStruct library"
+    Rake::TestTask.new('openstruct') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/stdlib/OpenStruct/*.rb']
+    end
 
-desc "Run the test suite for the Pathname library"
-Rake::TestTask.new('test_pathname') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/stdlib/Pathname/*.rb']
-end
+    desc "Run the test suite for the Pathname library"
+    Rake::TestTask.new('pathname') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/stdlib/Pathname/*.rb']
+    end
 
-desc "Run the test suite for the Rational library"
-Rake::TestTask.new('test_rational') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/stdlib/Rational/*.rb']
-end
+    desc "Run the test suite for the Rational library"
+    Rake::TestTask.new('rational') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/stdlib/Rational/*.rb']
+    end
 
-desc "Run the test suite for the Set library"
-Rake::TestTask.new('test_set') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/stdlib/Set/*.rb']
-end
+    desc "Run the test suite for the Set library"
+    Rake::TestTask.new('set') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/stdlib/Set/*.rb']
+    end
 
-desc "Run the test suite for the Socket library"
-Rake::TestTask.new('test_socket') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/stdlib/Socket/*.rb']
-end
+    desc "Run the test suite for the Socket library"
+    Rake::TestTask.new('socket') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/stdlib/Socket/*.rb']
+    end
 
-desc "Run the test suite for the tmpdir library"
-Rake::TestTask.new('test_tmpdir') do |t|
-   t.libs << 'lib'
-   t.warning = true
-   t.test_files = FileList['test/stdlib/Tmpdir/*.rb']
+    desc "Run the test suite for the tmpdir library"
+    Rake::TestTask.new('tmpdir') do |t|
+       t.libs << 'lib'
+       t.warning = true
+       t.test_files = FileList['test/stdlib/Tmpdir/*.rb']
+    end
+  end
 end
 
 ### Benchmark Tasks ###
