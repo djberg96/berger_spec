@@ -21,7 +21,8 @@ module Test
     VMS     = Config::CONFIG['host_os'] =~ /vms/i ? true : false
     OSX     = Config::CONFIG['host_os'] =~ /darwin|mach|osx/i ? true : false
 
-    JRUBY = defined? JRUBY_VERSION ? true : false
+    JRUBY    = defined?(JRUBY_VERSION) ? true : false
+    RUBINIUS = defined?(Rubinius) ? true : false
 
     # At the moment JRuby has not implemented Win32API so we'll skip it
     # for now. Some tests just won't work until it's implemented.
