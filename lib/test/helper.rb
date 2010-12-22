@@ -2,11 +2,15 @@
 # This module contains helper methods for use within the test cases included
 # in this package.  Most of them are cross platform helpers for figuring out
 # user names, home directories, etc.
+#
+# Because we're using test-unit 2, all test files must require this file
+# first before requiring test-unit directly.
 ##############################################################################
 require 'rubygems'
 require 'pathname'
 require 'rbconfig'
 require 'fileutils'
+gem 'test-unit'
 
 module Test
   module Helper
