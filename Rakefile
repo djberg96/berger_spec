@@ -242,6 +242,7 @@ namespace "test" do
 
     desc "Runs the test suite for the String class"
     Rake::TestTask.new('string') do |t|
+      t.libs << 'lib'
       t.test_files = FileList['test/core/String/*/*.rb']
       t.warning = true
     end
