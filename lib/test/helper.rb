@@ -24,6 +24,9 @@ module Test
     JRUBY    = defined?(JRUBY_VERSION) ? true : false
     RUBINIUS = defined?(Rubinius) ? true : false
 
+    # Neither JRuby nor Rubinius attempt to implement all (or any) $SAFE rules.
+    IGNORE_SAFE = JRUBY || RUBINIUS
+
     # At the moment JRuby has not implemented Win32API so we'll skip it
     # for now. Some tests just won't work until it's implemented.
     if WINDOWS && !JRUBY
