@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#push instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Push_Instance < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#flatten and Array#flatten! instance methods.
 ##########################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Flatten_Instance < Test::Unit::TestCase

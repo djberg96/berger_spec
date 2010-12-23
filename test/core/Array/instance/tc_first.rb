@@ -3,6 +3,7 @@
 #
 # Test case for the Array#first instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_First_InstanceMethod < Test::Unit::TestCase

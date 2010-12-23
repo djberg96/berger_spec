@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#nitems instance method.
 ######################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_NItems_Instance < Test::Unit::TestCase

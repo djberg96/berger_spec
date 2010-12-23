@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#join instance method.
 ######################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Join_Instance < Test::Unit::TestCase

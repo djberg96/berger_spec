@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#at instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_At_InstanceMethod < Test::Unit::TestCase

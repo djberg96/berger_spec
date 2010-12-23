@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#slice and Array#slice! instance methods.
 #####################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Slice_InstanceMethod < Test::Unit::TestCase

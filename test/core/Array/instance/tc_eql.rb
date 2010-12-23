@@ -3,6 +3,7 @@
 #
 # Test for the Array#eql? instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Eql_Instance < Test::Unit::TestCase

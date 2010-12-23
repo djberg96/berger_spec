@@ -4,8 +4,8 @@
 # Test suite for Array#== instance method. I added a custom class to verify
 # that its to_ary method is handled properly by the Array#== method.
 #############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Array_Equality_Instance < Test::Unit::TestCase
    include Test::Helper

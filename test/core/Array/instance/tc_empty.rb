@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#empty? instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Empty_InstanceMethod < Test::Unit::TestCase

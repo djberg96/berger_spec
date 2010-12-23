@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#unshift instance method.
 ###########################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_Unshift_Instance < Test::Unit::TestCase

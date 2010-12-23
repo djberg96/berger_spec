@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#reject! instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Reject_Instance < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#pop instance method.
 ################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Pop_Instance < Test::Unit::TestCase

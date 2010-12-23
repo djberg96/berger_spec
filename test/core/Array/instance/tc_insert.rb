@@ -3,8 +3,8 @@
 #
 # Test case for the Array#insert instance method.
 #######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Array_Insert_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

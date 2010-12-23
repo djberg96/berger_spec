@@ -5,8 +5,8 @@
 # the Object#hash method because the Array class has a custom implementation
 # in array.c.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Array_Hash_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

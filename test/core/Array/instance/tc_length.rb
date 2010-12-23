@@ -3,6 +3,7 @@
 #
 # Test for the Array#length instance method.
 ######################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Length_Instance < Test::Unit::TestCase

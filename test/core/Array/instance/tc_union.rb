@@ -5,6 +5,7 @@
 # its own to_ary method here to verify that it's handled by the Array#|
 # method as well.
 ############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Union_Instance < Test::Unit::TestCase

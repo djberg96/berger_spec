@@ -5,6 +5,7 @@
 # implementation in array.c, so that's what we test it instead of relying on
 # the tests for Object#inspect.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_Inspect_InstanceMethod < Test::Unit::TestCase

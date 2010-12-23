@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#* instance method.
 ################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Repetition_InstanceMethod < Test::Unit::TestCase

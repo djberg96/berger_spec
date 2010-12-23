@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#fetch instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_Fetch_InstanceMethod < Test::Unit::TestCase

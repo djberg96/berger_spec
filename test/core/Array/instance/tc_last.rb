@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#last instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_Last_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Array#delete_at instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_DeleteAt_InstanceMethod < Test::Unit::TestCase

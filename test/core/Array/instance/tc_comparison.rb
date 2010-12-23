@@ -4,6 +4,7 @@
 # Test suite for the Array#<=> method. Note that I've added a custom class
 # with its own to_ary method to ensure that Array#<=> responds to it properly.
 ###############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Comparison_Instance < Test::Unit::TestCase

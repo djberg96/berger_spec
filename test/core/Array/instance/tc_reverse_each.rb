@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#reverse_each instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_ReverseEach_Instance < Test::Unit::TestCase

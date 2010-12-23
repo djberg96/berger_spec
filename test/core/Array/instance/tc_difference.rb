@@ -4,6 +4,7 @@
 # Test suite for the Array#- instance method. Note that we define a class
 # with a custom to_ary method to ensure that Array#- uses it properly.
 ############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Difference_InstanceMethod < Test::Unit::TestCase

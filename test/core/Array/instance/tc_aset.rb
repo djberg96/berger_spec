@@ -6,6 +6,7 @@
 # Note that I find the rules for the second and third forms of Array#[]= to
 # be incredibly byzantine in general.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_Aset_InstanceMethod < Test::Unit::TestCase

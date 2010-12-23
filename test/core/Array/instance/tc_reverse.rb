@@ -4,6 +4,7 @@
 # Test suite for the Array#reverse and Array#reverse!
 # instance methods.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Reverse_Instance < Test::Unit::TestCase

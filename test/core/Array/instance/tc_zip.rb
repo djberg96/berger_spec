@@ -6,6 +6,7 @@
 # the implementation in array.c versus enum.c. Specifically, Array#zip
 # requires that its arguments respond to to_ary.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Array_Zip_InstanceMethod < Test::Unit::TestCase

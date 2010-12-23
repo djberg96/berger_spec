@@ -5,8 +5,8 @@
 # a custom class here to verify that Array#replace handles custom to_ary
 # methods properly.
 ##############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Array_Replace_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

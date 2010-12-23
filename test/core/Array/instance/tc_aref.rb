@@ -3,8 +3,8 @@
 #
 # Test case for the Array#[] instance method.
 #######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Array_Aref_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

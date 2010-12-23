@@ -9,8 +9,8 @@
 # size for the 'sSiIlL' directives (i.e. directive followed byunderscore)
 # are not robust.
 ##############################################################################
-require "test/unit"
 require "test/helper"
+require "test/unit"
 
 class TC_Array_Pack_Instance < Test::Unit::TestCase
    include Test::Helper

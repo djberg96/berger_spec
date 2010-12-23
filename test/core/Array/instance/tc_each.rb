@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#each instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Each_Instance < Test::Unit::TestCase

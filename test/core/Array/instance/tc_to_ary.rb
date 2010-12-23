@@ -5,6 +5,7 @@
 # validate return values for arrays with a custom to_ary
 # method, and those that have no to_ary method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_ToAry_Instance < Test::Unit::TestCase

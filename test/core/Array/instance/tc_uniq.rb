@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#uniq and Array#unique instance methods.
 ####################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Uniq_Instance < Test::Unit::TestCase

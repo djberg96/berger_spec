@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#to_s instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_ToS_Instance < Test::Unit::TestCase

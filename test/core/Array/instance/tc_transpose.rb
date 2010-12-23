@@ -4,6 +4,7 @@
 # Test suite for the Array#transpose method. These tests are skipped in the
 # Amber implementation, via the Rakefile.
 #############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Transpose_InstanceMethod < Test::Unit::TestCase

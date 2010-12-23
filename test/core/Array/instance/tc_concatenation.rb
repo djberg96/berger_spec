@@ -4,6 +4,7 @@
 # Test suite for the Array#+ instance method. I've added a class with a
 # to_ary method to ensure that Array#+ handles it properly.
 ##########################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Concatenation_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#shift instance method.
 ################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Shift_Instance < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#assoc instance method.
 ########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Assoc_Instance < Test::Unit::TestCase

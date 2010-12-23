@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#include? method.
 ######################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Include_Instance < Test::Unit::TestCase

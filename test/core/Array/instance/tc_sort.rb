@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#sort and Array#sort! instance methods.
 ###################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Sort_InstanceMethod < Test::Unit::TestCase

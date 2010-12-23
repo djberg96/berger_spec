@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#delete_if instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_DeleteIf_Instance < Test::Unit::TestCase

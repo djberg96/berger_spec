@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#collect and Array#collect! instance methods.
 #########################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Collect_Instance < Test::Unit::TestCase

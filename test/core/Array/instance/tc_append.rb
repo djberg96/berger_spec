@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#<< instance method.
 ############################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Append_InstanceMethod < Test::Unit::TestCase

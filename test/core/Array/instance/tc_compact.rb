@@ -4,6 +4,7 @@
 # Test suite for the Array#compact instance and Array#compact!
 # instance methods.
 #################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Compact_Instance < Test::Unit::TestCase

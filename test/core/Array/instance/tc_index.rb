@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#index instance method.
 ######################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Index_Instance < Test::Unit::TestCase

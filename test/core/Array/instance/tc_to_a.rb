@@ -3,6 +3,7 @@
 #
 # Test suite for the Array#to_a instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class FooArray < Array

@@ -4,6 +4,7 @@
 # Test suite for the Array#concat instance method. I've added a class with
 # a custom to_ary method to ensure that it behaves properly with Array#concat.
 ###############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Array_Concat_Instance < Test::Unit::TestCase
