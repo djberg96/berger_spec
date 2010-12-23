@@ -37,10 +37,32 @@ namespace "test" do
       t.warning = true
     end
 
+    namespace "bignum" do
+      Dir['test/core/Bignum/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
+    end
+
     desc "Runs the test suite for the Binding class"
     Rake::TestTask.new('binding') do |t|
       t.test_files = FileList['test/core/Binding/*/*.rb']
       t.warning = true
+    end
+
+    namespace "binding" do
+      Dir['test/core/Binding/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
     end
 
     desc "Runs the test suite for the Class module"
@@ -60,6 +82,17 @@ namespace "test" do
       t.libs << 'lib'
       t.warning = true
       t.test_files = FileList['test/core/Dir/*/*.rb']
+    end
+
+    namespace "dir" do
+      Dir['test/core/Dir/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
     end
 
     desc "Runs the test suite for the Enumerable class"
@@ -97,11 +130,33 @@ namespace "test" do
       t.test_files = FileList['test/core/File/*/*.rb']
     end
 
+    namespace "file" do
+      Dir['test/core/File/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
+    end
+
     desc "Runs the test suite for the File::Stat class"
-    Rake::TestTask.new('file_stat') do |t|
+    Rake::TestTask.new('file-stat') do |t|
       t.libs << 'lib'
       t.warning = true
       t.test_files = FileList['test/core/FileStat/*/*.rb']
+    end
+
+    namespace "file-stat" do
+      Dir['test/core/FileStat/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
     end
 
     desc "Runs the test suite for the Fixnum class"
@@ -281,6 +336,17 @@ namespace "test" do
       files = FileList['test/core/Time/*/*.rb']
       t.test_files = files
       t.warning = true
+    end
+
+    namespace "time" do
+      Dir['test/core/Time/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
     end
 
     desc "Runs the test suite for the TrueClass class"
