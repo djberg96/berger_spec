@@ -108,8 +108,8 @@ module Test
 
     # Returns the null device for the given platform
     def null_device
-      case CONFIG['host_os']
-        when /windows|mswin/i
+      case Config::CONFIG['host_os']
+        when /windows|mswin|msdos|cygwin|mingw|win32/i
           'NUL'
         when /amiga/i
           'NIL:'
