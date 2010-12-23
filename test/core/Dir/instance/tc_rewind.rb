@@ -3,8 +3,8 @@
 #
 # Test case for the Dir#rewind instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Rewind_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

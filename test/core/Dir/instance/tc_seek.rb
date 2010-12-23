@@ -3,8 +3,8 @@
 #
 # Test case for the Dir#seek instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Seek_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

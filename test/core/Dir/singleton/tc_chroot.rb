@@ -5,8 +5,8 @@
 # are skipped on Windows and/or if the test suite is not being run
 # as root.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Chroot_Class < Test::Unit::TestCase
    include Test::Helper

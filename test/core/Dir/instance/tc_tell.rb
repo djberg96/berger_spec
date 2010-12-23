@@ -4,8 +4,8 @@
 # Test case for the Dir#tell instance method.  This also covers the
 # Dir#pos synonym.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Tell_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

@@ -3,8 +3,8 @@
 #
 # Test case for the Dir.glob class method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 require 'fileutils'
 
 class TC_Dir_Glob_Class < Test::Unit::TestCase

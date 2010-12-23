@@ -3,6 +3,7 @@
 #
 # Test case for the Dir#read instance method.
 ######################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Dir_Read_Instance < Test::Unit::TestCase

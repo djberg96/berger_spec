@@ -3,8 +3,8 @@
 #
 # Test case for the Dir#close instance method
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Close_Instance < Test::Unit::TestCase
    include Test::Helper

@@ -4,8 +4,8 @@
 # Test case for the Dir.delete class method.  This also covers the
 # Dir.rmdir and Dir.unlink aliases.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Delete_Class < Test::Unit::TestCase
    include Test::Helper

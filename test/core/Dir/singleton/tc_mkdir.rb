@@ -3,8 +3,8 @@
 #
 # Test case for the Dir.mkdir class method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Mkdir_Class < Test::Unit::TestCase
    include Test::Helper

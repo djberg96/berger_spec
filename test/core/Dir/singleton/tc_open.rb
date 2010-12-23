@@ -3,6 +3,7 @@
 #
 # Test case for the Dir.open class method.
 ######################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Dir_Open_Class < Test::Unit::TestCase

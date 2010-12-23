@@ -3,8 +3,8 @@
 #
 # Test suite for the Dir#path instance method.
 #########################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Path_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

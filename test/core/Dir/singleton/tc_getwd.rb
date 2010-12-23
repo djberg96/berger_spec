@@ -4,8 +4,8 @@
 # Test suite for the Dir.getwd class method.  This also tests
 # the Dir.pwd alias.
 ###############################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Dir_Getwd_Class < Test::Unit::TestCase
    include Test::Helper

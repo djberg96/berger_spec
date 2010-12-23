@@ -3,8 +3,8 @@
 #
 # Test suite for the Dir.new class method.
 ##############################################
-require "test/unit"
 require "test/helper"
+require "test/unit"
 
 class TC_Dir_New_Class < Test::Unit::TestCase
    include Test::Helper
