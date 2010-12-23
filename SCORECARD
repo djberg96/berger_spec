@@ -47,3 +47,7 @@
   no mention of its removal in the ChangeLog. In any case, the IO objects do NOT
   share a common file pointer. IO just uses the inherited Object#clone method,
   and dup's the file pointer.
+
+== JRuby, Rubinius, etc
+  The majority of the bugs reported for other implementations of Ruby are the
+  direct result of this test suite.
