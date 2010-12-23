@@ -49,8 +49,11 @@ class TC_Array_FlattenBang_InstanceMethod < Test::Unit::TestCase
       assert_nothing_raised{ @array.flatten!(1) }
     end
 
+    test "flatten bang with argument of zero returns nil" do
+      assert_nil(@array.dup.flatten!(0), "=> Ruby 1.8-Bug#4196")
+    end
+
     test "flatten bang with argument returns expected results" do
-      assert_equal(@array, @array.dup.flatten!(0))
       assert_equal([1,2,3,[4,5]], @array.dup.flatten!(1))
       assert_equal([1,2,3,4,5], @array.dup.flatten!(2))
     end
