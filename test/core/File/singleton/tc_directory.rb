@@ -3,8 +3,8 @@
 #
 # Test case for the File.directory? class method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Directory_ClassMethod < Test::Unit::TestCase
    include Test::Helper

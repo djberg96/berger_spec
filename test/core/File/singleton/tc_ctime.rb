@@ -3,6 +3,7 @@
 #
 # Test case for the File.ctime class method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_File_Ctime_ClassMethod < Test::Unit::TestCase

@@ -9,8 +9,8 @@
 #
 # TODO: Validate that these tests work on Linux, FreeBSD, etc.
 ##########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Lchown_ClassMethod < Test::Unit::TestCase
    include Test::Helper

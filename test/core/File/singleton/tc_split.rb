@@ -6,8 +6,8 @@
 # Note: this author considers the behavior of File.split on root paths to
 # be nonsensical. The POSIX spec does NOT back up the current implementation.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Split < Test::Unit::TestCase
    include Test::Helper

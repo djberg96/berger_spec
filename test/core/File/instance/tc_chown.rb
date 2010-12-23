@@ -14,8 +14,8 @@
 # best if you run this test case as root. If not, some tests will be
 # skipped.
 ##########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Chown_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

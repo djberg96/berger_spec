@@ -4,8 +4,8 @@
 # Test case for the File.writable? class method. Some tests
 # skipped on MS Windows.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Writable_ClassMethod < Test::Unit::TestCase
    include Test::Helper

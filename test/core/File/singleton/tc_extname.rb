@@ -3,6 +3,7 @@
 #
 # Test suite for the File.extname method.
 ###########################################
+require 'test/helper'
 require "test/unit"
 
 class TC_File_Extname < Test::Unit::TestCase

@@ -4,8 +4,8 @@
 # Test case for the File.lchmod class method. Note that almost all
 # of these tests are skipped on MS Windows, OS X, and SOLARIS.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Lchmod_ClassMethod < Test::Unit::TestCase
    include Test::Helper

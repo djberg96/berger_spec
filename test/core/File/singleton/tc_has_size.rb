@@ -3,8 +3,8 @@
 #
 # Test case for the File.size? class method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_HasSize_ClassMethod < Test::Unit::TestCase
    include Test::Helper

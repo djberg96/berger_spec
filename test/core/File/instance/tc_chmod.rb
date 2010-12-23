@@ -3,8 +3,8 @@
 #
 # Test case for the File#chmod instance method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Chmod_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

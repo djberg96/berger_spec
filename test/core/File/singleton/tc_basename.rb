@@ -4,8 +4,8 @@
 # Test suite for the File.basename method. Note that there are some known
 # issues with File.basename on MS Windows. See ruby-core: 10321.
 ##############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Basename_Class < Test::Unit::TestCase
    include Test::Helper

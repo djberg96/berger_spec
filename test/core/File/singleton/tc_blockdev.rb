@@ -11,8 +11,8 @@
 # anything that isn't a character, pipe or disk file type is
 # considered a block device.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Block_ClassMethod < Test::Unit::TestCase
    include Test::Helper

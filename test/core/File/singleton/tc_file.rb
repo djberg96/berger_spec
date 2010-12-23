@@ -3,8 +3,8 @@
 #
 # Test case for the File.file? class method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_File_ClassMethod < Test::Unit::TestCase
    include Test::Helper

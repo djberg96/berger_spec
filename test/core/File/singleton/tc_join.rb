@@ -3,8 +3,8 @@
 #
 # Test suite for the File.join class method
 ##########################################################
-require "test/unit"
 require "test/helper"
+require "test/unit"
 
 class TC_File_Join_ClassMethod < Test::Unit::TestCase
    include Test::Helper

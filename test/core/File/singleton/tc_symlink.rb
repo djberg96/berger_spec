@@ -6,8 +6,8 @@
 # TODO: Most of these tests are skipped on MS Windows, but will need
 # to be updated for Vista.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Symlink_ClassMethod < Test::Unit::TestCase
    include Test::Helper

@@ -17,9 +17,9 @@
 # best if you run this test case as root. If not, some tests will be
 # skipped.
 ##########################################################################
-require 'test/unit'
 require 'test/helper'
-require 'etc' rescue nil
+require 'test/unit'
+require 'etc'
 
 class TC_File_Chown_ClassMethod < Test::Unit::TestCase
    include Test::Helper

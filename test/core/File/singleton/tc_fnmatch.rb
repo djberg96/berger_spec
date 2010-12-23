@@ -4,8 +4,8 @@
 # Test case for the File.fnmatch class method and the File.fnmatch?
 # alias.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 require 'fileutils'
 
 class TC_File_Fnmatch_ClassMethod < Test::Unit::TestCase
@@ -29,7 +29,7 @@ class TC_File_Fnmatch_ClassMethod < Test::Unit::TestCase
       assert_respond_to(File, :fnmatch)
       assert_respond_to(File, :fnmatch?)
       assert_nothing_raised{ File.fnmatch('cat', @path1) }
-      assert_kind_of(Boolean, File.fnmatch('cat', @path1))
+      assert_boolean(File.fnmatch('cat', @path1))
    end
 
    def test_fnmatch_no_metacharacters

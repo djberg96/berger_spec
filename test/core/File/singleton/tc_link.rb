@@ -4,8 +4,8 @@
 # Test case for the File.link class method. Most tests skipped on
 # MS Windows
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Link_ClassMethod < Test::Unit::TestCase
    include Test::Helper

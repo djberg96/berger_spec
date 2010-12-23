@@ -3,8 +3,8 @@
 #
 # Test case for the File.zero? class method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Zero_ClassMethod < Test::Unit::TestCase
    include Test::Helper

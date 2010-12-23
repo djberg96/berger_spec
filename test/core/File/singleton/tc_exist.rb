@@ -4,8 +4,8 @@
 # Test case for the File.exist? class method and the File.exists?
 # alias.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Exist_ClassMethod < Test::Unit::TestCase
    include Test::Helper

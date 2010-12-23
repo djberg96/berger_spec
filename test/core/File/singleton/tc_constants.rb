@@ -7,8 +7,8 @@
 # Note that there is some overlap between this test case and the
 # equivalent test case for IO.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Constants < Test::Unit::TestCase
    include Test::Helper

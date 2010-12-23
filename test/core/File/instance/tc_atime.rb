@@ -3,8 +3,8 @@
 #
 # Test case for the File#atime instance method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Atime_InstanceMethod < Test::Unit::TestCase
    def setup

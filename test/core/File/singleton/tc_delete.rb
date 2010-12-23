@@ -4,8 +4,8 @@
 # Test case for the File.delete class method, and the File.unlink
 # alias.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Delete_ClassMethod < Test::Unit::TestCase
    include Test::Helper

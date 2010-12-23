@@ -3,8 +3,8 @@
 #
 # Test case for the File#mtime instance method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Mtime_InstanceMethod < Test::Unit::TestCase
    def setup

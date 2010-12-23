@@ -3,8 +3,8 @@
 #
 # Test case for the File.identical? class method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Identical_ClassMethod < Test::Unit::TestCase
    include Test::Helper
@@ -23,7 +23,7 @@ class TC_File_Identical_ClassMethod < Test::Unit::TestCase
    def test_identical_basic
       assert_respond_to(File, :identical?)
       assert_nothing_raised{ File.identical?(@file1, @file2) }
-      assert_kind_of(Boolean, File.identical?(@file1, @file2))
+      assert_boolean(File.identical?(@file1, @file2))
    end
 
    def test_identical

@@ -3,8 +3,8 @@
 #
 # Test case for the File.rename class method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Rename_ClassMethod < Test::Unit::TestCase
    include Test::Helper

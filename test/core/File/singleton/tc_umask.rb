@@ -6,8 +6,8 @@
 # 
 # TODO: Add tests for UNIX platforms.
 ##########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Umask_ClassMethod < Test::Unit::TestCase
    include Test::Helper

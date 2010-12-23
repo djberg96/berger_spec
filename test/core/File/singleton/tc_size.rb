@@ -5,6 +5,7 @@
 #
 # TODO: Add big file (>2gb) tests.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_File_Size_ClassMethod < Test::Unit::TestCase

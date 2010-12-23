@@ -3,8 +3,8 @@
 #
 # Test case for the File.utime class method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Utime_ClassMethod < Test::Unit::TestCase
    include Test::Helper

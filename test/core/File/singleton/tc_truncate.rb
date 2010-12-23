@@ -3,8 +3,8 @@
 #
 # Test case for the File.truncate class method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Truncate_ClassMethod < Test::Unit::TestCase
    include Test::Helper

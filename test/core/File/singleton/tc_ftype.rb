@@ -6,8 +6,8 @@
 # TODO: Add tests for 'socket' and 'unknown', and better tests for
 # MS Windows.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_Ftype_ClassMethod < Test::Unit::TestCase
    include Test::Helper

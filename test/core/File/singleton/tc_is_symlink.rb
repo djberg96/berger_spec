@@ -5,8 +5,8 @@
 #
 # TODO: This will have to be updated for Vista.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_File_IsSymlink_ClassMethod < Test::Unit::TestCase
    include Test::Helper
