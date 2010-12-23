@@ -4,6 +4,7 @@
 # Because the time.c source file implements a custom version of _dump
 # and _load, we test it independently here.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Marshal_InstanceMethod < Test::Unit::TestCase

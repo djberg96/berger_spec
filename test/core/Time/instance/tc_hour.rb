@@ -3,6 +3,7 @@
 #
 # Test case for the Time#hour instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Hour_InstanceMethod < Test::Unit::TestCase

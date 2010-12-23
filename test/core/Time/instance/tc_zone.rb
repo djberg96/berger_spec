@@ -3,8 +3,8 @@
 #
 # Test case for the Time#zone instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Zone_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

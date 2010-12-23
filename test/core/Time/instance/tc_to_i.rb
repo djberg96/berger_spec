@@ -3,6 +3,7 @@
 #
 # Test case for the Time#to_i instance method and the Time#tv_sec alias.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_ToI_InstanceMethod < Test::Unit::TestCase

@@ -3,8 +3,8 @@
 #
 # Test case for the Time.gm class method and the Time.utc alias.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_GM_ClassMethod < Test::Unit::TestCase
    include Test::Helper

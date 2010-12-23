@@ -3,8 +3,8 @@
 #
 # Test case for the Time.local class method and the Time.mktime alias.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Local_ClassMethod < Test::Unit::TestCase
    include Test::Helper

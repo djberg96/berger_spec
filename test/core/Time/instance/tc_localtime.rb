@@ -6,8 +6,8 @@
 # Note: Amber unifies Time#localtime and Time#getlocal into the
 # Time#localtime and Time#localtime! methods.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Localtime_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

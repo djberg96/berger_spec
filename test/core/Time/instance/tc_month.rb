@@ -3,6 +3,7 @@
 #
 # Test case for the Time#month instance method and the Time#mon alias.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Month_InstanceMethod < Test::Unit::TestCase

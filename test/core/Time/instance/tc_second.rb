@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_sec.rb
+# tc_second.rb
 #
 # Test case for the Time#sec instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Second_InstanceMethod < Test::Unit::TestCase

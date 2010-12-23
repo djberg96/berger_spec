@@ -3,8 +3,8 @@
 #
 # Test case for the Time#isdst instance method, and the Time#dst? alias.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Isdst_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -16,13 +16,13 @@ class TC_Time_Isdst_InstanceMethod < Test::Unit::TestCase
    def test_isdst_basic
       assert_respond_to(@time, :isdst)
       assert_nothing_raised{ @time.isdst }
-      assert_kind_of(Boolean, @time.isdst)
+      assert_boolean(@time.isdst)
    end
 
    def test_dst_basic
       assert_respond_to(@time, :dst?)
       assert_nothing_raised{ @time.dst? }
-      assert_kind_of(Boolean, @time.dst?)
+      assert_boolean(@time.dst?)
    end
 
    def test_isdst

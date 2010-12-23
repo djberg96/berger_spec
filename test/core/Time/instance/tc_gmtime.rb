@@ -4,11 +4,11 @@
 # Test case for the Time#gmtime instance method and the Time#utc
 # alias.
 #
-# NOTE: Amber unified the Time#getgm and Time#gmtime methods into the
+# NOTE: Sapphire unified the Time#getgm and Time#gmtime methods into the
 # Time#gmtime and Time#gmtime! methods.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Gmtime_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

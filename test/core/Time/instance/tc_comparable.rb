@@ -4,8 +4,8 @@
 # These tests validate the various Comparable mixin methods for the
 # Time class.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Comparable_InstanceMethods < Test::Unit::TestCase
    include Test::Helper
@@ -17,12 +17,12 @@ class TC_Time_Comparable_InstanceMethods < Test::Unit::TestCase
    end
 
    def test_between
-      assert_kind_of(Boolean, @now.between?(@past, @future))
-      assert_equal(true, @now.between?(@past, @future))
-      assert_equal(false, @now.between?(@future, @past))
-      assert_equal(true, @now.between?(@now, @now))
-      assert_equal(true, @now.between?(@now, @future))
-      assert_equal(false, @now.between?(@now, @past))
+      assert_boolean(@now.between?(@past, @future))
+      assert_true(@now.between?(@past, @future))
+      assert_false(@now.between?(@future, @past))
+      assert_true(@now.between?(@now, @now))
+      assert_true(@now.between?(@now, @future))
+      assert_false(@now.between?(@now, @past))
    end
 
    def test_expected_between_failures
@@ -32,10 +32,10 @@ class TC_Time_Comparable_InstanceMethods < Test::Unit::TestCase
    end
 
    def test_greater_than
-      assert_kind_of(Boolean, @now > @future)
-      assert_equal(false, @now > @now)
-      assert_equal(false, @now > @future)
-      assert_equal(true, @future > @now)
+      assert_boolean(@now > @future)
+      assert_false(@now > @now)
+      assert_false(@now > @future)
+      assert_true(@future > @now)
    end
 
    def test_expected_greater_than_failures
@@ -45,10 +45,10 @@ class TC_Time_Comparable_InstanceMethods < Test::Unit::TestCase
    end
 
    def test_greater_than_or_equal_to
-      assert_kind_of(Boolean, @now >= @future)
-      assert_equal(true, @now >= @now)
-      assert_equal(false, @now >= @future)
-      assert_equal(true, @future >= @now)
+      assert_boolean(@now >= @future)
+      assert_true(@now >= @now)
+      assert_false(@now >= @future)
+      assert_true(@future >= @now)
    end
 
    def test_expected_greater_than_or_equal_to_failures
@@ -58,10 +58,10 @@ class TC_Time_Comparable_InstanceMethods < Test::Unit::TestCase
    end
 
    def test_equals
-      assert_kind_of(Boolean, @now == @future)
-      assert_equal(true, @now == @now)
-      assert_equal(false, @now == @future)
-      assert_equal(false, @future == @now)
+      assert_boolean(@now == @future)
+      assert_true(@now == @now)
+      assert_false(@now == @future)
+      assert_false(@future == @now)
    end
 
    def test_expected_equals_failures
@@ -72,10 +72,10 @@ class TC_Time_Comparable_InstanceMethods < Test::Unit::TestCase
    end
 
    def test_less_than_or_equal_to
-      assert_kind_of(Boolean, @now <= @future)
-      assert_equal(true, @now <= @now)
-      assert_equal(true, @now <= @future)
-      assert_equal(false, @future <= @now)
+      assert_boolean(@now <= @future)
+      assert_true(@now <= @now)
+      assert_true(@now <= @future)
+      assert_false(@future <= @now)
    end
 
    def test_expected_less_than_or_equal_to_failures
@@ -85,7 +85,7 @@ class TC_Time_Comparable_InstanceMethods < Test::Unit::TestCase
    end
 
    def test_less_than
-      assert_kind_of(Boolean, @now < @future)
+      assert_boolean(@now < @future)
       assert_equal(true, @now < @future)
       assert_equal(false, @future < @now)
    end

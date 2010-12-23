@@ -3,8 +3,8 @@
 #
 # Test case for the Time#gmt? instance method and the Time#utc? alias.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_IsGmt_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -17,15 +17,15 @@ class TC_Time_IsGmt_InstanceMethod < Test::Unit::TestCase
    def test_is_gmt_basic
       assert_respond_to(@local, :gmt?)
       assert_nothing_raised{ @local.gmt? }
-      assert_kind_of(Boolean, @local.gmt?)
+      assert_boolean(@local.gmt?)
    end
 
    def test_is_utc_alias_basic
       assert_respond_to(@local, :utc?)
       assert_nothing_raised{ @local.utc? }
-      assert_kind_of(Boolean, @local.utc?)
+      assert_boolean(@local.utc?)
    end
-   
+
    def test_is_gmt
       assert_equal(true, @gmt.gmt?)
       assert_equal(false, @local.gmt?)

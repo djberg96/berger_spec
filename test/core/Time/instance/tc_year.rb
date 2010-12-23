@@ -4,6 +4,7 @@
 # Test case for the Time#year instance method.
 ###############################################################################
 require 'test/unit'
+require 'test/unit'
 
 class TC_Time_Year_InstanceMethod < Test::Unit::TestCase
    def setup

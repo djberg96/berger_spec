@@ -5,8 +5,8 @@
 #
 # TODO: Add tests for 'c', 'x', 'X', and 'Z'.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Strftime_InstanceMethod < Test::Unit::TestCase
    def setup

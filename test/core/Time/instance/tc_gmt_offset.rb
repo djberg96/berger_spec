@@ -4,8 +4,8 @@
 # Test case for the Time#gmt_offset instance method and the
 # Time#utc_offset alias.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_GmtOffset_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

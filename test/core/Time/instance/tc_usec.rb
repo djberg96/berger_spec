@@ -3,6 +3,7 @@
 #
 # Test case for the Time#usec instance method and the Time#tv_usec alias.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Usec_InstanceMethod < Test::Unit::TestCase

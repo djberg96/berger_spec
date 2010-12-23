@@ -3,6 +3,7 @@
 #
 # Test case for the Time.new class method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_New_ClassMethod < Test::Unit::TestCase

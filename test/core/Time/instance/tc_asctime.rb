@@ -3,6 +3,7 @@
 #
 # Test case for the Time#asctime instance method, and the Time#ctime alias.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Asctime_InstanceMethod < Test::Unit::TestCase

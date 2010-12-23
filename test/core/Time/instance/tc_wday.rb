@@ -3,6 +3,7 @@
 #
 # Test case for the Time#wday instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Wday_InstanceMethod < Test::Unit::TestCase

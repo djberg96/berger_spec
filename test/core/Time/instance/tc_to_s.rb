@@ -3,8 +3,8 @@
 #
 # Test case for the Time#to_s instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_ToS_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

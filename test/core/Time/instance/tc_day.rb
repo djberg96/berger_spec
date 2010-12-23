@@ -3,6 +3,7 @@
 #
 # Test case for the Time#day instance method and the Time#mday alias.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Day_InstanceMethod < Test::Unit::TestCase

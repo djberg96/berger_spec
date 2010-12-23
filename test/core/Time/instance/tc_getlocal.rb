@@ -3,8 +3,8 @@
 #
 # Test case for the Time#getlocal instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Getlocal_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

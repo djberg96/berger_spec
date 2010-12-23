@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_min.rb
+# tc_minute.rb
 #
 # Test case for the Time#min instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_Minute_InstanceMethod < Test::Unit::TestCase

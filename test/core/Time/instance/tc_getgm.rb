@@ -4,8 +4,8 @@
 # Test case for the Time#getgm instance method and the Time#getutc
 # alias.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_Getgm_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

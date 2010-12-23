@@ -3,6 +3,7 @@
 #
 # Test case for the Time#to_a instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Time_ToA_InstanceMethod < Test::Unit::TestCase

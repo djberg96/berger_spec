@@ -1,8 +1,8 @@
 ###############################################################################
 # tc_at.rb
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Time_At_ClassMethod < Test::Unit::TestCase
    include Test::Helper
