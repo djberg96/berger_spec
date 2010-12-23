@@ -48,6 +48,11 @@ module Test
 
     RELEASE = RUBY_VERSION.split('.').last.to_i
 
+    # This constant is used because of some major behavioral changes between
+    # 1.8.6 and 1.8.7 with regards to Enumerators and Symbols.
+    major, minor, teeny = RUBY_VERSION.split('.')
+    PRE187 = (major.to_i == 1) && (minor.to_i <= 8) && (teeny.to_i <= 6)
+
     # True if tests are run on a big endian platform
     BIG_ENDIAN = [1].pack('I') == [1].pack('N')
 
