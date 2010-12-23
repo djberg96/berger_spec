@@ -24,6 +24,7 @@ class TC_Array_Flatten_InstanceMethod < Test::Unit::TestCase
   end
 
   test "flatten does not modify its receiver" do
+    @array.flatten
     assert_equal([1,[2,3,[4,5]]], @array)
   end
 
