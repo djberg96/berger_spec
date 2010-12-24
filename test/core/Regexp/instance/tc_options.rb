@@ -3,6 +3,7 @@
 #
 # Test case for the Regexp#options instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Regexp_Options_InstanceMethod < Test::Unit::TestCase

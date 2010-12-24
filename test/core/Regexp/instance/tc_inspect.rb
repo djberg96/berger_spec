@@ -3,6 +3,7 @@
 #
 # Test case for the Regexp#inspect instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Regexp_Inspect_InstanceMethod < Test::Unit::TestCase

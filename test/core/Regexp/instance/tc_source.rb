@@ -3,6 +3,7 @@
 #
 # Test case for the Regexp#source instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Regexp_Source_InstanceMethod < Test::Unit::TestCase

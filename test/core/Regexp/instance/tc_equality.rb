@@ -3,8 +3,8 @@
 #
 # Test case for the Regexp#== instance method.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Regexp_Equality_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -19,7 +19,7 @@ class TC_Regexp_Equality_InstanceMethod < Test::Unit::TestCase
    def test_equality_basic
       assert_respond_to(@regex, :==)
       assert_nothing_raised{ @regex == @regex_x }
-      assert_kind_of(Boolean, @regex == @regex_x)
+      assert_boolean(@regex == @regex_x)
    end
 
    def test_equality_true
