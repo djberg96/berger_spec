@@ -3,6 +3,7 @@
 #
 # Test case for the Fixnum#abs instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Fixnum_Abs_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Fixnum#[] (bit ref) instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Fixnum_Bref_InstanceMethod < Test::Unit::TestCase

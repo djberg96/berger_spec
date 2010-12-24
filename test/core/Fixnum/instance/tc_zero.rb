@@ -3,6 +3,7 @@
 #
 # Test case for the Fixnum#zero? instance method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Fixnum_Zero_InstanceMethod < Test::Unit::TestCase

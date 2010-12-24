@@ -3,6 +3,7 @@
 #
 # Test case for 'false |'.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FalseClass_Or_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Fixnum#* instance method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Fixnum_Multiplication_InstanceMethod < Test::Unit::TestCase

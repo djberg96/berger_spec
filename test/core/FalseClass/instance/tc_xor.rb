@@ -3,6 +3,7 @@
 #
 # Test case for 'false ^'.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FalseClass_ExclusiveOr_InstanceMethod < Test::Unit::TestCase
