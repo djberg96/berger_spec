@@ -3,6 +3,7 @@
 #
 # Test case for the TrueClass itself.
 ###########################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_TrueClass < Test::Unit::TestCase

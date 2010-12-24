@@ -3,6 +3,7 @@
 #
 # Test case for 'true &'.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_trueClass_Or_InstanceMethod < Test::Unit::TestCase

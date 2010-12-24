@@ -4,6 +4,7 @@
 # Test case for 'true |'. We use the stringio class here to verify
 # the difference in handling between '|' and '||'.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 require 'stringio'
 
