@@ -3,6 +3,7 @@
 #
 # Test case for the Class#allocate instance method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Class_Allocate_InstanceMethod < Test::Unit::TestCase

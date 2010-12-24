@@ -3,6 +3,7 @@
 #
 # Test case for the Class.inherited method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 $subclass = nil

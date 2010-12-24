@@ -3,6 +3,7 @@
 #
 # Test case for the Class#superclass instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Class_Superclass_InstanceMethod < Test::Unit::TestCase

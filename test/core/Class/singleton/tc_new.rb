@@ -3,6 +3,7 @@
 #
 # Test case for the Class.new method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Class_New_Class < Test::Unit::TestCase

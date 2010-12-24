@@ -3,6 +3,7 @@
 #
 # Test case for Binding objects.
 ##########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class FooBinding
