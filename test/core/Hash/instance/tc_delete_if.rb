@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#delete_if instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_DeleteIf_Instance < Test::Unit::TestCase

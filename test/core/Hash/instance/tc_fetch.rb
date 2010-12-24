@@ -3,8 +3,8 @@
 #
 # Test suite for the Hash#fetch instance method.
 ###########################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Hash_Fetch_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

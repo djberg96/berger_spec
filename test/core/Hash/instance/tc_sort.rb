@@ -3,8 +3,8 @@
 #
 # Test suite for the Hash#sort instance method.
 ###########################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Hash_Sort_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

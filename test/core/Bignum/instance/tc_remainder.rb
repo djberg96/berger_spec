@@ -3,6 +3,7 @@
 #
 # Test case for the Bignum#remainder instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Remainder_InstanceMethod < Test::Unit::TestCase

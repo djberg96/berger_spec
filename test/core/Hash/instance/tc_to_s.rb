@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#to_s instance method.
 ############################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_ToS_Instance < Test::Unit::TestCase

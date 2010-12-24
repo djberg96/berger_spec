@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash.new class method.
 ################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_New_ClassMethod < Test::Unit::TestCase

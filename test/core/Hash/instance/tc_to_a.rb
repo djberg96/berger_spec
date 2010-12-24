@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#to_a instance method.
 ############################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_ToA_InstanceMethod < Test::Unit::TestCase

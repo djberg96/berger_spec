@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#length instance method and the Hash#size alias.
 ############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Length_InstanceMethod < Test::Unit::TestCase

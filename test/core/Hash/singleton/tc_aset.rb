@@ -2,7 +2,8 @@
 # tc_aset.rb
 #
 # Test suite for the Hash[] class method.
-###########################################################
+##########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Aset_ClassMethod < Test::Unit::TestCase

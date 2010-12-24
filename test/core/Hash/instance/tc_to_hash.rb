@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#to_hash instance method.
 ############################################################
+require 'test/helper'
 require "test/unit"
 
 # Used to validate to_hash

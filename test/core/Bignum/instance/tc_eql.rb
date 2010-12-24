@@ -3,6 +3,7 @@
 #
 # Test case for the Bignum#eql? instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Eql_InstanceMethod < Test::Unit::TestCase

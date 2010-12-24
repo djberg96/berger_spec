@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#default_proc instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_DefaultProc_Instance < Test::Unit::TestCase

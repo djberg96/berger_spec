@@ -3,8 +3,8 @@
 #
 # Test suite for the Hash#== instance method.
 ###########################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Hash_Equality_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

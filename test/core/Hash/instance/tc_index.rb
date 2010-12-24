@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#index instance method.
 ############################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Hash_Index_InstanceMethod < Test::Unit::TestCase

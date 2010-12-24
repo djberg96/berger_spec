@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#each instance method and the Hash#each_pair alias.
 ##############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Each_Instance < Test::Unit::TestCase

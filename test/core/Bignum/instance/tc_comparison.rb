@@ -3,6 +3,7 @@
 #
 # Test case for the Bignum#<=> method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Comparison_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#[] instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Hash_Aref_InstanceMethod < Test::Unit::TestCase

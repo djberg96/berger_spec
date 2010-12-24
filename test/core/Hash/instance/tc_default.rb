@@ -3,8 +3,8 @@
 #
 # Test suite for the Hash#default and Hash#default= instance methods.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Hash_Default_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

@@ -5,6 +5,7 @@
 # because they are platform/architecture/bit specific. I would prefer to use
 # the rational library, but that messes up other tests.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Quo_InstanceMethod < Test::Unit::TestCase

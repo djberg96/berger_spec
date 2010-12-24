@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#shift instance method.
 ############################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Shift_Instance < Test::Unit::TestCase

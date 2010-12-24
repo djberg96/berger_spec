@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#has_value? instance method and the Hash#value? alias.
 ###############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_HasValue_InstanceMethod < Test::Unit::TestCase

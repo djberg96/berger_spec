@@ -3,6 +3,7 @@
 #
 # Test case for the Bignum#abs instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Abs_InstanceMethod < Test::Unit::TestCase

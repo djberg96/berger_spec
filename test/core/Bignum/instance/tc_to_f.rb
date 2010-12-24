@@ -4,6 +4,7 @@
 # Test case for the Bignum#to_f instance method. Note that the test for
 # Infinity will cause a warning. You can ignore it.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_ToF_InstanceMethod < Test::Unit::TestCase

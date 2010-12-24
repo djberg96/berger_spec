@@ -7,8 +7,8 @@
 # Ruby 1.8.6, I've added several extra tests for certain radix values
 # for bignums less than 2**64 (for 32 bit Ruby interpreters).
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Bignum_ToS_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

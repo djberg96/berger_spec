@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#invert instance method.
 ############################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Invert_Instance < Test::Unit::TestCase

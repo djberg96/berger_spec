@@ -6,8 +6,8 @@
 # TODO: I'm not entirely sure how to make this cross-platform or
 # cross-architecture. The tests below work with what I've got.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Bignum_Size_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

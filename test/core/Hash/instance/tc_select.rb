@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#select instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Select_Instance < Test::Unit::TestCase

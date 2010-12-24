@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#reject and Hash#reject! instance methods.
 ####################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Reject_Instance < Test::Unit::TestCase

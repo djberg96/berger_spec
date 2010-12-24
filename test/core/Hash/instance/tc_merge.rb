@@ -4,6 +4,7 @@
 # Test suite for the Hash#merge and Hash#merge! instance methods, as well
 # as the Hash#update alias.
 ###########################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Merge_Instance < Test::Unit::TestCase

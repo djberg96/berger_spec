@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#empty? instance method.
 ###########################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Empty_Instance < Test::Unit::TestCase

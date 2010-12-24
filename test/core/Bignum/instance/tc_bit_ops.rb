@@ -3,6 +3,7 @@
 #
 # Test case for Bignum bit operations ~, |, &, ^, <<, >>
 ##########################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Bit_Ops < Test::Unit::TestCase

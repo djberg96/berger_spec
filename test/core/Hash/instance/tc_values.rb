@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#values instance method.
 ############################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Values_Instance < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Bignum#== instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Equality_InstanceMethod < Test::Unit::TestCase

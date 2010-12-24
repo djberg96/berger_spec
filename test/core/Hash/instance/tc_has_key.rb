@@ -4,8 +4,8 @@
 # Test suite for the Hash#has_key? instance method as well as the
 # Hash#include?, Hash#key? and Hash#member? aliases.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Hash_HasKey_Instance < Test::Unit::TestCase
    include Test::Helper
@@ -17,25 +17,25 @@ class TC_Hash_HasKey_Instance < Test::Unit::TestCase
    def test_has_key_basic
       assert_respond_to(@hash, :has_key?)
       assert_nothing_raised{ @hash.has_key?(:foo) }
-      assert_kind_of(Boolean, @hash.has_key?(1))
+      assert_boolean(@hash.has_key?(1))
    end
    
    def test_key_basic
       assert_respond_to(@hash, :key?)
       assert_nothing_raised{ @hash.key?(:foo) }
-      assert_kind_of(Boolean, @hash.key?(1))
+      assert_boolean(@hash.key?(1))
    end
    
    def test_include_basic
       assert_respond_to(@hash, :has_key?)
       assert_nothing_raised{ @hash.include?(:foo) }
-      assert_kind_of(Boolean, @hash.include?(1))
+      assert_boolean(@hash.include?(1))
    end
      
    def test_member_basic
       assert_respond_to(@hash, :member?)
       assert_nothing_raised{ @hash.member?(:foo) }
-      assert_kind_of(Boolean, @hash.member?(1))
+      assert_boolean(@hash.member?(1))
    end
 
    def test_has_key_expected_true

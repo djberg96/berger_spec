@@ -3,6 +3,7 @@
 #
 # Test suite for the Hash#[]= instance method as well as the Hash#store alias.
 ###############################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_Hash_Aset_Instance < Test::Unit::TestCase

@@ -4,6 +4,7 @@
 # Test case for Bignum arithmetic operations +, -, *, /, %, ** and # -@.
 # This also includes tests for the Bignum#div and Bignum#module aliases.
 ##########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Bignum_Arithmetic_Ops < Test::Unit::TestCase

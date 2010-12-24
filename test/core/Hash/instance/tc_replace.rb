@@ -5,8 +5,8 @@
 #
 # TODO: Add $SAFE checks for $SAFE >= 4 (if possible).
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Hash_Replace_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
