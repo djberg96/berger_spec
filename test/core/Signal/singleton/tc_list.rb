@@ -3,8 +3,8 @@
 #
 # Test case for the Signal.list class method.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Signal_List_ClassMethod < Test::Unit::TestCase
    include Test::Helper

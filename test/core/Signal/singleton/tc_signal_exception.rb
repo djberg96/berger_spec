@@ -7,8 +7,8 @@
 # These tests are skipped on versions of Ruby older than 1.8.6. See RubyForge
 # bug #11795 for more information.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Signal_Exception_Class < Test::Unit::TestCase
    include Test::Helper

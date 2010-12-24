@@ -3,8 +3,8 @@
 #
 # Test case for the Signal.trap class method.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Signal_Trap_ClassMethod < Test::Unit::TestCase
    include Test::Helper
