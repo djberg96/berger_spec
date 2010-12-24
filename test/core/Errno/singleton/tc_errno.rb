@@ -5,6 +5,7 @@
 # it is impossible to predict which Errno classes will exist on any given
 # system.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Errno_Module < Test::Unit::TestCase

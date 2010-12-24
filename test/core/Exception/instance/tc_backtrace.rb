@@ -3,6 +3,7 @@
 #
 # Test case for the Exception#backtrace instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Exception_Backtrace_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Exception#exception instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TestException < Exception; end

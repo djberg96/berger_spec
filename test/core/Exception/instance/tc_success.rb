@@ -4,8 +4,8 @@
 # Test case for the Exception#success? instance method. Actually, this method
 # only exists on the SystemExit subclass.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Exception_Success_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -18,7 +18,7 @@ class TC_Exception_Success_InstanceMethod < Test::Unit::TestCase
    def test_success_basic
       assert_respond_to(@err, :success?)
       assert_nothing_raised{ @err.success? }
-      assert_kind_of(Boolean, @err.success?)
+      assert_boolean(@err.success?)
    end
 
    # 0 or nil are success, everything else is not.

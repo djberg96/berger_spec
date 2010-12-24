@@ -4,8 +4,8 @@
 # Test case for the Exception.new class method and the Exception.exception
 # (effective) alias.
 ##############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Exception_New_ClassMethod < Test::Unit::TestCase
    def setup

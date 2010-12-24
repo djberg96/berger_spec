@@ -4,6 +4,7 @@
 # This test case validates the existence of all the exceptions provided with
 # core Ruby, as well as the appropriate subclass hierarchy.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Exception_Hierarchy < Test::Unit::TestCase

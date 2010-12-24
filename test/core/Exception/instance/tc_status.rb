@@ -4,6 +4,7 @@
 # Test case for the Exception#status instance method. Actually, this method
 # only exists on the SystemExit subclass.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Exception_Status_InstanceMethod < Test::Unit::TestCase

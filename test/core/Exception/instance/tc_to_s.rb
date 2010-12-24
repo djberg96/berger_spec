@@ -3,6 +3,7 @@
 #
 # Test case for the Exception#to_s instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Exception_ToS_InstanceMethod < Test::Unit::TestCase

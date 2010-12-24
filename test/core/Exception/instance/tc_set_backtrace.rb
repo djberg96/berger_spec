@@ -6,6 +6,7 @@
 # regarding the format of the argument to set_backtrace. Also note that
 # it will accept a plain string, in addition to an array of strings.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Exception_SetBacktrace_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Exception#to_str instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Exception_ToStr_InstanceMethod < Test::Unit::TestCase
