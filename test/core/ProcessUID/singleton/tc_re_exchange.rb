@@ -4,8 +4,8 @@
 # Test case for the Process::UID.re_exchange module method. This test
 # case is useful only if run as root, and only on Unix systems.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessUID_ReExchange_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

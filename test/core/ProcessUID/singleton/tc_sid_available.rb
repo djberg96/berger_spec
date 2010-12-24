@@ -3,8 +3,8 @@
 #
 # Test case for the Process::UID.sid_available module method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessUID_SidAvailable_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

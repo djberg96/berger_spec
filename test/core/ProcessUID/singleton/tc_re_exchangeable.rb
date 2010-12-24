@@ -3,8 +3,8 @@
 #
 # Test case for the Process::UID.re_exchangeable module method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessUID_ReExchangeable_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

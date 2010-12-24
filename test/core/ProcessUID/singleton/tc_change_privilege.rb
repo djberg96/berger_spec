@@ -9,8 +9,8 @@
 # TODO: figure out why this method always fails, even when run as
 # the superuser.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessUID_ChangePrivilege_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

@@ -9,8 +9,8 @@
 #
 # TODO: Update this as more information becomes available.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessUID_Switch_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

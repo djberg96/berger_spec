@@ -4,8 +4,8 @@
 # Test case for the Process.rid module method. Most tests skipped
 # on MS Windows.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessUID_Rid_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

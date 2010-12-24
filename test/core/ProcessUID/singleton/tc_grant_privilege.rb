@@ -6,8 +6,8 @@
 #
 # For now these tests are for Unix platforms only.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessUID_GrantPrivilege_ModuleMethod < Test::Unit::TestCase
    include Test::Helper
