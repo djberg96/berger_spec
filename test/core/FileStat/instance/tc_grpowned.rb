@@ -1,48 +1,48 @@
 ######################################################################
 # tc_grpowned.rb
 #
-# Test case for the FileStat#grpowned? instance method. Most of
-# these tests are skipped on MS Windows.
+# Test case for the FileStat#grpowned? instance method.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_GrpOwned_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
-   
-   def setup
-      @stat = File::Stat.new(__FILE__)
+  include Test::Helper
 
-      if WINDOWS
-         @user = nil
-         @bool = nil
-      else
-         @user = Etc.getpwnam(Etc.getlogin)
-         @bool = Etc.getgrgid(@user.gid).name == @user.name
-         @bool = true if ROOT
-      end
-   end
+  def setup
+    @stat = File::Stat.new(__FILE__)
 
-   def test_grpowned_basic
-      assert_respond_to(@stat, :grpowned?)
-   end
-
-   def test_grpowned
-      if WINDOWS
-         assert_equal(false, @stat.grpowned?)
-      else
-         assert_equal(true, @stat.grpowned?)
-         assert_equal(@bool, File::Stat.new('/').grpowned?)
-      end
-   end
-
-   def test_grpowned_expected_errors
-      assert_raises(ArgumentError){ @stat.grpowned?(1) }
-   end
-
-   def teardown
-      @stat = nil
-      @bool = nil
+    if WINDOWS
       @user = nil
-   end
+      @bool = nil
+    else
+      @user = Etc.getpwnam(Etc.getlogin)
+      @bool = Etc.getgrgid(@user.gid).name == @user.name
+      @bool = true if ROOT
+    end
+  end
+
+  def test_grpowned_basic
+    assert_respond_to(@stat, :grpowned?)
+    assert_boolean(@stat.grpowned?)
+  end
+
+  def test_grpowned
+    if WINDOWS
+      assert_equal(false, @stat.grpowned?)
+    else
+      assert_equal(true, @stat.grpowned?)
+      assert_equal(@bool, File::Stat.new('/').grpowned?)
+    end
+  end
+
+  def test_grpowned_expected_errors
+    assert_raises(ArgumentError){ @stat.grpowned?(1) }
+  end
+
+  def teardown
+    @stat = nil
+    @bool = nil
+    @user = nil
+  end
 end
