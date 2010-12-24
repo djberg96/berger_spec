@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#chardev instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Chardev_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

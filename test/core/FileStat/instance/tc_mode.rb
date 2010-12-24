@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#mode instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Mode_Instance < Test::Unit::TestCase

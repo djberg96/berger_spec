@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#directory? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Directory_Instance < Test::Unit::TestCase

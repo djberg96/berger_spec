@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#ctime instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Ctime_Instance < Test::Unit::TestCase

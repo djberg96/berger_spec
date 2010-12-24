@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#blocks instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Blocks_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

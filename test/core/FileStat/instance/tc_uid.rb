@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#uid instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Uid_Instance < Test::Unit::TestCase

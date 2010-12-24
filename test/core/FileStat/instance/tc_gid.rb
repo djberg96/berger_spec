@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#gid instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Gid_Instance < Test::Unit::TestCase

@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#size and File::Stat#size? instance methods.
 #########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Size_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

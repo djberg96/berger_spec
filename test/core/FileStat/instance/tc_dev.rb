@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#dev instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Dev_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#readable_real? instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_ReadableReal_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

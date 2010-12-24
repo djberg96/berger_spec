@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#writable? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Writeable_Instance < Test::Unit::TestCase

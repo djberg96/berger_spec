@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#rdev_minor instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_RdevMinor_Instance < Test::Unit::TestCase
    include Test::Helper

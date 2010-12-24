@@ -6,8 +6,8 @@
 #
 # TODO: I am not sure the approach I'm using actually works. Verify.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Setgid_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

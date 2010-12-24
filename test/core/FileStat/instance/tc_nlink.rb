@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#nlink instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_NLink_Instance < Test::Unit::TestCase

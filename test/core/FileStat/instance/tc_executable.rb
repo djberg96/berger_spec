@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#executable? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Executable_Instance < Test::Unit::TestCase

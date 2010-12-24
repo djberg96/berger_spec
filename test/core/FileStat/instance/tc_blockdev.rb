@@ -7,8 +7,8 @@
 # we use that technique, however, the test will fail unless there's a
 # disk in the drive.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Blockdev_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

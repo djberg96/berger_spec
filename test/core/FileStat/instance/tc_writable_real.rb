@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#writable_real? instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_WritableReal_InstanceMethod < Test::Unit::TestCase
    def setup

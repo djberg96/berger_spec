@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#ftype? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_FType_Instance < Test::Unit::TestCase

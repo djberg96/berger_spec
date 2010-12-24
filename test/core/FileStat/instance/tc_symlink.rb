@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#symlink? instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Symlink_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

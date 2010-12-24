@@ -4,8 +4,8 @@
 # Test case for the FileStat#sticky instance method. Most tests
 # are skipped on MS Windows.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_Sticky_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

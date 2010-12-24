@@ -4,8 +4,8 @@
 # Test case for the FileStat#grpowned? instance method. Most of
 # these tests are skipped on MS Windows.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_GrpOwned_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

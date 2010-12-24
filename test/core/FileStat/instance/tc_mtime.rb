@@ -3,6 +3,7 @@
 #
 # Test case for the FileStat#mtime instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Mtime_Instance < Test::Unit::TestCase

@@ -3,8 +3,8 @@
 #
 # Test case for the FileStat#rdev_major instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_FileStat_RdevMajor_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
