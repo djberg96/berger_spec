@@ -7,6 +7,7 @@
 # Note: I've created my own class here because other classes tend to
 # implement their own custom version of collect/map.
 #########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MyEnumCollect

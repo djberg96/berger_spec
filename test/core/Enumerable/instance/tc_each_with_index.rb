@@ -6,6 +6,7 @@
 # Note: We use a custom object here because Array and Hash have custom
 # implementations.
 #########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MyEnumEachWithIndex

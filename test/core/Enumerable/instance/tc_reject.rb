@@ -3,6 +3,7 @@
 #
 # Test suite for the Enumerable#reject instance method.
 #########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MyEnumReject

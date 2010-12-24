@@ -4,6 +4,7 @@
 # Test suite for the Enumerable#to_a instance method and the
 # Enumerable#entries alias.
 #########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MyEnumToA

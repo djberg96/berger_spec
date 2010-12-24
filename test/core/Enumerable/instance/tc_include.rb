@@ -4,6 +4,7 @@
 # Test suite for the Enumerable#include instance method and the
 # Enumerable#member? alias.
 #########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MyEnumInclude

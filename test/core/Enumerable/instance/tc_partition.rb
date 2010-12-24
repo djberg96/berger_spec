@@ -3,6 +3,7 @@
 #
 # Test case for the Enumerable#partition instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Enumerable_Partition_InstanceMethod < Test::Unit::TestCase

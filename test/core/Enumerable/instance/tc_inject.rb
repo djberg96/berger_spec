@@ -3,6 +3,7 @@
 #
 # Test case for the Enumerable#inject instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Enumerable_Inject_InstanceMethod < Test::Unit::TestCase

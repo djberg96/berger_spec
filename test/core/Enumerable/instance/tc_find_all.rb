@@ -4,6 +4,7 @@
 # Test suite for the Enumerable#find_all instance method and the
 # Enumerable#select alias.
 #########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MyEnumFindAll

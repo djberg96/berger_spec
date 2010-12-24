@@ -3,6 +3,7 @@
 #
 # Test case for the Enumerable#zip instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Enumerable_Zip_InstanceMethod < Test::Unit::TestCase

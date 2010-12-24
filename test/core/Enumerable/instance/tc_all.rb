@@ -3,6 +3,7 @@
 #
 # Test case for the Enumerable#all? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Enumerable_All_InstanceMethod < Test::Unit::TestCase

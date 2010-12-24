@@ -3,6 +3,7 @@
 #
 # Test case for the Enumerable#sort_by instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Enumerable_SortBy_InstanceMethod < Test::Unit::TestCase

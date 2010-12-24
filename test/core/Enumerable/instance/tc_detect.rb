@@ -4,6 +4,7 @@
 # Test suite for the Enumerable#detect instance method and the
 # Enumerable#find alias.
 #########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MyEnumDetect

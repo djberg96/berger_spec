@@ -6,6 +6,7 @@
 # Note: I use arrays here because I know that array.c doesn't implement
 # its own version.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Enumerable_Max_InstanceMethod < Test::Unit::TestCase
