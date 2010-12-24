@@ -3,6 +3,7 @@
 #
 # Test case to verify the constants associated with Regexp.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Regexp_Constants < Test::Unit::TestCase
