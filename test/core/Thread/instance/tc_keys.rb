@@ -3,6 +3,7 @@
 #
 # Test case for the Thread#keys instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Keys_InstanceMethod < Test::Unit::TestCase

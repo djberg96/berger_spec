@@ -3,6 +3,7 @@
 #
 # Test case for the Thread#raise instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Raise_InstanceMethod < Test::Unit::TestCase

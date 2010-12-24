@@ -3,6 +3,7 @@
 #
 # Test case for the Thread#[]= instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Aset_InstanceMethod < Test::Unit::TestCase

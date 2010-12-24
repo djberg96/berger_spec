@@ -3,6 +3,7 @@
 #
 # Test case for the Thread#group instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Group_InstanceMethod < Test::Unit::TestCase

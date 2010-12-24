@@ -4,8 +4,8 @@
 # Test case for the Thread.abort_on_exception and Thread.abort_on_exception=
 # class methods
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Thread_AbortOnException_ClassMethod < Test::Unit::TestCase
    include Test::Helper
@@ -18,7 +18,7 @@ class TC_Thread_AbortOnException_ClassMethod < Test::Unit::TestCase
    def test_abort_on_exception_basic
       assert_respond_to(Thread, :abort_on_exception)
       assert_respond_to(Thread, :abort_on_exception=)
-      assert_kind_of(Boolean, Thread.abort_on_exception)
+      assert_boolean(Thread.abort_on_exception)
    end
 
    def test_abort_on_exception

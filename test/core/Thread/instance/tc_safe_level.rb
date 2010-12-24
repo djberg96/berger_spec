@@ -3,6 +3,7 @@
 #
 # Test case for the Thread#safe_level instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_SafeLevel < Test::Unit::TestCase

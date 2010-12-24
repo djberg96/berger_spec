@@ -3,6 +3,7 @@
 #
 # Test case for the Thread#join instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Join_InstanceMethod < Test::Unit::TestCase

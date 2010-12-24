@@ -4,6 +4,7 @@
 # Test case for the Thread#priority and Thread#priority= instance
 # methods.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Priority_InstanceMethod < Test::Unit::TestCase

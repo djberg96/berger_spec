@@ -3,8 +3,8 @@
 #
 # Test case for the Thread#value instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Thread_Value_InstanceMethod < Test::Unit::TestCase
    def setup

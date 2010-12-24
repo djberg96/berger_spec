@@ -3,6 +3,7 @@
 #
 # Test case for the Thread#run instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Run_InstanceMethod < Test::Unit::TestCase

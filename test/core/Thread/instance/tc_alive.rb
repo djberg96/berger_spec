@@ -3,8 +3,8 @@
 #
 # Test case for the Thread#alive? instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Thread_Alive_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -15,7 +15,7 @@ class TC_Thread_Alive_InstanceMethod < Test::Unit::TestCase
 
    def test_alive_basic
       assert_respond_to(@thread, :alive?)
-      assert_kind_of(Boolean, @thread.alive?)
+      assert_boolean(@thread.alive?)
    end
 
    def test_alive

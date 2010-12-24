@@ -4,6 +4,7 @@
 # Test case for the Thread#exit instance method and the Thread#kill
 # alias.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_Exit_InstanceMethod < Test::Unit::TestCase

@@ -3,8 +3,8 @@
 #
 # Test case for the Thread#key? instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Thread_HasKey_InstanceMethod < Test::Unit::TestCase
    def setup
@@ -17,7 +17,7 @@ class TC_Thread_HasKey_InstanceMethod < Test::Unit::TestCase
    def test_has_key_basic
       assert_respond_to(@thread, :key?)
       assert_nothing_raised{ @thread.key?(:foo) }
-      assert_kind_of(Boolean, @thread.key?(:foo))
+      assert_boolean(@thread.key?(:foo))
    end
 
    def test_has_key
