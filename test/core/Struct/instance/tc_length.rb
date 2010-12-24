@@ -4,6 +4,7 @@
 # Test case for the Struct#length instance method and the
 # Struct#size alias.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_Length_InstanceMethod < Test::Unit::TestCase

@@ -5,6 +5,7 @@
 # case tests both Struct.new and Struct::Class.new (where 'Class'
 # is whatever name we choose).
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_New_ClassMethod < Test::Unit::TestCase

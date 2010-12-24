@@ -3,6 +3,7 @@
 #
 # Test case for the Struct::Class.members class method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_Members_ClassMethod < Test::Unit::TestCase

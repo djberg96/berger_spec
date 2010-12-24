@@ -3,6 +3,7 @@
 #
 # Test case for the Struct#values_at instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_ValuesAt_InstanceMethod < Test::Unit::TestCase

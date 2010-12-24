@@ -3,6 +3,7 @@
 #
 # Test case for the Struct#each instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_Each_InstanceMethod < Test::Unit::TestCase

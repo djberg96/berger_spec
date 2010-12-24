@@ -4,6 +4,7 @@
 # Test case for the Struct#to_a instance method and the Struct#values
 # instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_ToA_InstanceMethod < Test::Unit::TestCase

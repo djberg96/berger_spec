@@ -3,6 +3,7 @@
 #
 # Test case for the Struct::Class#== method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_Equality_InstanceMethod < Test::Unit::TestCase

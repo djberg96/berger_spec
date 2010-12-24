@@ -3,6 +3,7 @@
 #
 # Foo case for the Struct::Class[] class method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Struct_Foo_ClassMethod < Test::Unit::TestCase
