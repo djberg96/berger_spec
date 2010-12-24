@@ -4,8 +4,8 @@
 # Test case for the Process.egid and Process.egid= module methods.
 # For now these tests are for UNIX platforms only.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Egid_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

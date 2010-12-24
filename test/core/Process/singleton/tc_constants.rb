@@ -6,8 +6,8 @@
 # Note that the actual values are not tested because they are set by
 # the OS and are not predictable (beyond being Fixnum's).
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Constants < Test::Unit::TestCase
    include Test::Helper

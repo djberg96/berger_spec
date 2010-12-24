@@ -4,8 +4,8 @@
 # Test case for the Process.abort module method. I have no idea
 # how to properly test this without a fork() function on MS Windows.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Abort_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

@@ -4,8 +4,8 @@
 # Test case for the Process.pid module method. It also tests the $$
 # special variable.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Pid_ModuleMethod < Test::Unit::TestCase
    def test_pid

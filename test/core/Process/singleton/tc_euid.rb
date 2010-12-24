@@ -4,8 +4,8 @@
 # Test case for the Process.euid and Process.euid= module methods.
 # For now these tests are for UNIX platforms only.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 require 'etc' rescue nil
 
 class TC_Process_Euid_ModuleMethod < Test::Unit::TestCase

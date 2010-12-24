@@ -3,8 +3,8 @@
 #
 # Test case for the Process.ppid module method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Ppid_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

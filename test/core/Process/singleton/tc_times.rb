@@ -3,6 +3,7 @@
 #
 # Test case for the Process.times module method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Process_Times_ModuleMethod < Test::Unit::TestCase

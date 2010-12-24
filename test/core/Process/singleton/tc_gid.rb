@@ -6,8 +6,8 @@
 # NOTE: The Process.gid= tests are only run if the test is run as the
 # root user.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Gid_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

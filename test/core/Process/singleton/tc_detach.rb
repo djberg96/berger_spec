@@ -4,8 +4,8 @@
 # Test case for the Process.detach method. This test case is for
 # UNIX platforms only.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Detach_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

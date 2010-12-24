@@ -4,8 +4,8 @@
 # Test case for the Process.exit module method. I have no idea how
 # to properly test this on MS Windows without a fork() method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Process_Exit_ModuleMethod < Test::Unit::TestCase
    include Test::Helper
