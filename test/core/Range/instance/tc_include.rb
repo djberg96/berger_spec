@@ -4,8 +4,8 @@
 # Test case for the Range#include? instance method as well as the
 # Range#=== and Range#member? aliases.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Range_Threequals_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

@@ -3,6 +3,7 @@
 #
 # Test case for the Range#eql? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Range_Eql_InstanceMethod < Test::Unit::TestCase

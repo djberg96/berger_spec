@@ -3,6 +3,7 @@
 #
 # Test case for the Range#== instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Range_Equal_InstanceMethod < Test::Unit::TestCase

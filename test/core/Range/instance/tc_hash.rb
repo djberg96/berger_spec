@@ -3,6 +3,7 @@
 #
 # Test case for the Range#hash instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Range_Hash_InstanceMethod < Test::Unit::TestCase

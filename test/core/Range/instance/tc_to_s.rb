@@ -4,6 +4,7 @@
 # Test case for the Range#to_s instance method. I've added this as a
 # separate test because range.c has a custom implementation.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Range_ToS_InstanceMethod < Test::Unit::TestCase

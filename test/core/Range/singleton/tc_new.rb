@@ -3,8 +3,8 @@
 #
 # Test case for the Range.new class method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Range_New_ClassMethod < Test::Unit::TestCase
    include Test::Helper

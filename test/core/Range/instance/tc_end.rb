@@ -4,6 +4,7 @@
 # Test case for the Range#end instance method and the Range#last
 # alias.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Range_End_InstanceMethod < Test::Unit::TestCase

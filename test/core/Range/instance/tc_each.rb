@@ -3,8 +3,8 @@
 #
 # Test for the Range#each instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Range_Each_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

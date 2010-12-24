@@ -4,6 +4,7 @@
 # Test case for the Range#begin instance method and the Range#first
 # alias.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Range_Begin_InstanceMethod < Test::Unit::TestCase
