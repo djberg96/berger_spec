@@ -3,6 +3,7 @@
 #
 # Test case for the UnboundMethod#arity instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class UnboundTest
