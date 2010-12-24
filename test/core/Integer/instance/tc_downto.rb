@@ -3,6 +3,7 @@
 #
 # Test case for the Integer#downto method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_Downto_Instance < Test::Unit::TestCase

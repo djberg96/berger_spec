@@ -3,6 +3,7 @@
 #
 # Test case for the Float#infinite? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Float_Infinite_InstanceMethod < Test::Unit::TestCase

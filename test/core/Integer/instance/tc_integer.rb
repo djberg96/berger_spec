@@ -3,6 +3,7 @@
 #
 # Test case for the Integer#integer? method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_IsInteger_Instance < Test::Unit::TestCase

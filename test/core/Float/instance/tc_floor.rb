@@ -3,6 +3,7 @@
 #
 # Test case for the Float#floor instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class Test_Float_Floor_InstanceMethod < Test::Unit::TestCase

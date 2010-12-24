@@ -3,6 +3,7 @@
 #
 # Test case for the constants associated with the Float class.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class Test_Float_Constants < Test::Unit::TestCase

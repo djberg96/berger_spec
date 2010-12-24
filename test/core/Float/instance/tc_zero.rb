@@ -3,6 +3,7 @@
 #
 # Test case for the Float#zero? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Float_Zero_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Integer#round method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_Round_Instance < Test::Unit::TestCase

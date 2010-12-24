@@ -3,6 +3,7 @@
 #
 # Test case for the Integer#times method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_Times_Instance < Test::Unit::TestCase

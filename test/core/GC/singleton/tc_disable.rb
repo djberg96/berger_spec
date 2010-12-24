@@ -5,6 +5,7 @@
 # of the GC tests in the 'test_core' task. Run the 'test_gc' task separately
 # to see the results.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_GC_Disable_ModuleMethod < Test::Unit::TestCase

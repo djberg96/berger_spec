@@ -4,6 +4,7 @@
 # Test case for the Integer#to_i method and the aliases, Integer#ceil,
 # Integer#round, Integer#to_int, and Integer#truncate.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_ToI_Instance < Test::Unit::TestCase

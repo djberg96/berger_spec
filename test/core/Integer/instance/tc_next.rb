@@ -3,6 +3,7 @@
 #
 # Test case for the Integer#next method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_Next_Instance < Test::Unit::TestCase

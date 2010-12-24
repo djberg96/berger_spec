@@ -3,6 +3,7 @@
 #
 # Test case for the GC#garbage_collect instance method. 
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_GC_GarbageCollect_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Float#ceil instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class Test_Float_Ceil_InstanceMethod < Test::Unit::TestCase

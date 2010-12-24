@@ -3,6 +3,7 @@
 #
 # Test case for the Integer#floor method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_Floor_Instance < Test::Unit::TestCase

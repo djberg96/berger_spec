@@ -3,6 +3,7 @@
 #
 # Test case for the Float#nan? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Float_Nan_InstanceMethod < Test::Unit::TestCase

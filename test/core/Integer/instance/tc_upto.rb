@@ -3,6 +3,7 @@
 #
 # Test case for the Integer#upto method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Integer_Upto_Instance < Test::Unit::TestCase
