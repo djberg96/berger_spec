@@ -3,6 +3,7 @@
 #
 # Test case for the Symbol#inspect instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Symbol_Inspect_InstanceMethod < Test::Unit::TestCase

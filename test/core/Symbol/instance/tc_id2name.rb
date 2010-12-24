@@ -3,6 +3,7 @@
 #
 # Test case for the Symbol#id2name instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Symbol_Id2name_InstanceMethod < Test::Unit::TestCase

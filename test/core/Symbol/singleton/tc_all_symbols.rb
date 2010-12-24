@@ -3,6 +3,7 @@
 #
 # Test case for the Symbol.all_symbols class method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Symbol_AllSymbols_ClassMethod < Test::Unit::TestCase
