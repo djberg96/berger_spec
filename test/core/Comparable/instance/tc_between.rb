@@ -3,8 +3,8 @@
 #
 # Test case for the Comparable#between? instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Comparable_Between_Instance < Test::Unit::TestCase
    include Test::Helper

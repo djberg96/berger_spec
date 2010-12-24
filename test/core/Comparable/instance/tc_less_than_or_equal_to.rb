@@ -5,6 +5,7 @@
 # purposes we setup a custom class that mixes in Comparable and
 # defines a basic <=> method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Comparable_LessThanOrEqualTo_Instance < Test::Unit::TestCase
