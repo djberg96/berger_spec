@@ -27,9 +27,7 @@ module Test
     # Neither JRuby nor Rubinius attempt to implement all (or any) $SAFE rules.
     IGNORE_SAFE = JRUBY || RUBINIUS
 
-    # At the moment JRuby has not implemented Win32API so we'll skip it
-    # for now. Some tests just won't work until it's implemented.
-    if WINDOWS && !JRUBY
+    if WINDOWS
       MAX_PATH = 260
 
       require 'Win32API'
