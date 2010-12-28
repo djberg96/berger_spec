@@ -7,8 +7,8 @@
 # using a file descriptor returned by File.new instead. This is acceptable
 # to me since File#closed is just using the IO#closed method that it inherited.
 ##############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 require 'socket'
 
 class TC_IO_Closed_InstanceMethod < Test::Unit::TestCase
@@ -23,7 +23,7 @@ class TC_IO_Closed_InstanceMethod < Test::Unit::TestCase
    def test_is_closed_basic
       assert_respond_to(@handle, :closed?)
       assert_nothing_raised{ @handle.closed? }
-      assert_kind_of(Boolean, @handle.closed?)
+      assert_boolean(@handle.closed?)
    end
 
    def test_is_closed_non_duplexed

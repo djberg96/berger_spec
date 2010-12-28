@@ -17,7 +17,7 @@ class TC_IO_Eof_InstanceMethod < Test::Unit::TestCase
    def test_eof_basic
       assert_respond_to(@handle, :eof)
       assert_respond_to(@handle, :eof?)
-      assert_kind_of(Boolean, @handle.eof)
+      assert_boolean(@handle.eof)
    end
 
    # A handle to an empty file returns true for IO#eof?. So, we test that

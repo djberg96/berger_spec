@@ -23,13 +23,13 @@ class TC_IO_Isatty_InstanceMethod < Test::Unit::TestCase
    def test_isatty_basic
       assert_respond_to(@fh, :isatty)
       assert_nothing_raised{ @fh.isatty }
-      assert_kind_of(Boolean, @fh.isatty)
+      assert_boolean(@fh.isatty)
    end
 
    def test_tty_alias_basic
       assert_respond_to(@fh, :isatty)
       assert_nothing_raised{ @fh.isatty }
-      assert_kind_of(Boolean, @fh.isatty)
+      assert_boolean(@fh.isatty)
    end
 
    def test_isatty

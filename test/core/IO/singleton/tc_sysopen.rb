@@ -3,8 +3,8 @@
 #
 # Test case for the IO.sysopen class method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Sysopen_ClassMethod < Test::Unit::TestCase
    include Test::Helper

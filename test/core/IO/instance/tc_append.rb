@@ -3,8 +3,8 @@
 #
 # Test case for the IO#<< instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 # Because the IO#<< method uses an object's .to_s method, we want
 # to verify that an object without a .to_s method will cause a failure

@@ -3,8 +3,8 @@
 #
 # Test case for the IO#binmode class method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Binmode_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

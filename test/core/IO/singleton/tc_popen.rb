@@ -4,8 +4,8 @@
 # Test case for the IO.popen class method. Some tests will be
 # skipped on MS Windows.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Popen_ClassMethod < Test::Unit::TestCase
    include Test::Helper

@@ -3,8 +3,8 @@
 #
 # Test case for the IO.read class method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Read_ClassMethod < Test::Unit::TestCase
    include Test::Helper

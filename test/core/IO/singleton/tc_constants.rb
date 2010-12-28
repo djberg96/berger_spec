@@ -8,6 +8,7 @@
 # I also verify the existence of some toplevel constants that are defined
 # in the io.c file.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_IO_Constants < Test::Unit::TestCase

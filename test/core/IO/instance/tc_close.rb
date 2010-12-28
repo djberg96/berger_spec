@@ -8,8 +8,8 @@
 # acceptable to me since File#close is just using the IO#close method
 # that it inherited.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Close_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

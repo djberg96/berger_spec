@@ -4,8 +4,8 @@
 # Test case for the IO.pipe class method. These tests are skipped
 # on MS Windows (via the Rakefile).
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Pipe_ClassMethod < Test::Unit::TestCase
    def setup

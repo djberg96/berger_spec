@@ -3,8 +3,8 @@
 #
 # Test case for the IO.new class method, and the IO.for_fd alias.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_New_ClassMethod < Test::Unit::TestCase
    include Test::Helper
