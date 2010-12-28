@@ -2,7 +2,7 @@ require 'rake'
 require 'rake/clean'
 require 'rake/testtask'
 
-CLEAN.include("**/*.rbc")
+CLEAN.include("**/*.rbc", "*tc*.txt", "*test*.txt")
 
 namespace "test" do
   desc "Runs the test suite for the core classes"
