@@ -197,6 +197,17 @@ namespace "test" do
       t.warning = true
     end
 
+    namespace "io" do
+      Dir['test/core/IO/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
+    end
+
     desc "Runs the test suite for the Kernel module"
     Rake::TestTask.new('kernel') do |t|
       t.test_files = FileList['test/core/Kernel/*/*.rb']

@@ -3,64 +3,63 @@
 #
 # Test case for the IO#isatty instance method and the IO#tty? alias.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Isatty_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   def setup
-      @null = null_device
-      @file = 'tc_isatty.txt'
-      @fh   = File.new(@file, 'wb')
-      @nh   = File.new(@null)
-      unless WINDOWS
-         @tty  = '/dev/tty'
-         @th = File.new(@tty) if File.exists?(@tty)
-      end
-   end
+  def setup
+    @null = null_device
+    @file = File.expand_path(File.basename(__FILE__, '.rb')) + '.txt'
+    @fh   = File.open(@file, 'wb')
+    @nh   = File.open(@null)
 
-   def test_isatty_basic
-      assert_respond_to(@fh, :isatty)
-      assert_nothing_raised{ @fh.isatty }
-      assert_boolean(@fh.isatty)
-   end
+    unless WINDOWS
+      @tty  = '/dev/tty'
+      @th = File.new(@tty) if File.exists?(@tty)
+    end
+  end
 
-   def test_tty_alias_basic
-      assert_respond_to(@fh, :isatty)
-      assert_nothing_raised{ @fh.isatty }
-      assert_boolean(@fh.isatty)
-   end
+  test "isatty basic functionality" do
+    assert_respond_to(@fh, :isatty)
+    assert_nothing_raised{ @fh.isatty }
+    assert_boolean(@fh.isatty)
+  end
 
-   def test_isatty
-      assert_equal(false, @fh.isatty)
+  test "tty is an alias for isatty" do
+    assert_alias_method(@fh, :tty?, :isatty)
+  end
 
-      if WINDOWS
-         assert_equal(true, @nh.isatty)
-      else
-         assert_equal(false, @nh.isatty)
-         assert_equal(true, @th.isatty) if @th
-      end
-   end
+  test "isatty returns expected results" do
+    assert_false(@fh.isatty)
 
-   # I'm assuming you don't run your test cases via cron...
-   def test_isatty_stdout
-      assert_equal(true, STDOUT.isatty)
-   end
+    if WINDOWS
+      assert_true(@nh.isatty)
+    else
+      assert_false(@nh.isatty)
+      assert_true(@th.isatty) if @th
+    end
+  end
 
-   def test_isatty_expected_errors
-      assert_raise(ArgumentError){ @fh.isatty(1) }
-   end
+  # I'm assuming you don't run your test cases via cron...
+  test "isatty returns true for STDOUT" do
+    assert_true(STDOUT.isatty)
+  end
 
-   def teardown
-      @fh.close unless @fh.closed?
-      @nh.close unless @nh.closed?
-      @th.close if @th && !@th.closed? unless WINDOWS
+  test "isatty does not accept any arguments" do
+    assert_raise(ArgumentError){ @fh.isatty(1) }
+  end
 
-      remove_file(@file)
+  def teardown
+    @fh.close unless @fh.closed?
+    @nh.close unless @nh.closed?
+    @th.close if @th && !@th.closed? unless WINDOWS
 
-      @null = nil
-      @file = nil
-      @tty  = nil
-   end
+    remove_file(@file)
+
+    @null = nil
+    @file = nil
+    @tty  = nil
+  end
 end
