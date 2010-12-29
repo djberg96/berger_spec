@@ -3,6 +3,7 @@
 #
 # Test suite for the NilClass#nil? instance method.
 ###################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_NilClass_Nil_Instance < Test::Unit::TestCase

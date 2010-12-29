@@ -3,6 +3,7 @@
 #
 # Test suite for the NilClass#^ instance method.
 ###################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_NilClass_XOR_Instance < Test::Unit::TestCase

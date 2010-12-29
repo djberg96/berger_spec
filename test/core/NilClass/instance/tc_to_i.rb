@@ -3,6 +3,7 @@
 #
 # Test suite for the NilClass#to_i instance method.
 ###################################################################
+require 'test/helper'
 require "test/unit"
 
 class TC_NilClass_ToI_Instance < Test::Unit::TestCase
