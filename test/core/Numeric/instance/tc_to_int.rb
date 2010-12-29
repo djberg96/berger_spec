@@ -3,6 +3,7 @@
 #
 # Test case for the Numeric#to_int instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Numeric_ToInt_InstanceMethod < Test::Unit::TestCase

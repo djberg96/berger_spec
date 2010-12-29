@@ -3,6 +3,7 @@
 #
 # Test case for the Numeric#eql? instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Numeric_Eql_InstanceMethod < Test::Unit::TestCase

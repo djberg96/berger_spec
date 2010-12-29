@@ -3,6 +3,7 @@
 #
 # Test case for the Numeric#integer? instance method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Numeric_Integer_InstanceMethod < Test::Unit::TestCase

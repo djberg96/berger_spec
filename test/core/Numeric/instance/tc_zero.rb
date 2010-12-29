@@ -3,6 +3,7 @@
 #
 # Test case for the Numeric#zero? instance method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Numeric_Zero_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Numeric#floor instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Numeric_Floor_InstanceMethod < Test::Unit::TestCase

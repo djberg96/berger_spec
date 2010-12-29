@@ -3,6 +3,7 @@
 #
 # Test case for the Numeric#truncate instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Numeric_Truncate_InstanceMethod < Test::Unit::TestCase

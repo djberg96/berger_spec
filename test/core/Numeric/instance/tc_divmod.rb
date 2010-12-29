@@ -3,6 +3,7 @@
 #
 # Test case for the Numeric#divmod instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Numeric_Divmod_InstanceMethod < Test::Unit::TestCase

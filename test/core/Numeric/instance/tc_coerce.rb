@@ -3,6 +3,7 @@
 #
 # Test case for the the Numeric#coerce instance method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 # This is used to test coerced strings later.
