@@ -7,10 +7,10 @@ CLEAN.include("**/*.rbc", "*tc*.txt", "*test*.txt")
 namespace "test" do
   desc "Runs the test suite for the core classes"
   Rake::TestTask.new('core') do |t|
-     files = FileList['test/core/**/tc*']
-     files.delete_if{ |f| File.basename(f) == 'tc_detach.rb' }
-     t.test_files = files
-     t.warning = true
+    files = FileList['test/core/**/*.rb']
+    files.delete_if{ |f| File.basename(f) == 'tc_detach.rb' }
+    t.test_files = files
+    t.warning = true
   end
 
   namespace "core" do
