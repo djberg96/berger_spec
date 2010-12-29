@@ -4,6 +4,7 @@
 # Test case for the Object#send instance method and the Object#__send__
 # alias.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Object_Send_InstanceMethod < Test::Unit::TestCase

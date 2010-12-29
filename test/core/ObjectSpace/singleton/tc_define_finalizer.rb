@@ -6,6 +6,7 @@
 # TODO: Figure out a way to fire off the finalizer and test the result
 # without exiting the program.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_ObjectSpace_DefineFinalizer_ClassMethod < Test::Unit::TestCase

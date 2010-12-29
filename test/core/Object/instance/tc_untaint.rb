@@ -3,6 +3,7 @@
 #
 # Test case for the Object#untaint instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Object_Untaint_InstanceMethod < Test::Unit::TestCase

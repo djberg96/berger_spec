@@ -3,6 +3,7 @@
 #
 # Test case for the Object#to_s instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 $object_to_s_main = to_s # Special case

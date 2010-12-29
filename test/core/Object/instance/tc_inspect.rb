@@ -3,6 +3,7 @@
 #
 # Test case for the Object#inspect instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 $object_inspect_main = inspect # Special case

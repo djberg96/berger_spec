@@ -3,8 +3,8 @@
 #
 # Test case for the Object#tainted? instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Object_Tainted_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -16,7 +16,7 @@ class TC_Object_Tainted_InstanceMethod < Test::Unit::TestCase
    def test_tainted_basic
       assert_respond_to(@object, :tainted?)
       assert_nothing_raised{ @object.tainted? }
-      assert_kind_of(Boolean, @object.tainted?)
+      assert_boolean(@object.tainted?)
    end
 
    def test_tainted

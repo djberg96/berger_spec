@@ -4,6 +4,7 @@
 # Test case for the Object#object_id instance method and the
 # Object#__id__ alias.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Object_ObjectId_InstanceMethod < Test::Unit::TestCase

@@ -3,6 +3,7 @@
 #
 # Test case for the Object#instance_of? instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Object_InstanceOf_InstanceMethod < Test::Unit::TestCase

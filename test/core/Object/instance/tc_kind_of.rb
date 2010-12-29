@@ -4,6 +4,7 @@
 # Test case for the Object#kind_of? instance method and the
 # Object#is_a? alias.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module ObjectKindOfM; end

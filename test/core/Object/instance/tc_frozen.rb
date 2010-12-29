@@ -3,8 +3,8 @@
 #
 # Test case for the Object#frozen? instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Object_Frozen_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -16,7 +16,7 @@ class TC_Object_Frozen_InstanceMethod < Test::Unit::TestCase
    def test_frozen_basic
       assert_respond_to(@object, :frozen?)
       assert_nothing_raised{ @object.frozen? }
-      assert_kind_of(Boolean, @object.frozen?)
+      assert_boolean(@object.frozen?)
    end
 
    def test_frozen

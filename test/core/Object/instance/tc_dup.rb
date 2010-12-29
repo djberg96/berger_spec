@@ -3,6 +3,7 @@
 #
 # Test case for the Object#dup instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class ObjectDup

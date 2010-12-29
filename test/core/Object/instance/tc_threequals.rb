@@ -4,8 +4,8 @@
 # Test case for the Object#==== instance method. For the Object class
 # these tests are effectively identical to Object#==.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Object_Threequals_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -18,7 +18,7 @@ class TC_Object_Threequals_InstanceMethod < Test::Unit::TestCase
    def test_threequals_basic
       assert_respond_to(@object1, :===)
       assert_nothing_raised{ @object1 === @object2 }
-      assert_kind_of(Boolean, @object1 === @object2)
+      assert_boolean(@object1 === @object2)
    end
 
    def test_threequals

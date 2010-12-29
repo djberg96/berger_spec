@@ -3,6 +3,7 @@
 #
 # Test case for the Object#class instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Object_Class_InstanceMethod < Test::Unit::TestCase

@@ -3,8 +3,8 @@
 #
 # Test case for the Object#taint instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Object_Taint_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

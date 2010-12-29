@@ -5,6 +5,7 @@
 # test case because Object#=~ always returns false. It is meant to be
 # overridden by subclasses.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Object_Match_InstanceMethod < Test::Unit::TestCase

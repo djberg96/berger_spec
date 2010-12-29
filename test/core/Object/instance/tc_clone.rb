@@ -3,6 +3,7 @@
 #
 # Test case for the Object#clone instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class ObjectClone

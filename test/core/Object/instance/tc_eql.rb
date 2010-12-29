@@ -3,8 +3,8 @@
 #
 # Test case for the Object#== instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Object_Eql_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -17,7 +17,7 @@ class TC_Object_Eql_InstanceMethod < Test::Unit::TestCase
    def test_eql_basic
       assert_respond_to(@object1, :eql?)
       assert_nothing_raised{ @object1.eql?(@object2) }
-      assert_kind_of(Boolean, @object1.eql?(@object2))
+      assert_boolean(@object1.eql?(@object2))
    end
 
    def test_eql

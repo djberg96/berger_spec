@@ -5,6 +5,7 @@
 #
 # TODO: Add tests for parameters to define_finalizer.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_ObjectSpace_Id2ref_ClassMethod < Test::Unit::TestCase
