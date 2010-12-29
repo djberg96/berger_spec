@@ -7,30 +7,29 @@
 #
 # For now these tests are for Unix platforms only.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessGID_Eid_ModuleMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   def setup
-      @eid   = nil
-      @group = Etc.getgrnam('nobody')
-   end
+  def setup
+    @eid   = nil
+    @group = Etc.getgrnam('nobody')
+  end
 
-   def test_eid_basic
-      assert_respond_to(Process::GID, :eid)
-   end
+  def test_eid_basic
+    assert_respond_to(Process::GID, :eid)
+  end
 
-   unless WINDOWS
-      def test_eid
-         assert_nothing_raised{ Process::GID.eid }
-         assert_kind_of(Fixnum, Process::GID.eid)
-      end
-   end
+  def test_eid
+    omit_if(WINDOWS, "eid test skipped on MS Windows")
+    assert_nothing_raised{ Process::GID.eid }
+    assert_kind_of(Fixnum, Process::GID.eid)
+  end
 
-   def teardown
-      @eid   = nil
-      @group = nil
-   end
+  def teardown
+    @eid   = nil
+    @group = nil
+ end
 end
