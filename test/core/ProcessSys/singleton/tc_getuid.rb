@@ -3,6 +3,7 @@
 #
 # Test case for the Process::Sys.getuid module method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_ProcessSys_Getuid_ModuleMethod < Test::Unit::TestCase

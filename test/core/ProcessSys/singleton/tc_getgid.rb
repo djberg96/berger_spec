@@ -3,6 +3,7 @@
 #
 # Test case for the Process::Sys.getgid module method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_ProcessSys_Getgid_ModuleMethod < Test::Unit::TestCase

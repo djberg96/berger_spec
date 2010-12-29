@@ -3,8 +3,8 @@
 #
 # Test case for the Process::Sys.issetugid module method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessSys_Issetugid_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

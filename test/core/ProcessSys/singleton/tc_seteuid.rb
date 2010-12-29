@@ -8,8 +8,8 @@
 #
 # TODO: Figure out why these tests always fail.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessSys_Seteuid_ModuleMethod < Test::Unit::TestCase
    include Test::Helper

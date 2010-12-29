@@ -6,8 +6,8 @@
 # Most of these tests will only run on Unix systems, and then only
 # as root.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_ProcessSys_Setgid_ModuleMethod < Test::Unit::TestCase
    include Test::Helper
