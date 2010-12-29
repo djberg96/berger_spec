@@ -44,6 +44,7 @@ class TC_IO_Isatty_InstanceMethod < Test::Unit::TestCase
 
   # I'm assuming you don't run your test cases via cron...
   test "isatty returns true for STDOUT" do
+    notify("This may be incorrect. See http://tinyurl.com/248kem9")
     assert_true(STDOUT.isatty)
   end
 
