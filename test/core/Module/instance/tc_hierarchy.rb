@@ -4,8 +4,8 @@
 # Test case for the various module hierarchy operators, i.e. >, <,
 # >= and <=.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 # We'll use these predeclared modules in the test case
 module H_Mixin_A
@@ -32,25 +32,25 @@ class TC_Module_Hierarchy_InstanceMethod < Test::Unit::TestCase
    def test_less_than_basic
       assert_respond_to(H_Mixin_A, :<)
       assert_nothing_raised{ H_Mixin_A < H_Parent }
-      assert_kind_of(Boolean, H_Mixin_A < H_Parent)
+      assert_boolean(H_Mixin_A < H_Parent)
    end
 
    def test_less_than_or_equal_to_basic
       assert_respond_to(H_Mixin_A, :<=)
       assert_nothing_raised{ H_Mixin_A <= H_Parent }
-      assert_kind_of(Boolean, H_Mixin_A <= H_Parent)
+      assert_boolean(H_Mixin_A <= H_Parent)
    end
 
    def test_greater_than_basic
       assert_respond_to(H_Mixin_A, :>)
       assert_nothing_raised{ H_Mixin_A > H_Parent }
-      assert_kind_of(Boolean, H_Mixin_A > H_Parent)
+      assert_boolean(H_Mixin_A > H_Parent)
    end
 
    def test_greater_than_or_equal_to_basic
       assert_respond_to(H_Mixin_A, :>=)
       assert_nothing_raised{ H_Mixin_A >= H_Parent }
-      assert_kind_of(Boolean, H_Mixin_A >= H_Parent)
+      assert_boolean(H_Mixin_A >= H_Parent)
    end
 
    def test_less_than

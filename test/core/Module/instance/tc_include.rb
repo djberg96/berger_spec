@@ -3,8 +3,8 @@
 #
 # Test case for the Module#include? instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 module IncludeA
 end
@@ -22,7 +22,7 @@ class TC_Module_Include_InstanceMethod < Test::Unit::TestCase
    def test_include_basic
       assert_respond_to(IncludeC, :include?)
       assert_nothing_raised{ IncludeC.include?(IncludeA) }
-      assert_kind_of(Boolean, IncludeC.include?(IncludeA))
+      assert_boolean(IncludeC.include?(IncludeA))
    end
 
    def test_include

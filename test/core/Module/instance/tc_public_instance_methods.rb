@@ -3,6 +3,7 @@
 #
 # Test case for the Module#public_instance_methods instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module PubInstMethA
@@ -13,7 +14,7 @@ module PubInstMethA
    protected
       def m_protected
       end
-   
+
    public
       def m_public
       end

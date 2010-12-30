@@ -3,6 +3,7 @@
 #
 # Test case for the Module#ancestors instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module AncModA; end

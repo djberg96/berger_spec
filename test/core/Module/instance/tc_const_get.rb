@@ -3,8 +3,8 @@
 #
 # Test case for the Module#const_get instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 module CG_Mod_A
    TEST  = 1

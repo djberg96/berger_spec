@@ -3,6 +3,7 @@
 #
 # Test case for the Module.nesting module method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 $nesting1 = Module.nesting

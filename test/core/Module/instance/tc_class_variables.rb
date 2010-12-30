@@ -3,6 +3,7 @@
 #
 # Test case for the Module#class_variables instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module CV_Mod_A

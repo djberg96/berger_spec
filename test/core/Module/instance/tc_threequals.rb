@@ -3,8 +3,8 @@
 #
 # Test case for the Module#=== instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 module ThreeModA; end
 module ThreeModB; end
@@ -25,7 +25,7 @@ class TCompare_Module_Threequals_InstanceMethod < Test::Unit::TestCase
    def test_threequals_basic
       assert_respond_to(ThreeModA, :===)
       assert_nothing_raised{ ThreeModA === ThreeModB }
-      assert_kind_of(Boolean, ThreeModA === ThreeModB)
+      assert_boolean(ThreeModA === ThreeModB)
    end
 
    def test_threequals

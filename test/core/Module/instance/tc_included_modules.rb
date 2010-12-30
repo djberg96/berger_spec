@@ -3,6 +3,7 @@
 #
 # Test case for the Module#included_modules instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module IncludedMod_A; end
@@ -27,7 +28,7 @@ class TC_Module_IncludeModules_InstanceMethod < Test::Unit::TestCase
       assert_equal([IncludedMod_A], IncludedMod_B.included_modules)
 
       assert_equal(
-         [IncludedMod_B, IncludedMod_A, Config, Kernel],
+         [IncludedMod_B, IncludedMod_A, Kernel],
          Included_Class_A.included_modules
       )
    end

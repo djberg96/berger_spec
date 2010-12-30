@@ -3,6 +3,7 @@
 #
 # Test case for the Module#<=> instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 # We'll use these predeclared modules in the test case

@@ -3,6 +3,7 @@
 #
 # Test case for the Module.new module method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Module_New_ModuleMethod < Test::Unit::TestCase

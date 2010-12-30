@@ -3,6 +3,7 @@
 #
 # Test case for the Module.constants module method.
 ######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Module_Constants_ModuleMethod < Test::Unit::TestCase

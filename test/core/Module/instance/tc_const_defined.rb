@@ -3,8 +3,8 @@
 #
 # Test case for the Module#const_defined? instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 module CD_Mod_A
    TEST  = 1
@@ -22,7 +22,7 @@ class TC_Module_ConstDefined_InstanceMethod < Test::Unit::TestCase
    def test_const_defined_basic
       assert_respond_to(CD_Mod_A, :const_defined?)
       assert_nothing_raised{ CD_Mod_A.const_defined?('TEST') }
-      assert_kind_of(Boolean, CD_Mod_A.const_defined?('TEST'))
+      assert_boolean(CD_Mod_A.const_defined?('TEST'))
    end
 
    def test_const_defined

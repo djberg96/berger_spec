@@ -3,6 +3,7 @@
 #
 # Test case for the Module#instance_methods instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module InstMethA

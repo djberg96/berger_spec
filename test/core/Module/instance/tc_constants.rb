@@ -3,6 +3,7 @@
 #
 # Test suite for the Module#constants instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module MConA
@@ -31,8 +32,8 @@ class TC_Module_Constants_InstanceMethods < Test::Unit::TestCase
 
    def test_constants
       assert_equal(['M_CON_A'], MConA.constants)
-      assert_equal(['M_CON_B', 'M_CON_A'], MConB.constants)
-      assert_equal(['M_CON_B', 'M_CON_A'], CConA.constants)
+      assert_equal(['M_CON_A', 'M_CON_B'], MConB.constants.sort)
+      assert_equal(['M_CON_A', 'M_CON_B'], CConA.constants.sort)
       assert_equal([], MConC.constants)
    end
 

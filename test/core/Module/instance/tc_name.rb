@@ -3,6 +3,7 @@
 #
 # Test case for the Module#name instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 module NameModA

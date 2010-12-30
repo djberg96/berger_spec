@@ -3,8 +3,8 @@
 #
 # Test case for the Module#const_set instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 module CSet_Mod_A
 end
