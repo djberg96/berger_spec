@@ -25,6 +25,10 @@ class TC_IO_Foreach_ClassMethod < Test::Unit::TestCase
     assert_nothing_raised{ IO.foreach(@filename){} }
   end
 
+  test "foreach returns nil" do
+    assert_nil(IO.foreach(@filename){ |line| @array << line })
+  end
+
   test "foreach without a separator argument works as expected" do
     assert_nothing_raised{ IO.foreach(@filename){ |line| @array << line } }
     assert_equal("hello\n", @array[0])
