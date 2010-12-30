@@ -1,16 +1,19 @@
-== Description
+= Description
   This is a custom test suite for Ruby. It includes tests for both the core
   classes and the standard library. A series of benchmarks are also included.
 
-== Prerequisites
-  Rake 0.8.7 or later.
+= Prerequisites
+  * rake 0.8.7 or later.
+  * test-unit 2.1 or later.
+  * mkmf-lite
 
-== Installation
+= Installation
   There is no gem. Just clone and run.
+  A gemspec is provided for Bundler users.
 
-== Conventions
+= Conventions
 
-=== Directory Layout
+== Directory Layout
    
   bench - toplevel directory for all benchmarks
   test  - toplevel directory for all tests
@@ -28,7 +31,7 @@
   class in question. Under the 'instance' folders are the tests for the instance
   methods of the class in question, if applicable.
    
-=== Test suites
+== Test suites
   The test program shall be test-unit 2.
 	
   All test files shall start with "test_", and end with the name of the method,
