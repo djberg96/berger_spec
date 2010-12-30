@@ -141,6 +141,11 @@ module Test
       end
     end
 
+    # Returns the root path. On Windows this is "C:\\". Otherwise it's "/".
+    def get_root_path
+      WINDOWS ? "C:\\" : "/"
+    end
+
     # Returns the UTF offset/bias.
     def get_tz_offset
       if WINDOWS
