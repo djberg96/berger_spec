@@ -1,12 +1,12 @@
 ######################################################################
-# tc_read.rb
+# test_read.rb
 #
-# Test case for the IO.read class method.
+# Test case for the IO.read singleton method.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_IO_Read_ClassMethod < Test::Unit::TestCase
+class TC_IO_Read_SingletonMethod < Test::Unit::TestCase
    include Test::Helper
 
    def setup

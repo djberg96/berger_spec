@@ -1,5 +1,5 @@
 ######################################################################
-# tc_pipe.rb
+# test_pipe.rb
 #
 # Test case for the IO.pipe class method. These tests are skipped
 # on MS Windows (via the Rakefile).
@@ -7,7 +7,7 @@
 require 'test/helper'
 require 'test/unit'
 
-class TC_IO_Pipe_ClassMethod < Test::Unit::TestCase
+class TC_IO_Pipe_SingletonMethod < Test::Unit::TestCase
    def setup
       @read  = nil
       @write = nil
@@ -37,7 +37,7 @@ class TC_IO_Pipe_ClassMethod < Test::Unit::TestCase
    end
 
    def teardown
-      @read.close if @read && !@read.closed? 
+      @read.close if @read && !@read.closed?
       @write.close if @write && !@write.closed?
    end
 end

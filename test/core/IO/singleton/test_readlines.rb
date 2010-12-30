@@ -1,12 +1,12 @@
 ######################################################################
-# tc_readlines.rb
+# test_readlines.rb
 #
 # Test case for the IO.readlines class method.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_IO_Readlines_ClassMethod < Test::Unit::TestCase
+class TC_IO_Readlines_SingletonMethod < Test::Unit::TestCase
    include Test::Helper
 
    def setup

@@ -1,12 +1,12 @@
 ######################################################################
-# tc_open.rb
+# test_open.rb
 #
 # Test case for the IO.open class method.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_IO_Open_ClassMethod < Test::Unit::TestCase
+class TC_IO_Open_SingletonMethod < Test::Unit::TestCase
    include Test::Helper
 
    def setup

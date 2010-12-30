@@ -1,5 +1,5 @@
 ######################################################################
-# tc_popen.rb
+# test_popen.rb
 #
 # Test case for the IO.popen class method. Some tests will be
 # skipped on MS Windows.
@@ -7,9 +7,9 @@
 require 'test/helper'
 require 'test/unit'
 
-class TC_IO_Popen_ClassMethod < Test::Unit::TestCase
+class TC_IO_Popen_SingletonMethod < Test::Unit::TestCase
    include Test::Helper
-   
+
    def setup
       @cmd = WINDOWS ? 'date /t' : 'date'
       @str = nil
