@@ -58,9 +58,8 @@ class TC_File_Join_SingletonMethod < Test::Unit::TestCase
   end
 
   test "join returns a tainted string if any argument is tainted" do
-    assert_false(File.join(*@dirs).tainted?)
-    assert_nothing_raised{ @dirs[0].taint }
-    assert_true(File.join(*@dirs).tainted?)
+    assert_false(File.join("test1", "test2").tainted?)
+    assert_true(File.join(Dir.pwd, "test1").tainted?) # Dir.pwd tainted
   end
 
   test "arguments to join must be strings" do
