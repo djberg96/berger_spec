@@ -10,8 +10,8 @@
 # limited subset of the available methods. Mostly, it's just ENV#[] and
 # ENV#[]=.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Env_Global_Constant < Test::Unit::TestCase
    include Test::Helper
