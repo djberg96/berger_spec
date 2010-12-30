@@ -1,11 +1,11 @@
 ######################################################################
-# tc_sysread.rb
+# test_sysread.rb
 #
 # Test case for the IO#sysread instance method. These tests are
 # nearly identical to the IO#read tests.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Sysread_InstancMethod < Test::Unit::TestCase
    include Test::Helper

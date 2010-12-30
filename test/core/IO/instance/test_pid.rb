@@ -1,10 +1,10 @@
 ########################################################################
-# tc_pid.rb
+# test_pid.rb
 #
 # Test case for the IO#pid instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Pid_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
@@ -12,7 +12,7 @@ class TC_IO_Pid_InstanceMethod < Test::Unit::TestCase
    def setup
       @cmd  = WINDOWS ? 'date /t' : 'date'      
       @io   = IO.popen(@cmd)
-      @file = 'tc_pid.txt'
+      @file = 'test_pid.txt'
       @fh   = File.open(@file, 'w')
    end
 

@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_gets.rb
+# test_gets.rb
 #
 # Test case for the IO#gets instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_IO_Gets_InstanceMethod < Test::Unit::TestCase

@@ -1,8 +1,9 @@
 ########################################################################
-# tc_lineno.rb
+# test_lineno.rb
 #
 # Test case for the IO#lineno and IO#lineno= instance methods.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_IO_Lineno_InstanceMethod < Test::Unit::TestCase

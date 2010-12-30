@@ -1,10 +1,10 @@
 ######################################################################
-# tc_read.rb
+# test_read.rb
 #
 # Test case for the IO#read instance method.
 ######################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Read_InstancMethod < Test::Unit::TestCase
    include Test::Helper

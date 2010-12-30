@@ -1,5 +1,5 @@
 ######################################################################
-# tc_fileno.rb
+# test_fileno.rb
 #
 # Test case for the IO#fileno instance method and the IO#to_i alias.
 ######################################################################

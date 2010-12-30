@@ -1,5 +1,5 @@
 ######################################################################
-# tc_close.rb
+# test_close.rb
 #
 # Test case for the IO#close instance method.
 #

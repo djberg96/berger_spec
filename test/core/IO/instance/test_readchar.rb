@@ -1,11 +1,11 @@
 ###############################################################################
-# tc_readchar.rb
+# test_readchar.rb
 #
 # Test case for the IO#readchar instance method. These tests are nearly
 # identical to the IO#getc tests.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_IO_Readchar_InstanceMethod < Test::Unit::TestCase
    include Test::Helper

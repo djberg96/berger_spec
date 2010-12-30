@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_getc.rb
+# test_getc.rb
 #
 # Test case for the IO#getc instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_IO_Getc_InstanceMethod < Test::Unit::TestCase

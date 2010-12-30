@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_pos.rb
+# test_pos.rb
 #
 # Test case for the IO#pos instance method, as well as the IO#tell alias.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_IO_Pos_InstanceMethod < Test::Unit::TestCase

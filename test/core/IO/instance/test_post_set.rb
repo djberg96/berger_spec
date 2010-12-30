@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_pos_set.rb
+# test_pos_set.rb
 #
 # Test case for the IO#pos= instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_IO_PosSet_InstanceMethod < Test::Unit::TestCase

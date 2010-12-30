@@ -1,5 +1,5 @@
 ########################################################################
-# tc_isatty.rb
+# test_isatty.rb
 #
 # Test case for the IO#isatty instance method and the IO#tty? alias.
 ########################################################################
