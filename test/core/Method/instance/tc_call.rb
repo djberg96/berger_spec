@@ -4,6 +4,7 @@
 # Test case for the Method#call instance method and the Method#[]
 # instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MethodCall

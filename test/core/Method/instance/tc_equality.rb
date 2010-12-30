@@ -3,8 +3,8 @@
 #
 # Test case for the Method#== instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class MethodEquality
    def foo; end
@@ -24,7 +24,7 @@ class TC_Method_Equality_InstanceMethod < Test::Unit::TestCase
    def test_equality_basic
       assert_respond_to(@meth, :==)
       assert_nothing_raised{ @meth == @syn }
-      assert_kind_of(Boolean, @meth == @alias)
+      assert_boolean(@meth == @alias)
    end
 
    def test_equality

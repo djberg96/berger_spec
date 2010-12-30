@@ -3,6 +3,7 @@
 #
 # Test case for the Method#unbind instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MethodUnbind

@@ -3,8 +3,8 @@
 #
 # Test case for the Method#.eql?( instance method.
 ########################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class MethodEql
    def foo; end
@@ -24,7 +24,7 @@ class TC_Method_Eql_InstanceMethod < Test::Unit::TestCase
    def test_equality_basic
       assert_respond_to(@meth, :eql?)
       assert_nothing_raised{ @meth.eql?(@syn) }
-      assert_kind_of(Boolean, @meth.eql?( @alias))
+      assert_boolean(@meth.eql?( @alias))
    end
 
    def test_equality

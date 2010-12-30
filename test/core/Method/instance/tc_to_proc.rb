@@ -3,6 +3,7 @@
 #
 # Test case for the Method#to_proc instance method.
 ########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class MethodProc
