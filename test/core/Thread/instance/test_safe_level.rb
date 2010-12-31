@@ -7,42 +7,53 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_Thread_SafeLevel < Test::Unit::TestCase
-   def setup
-      @thread0 = Thread.new{ sleep }
+  include Test::Helper
+
+  def setup
+    @thread0 = Thread.new{ sleep }
+
+    unless JRUBY || RUBINIUS
       @thread1 = Thread.new{ $SAFE = 1; sleep }
       @thread2 = Thread.new{ $SAFE = 2; sleep }
       @thread3 = Thread.new{ $SAFE = 3; sleep }
       @thread4 = Thread.new{ $SAFE = 4; sleep }
-   end
+    end
+  end
 
-   def test_safe_level_basic
-      assert_respond_to(@thread0, :safe_level)
-      assert_nothing_raised{ @thread0.safe_level }
-      assert_kind_of(Integer, @thread0.safe_level)
-   end
+  def test_safe_level_basic
+    omit_if(JRUBY || RUBINIUS, "skipping safe_level tests in this implementation")
+    assert_respond_to(@thread0, :safe_level)
+    assert_nothing_raised{ @thread0.safe_level }
+    assert_kind_of(Integer, @thread0.safe_level)
+  end
 
-   def test_safe_level
-      assert_equal(0, @thread0.safe_level)
-      assert_equal(1, @thread1.safe_level)
-      assert_equal(2, @thread2.safe_level)
-      assert_equal(3, @thread3.safe_level)
-      assert_equal(4, @thread4.safe_level)
-   end
+  def test_safe_level
+    omit_if(JRUBY || RUBINIUS, "skipping safe_level tests in this implementation")
+    assert_equal(0, @thread0.safe_level)
+    assert_equal(1, @thread1.safe_level)
+    assert_equal(2, @thread2.safe_level)
+    assert_equal(3, @thread3.safe_level)
+    assert_equal(4, @thread4.safe_level)
+  end
 
-   # TODO: Is this a bug?
-   def test_safe_level_edge_cases
-      assert_equal(99, Thread.new{ $SAFE = 99; sleep }.safe_level)
-   end
+  # TODO: Is this a bug?
+  def test_safe_level_edge_cases
+    omit_if(JRUBY || RUBINIUS, "skipping safe_level tests in this implementation")
+    assert_equal(99, Thread.new{ $SAFE = 99; sleep }.safe_level)
+  end
 
-   def test_safe_level_expected_errors
-      assert_raise(ArgumentError){ @thread0.safe_level(1) }
-   end
+  def test_safe_level_expected_errors
+    omit_if(JRUBY || RUBINIUS, "skipping safe_level tests in this implementation")
+    assert_raise(ArgumentError){ @thread0.safe_level(1) }
+  end
 
-   def teardown
-      @thread0.exit
+  def teardown
+    @thread0.exit
+    unless JRUBY || RUBINIUS
       @thread1.exit
       @thread2.exit
       @thread3.exit
       @thread4.exit
-   end
+    end
+  end
 end
