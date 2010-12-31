@@ -10,7 +10,7 @@
 * Array#== and custom to_ary methods. See RubyForge bug #11585.
 * IO.read handle leak on failed reads. See RubyForge bug #15065.
 * SignalException#signo bug. See RubyForge bug #11795.
-* Array#flatten!(0) shoudl return nil. See Ruby 1.8-Bug#4196.
+* Array#flatten!(0) should return nil. See Ruby 1.8-Bug#4196.
 
 === Core (Indirectly)
 * Bug in eval.c where rb_define_alias could fail. See ruby-talk:279538.
