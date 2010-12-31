@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.exp method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Exp_Class < Test::Unit::TestCase

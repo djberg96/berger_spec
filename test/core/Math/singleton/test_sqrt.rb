@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.sqrt method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Sqrt_Class < Test::Unit::TestCase

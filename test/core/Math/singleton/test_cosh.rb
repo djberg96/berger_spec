@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.cosh method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Cosh_Class < Test::Unit::TestCase

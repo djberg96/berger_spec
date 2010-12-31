@@ -3,6 +3,7 @@
 #
 # Test cases for constants in the Math module.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Constants_Class < Test::Unit::TestCase

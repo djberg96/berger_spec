@@ -3,8 +3,8 @@
 #
 # Test cases for the Math.log10 method.
 #####################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_Math_Log10_Class < Test::Unit::TestCase
    include Test::Helper

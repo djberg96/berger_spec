@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.cos method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Cos_Class < Test::Unit::TestCase

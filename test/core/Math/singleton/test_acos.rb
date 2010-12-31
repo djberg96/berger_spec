@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.acos method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Acos_Class < Test::Unit::TestCase

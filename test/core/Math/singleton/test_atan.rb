@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.atan method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Atan_Class < Test::Unit::TestCase

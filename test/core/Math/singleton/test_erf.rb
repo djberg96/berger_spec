@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.erf method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Erf_Class < Test::Unit::TestCase

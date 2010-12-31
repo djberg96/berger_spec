@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.asin method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Asin_Class < Test::Unit::TestCase

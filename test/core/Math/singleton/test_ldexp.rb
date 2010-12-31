@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.ldexp method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Ldexp_Class < Test::Unit::TestCase

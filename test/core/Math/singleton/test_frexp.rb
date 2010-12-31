@@ -3,6 +3,7 @@
 #
 # Test cases for the Math.frexp method.
 #####################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_Math_Frexp_Class < Test::Unit::TestCase
