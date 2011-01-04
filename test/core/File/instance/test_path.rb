@@ -16,9 +16,9 @@ class TC_File_Path < Test::Unit::TestCase
     @file_with_path  = File.join(@pwd, "test2")
     @file_with_extra = File.join(@pwd, "/./test3")
 
-    @fh_no_path    = File.new(@file_no_path, "wb+")
-    @fh_with_path  = File.new(@file_with_path, "wb+")
-    @fh_with_extra = File.new(@file_with_extra, "wb+")
+    @fh_no_path    = File.new(@file_no_path, "wb")
+    @fh_with_path  = File.new(@file_with_path, "wb")
+    @fh_with_extra = File.new(@file_with_extra, "wb")
   end
 
   test "path basic functionality" do

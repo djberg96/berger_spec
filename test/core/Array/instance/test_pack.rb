@@ -1,5 +1,5 @@
 ##############################################################################
-# tc_pack.rb
+# test_pack.rb
 #
 # Test suite for the Array#pack instance method.  Note that there is some
 # extra handling to deal with big endian versus little endian architectures.
@@ -337,7 +337,7 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
 
   # The exact return value for 'P' or 'p' is unpredictable, so we do some
   # general assertions instead.
-  unless JRUBY
+  unless JRUBY || RUBINIUS
     # Pointer to a structure (fixed-length string)
     def test_pack_P
       assert_nothing_raised{ @char_array.pack("P") }

@@ -48,9 +48,9 @@
    
   All test class names shall start with "TC_", followed by the class name,
   followed by the class or instance method (capitalized), followed by the word
-  "ClassMethod" (or "SingletonMethod"), or "Instance", as appropriate.
+  "SingletonMethod" or "Instance", as appropriate.
    
-  For example, TC_Dir_Getwd_ClassMethod < Test::Unit::TestCase
+  For example, TC_Dir_Getwd_SingletonMethod < Test::Unit::TestCase
 
   The Test::Helper module is mandatory in all tests, and must be required before
   require'ing test-unit so that test-unit 2 is loaded properly.
@@ -107,6 +107,12 @@
   To perform all tests run 'rake test'.
 
   See the output of 'rake -T' to see all available tests.
+
+== Disagreements
+  In a few cases I've written the tests to reflect the behavior that I
+  think ought to be implemented rather than what MRI currently does, e.g.
+  File.join with no arguments ought to raise an ArgumentError. In such cases
+  I append the string "[BERGER]" to the failure message.
 
 == On JRuby
   As of 25-May-2007 I've decided to go ahead and tailor some of the tests
