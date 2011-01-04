@@ -11,6 +11,14 @@
   There is no gem. Just clone and run.
   A gemspec is provided for Bundler users.
 
+= First Rule
+  The first rule of berger_spec is that no one passes berger_spec.
+
+  Seriously, no one passes all the specs because there are small inconsistencies
+  and problems in MRI that are either copied by other implementations, in which
+  case they are wrong, too. Or, they're fixed in the other implementations, which
+  means they can't all be correct.
+
 = Conventions
 
 == Directory Layout
