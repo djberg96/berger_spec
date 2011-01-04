@@ -306,6 +306,17 @@ namespace "test" do
       t.warning = true
     end
 
+    namespace "process" do
+      Dir['test/core/Process/singleton/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
+    end
+
     desc "Runs the test suite for the Process::GID module"
     Rake::TestTask.new('process_gid') do |t|
       t.test_files = FileList['test/core/ProcessGID/*/*.rb']
