@@ -21,14 +21,27 @@ namespace "test" do
     end
 
     namespace "array" do
-      Dir['test/core/Array/instance/*.rb'].each{ |file|
-        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
-        Rake::TestTask.new(name) do |t|
-          t.test_files = [file]
-          t.warning = true
-          t.verbose = true
-        end
-      }
+      namespace "instance" do
+        Dir['test/core/Array/instance/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
+
+      namespace "singleton" do
+        Dir['test/core/Array/singleton/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
     end
 
     desc "Runs the test suite for the Bignum class"
