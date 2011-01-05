@@ -1,10 +1,11 @@
 ###############################################################################
-# tc_offset.rb
+# test_offset.rb
 #
 # Test case for the MatchData#offset instance method.
 #
 # TODO: Add more advanced tests. These are pretty basic.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_Offset_InstanceMethod < Test::Unit::TestCase

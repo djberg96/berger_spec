@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_string.rb
+# test_string.rb
 #
 # Test case for the MatchData#string instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_String_InstanceMethod < Test::Unit::TestCase

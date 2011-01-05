@@ -1,10 +1,11 @@
 ###############################################################################
-# tc_post_match.rb
+# test_post_match.rb
 #
 # Test case for the MatchData#post_match instance method.
 #
 # TODO: Add more advanced tests.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_PostMatch_InstanceMethod < Test::Unit::TestCase

@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_aref.rb
+# test_aref.rb
 #
 # Test case for the MatchData#[] instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_Aref_InstanceMethod < Test::Unit::TestCase

@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_to_a.rb
+# test_to_a.rb
 #
 # Test case for the MatchData#to_a instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_ToA_InstanceMethod < Test::Unit::TestCase

@@ -5,6 +5,7 @@
 #
 # TODO: Add more advanced tests.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_PreMatch_InstanceMethod < Test::Unit::TestCase

@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_captures.rb
+# test_captures.rb
 #
 # Test case for the MatchData#captures instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_Captures_InstanceMethod < Test::Unit::TestCase

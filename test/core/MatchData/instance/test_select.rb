@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_select.rb
+# test_select.rb
 #
 # Test case for the MatchData#select instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_Select_InstanceMethod < Test::Unit::TestCase

@@ -1,10 +1,11 @@
 ###############################################################################
-# tc_begin.rb
+# test_begin.rb
 #
 # Test case for the MatchData#begin instance method.
 #
 # TODO: Add more advanced tests. These are pretty basic.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_Begin_InstanceMethod < Test::Unit::TestCase

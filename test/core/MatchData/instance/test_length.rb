@@ -1,9 +1,10 @@
 ###############################################################################
-# tc_length.rb
+# test_length.rb
 #
 # Test case for the MatchData#length instance method, and the MatchData#size
 # alias.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_Length_InstanceMethod < Test::Unit::TestCase

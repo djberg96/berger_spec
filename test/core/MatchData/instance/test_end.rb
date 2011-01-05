@@ -1,10 +1,11 @@
 ###############################################################################
-# tc_end.rb
+# test_end.rb
 #
 # Test case for the MatchData#end instance method.
 #
 # TODO: Add more advanced tests. These are pretty basic.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_End_InstanceMethod < Test::Unit::TestCase

@@ -1,8 +1,9 @@
 ###############################################################################
-# tc_to_s.rb
+# test_to_s.rb
 #
 # Test case for the MatchData#to_s instance method.
 ###############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class TC_MatchData_ToS_InstanceMethod < Test::Unit::TestCase

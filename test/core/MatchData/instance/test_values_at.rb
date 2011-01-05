@@ -1,14 +1,14 @@
 ###############################################################################
-# tc_values_at.rb
+# test_values_at.rb
 #
 # Test case for the MatchData#values_at instance method.
 ###############################################################################
-require 'test/unit'
 require 'test/helper'
+require 'test/unit'
 
 class TC_MatchData_ValuesAt_InstanceMethod < Test::Unit::TestCase
    include Test::Helper
-   
+
    def setup
       @string = 'THX1138'
       @regex  = /(.)(.)(\d+)(\d)/
