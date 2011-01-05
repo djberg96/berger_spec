@@ -1,53 +1,82 @@
 #############################################################################
-# tc_transpose.rb
+# test_transpose.rb
 #
-# Test suite for the Array#transpose method. These tests are skipped in the
-# Amber implementation, via the Rakefile.
+# Test suite for the Array#transpose method.
 #############################################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
 class TC_Array_Transpose_InstanceMethod < Test::Unit::TestCase
-   class ATranspose < Array
-      def to_ary
-         [[1,2], [3,4]]
-      end
-   end
+  class ATranspose < Array
+    def to_ary
+      [[1,2], [3,4]]
+    end
+  end
 
-   def setup
-      @array  = [["a","b"],["c","d"],["e","f"],["g","h"]]
-      @custom = ATranspose.new
-   end
+  def setup
+    @array  = [['a','b'], ['c','d'], ['e','f'], ['g','h']]
+    @custom = ATranspose.new
+  end
 
-   def test_basic
-      assert_respond_to(@array, :transpose)
-      assert_nothing_raised{ @array.transpose }
-   end
+  test 'transpose basic functionality' do
+    assert_respond_to(@array, :transpose)
+    assert_nothing_raised{ @array.transpose }
+  end
 
-   def test_transpose
-      assert_equal([["a","c","e","g"],["b","d","f","h"]], @array.transpose)
-      assert_equal([["a","b"],["c","d"],["e","f"],["g","h"]], @array)
-      assert_equal([["a","b"],["c","d"],["e","f"],["g","h"]], @array.transpose.transpose)
-   end
+  test "transpose returns the expected results" do
+    assert_equal([['a','c','e','g'],['b','d','f','h']], @array.transpose)
+    assert_equal([[1, 3], [2, 4], [[3], [5, 6]]], [[1,2,[3]],[3,4,[5,6]]].transpose)
+  end
 
-   def test_transpose_custom_to_ary
-      assert_nothing_raised{ @custom.transpose }
-      # assert_equal([[1,3], [2,4]], @custom.transpose) # Undefined. TODO: Revisit.
-   end
+  test "transpose does not modify its receiver" do
+    assert_nothing_raised{ @array.transpose }
+    assert_equal([['a','b'],['c','d'],['e','f'],['g','h']], @array)
+  end
 
-   def test_transpose_edge_cases
-      assert_equal([], [[], []].transpose)
-      assert_equal([[nil, false], [nil, true]], [[nil, nil], [false, true]].transpose) 
-   end
+  test "transposing a transposed array returns the original array" do
+    assert_equal([['a','b'],['c','d'],['e','f'],['g','h']], @array.transpose.transpose)
+  end
 
-   def test_expected_errors
-      assert_raise(TypeError){ [1,2,3].transpose }
-      assert_raise(IndexError){ [[1,2],[3]].transpose }
-      assert_raise(ArgumentError){ @array.transpose(1) }
-   end
+  test "transpose responds to custom to_ary methods" do
+    pend("transpose tests for custom to_ary method awaiting clarification")
+    assert_nothing_raised{ @custom.transpose }
+    assert_equal([[1,3], [2,4]], @custom.transpose)
+  end
 
-   def teardown
-      @array  = nil
-      @custom = nil
-   end
+  test "calling transpose on an empty array returns an empty array" do
+    assert_equal([], [].transpose)
+  end
+
+  test "calling transpose on an array of empty arrays returns an empty array" do
+    assert_equal([], [[], []].transpose)
+  end
+
+  test "transpose handles nil, false and true elements properly" do
+    assert_equal([[nil, false], [nil, true]], [[nil, nil], [false, true]].transpose) 
+  end
+
+  test "transpose can handle recursive arrays" do
+    array = []
+    array << array << array
+    assert_nothing_raised{ array.transpose }
+    assert_equal("[...][...][...][...][...][...][...][...]", array.transpose.to_s)
+  end
+
+  test "transpose raises an error if it does not contain nested arrays" do
+    assert_raise(TypeError){ [1,2,3].transpose }
+  end
+
+  test "transpose raises an error if element sizes differ" do
+    assert_raise(IndexError){ [[1,2],[3]].transpose }
+    assert_raise(IndexError){ [[1,2,3],[3,4]].transpose }
+  end
+
+  test "transpose does not accept any arguments" do
+    assert_raise(ArgumentError){ @array.transpose(1) }
+  end
+
+  def teardown
+    @array  = nil
+    @custom = nil
+  end
 end
