@@ -1,35 +1,41 @@
 ######################################################################
-# tc_detach.rb
+# test_detach.rb
 #
-# Test case for the Process.detach method. This test case is for
-# UNIX platforms only.
+# Test case for the Process.detach method.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_Process_Detach_ModuleMethod < Test::Unit::TestCase
-   include Test::Helper
+class TC_Process_Detach_SingletonMethod < Test::Unit::TestCase
+  include Test::Helper
 
-   def setup
-      @pid = nil
-   end
+  def setup
+    @pid  = nil
+    @skip = WINDOWS || JRUBY
+  end
 
-   if WINDOWS
-      def test_stub
-         # Stub to keep Test::Unit from whining about no tests
-      end
-   else
-      def test_detach_basic
-         assert_respond_to(Process, :detach)
-      end
+  test "detach basic functionality" do
+    assert_respond_to(Process, :detach)
+  end
 
-      def test_detach
-         assert_nothing_raised{ @pid = fork }
-         assert_nothing_raised{ Process.detach(@pid) } if @pid
-      end
-   end
+  test "detach behaves as expected" do
+    omit_if(@skip, "Process.detach tests skipped on MS Windows and/or JRuby")
+    @pid = fork
+    assert_nothing_raised{ Process.detach(@pid) } if @pid
+  end
 
-   def teardown
-      @pid = nil
-   end
+  test "detach requires a single argument" do
+    assert_raise(ArgumentError){ Process.detach }
+    assert_raise(ArgumentError){ Process.detach(1, 2) }
+  end
+
+  test "detach requires a numeric argument" do
+    assert_raise(TypeError){ Process.detach("test") }
+  end
+
+  def teardown
+    Process.kill(9, @pid) rescue nil
+    @pid  = nil
+    @skip = nil
+  end
 end
