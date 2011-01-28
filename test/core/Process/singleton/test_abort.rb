@@ -11,30 +11,38 @@ class TC_Process_Abort_ModuleMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
+    @skip   = WINDOWS || JRUBY
     @stderr = STDERR.clone
     @file   = File.join(Dir.pwd, 'test_abort.txt')
     @fh     = File.open(@file, "w")
     STDERR.reopen(@fh)
   end
 
-  def test_abort_basic
+  test "abort basic functionality" do
     assert_respond_to(Process, :abort)
   end
 
-  unless WINDOWS
-    def test_abort
-      fork{ Process.abort }
-      pid, status = Process.wait2
-      assert_equal(1, status.exitstatus)
-    end
+  test "abort behaves as expected" do
+    omit_if(@skip, "Process.abort tests skipped on MS Windows and/or JRuby")
+    fork{ Process.abort }
+    pid, status = Process.wait2
+    assert_equal(1, status.exitstatus)
+  end
 
-    def test_abort_with_error_message
-      fork{ Process.abort("hello world") }
-      pid, status = Process.wait2
+  test "abort accepts and returns a message" do
+    omit_if(@skip, "Process.abort tests skipped on MS Windows and/or JRuby")
+    fork{ Process.abort("hello world") }
+    pid, status = Process.wait2
+    assert_equal(1, status.exitstatus)
+    assert_equal("hello world", IO.read(@file).chomp)
+  end
 
-      assert_equal(1, status.exitstatus)
-      assert_equal("hello world", IO.read(@file).chomp)
-    end
+  test "abort only accepts one argument" do
+    assert_raise(ArgumentError){ Process.abort("test", "test2") }
+  end
+
+  test "abort only accepts string arguments" do
+    assert_raise(TypeError){ Process.abort(1234) }
   end
 
   def teardown
