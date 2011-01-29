@@ -74,11 +74,12 @@
   Any bugs found as a result of the test suite should be marked in the SCORECARD.
    
 == Coding guidelines for writers
-  * Three space indentation.
+  * Two space indentation.
   * Tabs to spaces, always.
-  * Meaningful test names.
+  * Meaningful test names and/or descriptions.
   * Avoid tests that depend on other tests.
   * Always reset your instance variables to nil in the teardown method.
+  * Ditto for class variables in the shutdown method.
   * Use the Test::Helper methods where appropriate.
 
 == Benchmark suites
@@ -119,7 +120,8 @@
   for JRuby. This is easy enough to do by checking the value of the JRUBY
   constant (defined in the Test::Helper module). You will have to stay
   somewhat apprised of JRuby development to know what tests can and/or
-  should be skipped.
+  should be skipped. Generally speaking this means $SAFE tests, and some of
+  the Process methods.
    
 == On Sapphire
   Sapphire is a custom fork of Ruby. You can find more information at
@@ -142,8 +144,8 @@
   - I'll add more to this section as I think of it.
    
 == Acknowledgements
-  Some tests shamelessly plagiarized from Rubicon, Rubinius, BFTS, or the
-  JRuby test suite.
+  Some tests shamelessly plagiarized from rubyspec, Rubicon, Rubinius,
+  BFTS, or the JRuby test suite.
 
 == License
   Artistic 2.0
