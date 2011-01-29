@@ -1,20 +1,26 @@
 ######################################################################
-# tc_ppid.rb
+# test_ppid.rb
 #
 # Test case for the Process.ppid module method.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_Process_Ppid_ModuleMethod < Test::Unit::TestCase
-   include Test::Helper
+class TC_Process_Ppid_SingletonMethod < Test::Unit::TestCase
+  include Test::Helper
 
-   # The test for MS Windows is the current behavior, but it could
-   # be made to return a legitimate value.
-   #
-   def test_ppid
-      assert_respond_to(Process, :ppid)
-      assert_kind_of(Fixnum, Process.ppid)
-      assert_equal(0, Process.ppid) if WINDOWS
-   end
+  test "ppid basic functionality" do
+    assert_respond_to(Process, :ppid)
+    assert_nothing_raised{ Process.ppid }
+    assert_kind_of(Fixnum, Process.ppid)
+  end
+
+  test "ppid returns expected results" do
+    assert_true(Process.ppid < Process.pid)
+    assert_true(Process.ppid > 0)
+  end
+
+  test "ppid does not accept any arguments" do
+    assert_raise(ArgumentError){ Process.ppid(1) }
+  end
 end
