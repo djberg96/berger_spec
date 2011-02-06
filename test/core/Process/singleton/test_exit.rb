@@ -75,10 +75,7 @@ class TC_Process_Exit_ModuleMethod < Test::Unit::TestCase
     fork{
       reader.close
       at_exit{ writer.write("at_exit_called") }
-      begin
-        Process.exit
-      rescue SystemExit
-      end
+      Process.exit
     }
 
     writer.close
