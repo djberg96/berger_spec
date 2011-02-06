@@ -59,6 +59,20 @@ class TC_Process_Exit_ModuleMethod < Test::Unit::TestCase
     assert_raise(ArgumentError){ Process.exit(1, 2) }
   end
 
+  test "exit raises an error in the scope of an exception handler" do
+    skip_check
+    begin
+      Process.exit(99)
+    rescue SystemExit
+      x = 'exit_test'
+    end
+    assert_equal('exit_test', x)
+  end
+
+  # TODO: Implement
+  #test "at_exit handlers are invoked when exit is called" do
+  #end
+
   def teardown
     Process.waitall unless WINDOWS || JRUBY
   end
