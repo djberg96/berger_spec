@@ -69,9 +69,22 @@ class TC_Process_Exit_ModuleMethod < Test::Unit::TestCase
     assert_equal('exit_test', x)
   end
 
-  # TODO: Implement
-  #test "at_exit handlers are invoked when exit is called" do
-  #end
+  test "at_exit handlers are invoked when exit is called" do
+    skip_check
+    reader, writer = IO.pipe
+    fork{
+      reader.close
+      at_exit{ writer.write("at_exit_called") }
+      begin
+        Process.exit
+      rescue SystemExit
+      end
+    }
+
+    writer.close
+    Process.wait
+    assert_equal("at_exit_called", reader.read)
+  end
 
   def teardown
     Process.waitall unless WINDOWS || JRUBY
