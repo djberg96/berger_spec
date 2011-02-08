@@ -46,6 +46,26 @@ class TC_Process_Getpriority_SingletonMethod < Test::Unit::TestCase
     assert_raise(TypeError){ Process.getpriority(@kind, "test") }
   end
 
+  test "getpriority fails at $SAFE level 2 or higher" do
+    omit_if(JRUBY, "Process.getpriority with $SAFE test skipped on JRuby")
+    assert_raise(SecurityError){
+      proc do
+        $SAFE = 3
+        Process.getpriority(Process::PRIO_PGRP, 0)
+      end.call
+    }
+  end
+
+  test "getpriority works at $SAFE level 1 or lower" do
+    omit_if(JRUBY, "Process.getpriority with $SAFE test skipped on JRuby")
+    assert_nothing_raised{
+      proc do
+        $SAFE = 1
+        Process.getpriority(Process::PRIO_PGRP, 0)
+      end.call
+    }
+  end
+
   def teardown
     @kind = nil
   end
