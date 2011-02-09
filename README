@@ -17,7 +17,7 @@
   Seriously, no one passes all the specs because there are small inconsistencies
   and problems in MRI that are either copied by other implementations, in which
   case they are wrong, too. Or, they're fixed in the other implementations, which
-  means they can't all be correct.
+  means they don't match MRI. Catch 22, baby.
 
 = Conventions
 
@@ -62,7 +62,7 @@
    
 == Testing guidelines for writers
   * One test file per method for the core classes. Exception: it is not necessary
-    to create separate files for aliases.
+    to create separate files for aliases, but aliases should be tested.
   * Comment your tests as appropriate.
   * Test basic functionality using most likely real world uses.
   * Test for expected errors.
