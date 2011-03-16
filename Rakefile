@@ -128,6 +128,19 @@ namespace "test" do
       t.test_files = FileList['test/core/Enumerable/*/*.rb']
     end
 
+    namespace "enumerable" do
+      namespace "instance" do
+        Dir['test/core/Enumerable/instance/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
+    end
+
     desc "Runs the test suite for the Errno class"
     Rake::TestTask.new('errno') do |t|
       t.libs << 'lib'
