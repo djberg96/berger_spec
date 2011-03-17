@@ -11,6 +11,9 @@
 * IO.read handle leak on failed reads. See RubyForge bug #15065.
 * SignalException#signo bug. See RubyForge bug #11795.
 * Array#flatten!(0) should return nil. See Ruby 1.8-Bug#4196.
+* Process.maxgroups is implemented poorly and Process.maxgroups= has no use
+  case. It isn't backed by an actual POSIX call, making it useless since the
+  OS wouldn't enforce it anyway. Redmine bug #4467.
 
 === Core (Indirectly)
 * Bug in eval.c where rb_define_alias could fail. See ruby-talk:279538.
