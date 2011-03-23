@@ -1,5 +1,5 @@
 ######################################################################
-# tc_any.rb
+# test_any.rb
 #
 # Test case for the Enumerable#any? instance method.
 ######################################################################
@@ -7,43 +7,46 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_Enumerable_Any_InstanceMethod < Test::Unit::TestCase
-   def setup
-      @enum = ['a', 'b', 'c']
-   end
+  def setup
+    @enum = ['a', 'b', 'c']
+  end
 
-   def test_any_basic
-      assert_respond_to(@enum, :any?)
-      assert_nothing_raised{ @enum.any? }
-      assert_nothing_raised{ @enum.any?{ } }
-   end
+  test "any? basic functionality" do
+    assert_respond_to(@enum, :any?)
+    assert_nothing_raised{ @enum.any? }
+    assert_nothing_raised{ @enum.any?{ } }
+  end
 
-   def test_any_no_block
-      assert_equal(true, [1, 2, 3].any?)
-      assert_equal(true, [nil, false, true].any?)
-      assert_equal(false, [nil, false].any?)
-   end
+  test "any? without a block returns the expected results" do
+    assert_true([1, 2, 3].any?)
+    assert_true([nil, false, true].any?)
+    assert_false([nil, false].any?)
+  end
 
-   def test_any_with_block
-      assert_equal(true, [1, 2, 3].any?{ |e| e > 1 })
-      assert_equal(false, [1, 2, 3].any?{ |e| e > 7 })
-   end
+  test "any? with a block returns the expected results" do
+    assert_equal(true, [1, 2, 3].any?{ |e| e > 1 })
+    assert_equal(false, [1, 2, 3].any?{ |e| e > 7 })
+  end
 
-   def test_any_with_explicit_false_and_nil
-      assert_equal(true, [false, nil].any?{ |e| e.nil? })
-      assert_equal(true, [false, nil].any?{ |e| e == false })
-   end
+  test "any? with explicit false or nil works as expected" do
+    assert_true([false, nil].any?{ |e| e.nil? })
+    assert_true([false, nil].any?{ |e| e == false })
+  end
 
-   def test_any_edge_cases
-      assert_equal(false, [].any?)
-      assert_equal(true, [0].any?)
-      assert_equal(true, [true].any?)
-   end
+  test "any? with explicit zero or true works as expected" do
+    assert_true([0].any?)
+    assert_true([true].any?)
+  end
 
-   def test_any_expected_errors
-      assert_raise(ArgumentError){ [1, 2, 3].any?(1) }
-   end
+  test "calling any? on an empty enumerable object returns false" do
+    assert_equal(false, [].any?)
+  end
 
-   def teardown
-      @enum = nil
-   end
+  test "any? does not accept any parameters" do
+    assert_raise(ArgumentError){ [1, 2, 3].any?(1) }
+  end
+
+  def teardown
+    @enum = nil
+  end
 end
