@@ -1,5 +1,5 @@
 ######################################################################
-# tc_tell.rb
+# test_tell.rb
 #
 # Test case for the Dir#tell instance method.  This also covers the
 # Dir#pos synonym.
@@ -8,35 +8,39 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_Dir_Tell_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   def setup
-      @pwd = pwd_n
-      @dir = Dir.new(@pwd)
-   end
+  def setup
+    @pwd = pwd_n
+    @dir = Dir.new(@pwd)
+  end
 
-   def test_tell_basic
-      assert_respond_to(@dir, :tell)
-      assert_nothing_raised{ @dir.tell }
-      assert_kind_of(Integer, @dir.tell)
-   end
+  test "tell basic functionality" do
+    assert_respond_to(@dir, :tell)
+    assert_nothing_raised{ @dir.tell }
+    assert_kind_of(Integer, @dir.tell)
+  end
 
-   def test_pos_basic
-      assert_respond_to(@dir, :pos)
-      assert_nothing_raised{ @dir.pos }
-      assert_kind_of(Integer, @dir.pos)
-   end
+  test "tell returns the expected value" do
+    initial = @dir.tell
+    assert_equal(0, @dir.tell)
+    assert_equal(0, initial)
+    @dir.read
+    assert_true(@dir.tell > initial)
+  end
 
-   def test_tell_expected_errors
-      assert_raises(ArgumentError){ @dir.tell(1) }
-   end
+  # Synonym (bug) in MRI.
+  test "pos is an alias for tell" do
+    assert_alias_method(@dir, :tell, :pos)
+  end
 
-   def test_pos_expected_errors
-      assert_raises(ArgumentError){ @dir.pos(1) }
-   end
+  test "tell does not accept any arguments" do
+    assert_raises(ArgumentError){ @dir.tell(1) }
+  end
 
-   def teardown
-      @pwd = nil
-      @dir = nil
-   end
+  def teardown
+    @dir.close if @dir
+    @pwd = nil
+    @dir = nil
+  end
 end
