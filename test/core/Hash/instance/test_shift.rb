@@ -1,43 +1,54 @@
 ############################################################
-# tc_shift.rb
+# test_shift.rb
 #
 # Test suite for the Hash#shift instance method.
 ############################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
-class TC_Hash_Shift_Instance < Test::Unit::TestCase
-   def setup
-      @hash1 = {"a",1}
-      @hash2 = Hash.new(99)      
-      @hash3 = Hash.new{ |h,k| h[k] = "test" }
-   end
+class Test_Hash_Shift_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @hash = {'a' => 1, :alpha => 2, :beta => ['a', 1], :gamma => {:nested => 3}}
+  end
 
-   def test_shift_basic
-      assert_respond_to(@hash1, :shift)
-      assert_nothing_raised{ @hash1.shift }
-   end
+  test "shift basic functionality" do
+    assert_respond_to(@hash, :shift)
+    assert_nothing_raised{ @hash.shift }
+    assert_kind_of(Array, @hash.shift)
+  end
 
-   def test_shift
-      assert_equal(["a",1], @hash1.shift)
-      assert_equal(nil, @hash1.shift)
-   end
+  test "shift returns expected results" do
+    assert_equal(['a', 1], {'a' => 1}.shift)
+    assert_equal([:alpha, 2], {:alpha => 2}.shift)
+    assert_equal([:beta, ['a', 1]], {:beta => ['a', 1]}.shift)
+    assert_equal([:gamma, {:nested => 3}], {:gamma => {:nested => 3}}.shift)
+  end
 
-   def test_shift_default_value
-      assert_equal(99, @hash2.shift)
-      assert_equal(99, @hash2.shift)
-   end
+  test "calling shift on an empty hash returns nil if no default value" do
+    assert_nil({}.shift)
+  end
 
-   def test_shift_default_proc
-      assert_equal("test", @hash3.shift)
-      assert_equal([nil,"test"], @hash3.shift)
-   end
+  test "calling shift on an empty hash returns the default value if set" do
+    hash = Hash.new(99)
+    assert_equal(99, hash.shift)
+  end
 
-   def test_shift_expected_errors
-      assert_raises(ArgumentError){ @hash1.shift(2) }
-   end
+  test "shift returns the value of the default proc if defined" do
+    hash = Hash.new{ |h,k| h[k] = 'test' }
+    assert_equal('test', hash.shift)
+    assert_equal({nil => 'test'}, hash)
+    assert_equal([nil, 'test'], hash.shift)
+  end
 
-   def teardown
-      @hash1 = nil
-   end
+  test "calling shift on a recursive hash works as expected" do
+    hash = {:a => 1}
+    hash[:b] = hash
+    assert_nothing_raised{ hash.shift }
+    assert_equal([:a, 1], hash.shift)
+    assert_nil(hash.shift)
+  end
+
+  test "shift does not accept any arguments" do
+    assert_raise(ArgumentError){ @hash.shift(2) }
+  end
 end
