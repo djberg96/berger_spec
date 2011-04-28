@@ -35,11 +35,6 @@ class Test_Hash_Aref_InstanceMethod < Test::Unit::TestCase
     assert_equal(6.0, @hash[3.7])
   end
 
-  test "aref slice returns expected array" do
-    assert_equal([1, 2], @hash[:foo, 'bar'])
-    assert_equal([1, nil], @hash[:foo, 'bogus'])
-  end
-
   test "aref with nested hash returns expected result" do
     hash = {{:a, 1}, {:b, 2}}
     assert_equal({:b, 2}, hash[{:a, 1}])
