@@ -237,6 +237,46 @@ namespace "test" do
       t.warning = true
     end
 
+
+    namespace "hash" do
+      desc "Run all Hash singleton tests"
+      Rake::TestTask.new('singleton') do |t|
+        t.test_files = FileList['test/core/Hash/singleton/*.rb']
+        t.warning = true
+      end
+
+      desc "Run all Hash instance tests"
+      Rake::TestTask.new('instance') do |t|
+        t.test_files = FileList['test/core/Hash/instance/test_a*.rb'] +
+                       FileList['test/core/Hash/instance/test_c*.rb'] +
+                       FileList['test/core/Hash/instance/test_d*.rb'] +
+                       FileList['test/core/Hash/instance/test_e*.rb']
+        t.warning = true
+      end
+
+      namespace "instance" do
+        Dir['test/core/Hash/instance/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
+
+      namespace "singleton" do
+        Dir['test/core/Hash/singleton/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
+    end
+
     desc "Runs the test suite for the Integer class"
     Rake::TestTask.new('integer') do |t|
       t.test_files = FileList['test/core/Integer/*/*.rb']
