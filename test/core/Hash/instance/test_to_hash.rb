@@ -1,41 +1,43 @@
 ############################################################
-# tc_to_hash.rb
+# test_to_hash.rb
 #
 # Test suite for the Hash#to_hash instance method.
 ############################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
-# Used to validate to_hash
-class FooHash
-   def to_hash
+class TC_Hash_ToHash_InstanceMethod < Test::Unit::TestCase
+  # Used to validate to_hash
+  class TestHash
+    def to_hash
       {"a",1,"b",2}
-   end
-end
+    end
+  end
 
-class TC_Hash_ToHash_Instance < Test::Unit::TestCase
-   def setup
-      @hash = {}
-      @foo  = FooHash.new
-   end
+  def setup
+    @hash = {}
+    @foo  = TestHash.new
+  end
 
-   def test_to_hash_basic
-      assert_respond_to(@hash, :to_hash)
-      assert_nothing_raised{ @hash.to_hash }
-   end
+  test "to_hash basic functionality" do
+    assert_respond_to(@hash, :to_hash)
+    assert_nothing_raised{ @hash.to_hash }
+  end
 
-   def test_to_hash
-      assert_equal({}, @hash)
-      assert_nothing_raised{ @hash.replace(@foo) }
-      assert_equal({"a",1,"b",2}, @hash)
-   end
+  # We use the replace method here because it calls to_hash internally.
+  test "implicit to_hash works as expected" do
+    assert_equal({}, @hash)
+    assert_nothing_raised{ @hash.replace(@foo) }
+    assert_equal({'a',1,'b',2}, @hash)
+  end
 
-   def test_to_hash_expected_errors
-      assert_raises(TypeError){ @hash.replace(1) }
-   end
+  test "to_hash raises an error if object doesn't implement to_hash method" do
+    assert_raise(TypeError){ @hash.replace(1) }
+    assert_raise(TypeError){ @hash.replace('a') }
+  end
 
-   def teardown
-      @hash = nil
-      @foo  = nil
-   end
+  def teardown
+    @hash = nil
+    @foo  = nil
+  end
 end
