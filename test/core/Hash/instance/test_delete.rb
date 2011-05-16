@@ -1,36 +1,43 @@
 ###########################################################
-# tc_delete.rb
+# test_delete.rb
 #
 # Test suite for the Hash#delete instance method.
 ###########################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
-class TC_Hash_Delete_Instance < Test::Unit::TestCase
-   def setup
-      @hash = {:a, 1, :b, 2, :c, 3, :d, 4}
-   end
+class TC_Hash_Delete_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @hash = {:a, 1, :b, true, :c, false, :d, nil}
+  end
 
-   def test_delete_basic
-      assert_respond_to(@hash, :delete)
-   end
+  test "delete basic functionality" do
+    assert_respond_to(@hash, :delete)
+    assert_nothing_raised{ @hash.delete(:a) }
+  end
 
-   def test_delete
-      assert_equal(1, @hash.delete(:a))
-      assert_equal(nil, @hash.delete(:f))
-      assert_equal(nil, @hash.delete(nil))
-   end
+  test "delete returns expected values" do
+    assert_equal(1, @hash.delete(:a))
+    assert_equal(true, @hash.delete(:b))
+    assert_equal(false, @hash.delete(:c))
+    assert_equal(nil, @hash.delete(:d))
+  end
 
-   def test_delete_with_block
-      assert_equal(1, @hash.delete(:a){ 99 })
-      assert_equal(99, @hash.delete(:f){ 99 })
-   end
+  test "delete returns nil if key is not found" do
+    assert_equal(nil, @hash.delete(:f))
+  end
 
-   def test_delete_expected_errors
-      assert_raises(ArgumentError){ @hash.delete(1,2) }
-   end
+  test "delete returns block value if key is not found" do
+    assert_equal(1, @hash.delete(:a){ 99 })
+    assert_equal(99, @hash.delete(:f){ 99 })
+  end
 
-   def teardown
-      @hash = nil
-   end
+  test "delete requires one argument only" do
+    assert_raise(ArgumentError){ @hash.delete }
+    assert_raise(ArgumentError){ @hash.delete(1,2) }
+  end
+
+  def teardown
+    @hash = nil
+  end
 end
