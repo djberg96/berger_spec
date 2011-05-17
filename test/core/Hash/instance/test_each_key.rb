@@ -31,6 +31,9 @@ class TC_Hash_EachKey_InstanceMethod < Test::Unit::TestCase
     i = 0
     {}.each_key{ i += 1 }
     assert_equal(0, i)
+  end
+
+  test "calling each_key with an empty block is a no-op" do
     assert_equal(@hash, @hash.each_key{})
   end
 
