@@ -1,105 +1,68 @@
 ###########################################################################
-# tc_merge.rb
+# test_merge.rb
 #
-# Test suite for the Hash#merge and Hash#merge! instance methods, as well
-# as the Hash#update alias.
+# Test suite for the Hash#merge instance method. Tests for the Hash#merge!
+# method can be found in the test_merge_bang.rb file.
 ###########################################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
-class TC_Hash_Merge_Instance < Test::Unit::TestCase
-   def setup
-      @hash1 = {"a", 1, "b", 2}
-      @hash2 = {"c", 3, "d", 4}
-   end
+class TC_Hash_Merge_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @hash1 = {"a", 1, "b", 2}
+    @hash2 = {"c", 3, "d", 4}
+  end
 
-   def test_merge_basic
-      assert_respond_to(@hash1, :merge)    
-      assert_nothing_raised{ @hash1.merge(@hash2) }
-      assert_kind_of(Hash, @hash1.merge(@hash2))
-   end
-   
-   def test_merge_bang_basic
-      assert_respond_to(@hash1, :merge!)
-      assert_nothing_raised{ @hash1.merge!(@hash2) }
-      assert_kind_of(Hash, @hash1.merge!(@hash2))
-   end
-   
-   def test_update_alias_basic
-      assert_respond_to(@hash1, :update)
-      assert_nothing_raised{ @hash1.update(@hash2) }
-      assert_kind_of(Hash, @hash1.update(@hash2))
-   end
+  test "merge basic functionality" do
+    assert_respond_to(@hash1, :merge)
+    assert_nothing_raised{ @hash1.merge(@hash2) }
+    assert_kind_of(Hash, @hash1.merge(@hash2))
+  end
 
-   def test_merge
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge(@hash2))
-      assert_equal({"a",1,"b",2}, @hash1.merge({}))
-      assert_equal({"b",2,"a",4}, @hash1.merge({"a",4}))
-      assert_equal({"a",1,"b",2,nil,1}, @hash1.merge({nil,1}))
-      assert_equal({"a", 1, "b", 2}, @hash1)
-      assert_equal({"c", 3, "d", 4}, @hash2)
-   end
+  test "merge returns the expected results" do
+    assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge(@hash2))
+    assert_equal({"a",1,"b",2}, @hash1.merge({}))
+    assert_equal({"b",2,"a",4}, @hash1.merge({"a",4}))
+    assert_equal({"a",1,"b",2,nil,1}, @hash1.merge({nil,1}))
+  end
 
-   def test_merge_bang
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge!(@hash2))
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge!({}))
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge!({"a",1}))
-      assert_equal({"a", 1, "b", 2, "c", 3, "d", 4}, @hash1)
-      assert_equal({"c", 3, "d", 4}, @hash2)
-   end
-   
-   def test_update_alias
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.update(@hash2))
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.update({}))
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.update({"a",1}))
-      assert_equal({"a", 1, "b", 2, "c", 3, "d", 4}, @hash1)
-      assert_equal({"c", 3, "d", 4}, @hash2)
-   end
+  test "merge does not modify the receiver" do
+    @hash1.merge(@hash2)
+    assert_equal({"a", 1, "b", 2}, @hash1)
+  end
 
-   def test_merge_with_block
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge(@hash2){|k,o,n| o })
-      assert_equal({"a",4,"b",2}, @hash1.merge({"a",4}){ |k,o,n| n })
-      assert_equal({"a",1,"b",2}, @hash1.merge({"a",4}){ |k,o,n| o })
-      assert_equal({"a", 1, "b", 2}, @hash1)
-      assert_equal({"c", 3, "d", 4}, @hash2)
-   end
+  test "merge with a block returns the expected results" do
+    assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge(@hash2){|k,o,n| o })
+    assert_equal({"a",4,"b",2}, @hash1.merge({"a",4}){ |k,o,n| n })
+    assert_equal({"a",1,"b",2}, @hash1.merge({"a",4}){ |k,o,n| o })
+  end
 
-   def test_merge_bang_with_block
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.merge!(@hash2){|k,o,n| o })
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1)
-      assert_equal({"a",4,"b",2}, {"a",1,"b",2}.merge!({"a",4}){ |k,o,n| n })
-      assert_equal({"a",1,"b",2}, {"a",1,"b",2}.merge!({"a",4}){ |k,o,n| o })
-      assert_equal({"c", 3, "d", 4}, @hash2)
-   end
-   
-   def test_update_alias_with_block
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1.update(@hash2){|k,o,n| o })
-      assert_equal({"a",1,"b",2,"c",3,"d",4}, @hash1)
-      assert_equal({"a",4,"b",2}, {"a",1,"b",2}.update({"a",4}){ |k,o,n| n })
-      assert_equal({"a",1,"b",2}, {"a",1,"b",2}.update({"a",4}){ |k,o,n| o })
-      assert_equal({"c", 3, "d", 4}, @hash2)
-   end
+  test "merge with a block does not modify the receiver" do
+    @hash1.merge(@hash2)
+    assert_equal({"a", 1, "b", 2}, @hash1)
+  end
 
-   def test_merge_expected_errors
-      assert_raises(TypeError){ @hash1.merge("foo") }
-      assert_raises(TypeError){ @hash1.merge(1) }
-      assert_raises(TypeError){ @hash1.merge([]) }
-   end
-   
-   def test_merge_bang_expected_errors
-      assert_raises(TypeError){ @hash1.merge!("foo") }
-      assert_raises(TypeError){ @hash1.merge!(1) }
-      assert_raises(TypeError){ @hash1.merge!([]) }
-   end
-   
-   def test_update_alias_expected_errors
-      assert_raises(TypeError){ @hash1.update("foo") }
-      assert_raises(TypeError){ @hash1.update(1) }
-      assert_raises(TypeError){ @hash1.update([]) }
-   end
+  test "merging an empty hash with an empty hash returns an empty hash" do
+    assert_equal({}, {}.merge({}))
+  end
 
-   def teardown
-      @hash1 = nil
-      @hash2 = nil
-   end
+  test "merging a non-empty hash with an empty hash returns the non-empty hash" do
+    assert_equal({1,2}, {1,2}.merge({}))
+  end
+
+  test "merge requires a hash argument" do
+    assert_raise(TypeError){ @hash1.merge("foo") }
+    assert_raise(TypeError){ @hash1.merge(1) }
+    assert_raise(TypeError){ @hash1.merge([]) }
+  end
+
+  test "merge requires one argument only" do
+    assert_raise(ArgumentError){ @hash1.merge }
+    assert_raise(ArgumentError){ @hash1.merge({}, {}) }
+  end
+
+  def teardown
+    @hash1 = nil
+    @hash2 = nil
+  end
 end
