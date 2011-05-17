@@ -1,55 +1,45 @@
 ###############################################################################
-# tc_has_value.rb
+# test_has_value.rb
 #
-# Test suite for the Hash#has_value? instance method and the Hash#value? alias.
+# Tests for the Hash#has_value? instance method.
 ###############################################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
 class TC_Hash_HasValue_InstanceMethod < Test::Unit::TestCase
-   def setup
-      @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
-   end
+  def setup
+    @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
+  end
 
-   def test_has_value_basic
-      assert_respond_to(@hash, :has_value?)
-      assert_nothing_raised{ @hash.has_value?(1) }
-   end
+  test "has_value? basic functionality" do
+    assert_respond_to(@hash, :has_value?)
+    assert_nothing_raised{ @hash.has_value?(1) }
+    assert_boolean(@hash.has_value?(1))
+  end
 
-   def test_value_alias_basic
-      assert_respond_to(@hash, :value?)
-      assert_nothing_raised{ @hash.value?(1) }
-   end
+  test "has_value? expected true results" do
+    assert_true(@hash.has_value?(1))
+    assert_true(@hash.has_value?(2))
+    assert_true(@hash.has_value?(3))
+    assert_true(@hash.has_value?(4))
+  end
 
-   def test_has_value
-      assert_equal(true, @hash.has_value?(1))
-      assert_equal(true, @hash.has_value?(2))
-      assert_equal(true, @hash.has_value?(3))
-      assert_equal(true, @hash.has_value?(4))
-      assert_equal(false, @hash.has_value?(99))
-      assert_equal(false, @hash.has_value?(false))
-      assert_equal(false, @hash.has_value?(nil))
-   end
+  test "has_value? expected false results" do
+    assert_false(@hash.has_value?(99))
+    assert_false(@hash.has_value?(false))
+    assert_false(@hash.has_value?(nil))
+  end
 
-   def test_value_alias
-      assert_equal(true, @hash.value?(1))
-      assert_equal(true, @hash.value?(2))
-      assert_equal(true, @hash.value?(3))
-      assert_equal(true, @hash.value?(4))
-      assert_equal(false, @hash.value?(99))
-      assert_equal(false, @hash.value?(false))
-      assert_equal(false, @hash.value?(nil))
-   end
+  test "value? is an alias for has_value?" do
+    assert_alias_method(@hash, :value?, :has_value?)
+  end
 
-   def test_has_value_expected_errors
-      assert_raises(ArgumentError){ @hash.has_value? }
-   end
+  test "has_value? requires one argument only" do
+    assert_raise(ArgumentError){ @hash.has_value? }
+    assert_raise(ArgumentError){ @hash.has_value?(1,2) }
+  end
 
-   def test_value_alias_expected_errors
-      assert_raises(ArgumentError){ @hash.value? }
-   end
-
-   def teardown
-      @hash = nil
-   end
+  def teardown
+    @hash = nil
+  end
 end
