@@ -8,7 +8,7 @@ require 'test/unit'
 
 class TC_Hash_Sort_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {'c', 3, 'a', 1, 'b', 2}
+    @hash = {'c', 3, 'd', 4, 'a', 1, 'b', 2}
   end
 
   test "sort basic functionality" do
@@ -19,13 +19,12 @@ class TC_Hash_Sort_InstanceMethod < Test::Unit::TestCase
   end
 
   test "sort expected results" do
-    assert_equal([['a',1],['b',2],['c',3]], @hash.sort)
+    assert_equal([['a',1],['b',2],['c',3], ['d',4]], @hash.sort)
     assert_equal([], {}.sort)
   end
 
   test "sort with block expected results" do
-    assert_equal([['c',3],['b',2],['a',1]], @hash.sort{ |a,b| b <=> a })
-    assert_equal([['c',3],['b',2],['a',1]], @hash.sort{ 1 } )
+    assert_equal([['d', 4],['c',3],['b',2],['a',1]], @hash.sort{ |a,b| b <=> a })
     assert_equal([], {}.sort{ |a,b| b <=> a })
   end
 
