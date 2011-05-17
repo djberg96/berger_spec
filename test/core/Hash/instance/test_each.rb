@@ -1,67 +1,60 @@
 ##############################################################################
-# tc_each.rb
+# test_each.rb
 #
 # Test suite for the Hash#each instance method and the Hash#each_pair alias.
 ##############################################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
-class TC_Hash_Each_Instance < Test::Unit::TestCase
-   def setup
-      @hash = {"ant", 1, "bat", 2, "cat", 3, "dog", 4}
-      @int  = 0
-   end
+class TC_Hash_Each_InstanceMethod < Test::Unit::TestCase
+  include Test::Helper
 
-   def test_each_basic
-      assert_respond_to(@hash, :each)
-      assert_nothing_raised{ @hash.each{} }
-   end
+  def setup
+    @hash = {"ant", 1, "bat", 2, "cat", 3, "dog", 4}
+    @int  = 0
+  end
 
-   def test_each_pair_basic
-      assert_respond_to(@hash, :each_pair)
-      assert_nothing_raised{ @hash.each_pair{} }
-   end
+  test "each basic functionality" do
+    assert_respond_to(@hash, :each)
+    assert_nothing_raised{ @hash.each{} }
+  end
 
-   def test_each_iterate
-      @hash.each{ |key, value|
-         assert_equal(value, @hash.delete(key))
-         @int += 1
-      }
-      assert_equal(4, @int)
-   end
+  test "each iterates as expected" do
+    @hash.each{ |key, value|
+      assert_equal(value, @hash.delete(key))
+      @int += 1
+    }
+    assert_equal(4, @int)
+  end
 
-   def test_each_pair_iterate
-      @hash.each_pair{ |key, value|
-         assert_equal(value, @hash.delete(key))
-         @int += 1
-      }
-      assert_equal(4, @int)
-   end
+  test "calling each on an empty hash is a no-op" do
+    {}.each{ @int += 1 }
+    assert_equal(0, @int)
+  end
 
-   def test_each_noop_on_empty
-      {}.each{ @int += 1 }
-      assert_equal(0, @int)
-      assert_equal(@hash, @hash.each{})
-   end
+  test "calling each with an empty block is a no-op" do
+    assert_equal(@hash, @hash.each{})
+  end
 
-   def test_each_pair_noop_on_empty
-      {}.each_pair{ @int += 1 }
-      assert_equal(0, @int)
-      assert_equal(@hash, @hash.each_pair{})
-   end
+  test "each_pair is an alias for each" do
+    assert_respond_to(@hash, :each_pair)
+    assert_alias_method(@hash, :each, :each_pair)
+  end
 
-   def test_each_expected_errors
-      assert_raises(ArgumentError){ @hash.each(1){} }
-      assert_raises(LocalJumpError){ @hash.each }
-   end
+  test "each does not accept any arguments" do
+    assert_raise(ArgumentError){ @hash.each(1){} }
+  end
 
-   def test_each_pair_expected_errors
-      assert_raises(ArgumentError){ @hash.each_pair(1){} }
-      assert_raises(LocalJumpError){ @hash.each_pair }
-   end
+  test "each with no block behaves as expected" do
+    if PRE187
+      assert_raise(LocalJumpError){ @hash.each }
+    else
+      assert_kind_of(Enumerable::Enumerator, @hash.each)
+    end
+  end
 
-   def teardown
-      @hash = nil
-      @int  = nil
-   end
+  def teardown
+    @hash = nil
+    @int  = nil
+  end
 end
