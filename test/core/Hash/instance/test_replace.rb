@@ -1,65 +1,50 @@
 #####################################################################
-# tc_replace.rb
+# test_replace.rb
 #
-# Test suite for the Hash#replace instance method.
-#
-# TODO: Add $SAFE checks for $SAFE >= 4 (if possible).
+# Tests for the Hash#replace instance method.
 #####################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_Hash_Replace_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
-   
-   def setup
-      @hash1  = {1,2,3,4}
-      @hash2  = @hash1
-      @frozen = {'a', 1, 'b', 2}.freeze
-   end
+  def setup
+    @hash1  = {1,2,3,4}
+    @hash2  = @hash1
+    @frozen = {'a', 1, 'b', 2}.freeze
+  end
 
-   def test_replace_basic
-      assert_respond_to(@hash1, :replace)
-      assert_nothing_raised{ @hash1.replace({}) }
-   end
+  test "replace basic functionality" do
+    assert_respond_to(@hash1, :replace)
+    assert_nothing_raised{ @hash1.replace({}) }
+    assert_kind_of(Hash, @hash1.replace({}))
+  end
 
-   def test_replace
-      assert_equal({1,2,3,4}, @hash1.replace({1,2,3,4}))
-      assert_equal({1,2,3,4}, @hash1)
-      assert_equal(@hash2, @hash1)
-      assert_equal(@hash2.object_id, @hash1.object_id)
-   end
+  test "replace expected results" do
+    assert_equal({1,2,3,4}, @hash1.replace({1,2,3,4}))
+    assert_equal({1,2,3,4}, @hash1)
+  end
 
-   # Hash#replace is illegal in $SAFE mode 4 or higher
-   unless JRUBY
-      def test_replace_in_safe_mode
-         assert_nothing_raised{
-            proc do
-               $SAFE = 3
-               @hash1.replace({'a', 'b'})
-            end.call
-         }
+  test "replacing a hash with itself returns itself" do
+    assert_equal(@hash2, @hash1)
+    assert_equal(@hash2.object_id, @hash1.object_id)
+  end
 
-         assert_raise(SecurityError){
-            proc do
-               $SAFE = 4
-               @hash1.replace({'a', 'b'})
-            end.call
-         }
-      end
-   end
+  test "replace requires one argument only" do
+    assert_raise(ArgumentError){ @hash1.replace({}, {}) }
+  end
 
-   # I would think calling replace on a frozen hash would raise a RuntimeError
-   # not a TypeError, but there you go.
-   #
-   def test_replace_expected_errors
-      assert_raise(ArgumentError){ @hash1.replace({}, {}) }
-      assert_raise(TypeError){ @hash1.replace("test") }
-      assert_raise(TypeError){ @frozen.replace(@hash1) }
-   end
+  test "replace requires a hash argument" do
+    assert_raise(TypeError){ @hash1.replace('test') }
+    assert_raise(TypeError){ @hash1.replace(1) }
+  end
 
-   def teardown
-      @hash1  = nil
-      @hash2  = nil
-      @frozen = nil
-   end
+  test "replace does not work on frozen hashes" do
+    assert_raise(TypeError){ @frozen.replace(@hash1) }
+  end
+
+  def teardown
+    @hash1  = nil
+    @hash2  = nil
+    @frozen = nil
+  end
 end
