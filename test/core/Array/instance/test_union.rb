@@ -60,9 +60,9 @@ class Test_Array_Union_InstanceMethod < Test::Unit::TestCase
   end
 
   test "an error is raised if the wrong number of arguments are passed" do
-    assert_raise(ArgumentError){ @array.send(:|, [], []) }
+    assert_raise(ArgumentError){ @array1.send(:|, [], []) }
   end
-   
+
   def teardown
     @array1 = nil
     @array2 = nil
