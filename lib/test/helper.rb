@@ -178,10 +178,12 @@ module Test
     # current date and time in a [year, mon, dow, day, hour, min, sec, usec]
     # array.
     def get_datetime
-      month_name = {1,'Jan',2,'Feb',3,'Mar',4,'Apr',5,'May',6,'Jun',7,
-        'Jul',8,'Aug',9,'Sep',10,'Oct',11,'Nov',12,'Dec'}
+      month_name = Hash[
+        1,'Jan',2,'Feb',3,'Mar',4,'Apr',5,'May',6,'Jun',7,
+        'Jul',8,'Aug',9,'Sep',10,'Oct',11,'Nov',12,'Dec'
+      ]
 
-      day_name = {0,'Sun',1,'Mon',2,'Tue',3,'Wed',4,'Thu',5,'Fri',6,'Sat'}
+      day_name = Hash[0,'Sun',1,'Mon',2,'Tue',3,'Wed',4,'Thu',5,'Fri',6,'Sat']
 
       array = []
       if WINDOWS

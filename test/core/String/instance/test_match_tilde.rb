@@ -41,7 +41,7 @@ class TC_String_MatchTilde_Instance < Test::Unit::TestCase
    def test_match_tilde_against_non_regex
       assert_equal(false, @simple =~ 0)
       assert_equal(false, @complex =~ 0)
-      assert_equal(false, @simple =~ {1,2,3,4})
+      assert_equal(false, @simple =~ Hash[1,2,3,4])
    end
 
    def test_match_tilde_expected_errors
