@@ -59,6 +59,10 @@ class TC_String_Capitalize_InstanceMethod < Test::Unit::TestCase
     assert_equal(str, str.capitalize)
   end
 
+  test "capitalize works as expected with tainted strings" do
+    assert_equal("Hello", @string.taint.capitalize)
+  end
+
   test "capitalize does not accept any arguments" do
     assert_raise(ArgumentError){ @string.capitalize("bogus") }
   end
