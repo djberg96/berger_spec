@@ -1,52 +1,69 @@
+# encoding: utf-8
 ########################################################################
 # test_capitalize.rb
 #
 # Test suite for the String#capitalize instance method. Tests for the
-# String#capitalize! method are in tc_capitalize_bang.rb.
-#
-# TODO: Add extended ASCII tests (?)
+# String#capitalize! method are in test_capitalize_bang.rb.
 ########################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_String_Capitalize_InstanceMethod < Test::Unit::TestCase
-   def setup
-      @string_basic   = "hello"
-      @string_numbers = "123"
-      @string_mixed   = "123heLLo"
-      @string_capped  = "HELLO"
-      @string_empty   = ""
-   end
+  def setup
+    @string = 'hello'
+  end
 
-   def test_capitalize_basic
-      assert_respond_to(@string_basic, :capitalize)
-      assert_nothing_raised{ @string_basic.capitalize }
-      assert_kind_of(String, @string_basic.capitalize)
-   end
+  test "capitalize basic functionality" do
+    assert_respond_to(@string, :capitalize)
+    assert_nothing_raised{ @string.capitalize }
+    assert_kind_of(String, @string.capitalize)
+  end
 
-   def test_capitalize
-      assert_equal("Hello", @string_basic.capitalize)
-      assert_equal("123", @string_numbers.capitalize)
-      assert_equal("123hello", @string_mixed.capitalize)
-      assert_equal("Hello", @string_capped.capitalize)
-      assert_equal("", @string_empty.capitalize)
-   end
+  test "capitalize works as expected with standard string" do
+    assert_equal("Hello", @string.capitalize)
+  end
 
-   def test_capitalize_edge_cases
-      assert_equal('', ''.capitalize)
-      assert_equal(' ', ' '.capitalize)
-      assert_equal("\000\000", "\000\000".capitalize)
-   end
+  test "capitalize works as expected with numerical string" do
+    str = "123"
+    assert_equal("123", str.capitalize)
+  end
 
-   def test_capitalize_expected_errors
-      assert_raise(ArgumentError){ @string_basic.capitalize("bogus") }
-   end
-   
-   def teardown
-      @string_basic   = nil
-      @string_numbers = nil
-      @string_mixed   = nil
-      @string_capped  = nil
-      @string_empty   = nil
-   end
+  test "capitalize works as expected with string composed of letters and numbers" do
+    str = "123hello"
+    assert_equal("123hello", str.capitalize)
+  end
+
+  test "capitalize works as expected with a string already capitalized" do
+    str = "Hello"
+    assert_equal("Hello", str.capitalize)
+  end
+
+  test "capitalize does nothing with empty strings" do
+    assert_equal("", "".capitalize)
+    assert_equal(" ", " ".capitalize)
+  end
+
+  test "capitalize has no effect on zero strings" do
+    str = "\000\000"
+    assert_equal("\000\000", str.capitalize)
+  end
+
+  test "capitalize does not modify its receiver" do
+    assert_equal("Hello", @string.capitalize)
+    assert_equal("hello", @string)
+  end
+
+  test "capitalize only works on ascii characters" do
+    str = "ελληνικά" # Greek
+    assert_nothing_raised{ str.capitalize }
+    assert_equal(str, str.capitalize)
+  end
+
+  test "capitalize does not accept any arguments" do
+    assert_raise(ArgumentError){ @string.capitalize("bogus") }
+  end
+
+  def teardown
+    @string = nil
+  end
 end
