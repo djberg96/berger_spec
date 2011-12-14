@@ -30,10 +30,10 @@ class TC_Dir_Mkdir_Class < Test::Unit::TestCase
     assert_true(File.directory?(@dir1))
   end
 
-  test "mkdir without a mode defaults to mode of 0777" do
+  test "mkdir without a mode defaults to mode of mask & 0777" do
     omit_if(WINDOWS || OSX, "skipping directory mode test on this platform")
     Dir.mkdir(@dir1)
-    assert_equal(16895, File.stat(@dir1).mode)
+    assert_equal(0, File.umask & File.stat(@dir1).mode)
   end
 
   test "mkdir accepts a mode as a second argument" do
