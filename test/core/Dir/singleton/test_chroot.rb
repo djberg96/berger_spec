@@ -35,6 +35,7 @@ class TC_Dir_Chroot_SingletonMethod < Test::Unit::TestCase
 
   test "chroot is permitted by a privileged process only" do
     omit_if(ROOT, "chroot test skipped if run as root")
+    omit_if(WINDOWS || JRUBY, "chroot test skipped on this platform")
     assert_raise(Errno::EPERM){ Dir.chroot(@root) }
   end
 
