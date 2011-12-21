@@ -29,9 +29,13 @@ class TC_Dir_Chdir_SingletonMethod < Test::Unit::TestCase
     assert_nothing_raised{ Dir.chdir(@pwd){} }
   end
 
-  test "chdir without a block behaves as expected" do
+  test "chdir without a block returns 0 upon success" do
     assert_equal(0, Dir.chdir(@pwd))
-    assert_nothing_raised{ Dir.chdir }
+  end
+
+  test "chdir without an argument defaults to using HOME" do
+    ENV['HOME'] = Dir.pwd
+    Dir.chdir
     assert_equal(@pwd, Dir.pwd)
   end
 
@@ -49,10 +53,24 @@ class TC_Dir_Chdir_SingletonMethod < Test::Unit::TestCase
     assert_raise(TypeError){ Dir.chdir(true) }
   end
 
-  test "chdir raises an error if the HOME env setting does not exist" do
+  test "chdir uses HOME before LOGDIR" do
+    ENV['HOME'] = Dir.pwd
+    ENV['LOGDIR'] = 'bogusdirectory'
+    assert_nothing_raised{ Dir.chdir }
+    assert_equal(ENV['HOME'], Dir.pwd)
+  end
+
+  test "chdir raises an error if HOME does not exist on the filesystem" do
     ENV['HOME'] = 'bogusdirectory'
     ENV['LOGDIR'] = nil
     assert_raise_kind_of(SystemCallError){ Dir.chdir }
+  end
+
+  test "chdir without an argument defaults to LOGDIR if HOME is not set" do
+    ENV['HOME']   = nil
+    ENV['LOGDIR'] = Dir.pwd
+    Dir.chdir
+    assert_equal(ENV['LOGDIR'], Dir.pwd)
   end
 
   test "chdir raises an error if both the HOME and LOGDIR env variables are nil" do
