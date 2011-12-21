@@ -7,7 +7,7 @@ require 'test/helper'
 require 'test/unit'
 require 'fileutils'
 
-class TC_Dir_Glob_Class < Test::Unit::TestCase
+class TC_Dir_Glob_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   # Helper method to get just the basename of the filename. Results
