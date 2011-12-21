@@ -31,8 +31,8 @@ class TC_Dir_Foreach_SingletonMethod < Test::Unit::TestCase
     assert_equal(entries.sort, @entries.sort)
   end
 
-  test "foreach requires a block" do
-    assert_raises(LocalJumpError){ Dir.foreach(@pwd) }
+  test "foreach returns an enumerator if no block is provided" do
+    assert_kind_of(Enumerable::Enumerator, Dir.foreach(@pwd))
   end
 
   test "foreach requires one argument only" do
