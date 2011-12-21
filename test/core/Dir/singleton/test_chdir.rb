@@ -6,7 +6,7 @@
 require 'test/helper'
 require 'test/unit'
 
-class TC_Dir_Chdir_Class < Test::Unit::TestCase
+class TC_Dir_Chdir_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
