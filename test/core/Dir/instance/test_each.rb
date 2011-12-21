@@ -38,14 +38,8 @@ class TC_Dir_Each_InstanceMethod < Test::Unit::TestCase
     assert_raises(ArgumentError){ @dir.each(1){} }
   end
 
-  if PRE187
-    test "each requires a block" do
-      assert_raises(LocalJumpError){ @dir.each }
-    end
-  else
-    test "each returns an enumerator if no block is given" do
-      assert_kind_of(Enumerable::Enumerator, @dir.each)
-    end
+  test "each returns an enumerator if no block is given" do
+    assert_kind_of(Enumerable::Enumerator, @dir.each)
   end
 
   def teardown
