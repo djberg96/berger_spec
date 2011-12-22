@@ -1,63 +1,85 @@
 ################################################
-# tc_repetition.rb
+# test_repetition.rb
 #
 # Test suite for the Array#* instance method.
 ################################################
 require 'test/helper'
 require "test/unit"
 
-class TC_Array_Repetition_InstanceMethod < Test::Unit::TestCase
-   def setup
-      @array1 = [1, 2, 3]
-      @array2 = ["hello", "world"]
-      @array3 = [true, false, nil]
-      @nested = [[1,2], ['a','b']]
-   end
+class Test_Array_Repetition_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @array_nums = [1, 2, 3]
+    @array_word = ["hello", "world"]
+    @array_edge = [true, false, nil]
+    @array_nest = [[1,2], ['a','b']]
+  end
 
-   def test_repetition_method_exists
-      assert_respond_to(@array1, :*)
-   end
+  test "repetition basic functionality" do
+    assert_respond_to(@array_nums, :*)
+    assert_nothing_raised{ @array_nums * 'x' }
+    assert_kind_of([Array, String], @array_nums * 'x')
+  end
 
-   def test_repetition_numeric
-      assert_nothing_raised{ @array1 * 2 }
-      assert_equal([1, 2, 3, 1, 2, 3], @array1 * 2)
-      assert_equal(["hello", "world", "hello", "world"], @array2 * 2)
-      assert_equal([true, false, nil, true, false, nil], @array3 * 2)
-   end
+  test "repetitition results for numeric argument" do
+    assert_nothing_raised{ @array_nums * 2 }
+    assert_equal([1, 2, 3, 1, 2, 3], @array_nums * 2)
+    assert_equal(["hello", "world", "hello", "world"], @array_word * 2)
+    assert_equal([true, false, nil, true, false, nil], @array_edge * 2)
+  end
 
-   def test_repetition_string_join
-      assert_nothing_raised{ @array1 * "-" }
-      assert_equal("1-2-3", @array1 * "-")
-      assert_equal("hello-world", @array2 * "-")
-      assert_equal("true-false-", @array3 * "-")
-   end
+  test "repetition results for string argument" do
+    assert_nothing_raised{ @array_nums * "-" }
+    assert_equal("1-2-3", @array_nums * "-")
+    assert_equal("hello-world", @array_word * "-")
+    assert_equal("true-false-", @array_edge * "-")
+  end
 
-   def test_repetition_nested
-      assert_nothing_raised{ @nested * 2 }
-      assert_equal([[1,2],['a','b'],[1,2],['a','b']], @nested * 2)
-      assert_equal("1-2-a-b", @nested * "-")
-   end
+  test "repetition with nested arrays returns expected results" do
+    assert_nothing_raised{ @array_nest * 2 }
+    assert_equal([[1, 2],['a', 'b'],[1, 2],['a', 'b']], @array_nest * 2)
+    assert_equal("1-2-a-b", @array_nest * "-")
+  end
 
-   def test_repetition_edge_cases
-      assert_equal("", [nil] * "-")
-      assert_equal("", [] * "-")
-      assert_equal("false", [false] * "-")
-      assert_equal([1,2,3], @array1 * 1.9)
-   end
+  test "arrays containing explicit nil and false return expected results" do
+    assert_equal("", [nil] * "-")
+    assert_equal("", [] * "-")
+    assert_equal("false", [false] * "-")
+    assert_equal([1, 2, 3], @array_nums * 1.9)
+  end
 
-   def test_repetition_expected_errors
-      assert_raises(TypeError){ @array1 * nil }
-      assert_raises(TypeError){ @array1 * @array2 }
-      assert_raises(TypeError){ @array1 * false }
-      assert_raises(ArgumentError){ @array1 * -3 }
-      assert_raises(ArgumentError, RangeError){ @array1 * (256**64) }
-      assert_raises(ArgumentError){ @array1.send(:*, @array2, @array3) }
-   end
+  test "passing an argument of 0 returns an empty array" do
+    assert_nothing_raised{ @array_nums * 0 }
+    assert_equal([], @array_nums * 0) 
+  end
+
+  test "if original array is tainted then result is tainted" do
+    @array_nums.taint
+    assert_nothing_raised{ @array_nums = @array_nums * 2 }
+    assert_true(@array_nums.tainted?)
+  end
+
+  test "passing anything other than a string or numeric raises an error" do
+    assert_raise(TypeError){ @array_nums * nil }
+    assert_raise(TypeError){ @array_nums * @array_word }
+    assert_raise(TypeError){ @array_nums * false }
+  end
+
+  test "passing the wrong number of arguments raises an error" do 
+    assert_raise(ArgumentError){ @array_nums.send(:*, @array_nums, @array_word) }
+  end
+
+  test "passing a negative numeric value is illegal" do
+    assert_raise(ArgumentError){ @array_nums * -3 }
+  end
+
+  test "passing a value that is too large raises an error" do
+    assert_raise(ArgumentError, RangeError){ @array_nums * (256**64) }
+  end
    
-   def teardown
-      @array1 = nil
-      @array2 = nil
-      @array3 = nil 
-      @nested = nil
-   end
+  def teardown
+    @array_nums = nil
+    @array_word = nil
+    @array_edge = nil 
+    @array_nest = nil
+  end
 end

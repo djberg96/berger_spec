@@ -1,84 +1,152 @@
-#####################################################################
+#######################################################################
 # test_slice_bang.rb
 #
-# Test suite for the Array#slice! instance method.
-#####################################################################
+# Test case for the Array#slice! instance method.
+#######################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_Array_SliceBang_InstanceMethod < Test::Unit::TestCase
+class Test_Array_SliceBang_InstanceMethod < Test::Unit::TestCase
   def setup
-    @array = %w/a b c d e/
+    @empty = []
+    @basic = [1,2,3]
+    @multi = [1, 'foo', /^$/]
   end
 
-  test "slice_bang basic functionality" do
-    assert_respond_to(@array, :slice!)
+  test "slice bang basic functionality" do
+    assert_respond_to(@basic, :[])
+    assert_nothing_raised{ @basic.slice!(0) }
   end
 
-  test "slice_bang accepts a single integer argument" do
-    assert_nothing_raised{ @array.slice!(1) }
+  test "slice bang with a single integer value that exists" do
+    assert_equal(1, [1, 2, 3].slice!(0))
+    assert_equal(2, [1, 2, 3].slice!(1))
+    assert_equal(3, [1, 2, 3].slice!(2))
   end
 
-  test "slice_bang returns a single element if a single integer is provided" do
-    assert_equal('a', @array.slice!(0))
-    assert_equal('e', @array.slice!(-1))
+  test "slice bang with a single integer modifies its receiver" do
+    assert_nothing_raised{ @basic.slice!(0) }
+    assert_equal([2, 3], @basic)
   end
 
-  test "slice_bang returns nil if the integer is out of bounds" do
-    assert_nil(@array.slice!(99))
-    assert_nil(@array.slice!(-99))
+  test "slice bang with a start and length modifies its receiver" do
+    assert_nothing_raised{ @basic.slice!(0, 2) }
+    assert_equal([3], @basic)
   end
 
-  test "slice_bang accepts a start and a length" do
-    assert_nothing_raised{ @array.slice!(1, 2) }
+  test "slice bang with a range modifies its receiver" do
+    assert_nothing_raised{ @basic.slice!(0..1) }
+    assert_equal([3], @basic)
   end
 
-  test "slice_bang returns an array of elements if a start and length are provided" do
-    assert_kind_of(Array, @array.dup.slice!(1, 2))
-    assert_equal(['b', 'c'], @array.slice!(1, 2))
+  test "slice bang on an empty array returns nil regardless of index" do
+    assert_nil(@empty.slice!(0))
+    assert_nil(@empty.slice!(-1))
+    assert_nil(@empty.slice!(1))
   end
 
-  test "slice_bang returns nil if the start is out of bounds" do
-    assert_nil(@array.slice!(99, 2))
+  test "slice bang with a negative index returns expected value" do
+    assert_equal(3, [1, 2, 3].slice!(-1))
+    assert_equal(2, [1, 2, 3].slice!(-2))
+    assert_equal(1, [1, 2, 3].slice!(-3))
   end
 
-  test "slice_bang returns all remaining elements if the length is greater than the array size" do
-    assert_equal(['c', 'd', 'e'], @array.slice!(2, 99))
+  test "slice bang with an value out of range returns nil" do
+    assert_nil([1, 2, 3].slice!(99))
+    assert_nil([1, 2, 3].slice!(-4))
   end
 
-  test "slice_bang accepts a range" do
-    assert_nothing_raised{ @array.slice(1..2) }
+  test "float slice bang value treated as an integer" do
+    assert_equal(1, [1, 2, 3].slice!(0.5))
+    assert_equal(3, [1, 2, 3].slice!(2.2))
+    assert_equal(3, [1, 2, 3].slice!(-1.7))
   end
 
-  test "slice_bang returns the expected results for a range within its size and length" do
-    assert_equal(['b', 'c'], @array.dup.slice!(1..2))
-    assert_equal(['c', 'd', 'e'], @array.slice!(2..-1))
+  test "slice bang with a start and length works as expected" do
+    assert_equal(['foo', /^$/], [1, 'foo', /^$/].slice!(1, 2))
+    assert_equal([1, 'foo'], [1, 'foo', /^$/].slice!(0, 2))
+    assert_equal([1, 'foo'], [1, 'foo', /^$/].slice!(-3, 2))     
   end
 
-  test "slice_bang returns nil for a range if its size is greater than the array size" do
-    assert_nil(@array.slice!(99..101))
+  test "slice bang with a start out of range returns nil" do
+    assert_nil([1, 'foo', /^$/].slice!(-5, 2))
   end
 
-  test "slice_bang returns all remaining elements if the range length is greater than the array size" do
-    assert_equal(['c', 'd', 'e'], @array.slice!(2..99))
+  test "slice bang with a length out of range does not affect results" do
+    assert_equal([2, 3], [1, 2, 3].slice!(1, 99))
   end
 
-  test "slice_bang modifies its receiver" do
-    @array.slice!(1, 2)
-    assert_equal(%w[a d e], @array)
+  test "slice bang with a float length works as expected" do
+    assert_equal(['foo', /^$/], @multi.slice!(1.5, 2.5))
+    assert_equal([1], @multi.slice!(0.3, 2.1))
+    assert_equal([], @multi.slice!(0.3, 2.1))
+    assert_nil(@multi.slice!(-3.9, 2.0))     
   end
 
-  test "slice_bang accepts a maximum of two arguments" do
-    assert_raises(ArgumentError){ @array.slice!(1, 2, 3) }
+  test "slice bang with a range works as expected" do
+    assert_equal([], @empty.slice!(0..1))
+    assert_equal([1,2], [1, 2, 3].slice!(0..1))
+    assert_equal([1,2,3], [1, 2, 3].slice!(0..2))
+    assert_equal([1,2,3], [1, 2, 3].slice!(0..3))
   end
 
-  test "slice_bang accepts integer and range arguments only" do
-    assert_raises(TypeError){ @array.slice!(true) }
-    assert_raises(TypeError){ @array.slice!(2, nil) }
-    assert_raises(TypeError){ @array.slice!(nil, 2) }
+  test "slice bang with negative range indexes works as expected" do
+    assert_equal([1, 2], [1, 2, 3].slice!(0..-2))
+    assert_equal([], [1, 2, 3].slice!(-2..0))
+    assert_equal([1,2,3], [1, 2, 3].slice!(-3..-1))
   end
 
+  test "index must be a numeric value" do
+    assert_raise(TypeError){ @empty.slice!(nil) }
+    assert_raise(TypeError){ @empty.slice!('foo') }
+  end
+
+  test "length must be a numeric value" do
+    assert_raise(TypeError){ @empty.slice!(0, nil) }
+    assert_raise(TypeError){ @empty.slice!(0, 'foo') }
+  end
+
+  test "slice bang only accepts one argument if a range is used" do
+    assert_raise(TypeError, ArgumentError){ [1, 2, 3].slice!(1..3, 1) }
+    assert_raise(TypeError, ArgumentError){ [1, 2, 3].slice!(1..3, -1) }
+  end
+
+  test "error message if a second argument is passed when a range is used" do
+    assert_raise_message("no second argument when Range provided"){ [1, 2, 3].slice!(1..3, 1) }
+  end
+
+  test "slice bang does not accept symbols for arguments" do
+    assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym) }
+    assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym, '2') }
+    assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym, 2) }
+    assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym, '2'.to_sym) }
+  end
+
+  test "error message if a symbol is used as an index" do
+    assert_raise_message("symbol as array index"){ [1, 2, 3].slice!('1'.to_sym) }
+  end
+
+  test "slice bang requires at least one argument" do
+    assert_raise(ArgumentError){ [1, 2, 3].slice! }
+  end
+
+  test "slice bang accepts a maximum of two arguments" do
+    assert_raise(ArgumentError){ [1, 2, 3].slice!(1, 1, 1) }
+  end
+
+  test "a negative length raises an error in the second form" do
+    assert_raise(IndexError){ @basic.slice!(1, -1) }
+    assert_raise(IndexError){ @basic.slice!(-2, -1) }
+    assert_raise(IndexError){ @basic.slice!(-1, -2) }
+  end
+
+  test "error message if a negative length is used in the second form" do
+    assert_raise_message("negative length (-1)"){ @basic.slice!(1, -1) }
+  end
+   
   def teardown
-    @array = nil
+    @empty = nil
+    @basic = nil
+    @multi = nil
   end
 end

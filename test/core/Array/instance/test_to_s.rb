@@ -1,33 +1,44 @@
-###########################################################
-# tc_to_s.rb
+########################################################################
+# test_to_s.rb
 #
-# Test suite for the Array#to_s instance method.
-###########################################################
+# Test case for the Array#to_s instance method.
+########################################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
-class TC_Array_ToS_Instance < Test::Unit::TestCase
-   def setup
-      @array = [1,2,3]
-   end
+class Test_Array_InspectMethod_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @empty     = []
+    @normal    = [1, 'a', 2]
+    @recursive = [1, 'a', 2]
+    @recursive << @recursive
+  end
 
-   def test_to_s_basic
-      assert_respond_to(@array, :to_s)
-      assert_nothing_raised{ @array.to_s }
-   end
+  test "to_s basic functionality" do
+    assert_respond_to(@empty, :to_s)
+    assert_nothing_raised{ @empty.to_s }
+    assert_kind_of(String, @empty.to_s)
+  end
 
-   def test_to_s
-      assert_equal("123", @array.to_s)
-      assert_equal("", [].to_s)
-      assert_equal("", [nil].to_s)
-      assert_equal("false", [false].to_s)
-   end
+  test "to_s on a simple array works as expected" do
+    assert_equal('1a2', @normal.to_s)
+  end
 
-   def test_expected_errors
-      assert_raises(ArgumentError){ @array.to_s(1) }
-   end
+  test "to_s on an empty array returns an empty string" do
+    assert_equal('', @empty.to_s)
+  end
 
-   def teardown
-      @array = nil
-   end
+  test "to_s on a recursive array works as expected" do
+    assert_equal('1a2[...]', @recursive.to_s)
+  end
+
+  test "passing the wrong number of arguments raises an error" do
+    assert_raise(ArgumentError){ @normal.to_s(true) }
+  end
+
+  def teardown
+    @empty     = nil
+    @normal    = nil
+    @recursive = nil
+  end
 end

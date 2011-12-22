@@ -1,36 +1,41 @@
-###########################################################
-# tc_to_a.rb
+#######################################################################
+# test_to_a.rb
 #
 # Test suite for the Array#to_a instance method.
-###########################################################
+#######################################################################
 require 'test/helper'
-require "test/unit"
+require 'test/unit'
 
-class FooArray < Array
-   def to_ary
-   end
-end
+class Test_Array_ToA_InstanceMethod < Test::Unit::TestCase
+  class ArrayToA < Array; end
 
-class TC_Array_ToA_Instance < Test::Unit::TestCase
-   def setup
-      @array = [1,2,3]
-   end
+  def setup
+    @array = [1, 2, 3]
+    @subclass = ArrayToA.new
+  end
 
-   def test_to_a_basic
-      assert_respond_to(@array, :to_a)
-      assert_nothing_raised{ @array.to_a }
-   end
+  test "to_a basic functionality" do
+    assert_respond_to(@array, :to_a)
+    assert_nothing_raised{ @array.to_a }
+    assert_kind_of(Array, @array.to_a)
+  end
    
-   def test_to_a
-      assert_equal(@array, @array.to_a)
-      assert_equal(@array.object_id, @array.to_a.object_id)
-   end
+  test "to_a returns itself when called on core Array instance" do
+    assert_equal(@array, @array.to_a)
+    assert_equal(@array.object_id, @array.to_a.object_id)
+  end
 
-   def test_expected_errors
-      assert_raises(ArgumentError){ @array.to_a(1) }
-   end
+  test "to_a converts a subclass back to an Array" do
+    assert_equal(ArrayToA, @subclass.class)
+    assert_equal(Array, @subclass.to_a.class)
+  end
 
-   def teardown
-      @array = nil
-   end
+  test "an error is raised if the wrong number of arguments are passed" do
+    assert_raise(ArgumentError){ @array.to_a(1) }
+  end
+
+  def teardown
+    @array = nil
+    @subclass = nil
+  end
 end

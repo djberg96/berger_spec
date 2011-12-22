@@ -1,52 +1,53 @@
-#################################################################
-# tc_compact.rb
+########################################################################
+# test_compact.rb
 #
-# Test suite for the Array#compact instance and Array#compact!
-# instance methods.
-#################################################################
-require 'test/helper'
-require "test/unit"
+# Test suite for the Array#compact instance method.
+#
+# The tests for the Array#compact! instance method can be found in the
+# test_compact_bang.rb file.
+########################################################################
+require 'test/unit'
 
-class TC_Array_Compact_Instance < Test::Unit::TestCase
-   def setup
-      @array1 = [1, "two", nil, false, nil]
-      @array2 = [0, 1, 2, 3]
-   end
+class Test_Array_Compact_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @numbers = [0, 1, 2, 3]
+    @mixed   = [1, 'two', nil, false, nil]
+  end
 
-   def test_compact_basic
-      assert_respond_to(@array1, :compact)
-      assert_respond_to(@array1, :compact!)
-      assert_nothing_raised{ @array1.compact }
-      assert_nothing_raised{ @array1.compact! }
-   end
+  test 'compact basic functionality' do
+    assert_respond_to(@mixed, :compact)
+    assert_nothing_raised{ @mixed.compact }
+  end
 
-   def test_compact_return_values
-      assert_equal([1,"two",false], @array1.compact)
-      assert_equal([0,1,2,3], @array2.compact)
-   end
+  test 'compact returns expected value' do
+    assert_equal([1, 'two', false], @mixed.compact)
+    assert_equal([0, 1, 2, 3], @numbers.compact)
+  end
 
-   def test_compact_bang_return_values
-      assert_equal([1,"two",false], @array1.compact!)
-      assert_equal(nil, @array2.compact!)
-   end
+  test 'original receiver is not modified' do
+    assert_nothing_raised{ @mixed.compact }
+    assert_equal([1, 'two', nil, false, nil], @mixed)
+  end
 
-   def test_compact_returns_copy
-      assert_nothing_raised{ @array1.compact }
-      assert_equal([1, "two", nil, false, nil], @array1)
-   end
+  test 'compact on an empty array returns an empty array' do
+    assert_equal([], [].compact)
+  end
 
-   def test_compact_bang_modifies_receiver
-      assert_nothing_raised{ @array1.compact! }
-      assert_equal([1, "two", false], @array1)
-   end
+  test 'compact on an array that only contains nil returns an empty array' do
+    assert_equal([], [nil, nil, nil].compact)
+  end
 
-   def test_compact_expected_errors
-      assert_raises(ArgumentError){ @array1.compact(1) }
-      assert_raises(ArgumentError){ @array1.compact!(1) }
-   end
+  test 'nested arrays that contain nil are unaffected' do
+    assert_equal([[nil]], [[nil]].compact)
+    assert_equal([[nil]], [nil, [nil]].compact)
+  end
 
-   def teardown
-      @array1 = nil
-      @array2 = nil
-   end
+  test 'the wrong number of arguments raises an error' do
+    assert_raise(ArgumentError){ @numbers.compact(1) }
+  end
+
+  def teardown
+    @numbers = nil
+    @mixed   = nil
+  end
 end

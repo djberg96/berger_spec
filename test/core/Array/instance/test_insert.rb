@@ -1,59 +1,69 @@
 #######################################################################
-# tc_insert.rb
+# test_insert.rb
 #
 # Test case for the Array#insert instance method.
 #######################################################################
-require 'test/helper'
 require 'test/unit'
 
-class TC_Array_Insert_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
+class Test_Array_Insert_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @array = ['a', 'b', 'c']
+  end
 
-   def setup
-      @array = ['a', 'b', 'c']
-   end
+  test "insert basic functionality" do
+    assert_respond_to(@array, :insert)
+    assert_nothing_raised{ @array.insert(1, 1) }
+    assert_kind_of(Array, @array.insert(1, 1))
+  end
 
-   def test_insert_basic
-      assert_respond_to(@array, :insert)
-      assert_nothing_raised{ @array.insert(1,1) }
-   end
+  test "insert with one value works as expected" do
+    assert_equal(['a', 'b', 7, 'c'], @array.insert(2, 7))
+  end
 
-   def test_insert_one_value
-      assert_equal(['a','b',7,'c'], @array.insert(2,7))
-   end
+  test "insert with multiple values works as expected" do
+    assert_equal(['a','b', 7, 8, 9, 'c'], @array.insert(2, 7, 8, 9))
+  end
 
-   def test_insert_multiple_values
-      assert_equal(['a','b',7,8,9,'c'], @array.insert(2,7,8,9))
-   end
+  test "insert with a negative index works as expected" do
+    assert_equal(['a', 'b', 7, 8, 9, 'c'], @array.insert(-2, 7, 8, 9))
+  end
 
-   def test_insert_negative_index
-      assert_equal(['a','b',7,8,9,'c'], @array.insert(-2, 7, 8, 9))
-   end
+  test "an index of negative one effectively concatenates the array" do
+    assert_equal(['a','b','c', 7, 8, 9], @array.insert(-1, 7, 8, 9))
+  end
 
-   # Using an index of -1 merely concatenates the arrays
-   def test_insert_negative_index_append
-      assert_equal(['a','b','c',7,8,9], @array.insert(-1, 7, 8, 9))
-   end
+  test "nil is filled in if the index is out of bounds" do
+    assert_equal(['a','b','c', nil, nil, 7], @array.insert(5, 7))
+  end
 
-   def test_insert_index_out_of_bounds
-      assert_equal(['a','b','c',nil,nil,7], @array.insert(5, 7))
-   end
+  test "a float index is treated as an integer" do
+    assert_equal(['a', 'b', 7, 'c'], @array.insert(2.5, 7))
+    assert_equal(['z', 'a', 'b', 7, 'c'], @array.insert(0.0, 'z'))
+  end
 
-   def test_insert_float_index
-      assert_equal(['a', 'b', 7, 'c'], @array.insert(2.5, 7))
-      assert_equal(['z', 'a', 'b', 7, 'c'], @array.insert(0.0, 'z'))
-   end
+  test "using an index on a recursive array works as expected" do
+    @array = @array << @array
+    assert_nothing_raised{ @array.insert(3, 'test') }
+    assert_nothing_raised{ @array.insert(9, 'test') }
+  end
 
-   def test_insert_edge_cases
-      assert_equal(['a', 'b', 'c'], @array.insert(0))
-   end
+  test "an error is raised if no index is provided" do
+    assert_raise(ArgumentError){ @array.insert }
+  end
 
-   def test_expected_errors
-      assert_raise(ArgumentError){ @array.insert }
-      assert_raise(IndexError){ @array.insert(-9, 7) }
-   end
+  test "an error is raised if no values are provided" do
+    assert_raise(ArgumentError){ @array.insert(0) }
+  end
 
-   def teardown
-      @array = nil
-   end
+  test "error message raised if no values are provided" do
+    assert_raise_message("no objects provided (minimum one)"){ @array.insert(0) }
+  end
+
+  test "an error is raised if the index is out of bounds on the left side" do
+    assert_raise(IndexError){ @array.insert(-9, 7) }
+  end
+
+  def teardown
+    @array = nil
+  end
 end

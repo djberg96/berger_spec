@@ -1,18 +1,15 @@
 #############################################################################
-# tc_equality.rb
+# test_equality.rb
 #
 # Test suite for Array#== instance method. I added a custom class to verify
 # that its to_ary method is handled properly by the Array#== method.
 #############################################################################
-require 'test/helper'
 require 'test/unit'
 
-class TC_Array_Equality_Instance < Test::Unit::TestCase
-  include Test::Helper
-
+class Test_Array_Equality_InstanceMethod < Test::Unit::TestCase
   class AEquality
     def to_ary
-       [1,2,3]
+      [1,2,3]
     end
   end
 
@@ -24,33 +21,44 @@ class TC_Array_Equality_Instance < Test::Unit::TestCase
     @custom        = AEquality.new
   end
 
-  def test_basic
+  test "equality basic functionality" do
     assert_respond_to(@array_int1, :==)
     assert_nothing_raised{ @array_int1 == @array_int2 }
     assert_boolean(@array_int1 == @array_int2)
   end
 
-  def test_equality_success
-    msg = "=> See RubyForge bug #11585"
-    assert_equal(true, @array_int1 == @array_int2)
-    assert_equal(true, @array_int1 == @custom, msg)
-    assert_equal(true, [1.1, 2.1] == [1.1, 2.1])
+  test "equality expected true results" do
+    assert_true(@array_int1 == @array_int2)
+    assert_true([1.1, 2.1] == [1.1, 2.1])
   end
 
-  def test_equality_failure
-    assert_equal(false, @array_int1 == @array_int3)
-    assert_equal(false, @array_int1 == @array_chr_int)
-    assert_equal(false, @array_int1 == [])
-    assert_equal(false, @array_int1 == nil)
-    assert_equal(false, @array_int1 == 0)
-    assert_equal(false, [1.11, 2.1] == [1.1, 2.1])
+  test "equality honors custom to_ary methods for non array objects" do
+    assert_true(@array_int1 == @custom)
+    assert_false(@array_int3 == @custom)
   end
 
-  def test_edge_cases
-    assert_equal(false, [0] == 0)
-    assert_equal(false, [nil] == nil)
-    assert_equal(false, [true] == true)
-    assert_equal(false, [false] == false)
+  test "equality expected failures" do
+    assert_false(@array_int1 == @array_int3)
+    assert_false(@array_int1 == @array_chr_int)
+    assert_false(@array_int1 == [])
+    assert_false(@array_int1 == nil)
+    assert_false(@array_int1 == 0)
+    assert_false([1.11, 2.1] == [1.1, 2.1])
+  end
+
+  test "expected success for empty, nil and false elements" do 
+    assert_true([] == [])
+    assert_true([nil] == [nil])
+    assert_true([false] == [false])
+    assert_true([true] == [true])
+  end
+
+  test "expected failures for empty, nil and false elements" do 
+    assert_false([0] == 0)
+    assert_false([nil] == nil)
+    assert_false([nil] == [nil, nil])
+    assert_false([true] == true)
+    assert_false([false] == false)
   end
 
   def teardown

@@ -1,15 +1,13 @@
 ###########################################################
-# tc_each.rb
+# test_each.rb
 #
 # Test suite for the Array#each instance method.
 ###########################################################
-require 'test/helper'
 require "test/unit"
 
-class TC_Array_Each_InstanceMethod < Test::Unit::TestCase
-  include Test::Helper
-
+class Test_Array_Each_Instance < Test::Unit::TestCase
   def setup
+    @count = 0
     @array = ["ant", "bat", "cat", "dog"]
   end
 
@@ -18,37 +16,37 @@ class TC_Array_Each_InstanceMethod < Test::Unit::TestCase
     assert_nothing_raised{ @array.each{} }
   end
 
-  test "each iterates over an array as expected" do
-    i = 0
+  test "each standard iteration" do
     @array.each{ |e|
-      assert_equal(@array[i], e)
-      i += 1
+      assert_equal(@array[@count], e)
+      @count += 1
     }
-    assert_equal(4, i)
+    assert_equal(4, @count)
   end
 
-  test "calling each on an empty array is effectively a no-op" do
-    i = 0
-    [].each{ i += 1 }
-    assert_equal(0, i)
+  test "each on an empty array is effectively a null op" do
+    [].each{ @count += 1 }
+    assert_equal(0, @count)
+  end
+
+  test "each without block arguments returns original array" do
     assert_equal(@array, @array.each{})
   end
 
-  test "each does not accept any arguments" do
-    assert_raises(ArgumentError){ @array.each(1){} }
+  test "deleting an element during an iteration does not raise an error" do
+    assert_nothing_raised{ @array.each{ @array.pop } }
   end
 
-  if PRE187
-    test "each requires a block" do
-      assert_raises(LocalJumpError){ @array.each }
-    end
-  else
-    test "each returns an enumerator if no block is given" do
-      assert_kind_of(Enumerable::Enumerator, @array.each)
-    end
+  test "each without a block raises an error" do
+    assert_raise(LocalJumpError){ @array.each }
+  end
+
+  test "passing the wrong number of arguments raises an error" do
+    assert_raise(ArgumentError){ @array.each(1){} }
   end
 
   def teardown
+    @count = nil
     @array = nil
   end
 end

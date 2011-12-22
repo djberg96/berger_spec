@@ -1,12 +1,12 @@
 #########################################################################
-# tc_collect.rb
+# test_collect.rb
 #
-# Test suite for the Array#collect and Array#collect! instance methods.
+# Test suite for the Array#collect instance method.
 #########################################################################
 require 'test/helper'
 require "test/unit"
 
-class TC_Array_Collect_Instance < Test::Unit::TestCase
+class TC_Array_Collect_InstanceMethod < Test::Unit::TestCase
    def setup
       @array = [1, 2, 3] 
    end
