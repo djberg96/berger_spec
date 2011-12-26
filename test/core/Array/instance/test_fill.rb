@@ -3,11 +3,12 @@
 #
 # Test suite for the Array#fill instance method.
 #######################################################################
+require 'test/helper'
 require 'test/unit'
 
 class Test_Array_Fill_InstanceMethod < Test::Unit::TestCase
   def setup
-    @array = %w/a b c d/
+    @array = %w[a b c d]
   end
 
   test "fill basic functionality" do
@@ -80,28 +81,33 @@ class Test_Array_Fill_InstanceMethod < Test::Unit::TestCase
   end
 
   test "an error is raised if both a range and a length are passed as arguments" do
-    assert_raise(ArgumentError){ @array.fill('x', 0..1, 1) }
+    assert_raise(TypeError){ @array.fill('x', 0..1, 1) }
   end
 
   test "error message raised if both a range and a length are passed as arguments" do
-    assert_raise_message("length illegal if range provided"){ @array.fill('x', 0..1, 1) }
+    msg = "can't convert Range into Integer"
+    assert_raise_message(msg){ @array.fill('x', 0..1, 1) }
   end
 
-  test "an error is raised if the start value exceeds the array length" do
-    assert_raise(IndexError){ @array.fill('x', 99) }
+  # SAPPHIRE: Raise an error
+  test "fill is a no-op if the start value exceeds the array length" do
+    assert_equal(@array, @array.fill('x', 99))
   end
 
-  test "error messge raised if the start value exceeds the array length" do
-    assert_raise("starting point exceeds array size"){ @array.fill('x', 99) }
+  # SAPPHIRE: Have an error message
+  #test "error messge raised if the start value exceeds the array length" do
+  #  assert_raise("starting point exceeds array size"){ @array.fill('x', 99) }
+  #end
+
+  # SAPPHIRE: Raise en error
+  test "passing fill a negative length is effectively a no-op" do
+    assert_equal(@array, @array.fill('x', 0, -1))
   end
 
-  test "an error is raised if the length is negative" do
-    assert_raise(ArgumentError){ @array.fill('x', 0, -1) }
-  end
-
-  test "error message raised if the length is negative" do
-    assert_raise("negative length illegal"){ @array.fill('x', 1, -1) }
-  end
+  # SAPPHIRE: Have an error message
+  #test "error message raised if the length is negative" do
+  #  assert_raise("negative length illegal"){ @array.fill('x', 1, -1) }
+  #end
 
   def teardown
     @array = nil
