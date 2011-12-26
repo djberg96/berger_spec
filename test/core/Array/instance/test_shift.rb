@@ -8,7 +8,7 @@ require 'test/unit'
 
 class Test_Array_Shift_InstanceMethod < Test::Unit::TestCase
   def setup
-    @array = %w/a b c/
+    @array = %w[a b c]
   end
 
   test "shift basic functionality" do
@@ -53,8 +53,11 @@ class Test_Array_Shift_InstanceMethod < Test::Unit::TestCase
   end
 
   test "an error is raised if the wrong number of arguments are passed" do
-    assert_raise(ArgumentError){ @array.shift("foo") }
-    assert_raise(ArgumentError){ @array.shift(2) }
+    assert_raise(ArgumentError){ @array.shift(2, 2) }
+  end
+
+  test "an error is raised if an invalid type is used as an argument" do
+    assert_raise(TypeError){ @array.shift("foo") }
   end
 
   def teardown
