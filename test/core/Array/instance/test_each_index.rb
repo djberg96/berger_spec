@@ -3,7 +3,8 @@
 #
 # Test suite for the Array#each_index instance method.
 ###########################################################
-require "test/unit"
+require 'test/helper'
+require 'test/unit'
 
 class Test_Array_EachIndex_InstanceMethod < Test::Unit::TestCase
   def setup
@@ -37,8 +38,8 @@ class Test_Array_EachIndex_InstanceMethod < Test::Unit::TestCase
     assert_equal(@array, @array.each_index{}) 
   end
 
-  test "an error is raised if a block is not passed" do
-    assert_raise(LocalJumpError){ @array.each_index }
+  test "each_index returns an enumerator object if no block is provided" do
+    assert_kind_of(Enumerable::Enumerator, @array.each_index)
   end
 
   test "an error is raised if the wrong number of arguments are passed" do
