@@ -45,8 +45,8 @@ class Test_Array_ReverseEach_InstanceMethod < Test::Unit::TestCase
     assert_equal(5, temp.size)
   end
 
-  test "reverse_each without a block raises an error" do
-    assert_raise(LocalJumpError){ @array.reverse_each }
+  test "reverse_each without a block returns an Enumerator object" do
+    assert_kind_of(Enumerable::Enumerator, @array.reverse_each)
   end
 
   test "reverse_each with the wrong number of arguments raises an error" do
