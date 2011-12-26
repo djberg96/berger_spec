@@ -4,6 +4,7 @@
 # Test suite for the Array#flatten instance method. Tests for the
 # Array#flatten! instance method are in the test_flatten_bang.rb file.
 ##########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class Test_Array_Flatten_InstanceMethod < Test::Unit::TestCase
@@ -50,8 +51,23 @@ class Test_Array_Flatten_InstanceMethod < Test::Unit::TestCase
     assert_raise_message("tried to flatten recursive array"){ @array.flatten }
   end
 
-  test "flatten raises an error if the wrong number of arguments are passed" do
-    assert_raise(ArgumentError){ @array.flatten(1) }
+  test "flatten accepts an optional argument" do
+    assert_nothing_raised{ @array.flatten(1) }
+    assert_kind_of(Array, @array.flatten(1))
+  end
+
+  test "flatten only flattens to the specified level if provided" do
+    assert_equal([1,2,3,[4,5]], @array.flatten(1))
+    assert_equal([1,2,3,4,5], @array.flatten(2))
+    assert_equal([1,2,3,4,5], @array.flatten(-1))
+  end
+
+  test "flatten raises an error if an invalid argument is used" do
+    assert_raise(TypeError){ @array.flatten(true) }
+  end
+
+  test "flatten only accepts on argument" do
+    assert_raise(ArgumentError){ @array.flatten(1,1) }
   end
 
   def teardown

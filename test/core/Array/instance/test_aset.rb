@@ -164,7 +164,7 @@ class Test_Array_Aset_InstanceMethod < Test::Unit::TestCase
   end
 
   test 'using a symbol as an index raises a specific error message' do
-    assert_raise_message("symbol as array index"){ @basic['1'.to_sym, 0] = 1 }
+    assert_raise_message("Symbol as array index"){ @basic['1'.to_sym, 0] = 1 }
   end
 
   test 'passing a second argument if a range is used causes an error' do
