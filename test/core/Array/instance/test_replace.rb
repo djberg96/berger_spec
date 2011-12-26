@@ -5,9 +5,11 @@
 # a custom class here to verify that Array#replace handles custom to_ary
 # methods properly.
 ##############################################################################
+require 'test/helper'
 require 'test/unit'
 
 class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
+  include Test::Helper
    
   class AReplace
     def to_ary
@@ -48,6 +50,8 @@ class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
 
   # Array#replace is illegal in $SAFE level 4 or higher
   def test_replace_in_safe_mode
+    omit_if(JRUBY, "safe level test skipped on JRuby")
+
     assert_nothing_raised{
       proc do
         $SAFE = 3
