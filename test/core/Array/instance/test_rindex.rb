@@ -35,8 +35,11 @@ class Test_Array_RIndex_InstanceMethod < Test::Unit::TestCase
   end
 
   test "rindex raises an error if the wrong number of arguments are passed" do
-    assert_raise(ArgumentError){ @array.rindex }
     assert_raise(ArgumentError){ @array.rindex(0,1) }
+  end
+
+  test "rindex returns an Enumerator object if no argument is passed" do
+    assert_kind_of(Enumerable::Enumerator, @array.rindex)
   end
 
   def teardown
