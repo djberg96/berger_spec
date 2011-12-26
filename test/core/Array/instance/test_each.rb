@@ -3,9 +3,10 @@
 #
 # Test suite for the Array#each instance method.
 ###########################################################
-require "test/unit"
+require 'test/helper'
+require 'test/unit'
 
-class Test_Array_Each_Instance < Test::Unit::TestCase
+class Test_Array_Each_InstanceMethod < Test::Unit::TestCase
   def setup
     @count = 0
     @array = ["ant", "bat", "cat", "dog"]
@@ -37,8 +38,8 @@ class Test_Array_Each_Instance < Test::Unit::TestCase
     assert_nothing_raised{ @array.each{ @array.pop } }
   end
 
-  test "each without a block raises an error" do
-    assert_raise(LocalJumpError){ @array.each }
+  test "each without a block returns an enumerator object" do
+    assert_kind_of(Enumerable::Enumerator, @array.each)
   end
 
   test "passing the wrong number of arguments raises an error" do
