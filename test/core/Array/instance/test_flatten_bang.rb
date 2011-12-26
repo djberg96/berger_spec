@@ -1,9 +1,10 @@
 ##########################################################################
-# test_flatten.rb
+# test_flatten_bang.rb
 #
-# Test suite for the Array#flatten instance method. Tests for the
-# Array#flatten! instance method are in the test_flatten_bang.rb file.
+# Test suite for the Array#flatten! instance method. Tests for the
+# Array#flatten instance method are in the test_flatten.rb file.
 ##########################################################################
+require 'test/helper'
 require 'test/unit'
 
 class Test_Array_FlattenBang_InstanceMethod < Test::Unit::TestCase
@@ -41,8 +42,16 @@ class Test_Array_FlattenBang_InstanceMethod < Test::Unit::TestCase
     assert_equal([nil], [[nil]].flatten!)
   end
 
-  test "an error is raised if the wrong number of arguments are passed" do
-    assert_raise(ArgumentError){ @array.flatten!(1) }
+  test "flatten bang accepts an optional argument" do
+    assert_nothing_raised{ @array.flatten!(1) }
+    assert_kind_of(Array, @array.flatten!(1))
+  end
+
+  test "flatten bang returns expected result when an argument is provided" do
+    assert_equal([1,[2,[3,4]]], [1,[2,[3,4]]].flatten!(0))
+    assert_equal([1,2,[3,4]], [1,[2,[3,4]]].flatten!(1))
+    assert_equal([1,2,3,4], [1,[2,[3,4]]].flatten!(2))
+    assert_equal([1,2,3,4], [1,[2,[3,4]]].flatten!(9))
   end
 
   test "attempting to flatten a recursive array raises an error" do
@@ -52,7 +61,8 @@ class Test_Array_FlattenBang_InstanceMethod < Test::Unit::TestCase
 
   test "attempting to flatten a recursive array emits a specific error message" do
     @array = @array << @array
-    assert_raise_message("tried to flatten recursive array"){ @array.flatten! }
+    msg = "tried to flatten recursive array"
+    assert_raise_message(msg){ @array.flatten! }
   end
 
   def teardown
