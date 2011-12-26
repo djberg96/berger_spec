@@ -6,9 +6,9 @@
 require 'test/helper'
 require "test/unit"
 
-class Test_Array_Pop_Instance < Test::Unit::TestCase
+class Test_Array_Pop_InstanceMethod < Test::Unit::TestCase
   def setup
-    @array = %w/a b c/
+    @array = %w[a b c]
   end
 
   test "pop basic functionality" do
@@ -40,8 +40,26 @@ class Test_Array_Pop_Instance < Test::Unit::TestCase
     assert_equal('c', @array.pop)
   end
 
+  test "pop accepts an optional integer argument" do
+    assert_nothing_raised{ [1,2,3].pop(2) }
+    assert_equal([2,3], [1,2,3].pop(2))
+    assert_equal([1,2,3], [1,2,3].pop(9))
+  end
+
+  test "pop requires a non-negative argument if provided" do
+    assert_raise(ArgumentError){ @array.pop(-1) }
+  end
+
+  test "pop emits a specific error message if a negative argument is provided" do
+    assert_raise_message("negative array size"){ @array.pop(-1) }
+  end
+
+  test "pop requires an integer argument if provided" do
+    assert_raise(TypeError){ @array.pop("a") }
+  end
+
   test "pop raises an error if the wrong number of arguments are passed" do
-    assert_raise(ArgumentError){ @array.pop("foo") }
+    assert_raise(ArgumentError){ @array.pop(1,2) }
   end
 
   def teardown
