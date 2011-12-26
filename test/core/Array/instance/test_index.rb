@@ -3,7 +3,8 @@
 #
 # Test suite for the Array#index instance method.
 ######################################################
-require "test/unit"
+require 'test/helper'
+require 'test/unit'
 
 class Test_Array_Index_InstanceMethod < Test::Unit::TestCase
   def setup   
@@ -34,8 +35,11 @@ class Test_Array_Index_InstanceMethod < Test::Unit::TestCase
     assert_nil([].index(nil))
   end
 
+  test "index returns an enumerator object if no arguments are provided" do
+    assert_kind_of(Enumerable::Enumerator, @array.index)
+  end
+
   test "passing the wrong number of arguments raises an error" do
-    assert_raise(ArgumentError){ @array.index }
     assert_raise(ArgumentError){ @array.index(0, 1) }
   end
 
