@@ -42,8 +42,9 @@ class Test_Array_Push_InstanceMethod < Test::Unit::TestCase
     assert_true(@array.object_id == @array.push('a').object_id)
   end
 
-  test "calling push without an argument raises an error" do
-    assert_raise(ArgumentError){ @array.push }
+  test "calling push without an argument returns itself" do
+    assert_equal(@array, @array.push)
+    assert_equal(@array.object_id, @array.push.object_id)
   end
 
   def teardown
