@@ -19,7 +19,9 @@ class TC_Process_Egid_Set_SingletonMethod < Test::Unit::TestCase
   end
 
   test "egid= works as expected" do
+    omit_if(WINDOWS, "Process.egid= tests skipped on MS Windows")
     omit_unless(ROOT, "Process.egid= tests skipped unless run as root")
+
     assert_nothing_raised{ @egid = Process.egid }
     assert_nothing_raised{ Process.egid = @user.gid }
     assert_equal(@user.gid, Process.egid)
@@ -28,11 +30,13 @@ class TC_Process_Egid_Set_SingletonMethod < Test::Unit::TestCase
   end
 
   test "egid= returns the assigned value" do
+    omit_if(WINDOWS, "Process.egid= tests skipped on MS Windows")
     @egid = Process.egid
     assert_equal(@egid, Process.egid = @egid)
   end
 
   test "egid= requires a numeric argument" do
+    omit_if(WINDOWS, "Process.egid= tests skipped on MS Windows")
     assert_raise(TypeError){ Process.egid = "test" }
   end
 
