@@ -16,6 +16,7 @@ class TC_Process_Ppid_SingletonMethod < Test::Unit::TestCase
   end
 
   test "ppid returns expected results" do
+    omit_if(WINDOWS, "Process.ppid broken on MS Windows")
     assert_true(Process.ppid < Process.pid)
     assert_true(Process.ppid > 0)
   end
