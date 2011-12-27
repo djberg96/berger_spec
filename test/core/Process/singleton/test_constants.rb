@@ -27,16 +27,19 @@ class TC_Process_Constants < Test::Unit::TestCase
   end
 
   test "child handling constants exist" do
+    omit_if(WINDOWS, "child handling constant check skipped on MS Windows")
     assert_not_nil(Process::WNOHANG)
     assert_not_nil(Process::WUNTRACED)
   end
 
   test "child handling constants are numbers" do
+    omit_if(WINDOWS, "child handling constant check skipped on MS Windows")
     assert_kind_of(Numeric, Process::WNOHANG)
     assert_kind_of(Numeric, Process::WUNTRACED)
   end
 
   test "rlimit constants exist" do
+    omit_if(WINDOWS, "rlimit constant check skipped on MS Windows")
     assert_not_nil(Process::RLIM_INFINITY)
     assert_not_nil(Process::RLIM_SAVED_MAX)
     assert_not_nil(Process::RLIM_SAVED_CUR)
@@ -60,6 +63,7 @@ class TC_Process_Constants < Test::Unit::TestCase
   end
 
   test "rlimit constants are numbers" do
+    omit_if(WINDOWS, "rlimit constant check skipped on MS Windows")
     assert_kind_of(Numeric, Process::RLIM_INFINITY)
     assert_kind_of(Numeric, Process::RLIM_SAVED_MAX)
     assert_kind_of(Numeric, Process::RLIM_SAVED_CUR)
