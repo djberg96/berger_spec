@@ -24,6 +24,7 @@ class TC_Process_Maxgroups_SingletonMethod < Test::Unit::TestCase
   end
 
   test "maxgroups_set requires a positive numeric argument" do
+    omit_if(WINDOWS, "Process.maxgroups= tests skipped on MS Windows")
     notify("Process.maxgroups= bug; http://redmine.ruby-lang.org/issues/4467")
     assert_raise(TypeError){ Process.maxgroups = "test" }
     assert_raise(TypeError){ Process.maxgroups = -1 }
