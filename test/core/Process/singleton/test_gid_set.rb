@@ -22,7 +22,9 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
   end
 
   test "gid= sets the gid as expected" do
+    omit_if(WINDOWS, "Process.gid= tests skipped on MS Windows")
     omit_unless(ROOT, "Process.gid= tests skipped except when root")
+
     assert_nothing_raised{ Process.gid = @local_gid }
     assert_equal(@local_gid, Process.gid)
     assert_nothing_raised{ Process.gid = @login_gid }
@@ -30,11 +32,14 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
   end
 
   test "gid= returns the value that was assigned" do
+    omit_if(WINDOWS, "Process.gid= tests skipped on MS Windows")
     omit_unless(ROOT, "Process.gid= tests skipped except when root")
+
     assert_equal(@local_gid, Process.gid = @local_gid)
   end
 
   test "gid= requires a numeric argument" do
+    omit_unless(ROOT, "Process.gid= tests skipped except when root")
     assert_raises(TypeError){ Process.gid = "bogus" }
   end
 
