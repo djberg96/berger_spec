@@ -20,6 +20,7 @@ class TC_Process_Groups_SingletonMethod < Test::Unit::TestCase
   end
 
   test "the array returned by the groups method contains only integers" do
+    omit_if(WINDOWS, "Process.groups test skipped on Windows")
     Process.groups.each{ |group| assert_kind_of(Numeric, group) }
   end
 
