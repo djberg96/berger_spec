@@ -1,48 +1,40 @@
 ######################################################################
-# tc_blockdev.rb
+# test_blockdev.rb
 #
 # Test case for the FileStat#blockdev instance method.
-#
-# TODO: Use WMI + WIN32_LOGICALDISK to get the CDROM drive. Even if
-# we use that technique, however, the test will fail unless there's a
-# disk in the drive.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_FileStat_Blockdev_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   def setup
-      @stat = File::Stat.new(__FILE__)
+  def setup
+    @stat = File::Stat.new(__FILE__)
 
-      if SOLARIS
-         @file = '/dev/fd0'
-      elsif WINDOWS
-         @file = 'D:/'
-      else
-         @file = '/dev/disk0'
-      end
-      
-      @win_error = '=> May fail on MS Windows'
-   end
+    if SOLARIS
+      @file = '/dev/fd0'
+    else
+      @file = '/dev/disk0'
+    end
+  end
 
-   def test_blockdev_basic
-      assert_respond_to(@stat, :blockdev?)
-   end
+  test "blockdev basic functionality" do
+    assert_respond_to(@stat, :blockdev?)
+  end
 
-   def test_blockdev
-      assert_equal(false, @stat.blockdev?)
-      assert_equal(true, File.stat(@file).blockdev?, @win_error)
-   end
+  test "blockdev returns expected result" do
+    omit_if(WINDOWS, "FileStat#blockdev test skipped on MS Windows")
+    assert_false(@stat.blockdev?)
+    assert_true(File.stat(@file).blockdev?)
+  end
 
-   def test_blockdev_expected_errors
-      assert_raises(ArgumentError){ @stat.blockdev?(1) }
-   end
+  test "blockdev method does not accept any arguments" do
+    assert_raises(ArgumentError){ @stat.blockdev?(1) }
+  end
 
-   def teardown
-      @stat = nil
-      @file = nil
-      @win_error = nil
-   end
+  def teardown
+    @stat = nil
+    @file = nil
+  end
 end
