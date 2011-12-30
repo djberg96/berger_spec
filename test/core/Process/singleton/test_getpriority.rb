@@ -10,7 +10,7 @@ class TC_Process_Getpriority_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @kind = Process::PRIO_PROCESS
+    @kind = Process::PRIO_PROCESS unless WINDOWS
   end
 
   test "getpriority basic functionality" do
@@ -18,36 +18,44 @@ class TC_Process_Getpriority_SingletonMethod < Test::Unit::TestCase
   end
 
   test "getpriority returns expected results" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     assert_kind_of(Fixnum, Process.getpriority(@kind, 0))
     assert_true(Process.getpriority(@kind, Process.pid) >= 0)
     assert_true(Process.getpriority(@kind, Process.pid) <= 100000)
   end
 
   test "getpriority accepts one of three process types" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     assert_nothing_raised{ Process.getpriority(Process::PRIO_PGRP, 0) }
     assert_nothing_raised{ Process.getpriority(Process::PRIO_PROCESS, 0) }
     assert_nothing_raised{ Process.getpriority(Process::PRIO_USER, 0) }
   end
 
   test "getpriority requires two argument" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     assert_raise(ArgumentError){ Process.getpriority }
     assert_raise(ArgumentError){ Process.getpriority(@kind, 0, 0) }
   end
 
   test "getpriority requires a valid process type" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     assert_raise(Errno::EINVAL){ Process.getpriority(9999, 0) }
   end
 
   test "getpriority requires a numeric process type" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     assert_raise(TypeError){ Process.getpriority("test", 0) }
   end
 
   test "getpriority requires a numeric pid" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     assert_raise(TypeError){ Process.getpriority(@kind, "test") }
   end
 
   test "getpriority fails at $SAFE level 2 or higher" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     omit_if(JRUBY, "Process.getpriority with $SAFE test skipped on JRuby")
+
     assert_raise(SecurityError){
       proc do
         $SAFE = 3
@@ -57,7 +65,9 @@ class TC_Process_Getpriority_SingletonMethod < Test::Unit::TestCase
   end
 
   test "getpriority works at $SAFE level 1 or lower" do
+    omit_if(WINDOWS, "Process.getpriority tests skipped on MS Windows")
     omit_if(JRUBY, "Process.getpriority with $SAFE test skipped on JRuby")
+
     assert_nothing_raised{
       proc do
         $SAFE = 1
@@ -67,6 +77,6 @@ class TC_Process_Getpriority_SingletonMethod < Test::Unit::TestCase
   end
 
   def teardown
-    @kind = nil
+    @kind = nil unless WINDOWS
   end
 end
