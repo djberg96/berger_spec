@@ -1,5 +1,5 @@
 ######################################################################
-# tc_grpowned.rb
+# test_grpowned.rb
 #
 # Test case for the FileStat#grpowned? instance method.
 ######################################################################
@@ -10,7 +10,10 @@ class TC_FileStat_GrpOwned_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @stat = File::Stat.new(__FILE__)
+    @file = 'grpowned_test.txt'
+    touch(@file)
+
+    @stat = File::Stat.new(@file)
 
     if WINDOWS
       @user = nil
@@ -18,31 +21,36 @@ class TC_FileStat_GrpOwned_InstanceMethod < Test::Unit::TestCase
     else
       @user = Etc.getpwnam(Etc.getlogin)
       @bool = Etc.getgrgid(@user.gid).name == @user.name
-      @bool = true if ROOT
+      @bool = true if ROOT || OSX
     end
   end
 
-  def test_grpowned_basic
+  test "grpowned basic functionality" do
     assert_respond_to(@stat, :grpowned?)
     assert_boolean(@stat.grpowned?)
   end
 
-  def test_grpowned
-    if WINDOWS
-      assert_equal(false, @stat.grpowned?)
-    else
-      assert_equal(true, @stat.grpowned?)
-      assert_equal(@bool, File::Stat.new('/').grpowned?)
-    end
+  test "grpowned always returns false on Windows" do
+    omit_unless(WINDOWS, 'grpowned test skipped except on Windows')
+    assert_false(@stat.grpowned?)
   end
 
-  def test_grpowned_expected_errors
+  test "grpowned returns the expected results on Unix" do
+    omit_if(WINDOWS, 'grpowned test skipped on Windows')
+    assert_true(@stat.grpowned?)
+    assert_equal(@bool, File::Stat.new('/').grpowned?)
+  end
+
+  test "grpowned does not take any arguments" do
     assert_raises(ArgumentError){ @stat.grpowned?(1) }
   end
 
   def teardown
+    File.delete(@file) if File.exists?(@file)
+
     @stat = nil
     @bool = nil
     @user = nil
+    @file = nil
   end
 end
