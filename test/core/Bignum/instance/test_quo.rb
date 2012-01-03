@@ -44,8 +44,9 @@ class TC_Bignum_Quo_InstanceMethod < Test::Unit::TestCase
     assert_raise(ArgumentError){ @bignum_pos.quo(1, 2) }
   end
 
-  test "quo with an argument of zero raises an error" do
-    assert_raise(ZeroDivisionError){ @bignum_pos.quo(0) }
+  # Ruby 1.9.x raises a ZeroDivisionError
+  test "quo with an argument of zero returns Infinity" do
+    assert_equal('Infinity', @bignum_pos.quo(0).to_s)
   end
 
   test "the argument to quot must be numeric" do
