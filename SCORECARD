@@ -32,7 +32,7 @@
   example, ['test'].pack('C') raises a TypeError, while ['test'].pack('D')
   raises an ArgumentError. Many of these can be traced to the Integer() and
   Float() kernel methods.
-* Some methods, such as File.join, allow you pass no arguments when they
+* Some methods, such as File.join, let you pass no arguments when they
   probably ought to check for 0 arguments and raise an ArgumentError. At the
   moment they're just no-ops.
 * The chsize() function in MS VC++ 6.0 has a bug where it does not raise an
@@ -53,5 +53,6 @@
   and dup's the file pointer.
 
 == JRuby, Rubinius, etc
-  The majority of the bugs reported for other implementations of Ruby are the
-  direct result of this test suite.
+  The majority of the bugs reported by me for other implementations of Ruby
+  are the direct result of this test suite. For JRuby, that's over 100 bug
+  reports at this point.
