@@ -140,11 +140,14 @@ class TC_Exception_Hierarchy < Test::Unit::TestCase
     assert_kind_of(StandardError, RangeError.new)
     assert_kind_of(StandardError, RegexpError.new)
     assert_kind_of(StandardError, RuntimeError.new)
-    assert_kind_of(StandardError, SecurityError.new)
     assert_kind_of(StandardError, SystemCallError.new(0))
     assert_kind_of(StandardError, ThreadError.new)
     assert_kind_of(StandardError, TypeError.new)
     assert_kind_of(StandardError, ZeroDivisionError.new)
+  end
+
+  test "SecurityError is a kind of Exception" do
+    assert_kind_of(Exception, SecurityError.new)
   end
 
   test "EOFError is a kind of IOError" do
