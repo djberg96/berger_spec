@@ -10,16 +10,16 @@ require 'rubygems'
 require 'pathname'
 require 'rbconfig'
 require 'fileutils'
-gem 'test-unit'
+require 'test-unit'
 
 module Test
   module Helper
-    WINDOWS = Config::CONFIG['host_os'] =~ /windows|mswin|cygwin|mingw|msdos/i ? true : false
-    LINUX   = Config::CONFIG['host_os'] =~ /linux/i ? true : false
-    SOLARIS = Config::CONFIG['host_os'] =~ /sunos|solaris/i ? true : false
-    BSD     = Config::CONFIG['host_os'] =~ /bsd/i ? true : false
-    VMS     = Config::CONFIG['host_os'] =~ /vms/i ? true : false
-    OSX     = Config::CONFIG['host_os'] =~ /darwin|mach|osx/i ? true : false
+    WINDOWS = RbConfig::CONFIG['host_os'] =~ /windows|mswin|cygwin|mingw|msdos/i ? true : false
+    LINUX   = RbConfig::CONFIG['host_os'] =~ /linux/i ? true : false
+    SOLARIS = RbConfig::CONFIG['host_os'] =~ /sunos|solaris/i ? true : false
+    BSD     = RbConfig::CONFIG['host_os'] =~ /bsd/i ? true : false
+    VMS     = RbConfig::CONFIG['host_os'] =~ /vms/i ? true : false
+    OSX     = RbConfig::CONFIG['host_os'] =~ /darwin|mach|osx/i ? true : false
 
     JRUBY    = defined?(JRUBY_VERSION) ? true : false
     RUBINIUS = defined?(Rubinius) ? true : false
@@ -106,7 +106,7 @@ module Test
 
     # Returns the null device for the given platform
     def null_device
-      case Config::CONFIG['host_os']
+      case RbConfig::CONFIG['host_os']
         when /windows|mswin|msdos|cygwin|mingw|win32/i
           'NUL'
         when /amiga/i
