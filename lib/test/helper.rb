@@ -164,13 +164,13 @@ module Test
       if WINDOWS
         buf = 0.chr * 172
         rv = GetTimeZoneInformation.call(buf)
-            if rv == 1
-           buf[4,64].tr("\000", '')
-            else
-               buf[84,64].tr("\000", '')
-            end
+        if rv == 1
+          buf[4,64].tr("\000", '')
+        else
+          buf[84,64].tr("\000", '')
+        end
       else
-        tz = `date`.chomp.split[4]
+        `date`.chomp.split[4]
       end
     end
 
