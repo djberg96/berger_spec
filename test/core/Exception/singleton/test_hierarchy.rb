@@ -66,7 +66,7 @@ class TC_Exception_Hierarchy < Test::Unit::TestCase
     assert_kind_of(ScriptError, NotImplementedError.new)
   end
 
-  test "Instances of NotImplementedError are a subclass of ScriptError" do
+  test "Instances of SyntaxError are a subclass of ScriptError" do
     assert_kind_of(ScriptError, SyntaxError.new)
   end
 
