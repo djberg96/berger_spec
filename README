@@ -3,8 +3,8 @@
   classes and the standard library. A series of benchmarks are also included.
 
 = Prerequisites
-  * rake 0.8.7 or later.
-  * test-unit 2.1 or later.
+  * rake 0.9.2 or later.
+  * test-unit 2.4 or later.
   * mkmf-lite
 
 = Installation
@@ -48,12 +48,12 @@
    
   All test class names shall start with "TC_", followed by the class name,
   followed by the class or instance method (capitalized), followed by the word
-  "SingletonMethod" or "Instance", as appropriate.
+  "SingletonMethod" or "InstanceMethod", as appropriate.
    
   For example, TC_Dir_Getwd_SingletonMethod < Test::Unit::TestCase
 
-  The Test::Helper module is mandatory in all tests, and must be required before
-  require'ing test-unit so that test-unit 2 is loaded properly.
+  The Test::Helper module is mandatory in all tests, and must be
+  required in all test files.
    
   Running the tests should be handled via tasks in the Rakefile. Some tests
   are skipped on certain platforms. Other tests are skipped unless you run
