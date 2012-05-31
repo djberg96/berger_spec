@@ -1,28 +1,15 @@
 ########################################################################
 # test_equality.rb
 #
-# Tests for the Exception#== method.
+# Tests for the Exception#== method. There are some tests that were
+# intentionally omitted. See https://bugs.ruby-lang.org/issues/5865.
 ########################################################################
 require 'test/helper'
 
 class TC_Exception_Equals < Test::Unit::TestCase
-  class TestError
-    attr_accessor :message
-    attr_writer :backtrace
-
-    def initialize(msg = nil)
-      @message = msg
-    end
-
-    def backtrace
-      @backtrace ? [@backtrace] : nil
-    end
-  end
-
   def setup
     @error1 = Exception.new
     @error2 = Exception.new
-    @custom = TestError.new
   end
 
   test "exceptions are equal if object and receiver are the same" do
@@ -35,7 +22,7 @@ class TC_Exception_Equals < Test::Unit::TestCase
 
   test "exceptions are equal if their messages and backtraces are the same" do
     @error1 = Exception.new('foo')
-    @error2 = StandardError.new('foo')
+    @error2 = Exception.new('foo')
     assert_true(@error1 == @error2)
 
     @error1.set_backtrace('bar')
@@ -57,42 +44,10 @@ class TC_Exception_Equals < Test::Unit::TestCase
     assert_false(@error1 == @error2)
   end
 
-  test "equality is false if object compared against does not implement message and backtrace functions" do
+  test "equality is false if object is not an exception" do
     assert_false(@error1 == [])
     assert_false(@error1 == {})
     assert_false(@error1 == 0)
-  end
-
-  test "equality is true if object compared against implements message and backtrace functions and they are the same" do
-    assert_true(@error1 == @custom)
-
-    @error1.set_backtrace('foo')
-    @custom.backtrace = 'foo'
-
-    assert_true(@error1 == @custom)
-
-    @error1 = Exception.new('bar')
-    @custom = TestError.new('bar')
-
-    assert_true(@error1 == @custom)
-  end
-
-  test "equality is false if object compared against implements message and backtrace functions and they are not the same" do
-    assert_true(@error1 == @custom)
-
-    @error1.set_backtrace('foo')
-    @custom.backtrace = 'bar'
-
-    assert_false(@error1 == @custom)
-
-    @error1.set_backtrace('bar')
-    assert_true(@error1 == @custom)
-
-    @error1 = Exception.new('foo')
-    @custom = TestError.new('bar')
-
-    assert_false(@error1.message == @custom.message)
-    assert_false(@error1 == @custom)
   end
 
   def teardown
