@@ -65,18 +65,21 @@ class TC_Process_Kill_SingletonMethod < Test::Unit::TestCase
   end
 
   test "the kill method applies to a process group if the signal is negative" do
+    omit_if(JRUBY)
     pid = Process.spawn(@cmd, :pgroup => true)
     grp = Process.getpgid(pid)
     assert_equal(1, Process.kill(-9, grp))
   end
 
   test "the kill method applies to a process group if the signal name starts with a minus" do
+    omit_if(JRUBY)
     pid = Process.spawn(@cmd, :pgroup => true)
     grp = Process.getpgid(pid)
     assert_equal(1, Process.kill('-SIGKILL', grp))
   end
 
   test "the kill method applies to a process group if the signal name without 'SIG' starts with a minus" do
+    omit_if(JRUBY)
     pid = Process.spawn(@cmd, :pgroup => true)
     grp = Process.getpgid(pid)
     assert_equal(1, Process.kill('-KILL', grp))
