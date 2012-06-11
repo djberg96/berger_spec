@@ -23,20 +23,21 @@ class TC_Process_Kill_SingletonMethod < Test::Unit::TestCase
   end
 
   test "kill with signal 0 does not actually send a signal" do
-    assert_nothing_raised{ Process.kill(0, 0) }
+    assert_nothing_raised{ Process.kill(0, Process.pid) }
   end
 
   test "kill with signal 0 returns 1 if the process exists" do
-    assert_equal(1, Process.kill(0, 0))
+    assert_equal(1, Process.kill(0, Process.pid))
   end
 
   test "kill with signal 0 raises an ESRCH error if any process does not exist" do
     assert_raise(Errno::ESRCH){ Process.kill(0, 99999999) }
-    assert_raise(Errno::ESRCH){ Process.kill(0, 0, 99999999) }
+    assert_raise(Errno::ESRCH){ Process.kill(0, Process.pid, 99999999) }
   end
 
   test "kill accepts multiple pid values" do
-    assert_nothing_raised{ Process.kill(0, 0, 0, 0, 0) }
+    pid = Process.pid
+    assert_nothing_raised{ Process.kill(0, pid, pid, pid, pid) }
   end
 
   test "kill with any signal returns the number of killed processes" do
@@ -60,8 +61,9 @@ class TC_Process_Kill_SingletonMethod < Test::Unit::TestCase
     assert_nothing_raised{ Process.kill(:KILL, pid) }
   end
 
-  test "kill coerces the pid to an integer, rounded down" do
-    assert_nothing_raised{ Process.kill(0, 0.7) }
+  test "kill coerces the pid to an integer" do
+    pid = Process.pid.to_f + 0.7
+    assert_nothing_raised{ Process.kill(0, pid) }
   end
 
   test "the kill method applies to a process group if the signal is negative" do
