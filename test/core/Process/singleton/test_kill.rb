@@ -87,6 +87,22 @@ class TC_Process_Kill_SingletonMethod < Test::Unit::TestCase
     assert_equal(1, Process.kill('-KILL', grp))
   end
 
+  test "an EINVAL error is raised on Windows if the signal is negative" do
+    omit_unless(WINDOWS)
+    @pid = Process.spawn(@cmd)
+    assert_raise(Errno::EINVAL){ Process.kill(-3, @pid) }
+  end
+
+  test "an EINVAL error is raised on Windows if the pid is 0 and it's not a SIGINT" do
+    omit_unless(WINDOWS)
+    assert_raise(Errno::EINVAL){ Process.kill(9, 0) }
+  end
+
+  test "an EINVAL error is raised if the pid is the current process and it's not a 0 or SIGKILL" do
+    omit_unless(WINDOWS)
+    assert_raise(Errno::EINVAL){ Process.kill(1, Process.pid) }
+  end
+
   test "kill requires at least two arguments" do
     assert_raise(ArgumentError){ Process.kill }
   end
