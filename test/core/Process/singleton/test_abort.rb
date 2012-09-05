@@ -25,14 +25,14 @@ class TC_Process_Abort_ModuleMethod < Test::Unit::TestCase
   test "abort behaves as expected" do
     omit_if(@skip, "Process.abort tests skipped on MS Windows and/or JRuby")
     fork{ Process.abort }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(1, status.exitstatus)
   end
 
   test "abort accepts and returns a message" do
     omit_if(@skip, "Process.abort tests skipped on MS Windows and/or JRuby")
     fork{ Process.abort("hello world") }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(1, status.exitstatus)
     assert_equal("hello world", IO.read(@file).chomp)
   end

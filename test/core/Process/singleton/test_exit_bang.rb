@@ -22,28 +22,28 @@ class TC_Process_ExitBang_SingletonMethod < Test::Unit::TestCase
   test "exit bang returns a default exit status of one" do
     skip_check
     fork{ Process.exit! }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(1, status.exitstatus)
   end
 
   test "exit bang with an argument of true returns zero (success)" do
     skip_check
     fork{ Process.exit!(true) }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(0, status.exitstatus)
   end
 
   test "exit bang with an argument of false returns one (failure)" do
     skip_check
     fork{ Process.exit!(false) }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(1, status.exitstatus)
   end
 
   test "exit bang accepts and returns the same numeric argument" do
     skip_check
     fork{ Process.exit!(99) }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(99, status.exitstatus)
   end
 
