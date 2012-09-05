@@ -9,8 +9,8 @@ require "test/unit"
 class Test_Array_Difference_InstanceMethod < Test::Unit::TestCase
   class ADiff
     def to_ary
-       [1, 2]
-     end
+      [1, 2]
+    end
   end
 
   def setup
