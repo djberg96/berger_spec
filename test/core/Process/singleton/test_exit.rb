@@ -24,28 +24,28 @@ class TC_Process_Exit_ModuleMethod < Test::Unit::TestCase
   test "exit returns a default exit status of zero" do
     skip_check
     fork{ Process.exit }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(0, status.exitstatus)
   end
 
   test "exit with an argument of true returns zero (success)" do
     skip_check
     fork{ Process.exit(true) }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(0, status.exitstatus)
   end
 
   test "exit with an argument of false returns one (failure)" do
     skip_check
     fork{ Process.exit(false) }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(1, status.exitstatus)
   end
 
   test "exit accepts and returns the same numeric argument" do
     skip_check
     fork{ Process.exit(99) }
-    pid, status = Process.wait2
+    _,status = Process.wait2
     assert_equal(99, status.exitstatus)
   end
 
