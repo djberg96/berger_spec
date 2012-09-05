@@ -89,7 +89,7 @@ class Test_Array_Zip_InstanceMethod < Test::Unit::TestCase
   test "passing the wrong type of argument raises an error" do
     assert_raise(TypeError){ @arr_int.zip(1) }
     assert_raise(TypeError){ @arr_int.zip(nil) }
-    assert_raise(TypeError){ @arr_int.zip({1,2,3,4}) }
+    assert_raise(TypeError){ @arr_int.zip(Hash[1,2,3,4]) }
   end
 
   def teardown

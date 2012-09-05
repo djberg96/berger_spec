@@ -26,10 +26,10 @@ class Test_Array_Unshift_InstanceMethod < Test::Unit::TestCase
     assert_nothing_raised{ @array.unshift(1) }
     assert_equal([1, 'a', 'b', 'c'], @array)
   end
-  
+
   test "unshift with splat works as expected" do
     assert_equal([1, 2, 'a', 'b', 'c'], @array.unshift(*[1,2]))
-    assert_equal([[1, 2], 'a', 'b', 'c'], ['a','b','c'].unshift(*{1,2}))
+    assert_equal([[1, 2], 'a', 'b', 'c'], ['a','b','c'].unshift(*Hash[1,2]))
   end
 
   test "unshift without arguments returns the original array" do
