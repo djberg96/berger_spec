@@ -2,6 +2,11 @@
   This is a custom test suite for Ruby. It includes tests for both the core
   classes and the standard library. A series of benchmarks are also included.
 
+= WARNING
+  This test suite is very much out of date and should not be used. Please do
+  not send me pull requests. I've decided to leave it up as more of a personal
+  historical archive than anything else.
+
 = Prerequisites
   * rake 0.9.2 or later.
   * test-unit 2.4 or later.
