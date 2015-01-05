@@ -13,6 +13,10 @@ class Test_Array_Comparison_Instance < Test::Unit::TestCase
     end
   end
 
+  class NoCompare
+    undef_method :<=>
+  end
+
   def setup
     @array_chr1 = ['a', 'a', 'c']
     @array_chr2 = ['a', 'b', 'c']
@@ -64,10 +68,17 @@ class Test_Array_Comparison_Instance < Test::Unit::TestCase
     assert_equal(0, @array_chr2 <=> @custom)
   end
 
-  test "comparison raises an error if objects are not comparable" do
-    assert_raise(NoMethodError){ [nil] <=> [nil] }
-    assert_raise(NoMethodError){ [false] <=> [false] }
-    assert_raise(NoMethodError){ [true] <=> [true] }
+  # In 1.8.x this would raise an error
+  test "comparison does not raise an error for explicit nil, true or false elements" do
+    assert_equal(0,  [nil] <=> [nil])
+    assert_equal(0,  [true] <=> [true])
+    assert_equal(0,  [false] <=> [false])
+  end
+
+  test "comparison raises an error if elements are not comparable" do
+    n1 = NoCompare.new
+    n2 = NoCompare.new
+    assert_raise(NoMethodError){ [n1] <=> [n2] }
   end
 
   def teardown
