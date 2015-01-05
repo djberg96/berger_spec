@@ -32,10 +32,11 @@ class Test_Array_Equality_InstanceMethod < Test::Unit::TestCase
     assert_true([1.1, 2.1] == [1.1, 2.1])
   end
 
-  test "equality honors custom to_ary methods for non array objects" do
-    assert_true(@array_int1 == @custom)
-    assert_false(@array_int3 == @custom)
-  end
+  # The C source makes a check for to_ary but never bothers to use it.
+  #test "equality honors custom to_ary methods for non array objects" do
+  #  assert_true(@array_int1 == @custom)
+  #  assert_false(@array_int3 == @custom)
+  #end
 
   test "equality expected failures" do
     assert_false(@array_int1 == @array_int3)
@@ -46,14 +47,14 @@ class Test_Array_Equality_InstanceMethod < Test::Unit::TestCase
     assert_false([1.11, 2.1] == [1.1, 2.1])
   end
 
-  test "expected success for empty, nil and false elements" do 
+  test "expected success for empty, nil and false elements" do
     assert_true([] == [])
     assert_true([nil] == [nil])
     assert_true([false] == [false])
     assert_true([true] == [true])
   end
 
-  test "expected failures for empty, nil and false elements" do 
+  test "expected failures for empty, nil and false elements" do
     assert_false([0] == 0)
     assert_false([nil] == nil)
     assert_false([nil] == [nil, nil])
