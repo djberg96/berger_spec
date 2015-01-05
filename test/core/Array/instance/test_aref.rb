@@ -50,7 +50,7 @@ class Test_Array_Aref_InstanceMethod < Test::Unit::TestCase
   test "aref with a start and length works as expected" do
     assert_equal(['foo', /^$/], @multi[1, 2])
     assert_equal([1, 'foo'], @multi[0, 2])
-    assert_equal([1, 'foo'], @multi[-3, 2])     
+    assert_equal([1, 'foo'], @multi[-3, 2])
   end
 
   test "aref with a start out of range returns nil" do
@@ -64,7 +64,7 @@ class Test_Array_Aref_InstanceMethod < Test::Unit::TestCase
   test "aref with a float length works as expected" do
     assert_equal(['foo', /^$/], @multi[1.5, 2.5])
     assert_equal([1, 'foo'], @multi[0.3, 2.1])
-    assert_equal([1, 'foo'], @multi[-3.9, 2.0])     
+    assert_equal([1, 'foo'], @multi[-3.9, 2.0])
     assert_nil(@multi[-5.0, 2.7])
   end
 
@@ -97,7 +97,7 @@ class Test_Array_Aref_InstanceMethod < Test::Unit::TestCase
   end
 
   test "error message if a second argument is passed when a range is used" do
-    assert_raise_message("can't convert Range into Integer"){ @basic[1..3, 1] }
+    assert_raise_message("no implicit conversion of Range into Integer"){ @basic[1..3, 1] }
   end
 
   test "aref does not accept symbols for arguments" do
@@ -108,7 +108,7 @@ class Test_Array_Aref_InstanceMethod < Test::Unit::TestCase
   end
 
   test "error message if a symbol is used as an index" do
-    assert_raise_message("Symbol as array index"){ @basic['1'.to_sym] }
+    assert_raise_message("no implicit conversion of Symbol into Integer"){ @basic['1'.to_sym] }
   end
 
   # SAPPHIRE: Make slice and [] true aliases
