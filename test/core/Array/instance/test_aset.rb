@@ -16,7 +16,7 @@ class Test_Array_Aset_InstanceMethod < Test::Unit::TestCase
     assert_nothing_raised{ @basic[0] = 1 }
     assert_kind_of(String, @basic[1] = 'a')
   end
-   
+
   test 'an integer index works as expected' do
     assert_nothing_raised{ @empty[0] = 'foo' }
     assert_equal('foo', @empty[0])
@@ -40,7 +40,7 @@ class Test_Array_Aset_InstanceMethod < Test::Unit::TestCase
     assert_nothing_raised{ @empty[-1] = 'foo' }
   end
 
-  test 'if the index is greater than the current array size then it grows automatically' do 
+  test 'if the index is greater than the current array size then it grows automatically' do
     assert_nothing_raised(IndexError){ @empty[2] = 'foo' }
     assert_equal([nil, nil, 'foo'], @empty)
   end
@@ -85,7 +85,7 @@ class Test_Array_Aset_InstanceMethod < Test::Unit::TestCase
   test 'a float starting index and integer length is legal' do
     assert_nothing_raised{ @basic[0.5, 3] = ['a', 'b', 'c'] }
     assert_equal(['a', 'b', 'c', 4, 5], @basic)
-  end 
+  end
 
   test 'a float starting index and float length is legal' do
     assert_nothing_raised{ @basic[0.5, 3.1] = ['a', 'b', 'c'] }
@@ -95,7 +95,7 @@ class Test_Array_Aset_InstanceMethod < Test::Unit::TestCase
   test 'a negative float starting index and integer length is legal' do
     assert_nothing_raised{ @basic[-0.5, 3] = ['a', 'b', 'c'] }
     assert_equal(['a', 'b', 'c', 4, 5], @basic)
-  end 
+  end
 
   test 'aset with range basic functionality' do
     assert_nothing_raised{ @basic[0..3] = 1 }
@@ -132,14 +132,16 @@ class Test_Array_Aset_InstanceMethod < Test::Unit::TestCase
     assert_equal([1, 'a', 'b', 2, 3, 4, 5], @basic)
   end
 
-  test 'assigning nil in the second form deletes elements from the array' do
+  # Compare with 1.8 which actually deleted elements instead
+  test 'assigning nil in the second form inserts a literal nil' do
     assert_nothing_raised{ @basic[2, 1] = nil }
-    assert_equal([1, 2, 4, 5], @basic)
+    assert_equal([1, 2, nil, 4, 5], @basic)
   end
 
-  test 'assigning nil in the third form deletes elements from the array' do
+  # Compare with 1.8 which actually deleted elements instead
+  test 'assigning nil in the third form inserts a literal nil' do
     assert_nothing_raised{ @basic[2..-2] = nil }
-    assert_equal([1, 2, 5], @basic)
+    assert_equal([1, 2, nil, 5], @basic)
   end
 
   test 'a negative index that points past the beginning of the array raises an error' do
@@ -164,7 +166,7 @@ class Test_Array_Aset_InstanceMethod < Test::Unit::TestCase
   end
 
   test 'using a symbol as an index raises a specific error message' do
-    assert_raise_message("Symbol as array index"){ @basic['1'.to_sym, 0] = 1 }
+    assert_raise_message("no implicit conversion of Symbol into Integer"){ @basic['1'.to_sym, 0] = 1 }
   end
 
   test 'passing a second argument if a range is used causes an error' do
