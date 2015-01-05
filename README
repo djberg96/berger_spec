@@ -51,11 +51,11 @@
   or an analogue based on the internal method name, e.g. "aref" to refer to
   Array#[].
    
-  All test class names shall start with "TC_", followed by the class name,
+  All test class names shall start with "Test_", followed by the class name,
   followed by the class or instance method (capitalized), followed by the word
   "SingletonMethod" or "InstanceMethod", as appropriate.
    
-  For example, TC_Dir_Getwd_SingletonMethod < Test::Unit::TestCase
+  For example, Test_Dir_Getwd_SingletonMethod < Test::Unit::TestCase
 
   The Test::Helper module is mandatory in all tests, and must be
   required in all test files.
