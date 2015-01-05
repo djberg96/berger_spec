@@ -39,7 +39,7 @@ class Test_Array_Each_InstanceMethod < Test::Unit::TestCase
   end
 
   test "each without a block returns an enumerator object" do
-    assert_kind_of(Enumerable::Enumerator, @array.each)
+    assert_kind_of(Enumerator, @array.each)
   end
 
   test "passing the wrong number of arguments raises an error" do
