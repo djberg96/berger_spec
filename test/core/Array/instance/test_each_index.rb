@@ -35,11 +35,11 @@ class Test_Array_EachIndex_InstanceMethod < Test::Unit::TestCase
   end
 
   test "each_index without block argument returns original array" do
-    assert_equal(@array, @array.each_index{}) 
+    assert_equal(@array, @array.each_index{})
   end
 
   test "each_index returns an enumerator object if no block is provided" do
-    assert_kind_of(Enumerable::Enumerator, @array.each_index)
+    assert_kind_of(Enumerator, @array.each_index)
   end
 
   test "an error is raised if the wrong number of arguments are passed" do
