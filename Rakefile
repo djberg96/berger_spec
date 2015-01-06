@@ -498,10 +498,6 @@ namespace "test" do
 
     files = FileList['test/stdlib/*/*.rb']
 
-    if File::ALT_SEPARATOR
-      files.delete_if{ |f| File.basename(f) == 'test_etc.rb' }
-    end
-
     t.test_files = files
   end
 
@@ -513,13 +509,11 @@ namespace "test" do
       t.test_files = FileList['test/stdlib/English/*.rb']
     end
 
-    unless File::ALT_SEPARATOR
-      desc "Run the test suite for the Etc library"
-      Rake::TestTask.new('etc') do |t|
-        t.libs << 'lib'
-        t.warning = true
-        t.test_files = FileList['test/stdlib/Etc/*.rb']
-      end
+    desc "Run the test suite for the Etc library"
+    Rake::TestTask.new('etc') do |t|
+      t.libs << 'lib'
+      t.warning = true
+      t.test_files = FileList['test/stdlib/Etc/*.rb']
     end
 
     desc "Run the test suite for the OpenStruct library"
