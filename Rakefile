@@ -499,7 +499,7 @@ namespace "test" do
     files = FileList['test/stdlib/*/*.rb']
 
     if File::ALT_SEPARATOR
-      files.delete_if{ |f| File.basename(f) == 'tc_etc.rb' }
+      files.delete_if{ |f| File.basename(f) == 'test_etc.rb' }
     end
 
     t.test_files = files
