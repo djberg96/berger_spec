@@ -1,5 +1,5 @@
 ###############################################################################
-# tc_etc.rb
+# test_etc.rb
 #
 # Tests for the Etc module. This test case goes out of its way to avoid using
 # the Test::Helper module because that module uses Etc internally. Thus, I
@@ -12,19 +12,17 @@
 require 'test/unit'
 require 'rbconfig'
 require 'etc'
-include Config
 
-class TC_Etc < Test::Unit::TestCase
-   def setup
-      @login = `whoami`.chomp
-      @name  = CONFIG['host_os'] =~ /darwin|osx/i ? 'mailman' : @login
+class Test_Stdlib_Etc < Test::Unit::TestCase
+  WINDOWS = File::ALT_SEPARATOR
+
+  def setup
+    @login = `whoami`.chomp
+    @name  = RbConfig::CONFIG['host_os'] =~ /darwin|osx/i ? 'mailman' : @login
+
+    unless File::ALT_SEPARATOR
       @group = IO.readlines('/etc/group').grep(/sys:/i).first.chomp.split(':')
       @user  = IO.readlines('/etc/passwd').grep(/#{@name}/i).first.chomp.split(':')
-
-      @pwent  = nil
-      @pwent2 = nil
-      @grent  = nil
-      @grent2 = nil
 
       # Some platforms use a double colon for the first separator, so we need
       # to delete any empty elements that appear as a result of this.
@@ -37,23 +35,63 @@ class TC_Etc < Test::Unit::TestCase
 
       @user_name = @user[0]
       @user_id   = @user[1].to_i
-   end
+    end
 
-   def test_endgrent
-      assert_respond_to(Etc, :endgrent)
-      assert_nothing_raised{ Etc.endgrent }
-   end
+    @pwent  = nil
+    @pwent2 = nil
+    @grent  = nil
+    @grent2 = nil
+  end
 
-   def test_endpwent
-      assert_respond_to(Etc, :endpwent)
-      assert_nothing_raised{ Etc.endpwent }
-   end
+  test "endgrent basic functionality" do
+    assert_respond_to(Etc, :endgrent)
+    assert_nothing_raised{ Etc.endgrent }
+  end
 
-   def test_getgrent
-      assert_respond_to(Etc, :getgrent)
-      assert_nothing_raised{ @grent = Etc.getgrent }
-      assert_kind_of(Struct::Group, @grent)
-   end
+  test "endgrent returns nil" do
+    assert_nil(Etc.endgrent)
+  end
+
+  test "endpwent basic functionality" do
+    assert_respond_to(Etc, :endpwent)
+    assert_nothing_raised{ Etc.endpwent }
+  end
+
+  test "endpwent returns nil" do
+    assert_nil(Etc.endpwent)
+  end
+
+  test "getgrent basic functionality" do
+    assert_respond_to(Etc, :getgrent)
+    assert_nothing_raised{ Etc.getgrent }
+  end
+
+  test "getgrent returns a single group struct" do
+    omit_if(WINDOWS)
+    assert_kind_of(Struct::Group, Etc.getgrent)
+  end
+
+  test "getgrent returns nil on Windows" do
+    omit_unless(WINDOWS)
+    assert_nil(Etc.getgrent)
+  end
+
+  test "struct returned by getgrent has three members" do
+    omit_if(WINDOWS)
+    @grent = Etc.getgrent
+    assert_respond_to(@grent, :name)
+    assert_respond_to(@grent, :gid)
+    assert_respond_to(@grent, :mem)
+  end
+
+  test "struct members returned by getgrent are of the expected type" do
+    omit_if(WINDOWS)
+    @grent = Etc.getgrent
+    assert_kind_of(String, @grent.name)
+    assert_kind_of(Integer, @grent.gid)
+    assert_kind_of(Array, @grent.mem)
+  end
+=begin
 
    # Buggy
    def test_getgrgid
@@ -172,19 +210,7 @@ class TC_Etc < Test::Unit::TestCase
       assert_kind_of(String, @pwent.shell)
    end
 
-   def test_struct_group_basic
-      assert_nothing_raised{ @grent = Etc.getgrent }
-      assert_respond_to(@grent, :name)
-      assert_respond_to(@grent, :gid)
-      assert_respond_to(@grent, :mem)
-   end
-
-   def test_struct_group
-      assert_nothing_raised{ @grent = Etc.getgrent }
-      assert_kind_of(String, @grent.name)
-      assert_kind_of(Integer, @grent.gid)
-      assert_kind_of(Array, @grent.mem)
-   end
+=end
 
    def teardown
       @login  = nil
