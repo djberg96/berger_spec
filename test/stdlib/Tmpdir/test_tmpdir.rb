@@ -115,7 +115,7 @@ class Test_Tmpdir_Stdlib < Test::Unit::TestCase
     remove_env_tmpdirs
     proc do
       $SAFE = 1
-      assert_equal(Etc.systmpdir, Dir.tmpdir)
+      assert_equal(File.expand_path(Etc.systmpdir), Dir.tmpdir)
     end.call
   end
 
