@@ -19,7 +19,7 @@ class TC_Rational_Integer_Stdlib < Test::Unit::TestCase
    end
 
    def test_gcd_expected_errors
-      assert_raises(NoMethodError){ @int1.gcd("bogus") }
+      assert_raises(TypeError){ @int1.gcd("bogus") }
       assert_raises(ArgumentError){ @int1.gcd }
    end
 
@@ -31,7 +31,7 @@ class TC_Rational_Integer_Stdlib < Test::Unit::TestCase
 
    def test_gcd2_expected_errors
       assert_raises(NoMethodError){ @int1.gcd2("bogus") }
-      assert_raises(ArgumentError){ @int1.gcd2 }
+      assert_raises(NoMethodError){ @int1.gcd2 }
    end
 
    def test_lcm
@@ -41,7 +41,7 @@ class TC_Rational_Integer_Stdlib < Test::Unit::TestCase
    end
 
    def test_lcm_expected_errors
-      assert_raises(NoMethodError){ @int1.lcm("bogus") }
+      assert_raises(TypeError){ @int1.lcm("bogus") }
       assert_raises(ArgumentError){ @int1.lcm }
    end
 
@@ -52,7 +52,7 @@ class TC_Rational_Integer_Stdlib < Test::Unit::TestCase
    end
 
    def test_gcdlcm_expected_errors
-      assert_raises(NoMethodError){ @int1.gcdlcm("bogus") }
+      assert_raises(TypeError){ @int1.gcdlcm("bogus") }
       assert_raises(ArgumentError){ @int1.gcdlcm }
    end
 
