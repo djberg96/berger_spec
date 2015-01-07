@@ -15,10 +15,11 @@ require 'etc'
 
 class Test_Stdlib_Etc < Test::Unit::TestCase
   WINDOWS = File::ALT_SEPARATOR
+  DARWIN  = RbConfig::CONFIG['host_os'] =~ /darwin|osx/i
 
   def setup
     @login = `whoami`.chomp
-    @name  = RbConfig::CONFIG['host_os'] =~ /darwin|osx/i ? 'mailman' : @login
+    @name  = DARWIN ? '_mailman' : @login
 
     unless File::ALT_SEPARATOR
       @group = IO.readlines('/etc/group').grep(/sys:/i).first.chomp.split(':')
@@ -30,11 +31,22 @@ class Test_Stdlib_Etc < Test::Unit::TestCase
       @user.delete_if{ |e| e == "" || e == "*" }
 
       @group_name = @group[0]
-      @group_id   = @group[2].to_i
-      @group_mem  = @group[3]
+
+      if DARWIN
+        @group_id  = @group[1].to_i
+        @group_mem = @group[2]
+      else
+        @group_id  = @group[2].to_i
+        @group_mem = @group[3]
+      end
 
       @user_name = @user[0]
-      @user_id   = @user[2].to_i
+
+      if DARWIN
+        @user_id = @user[1].to_i
+      else
+        @user_id = @user[2].to_i
+      end
     end
 
     @pwent  = nil
