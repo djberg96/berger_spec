@@ -30,11 +30,11 @@ class Test_Stdlib_Etc < Test::Unit::TestCase
       @user.delete_if{ |e| e == "" || e == "*" }
 
       @group_name = @group[0]
-      @group_id   = @group[1].to_i
-      @group_mem  = @group[2]
+      @group_id   = @group[2].to_i
+      @group_mem  = @group[3]
 
       @user_name = @user[0]
-      @user_id   = @user[1].to_i
+      @user_id   = @user[2].to_i
     end
 
     @pwent  = nil
@@ -91,22 +91,38 @@ class Test_Stdlib_Etc < Test::Unit::TestCase
     assert_kind_of(Integer, @grent.gid)
     assert_kind_of(Array, @grent.mem)
   end
+
+  test "getgrgid basic functionality" do
+    assert_respond_to(Etc, :getgrgid)
+    assert_nothing_raised{ Etc.getgrgid(@group_id) }
+  end
+
+  test "getgrgid returns a Group struct" do
+    assert_kind_of(Struct::Group, Etc.getgrgid(@group_id))
+  end
+
+  test "getgrgid returns the expected struct values" do
+    @grent = Etc.getgrgid(@group_id)
+    assert_equal(@group_name, @grent.name)
+    assert_equal(@group_id, @grent.gid)
+  end
+
+  test "getgrnam basic functionality" do
+    assert_respond_to(Etc, :getgrnam)
+    assert_nothing_raised{ Etc.getgrnam('sys') }
+  end
+
+  test "getgrnam returns a Group struct" do
+    assert_kind_of(Struct::Group, Etc.getgrnam('sys'))
+  end
+
+  test "getgrnam returns the expected struct values" do
+    @grent = Etc.getgrnam('sys')
+    assert_equal(@group_name, @grent.name)
+    assert_equal(@group_id, @grent.gid)
+  end
+
 =begin
-
-   # Buggy
-   def test_getgrgid
-      msg = '-Known issue on some platforms-'
-      assert_nothing_raised{ @grent = Etc.getgrgid(@group_id) }
-      assert_equal(@group_name, @grent.name, msg)
-      assert_equal(@group_id, @grent.gid, msg)
-   end
-
-   def test_getgrnam
-      assert_nothing_raised{ @grent = Etc.getgrnam('sys') }
-      assert_equal(@group_name, @grent.name)
-      assert_equal(@group_id, @grent.gid)
-   end
-
    def test_getlogin
       assert_respond_to(Etc, :getlogin)
       assert_nothing_raised{ Etc.getlogin }
