@@ -37,7 +37,7 @@ class Test_Tmpdir_Stdlib < Test::Unit::TestCase
     @env_temp = ENV['TEMP']
     @env_userprofile = ENV['USERPROFILE']
 
-    Dir.mkdir(@dtmp)
+    Dir.mkdir(@dtmp) unless File.exist?(@dtmp)
   end
 
   test "tmpdir basic functionality" do
@@ -55,7 +55,7 @@ class Test_Tmpdir_Stdlib < Test::Unit::TestCase
   end
 
   test "tmpdir returns the expected result" do
-    assert_equal(@tmp, Dir.tmpdir)
+    assert_equal(File.expand_path(@tmp), Dir.tmpdir)
   end
 
   test "tmpdir uses ENV['TMPDIR'] as it's first check by default" do
