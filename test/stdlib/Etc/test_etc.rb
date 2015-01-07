@@ -66,7 +66,7 @@ class Test_Stdlib_Etc < Test::Unit::TestCase
     assert_nothing_raised{ Etc.getgrent }
   end
 
-  test "getgrent returns a single group struct" do
+  test "getgrent returns a single Group struct" do
     omit_if(WINDOWS)
     assert_kind_of(Struct::Group, Etc.getgrent)
   end
@@ -122,120 +122,177 @@ class Test_Stdlib_Etc < Test::Unit::TestCase
     assert_equal(@group_id, @grent.gid)
   end
 
-=begin
-   def test_getlogin
-      assert_respond_to(Etc, :getlogin)
-      assert_nothing_raised{ Etc.getlogin }
-      assert_equal(@login, Etc.getlogin)
-      assert_kind_of(String, Etc.getlogin)
-   end
+  test "getlogin basic functionality" do
+    assert_respond_to(Etc, :getlogin)
+    assert_nothing_raised{ Etc.getlogin }
+  end
 
-   def test_getpwent
-      assert_respond_to(Etc, :getpwent)
-      assert_nothing_raised{ Etc.getpwent }
-      assert_kind_of(Struct::Passwd, Etc.getpwent)
-   end
+  test "getlogin returns expected value" do
+    assert_kind_of(String, Etc.getlogin)
+    assert_equal(@login, Etc.getlogin)
+  end
 
-   def test_getpwnam
-      assert_respond_to(Etc, :getpwnam)
-      assert_nothing_raised{ @pwent = Etc.getpwnam(@login) }
-      assert_kind_of(Struct::Passwd, Etc.getpwnam(@login))
-      assert_equal(@login, @pwent.name)
-   end
+  test "getpwent basic functionality" do
+    assert_respond_to(Etc, :getpwent)
+    assert_nothing_raised{ Etc.getpwent }
+  end
 
-   def test_getpwuid
-      assert_respond_to(Etc, :getpwuid)
-      assert_nothing_raised{ @pwent = Etc.getpwuid(@user_id) }
-      assert_kind_of(Struct::Passwd, Etc.getpwuid(@user_id))
-      assert_equal(@name, @pwent.name)
-   end
+  test "getpwent returns a single Passwd struct" do
+    assert_kind_of(Struct::Passwd, Etc.getpwent)
+  end
 
-   # Without a block the pointer increments one entry on each call, so the
-   # first and subsequent reads should never be identical.
-   #
-   def test_group_no_block
-      assert_respond_to(Etc, :group)
-      assert_nothing_raised{ @grent = Etc.group }
-      assert_kind_of(Struct::Group, @grent)
-      assert_nothing_raised{ @grent2 = Etc.group }
-      assert(@grent.name != @grent2.name)
-   end
+  test "Passwd struct returned by getpwent has expected members" do
+    @pwent = Etc.getpwent
+    assert_respond_to(@pwent, :name)
+    assert_respond_to(@pwent, :uid)
+    assert_respond_to(@pwent, :gid)
+    assert_respond_to(@pwent, :dir)
+    assert_respond_to(@pwent, :shell)
+  end
 
-   # The block form resets the pointer, so the first read should be identical
-   # each time we call it in block form.
-   #
-   def test_group_with_block
-      assert_respond_to(Etc, :group)
-      assert_nothing_raised{ Etc.group{ |g| @grent = g; break } }
-      assert_kind_of(Struct::Group, @grent)
-      assert_nothing_raised{ Etc.group{ |g| @grent2 = g; break } }
-      assert(@grent.name == @grent2.name)
-   end
+  test "Passwd struct are of the expected type" do
+    @pwent = Etc.getpwent
+    assert_kind_of(String, @pwent.name)
+    assert_kind_of(Integer, @pwent.uid)
+    assert_kind_of(Integer, @pwent.gid)
+    assert_kind_of(String, @pwent.dir)
+    assert_kind_of(String, @pwent.shell)
+  end
 
-   # The same comment for test_group_no_block applies here.
-   #
-   def test_passwd_no_block
-      assert_respond_to(Etc, :passwd)
-      assert_nothing_raised{ @pwent = Etc.passwd }
-      assert_kind_of(Struct::Passwd, @pwent)
-      assert_nothing_raised{ @pwent2 = Etc.group }
-      assert(@pwent.name != @pwent2.name)
-   end
+  test "getpwnam basic functionality" do
+    assert_respond_to(Etc, :getpwnam)
+    assert_nothing_raised{ Etc.getpwnam(@login) }
+  end
 
-   # The same comment for test_group_with_block applies here.
-   #
-   def test_passwd_with_block
-      assert_respond_to(Etc, :passwd)
-      assert_nothing_raised{ Etc.passwd{ |u| @pwent = u; break } }
-      assert_kind_of(Struct::Passwd, @pwent)
-      assert_nothing_raised{ Etc.group{ |u| @pwent2 = u; break } }
-      assert(@pwent.name == @pwent2.name)
-   end
+  test "getpwnam returns Passwd struct" do
+    assert_kind_of(Struct::Passwd, Etc.getpwnam(@login))
+  end
 
-   def test_setgrent
-      assert_respond_to(Etc, :setgrent)
-      assert_nothing_raised{ Etc.setgrent }
-      assert_nil(Etc.setgrent)
-   end
+  test "getpwnam returns expected Passwd struct" do
+    @pwent = Etc.getpwnam(@login)
+    assert_equal(@login, @pwent.name)
+  end
 
-   def test_setpwent
-      assert_respond_to(Etc, :setpwent)
-      assert_nothing_raised{ Etc.setpwent }
-   end
+  test "getpwuid basic functionality" do
+    assert_respond_to(Etc, :getpwuid)
+    assert_nothing_raised{ Etc.getpwuid(@user_id) }
+  end
 
-   # Test the struct members I'm fairly certain exist on all flavors of Unix.
-   #
-   def test_struct_passwd_basic
-      assert_nothing_raised{ @pwent = Etc.getpwent }
-      assert_respond_to(@pwent, :name)
-      assert_respond_to(@pwent, :uid)
-      assert_respond_to(@pwent, :gid)
-      assert_respond_to(@pwent, :dir)
-      assert_respond_to(@pwent, :shell)
-   end
+  test "getpwuid returns a Passwd struct" do
+    assert_kind_of(Struct::Passwd, Etc.getpwuid(@user_id))
+  end
 
-   # Because we don't know the exact values for any given passwd entry,
-   # we can only check the basic types of data returned.
-   #
-   def test_struct_passwd
-      assert_nothing_raised{ @pwent = Etc.getpwent }
-      assert_kind_of(String, @pwent.name)
-      assert_kind_of(Integer, @pwent.uid)
-      assert_kind_of(Integer, @pwent.gid)
-      assert_kind_of(String, @pwent.dir)
-      assert_kind_of(String, @pwent.shell)
-   end
+  test "getpwuid returns expected Passwd struct" do
+    @pwent = Etc.getpwuid(@user_id)
+    assert_equal(@name, @pwent.name)
+  end
 
-=end
+  test "group method basic functionality" do
+    assert_respond_to(Etc, :group)
+    assert_nothing_raised{ Etc.group }
+  end
 
-   def teardown
-      @login  = nil
-      @name   = nil
-      @pwent  = nil
-      @pwent2 = nil
-      @grent  = nil
-      @grent2 = nil
-      @group  = nil
-      @user  = nil
-   end
+  test "group method returns a Group struct" do
+    assert_kind_of(Struct::Group, Etc.group)
+  end
+
+  test "group method without a block reads one entry at a time" do
+    assert_not_equal(Etc.group.name, Etc.group.name)
+  end
+
+  test "group method with a block resets back to the first entry" do
+    assert_nothing_raised{ Etc.group{ |g| @grent  = g; break } }
+    assert_nothing_raised{ Etc.group{ |g| @grent2 = g; break } }
+    assert_equal(@grent, @grent2)
+  end
+
+  test "group method does not accept any arguments" do
+    assert_raise(ArgumentError){ Etc.group(1) }
+  end
+
+  test "group returns nil if already at end of the database" do
+    assert_nothing_raised{ 1000.times{ Etc.group } }
+    assert_nil(Etc.group)
+    Etc.setgrent
+  end
+
+  test "passwd basic functionality" do
+    assert_respond_to(Etc, :passwd)
+    assert_nothing_raised{ Etc.passwd }
+  end
+
+  test "passwd returns a Passwd struct" do
+    assert_kind_of(Struct::Passwd, Etc.passwd)
+  end
+
+  test "passwd method without a block reads one entry at a time" do
+    assert_true(Etc.passwd.name != Etc.passwd.name)
+  end
+
+  test "passwd method with a block resets back to the first entry" do
+    assert_nothing_raised{ Etc.passwd{ |pw| @pwent  = pw; break } }
+    assert_nothing_raised{ Etc.passwd{ |pw| @pwent2 = pw; break } }
+    assert_equal(@pwent, @pwent2)
+  end
+
+  test "passwd method does not accept any arguments" do
+    assert_raise(ArgumentError){ Etc.passwd(1) }
+  end
+
+  test "passwd returns nil if already at end of the database" do
+    assert_nothing_raised{ 1000.times{ Etc.passwd } }
+    assert_nil(Etc.passwd)
+    Etc.setpwent
+  end
+
+  test "setgrent basic functionality" do
+    assert_respond_to(Etc, :setgrent)
+    assert_nothing_raised{ Etc.setgrent }
+  end
+
+  test "setgrent returns nil" do
+    assert_nil(Etc.setgrent)
+  end
+
+  test "setgrent rewinds to the start of the database" do
+    @grent = Etc.group
+    Etc.setgrent
+    @grent2 = Etc.group
+    assert_equal(@grent, @grent2)
+  end
+
+  test "setgrent does not accept any arguments" do
+    assert_raise(ArgumentError){ Etc.setgrent(1) }
+  end
+
+  test "setpwent basic functionality" do
+    assert_respond_to(Etc, :setpwent)
+    assert_nothing_raised{ Etc.setpwent }
+  end
+
+  test "setpwent returns nil" do
+    assert_nil(Etc.setpwent)
+  end
+
+  test "setpwent rewinds to the start of the database" do
+    @pwent = Etc.passwd
+    Etc.setpwent
+    @pwent2 = Etc.passwd
+    assert_equal(@pwent, @pwent2)
+  end
+
+  test "setpwent does not take any arguments" do
+    assert_raise(ArgumentError){ Etc.setpwent(1) }
+  end
+
+  def teardown
+    @login  = nil
+    @name   = nil
+    @pwent  = nil
+    @pwent2 = nil
+    @grent  = nil
+    @grent2 = nil
+    @group  = nil
+    @user  = nil
+  end
 end
