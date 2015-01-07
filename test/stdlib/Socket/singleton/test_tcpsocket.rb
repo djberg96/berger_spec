@@ -1,12 +1,12 @@
 ######################################################################
-# tc_tcpsocket.rb
+# test_tcpsocket.rb
 #
 # Test case for the TCPSocket class.
 ######################################################################
 require 'test/unit'
 require 'socket'
 
-class TC_TCPSocket_Stdlib < Test::Unit::TestCase
+class Test_Stdlib_TCPSocket < Test::Unit::TestCase
    def setup
       @socket = nil
    end
