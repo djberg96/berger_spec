@@ -548,7 +548,7 @@ namespace "test" do
     Rake::TestTask.new('socket') do |t|
       t.libs << 'lib'
       t.warning = true
-      t.test_files = FileList['test/stdlib/Socket/*.rb']
+      t.test_files = FileList['test/stdlib/Socket/**/*.rb']
     end
 
     desc "Run the test suite for the tmpdir library"
