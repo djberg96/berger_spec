@@ -78,6 +78,43 @@ class Test_Stdlib_OStruct < Test::Unit::TestCase
     assert_equal([[:foo,1],[:bar,2]], @ostruct1.each_pair.to_a)
   end
 
+  test "eql? method basic functionality" do
+    assert_respond_to(@ostruct1, :eql?)
+    assert_boolean(@ostruct1.eql?(@ostruct2))
+  end
+
+  test "eql? method returns expected results" do
+    assert_true(@ostruct1.eql?(@ostruct2))
+    assert_false(@ostruct1.eql?([]))
+    assert_false(@ostruct1.eql?({}))
+  end
+
+  test "hash method basic functionality" do
+    assert_respond_to(@ostruct1, :hash)
+    assert_nothing_raised{ @ostruct1.hash }
+  end
+
+  test "hash returns a hashed number" do
+    assert_kind_of(Fixnum, @ostruct1.hash)
+  end
+
+  test "openstruct implements custom inspect method" do
+    @ostruct1.foo = 1
+    @ostruct1.bar = 2
+    assert_equal("#<OpenStruct foo=1, bar=2>", @ostruct1.inspect)
+  end
+
+  test "to_h method basic functionality" do
+    assert_respond_to(@ostruct1, :to_h)
+    assert_nothing_raised{ @ostruct1.to_h }
+    assert_kind_of(Hash, @ostruct1.to_h)
+  end
+
+  test "to_h returns expected value" do
+    @ostruct1.foo = 1; @ostruct1.bar = 2
+    assert_equal({:foo => 1, :bar => 2}, @ostruct1.to_h)
+  end
+
   test "openstruct equality check returns expected value" do
     assert_true(@ostruct1 == @ostruct2)
 
