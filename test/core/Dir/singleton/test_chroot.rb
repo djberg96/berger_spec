@@ -1,9 +1,9 @@
 ######################################################################
 # test_chroot.rb
 #
-# Test case for the Dir.chroot class method.  Note that many tests
-# are skipped on Windows and/or if the test suite is not being run
-# as root.
+# Test case for the Dir.chroot class method.  Note that all tests
+# are skipped on Windows. On Unix, some are skipped if the test suite
+# is not being run as root.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
@@ -16,6 +16,7 @@ class TC_Dir_Chroot_SingletonMethod < Test::Unit::TestCase
   end
 
   test "chroot basic functionality" do
+    omit_if(WINDOWS || JRUBY, "chroot test skipped on this platform")
     assert_respond_to(Dir, :chroot)
   end
 
