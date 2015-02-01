@@ -26,7 +26,7 @@ class TC_Dir_Mkdir_Class < Test::Unit::TestCase
 
   test "mkdir with a single argument creates the directory as expected" do
     Dir.mkdir(@dir1)
-    assert_true(File.exists?(@dir1))
+    assert_true(File.exist?(@dir1))
     assert_true(File.directory?(@dir1))
   end
 
@@ -38,7 +38,7 @@ class TC_Dir_Mkdir_Class < Test::Unit::TestCase
 
   test "mkdir accepts a mode as a second argument" do
     assert_nothing_raised{ Dir.mkdir(@dir2, 0777) }
-    assert_true(File.exists?(@dir2))
+    assert_true(File.exist?(@dir2))
     assert_true(File.directory?(@dir2))
   end
 
@@ -65,8 +65,8 @@ class TC_Dir_Mkdir_Class < Test::Unit::TestCase
   end
 
   def teardown
-    remove_dir(@dir1) if File.exists?(@dir1)
-    remove_dir(@dir2) if File.exists?(@dir2)
+    remove_dir(@dir1) if File.exist?(@dir1)
+    remove_dir(@dir2) if File.exist?(@dir2)
 
     @dir1 = nil
     @dir2 = nil
