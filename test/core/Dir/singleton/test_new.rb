@@ -38,6 +38,6 @@ class TC_Dir_New_SingletonMethod < Test::Unit::TestCase
   end
 
   def teardown
-    Dir.rmdir(@dir) if File.exists?(@dir)
+    Dir.rmdir(@dir) if File.exist?(@dir)
   end
 end

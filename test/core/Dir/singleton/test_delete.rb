@@ -49,7 +49,7 @@ class TC_Dir_Delete_SingletonMethod < Test::Unit::TestCase
   end
 
   def teardown
-    remove_dir(@new_dir) if File.exists?(@new_dir)
+    remove_dir(@new_dir) if File.exist?(@new_dir)
     @cur_dir = nil
     @new_dir = nil
   end
