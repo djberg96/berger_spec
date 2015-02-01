@@ -32,17 +32,16 @@ class TC_Dir_PosSet_InstanceMethod < Test::Unit::TestCase
     assert_equal(first, @dir.read)
   end
 
-  test "specifying a negative value after at least one read results in nil" do
-    @dir.read
-    assert_nothing_raised{ @dir.pos = -7 }
-    assert_nil(@dir.read)
+  test "specifying a negative number of any value resets the pointer to the beginning" do
+    10.times{ @dir.read }
+    assert_nothing_raised{ @dir.pos = -3 }
+    assert_equal('.', @dir.read)
   end
 
-  test "specifying a negative value prior to at least one read results in the first element" do
-    temp = Dir.new(Dir.pwd)
-    assert_nothing_raised{ @dir.pos = -7 }
-    assert_equal(temp.read, @dir.read)
-    temp.close
+  test "specifying a negative value that is out of bounds resets the pointer to the beginning" do
+    @dir.read
+    assert_nothing_raised{ @dir.pos = -100 }
+    assert_equal('.', @dir.read)
   end
 
   test "pos requires a numeric argument" do
