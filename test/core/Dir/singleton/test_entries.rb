@@ -11,6 +11,8 @@ class TC_Dir_Entries_SingletonMethod < Test::Unit::TestCase
 
   def setup
     @pwd = Dir.pwd
+    @enc = Encoding::UTF_16LE
+
     if WINDOWS
       @entries = `dir /A /B`.split("\n").push('.', '..')
     else
@@ -30,6 +32,15 @@ class TC_Dir_Entries_SingletonMethod < Test::Unit::TestCase
     assert_equal(@entries.sort, Dir.entries(@pwd).sort)
   end
 
+  test "entries accepts an optional encoding argument" do
+    assert_nothing_raised{ Dir.entries(@pwd, encoding: @enc) }
+  end
+
+  test "if an encoding argument is provided then all results are encoded" do
+    entries = Dir.entries(@pwd, encoding: @enc)
+    entries.each{ |e| assert_true(e.encoding == @enc) }
+  end
+
   test "entries requires one argument" do
     assert_raise(ArgumentError){ Dir.entries }
     assert_raise(ArgumentError){ Dir.entries(@pwd, @pwd) }
@@ -45,6 +56,7 @@ class TC_Dir_Entries_SingletonMethod < Test::Unit::TestCase
 
   def teardown
     @pwd     = nil
+    @enc     = nil
     @entries = nil
   end
 end
