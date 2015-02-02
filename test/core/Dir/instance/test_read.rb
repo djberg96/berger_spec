@@ -23,7 +23,7 @@ class TC_Dir_Read_InstanceMethod < Test::Unit::TestCase
   end
 
   test "read returns non nil values up to the end of the stream" do
-    Dir.entries(Dir.pwd).length.times{ @arr = @dir.read }
+    Dir.entries(Dir.pwd).length.times{ @arr << @dir.read }
     assert_true(@arr.all?{ |e| e.is_a?(String) })
   end
 
