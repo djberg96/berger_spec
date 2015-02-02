@@ -17,7 +17,9 @@ class TC_Dir_Foreach_SingletonMethod < Test::Unit::TestCase
       @entries.push('.') unless @entries.include?('.')
       @entries.push('..') unless @entries.include?('..')
     end
+
     @pwd = Dir.pwd
+    @enc = Encoding::UTF_16LE
   end
 
   test "foreach basic functionality" do
@@ -32,12 +34,22 @@ class TC_Dir_Foreach_SingletonMethod < Test::Unit::TestCase
   end
 
   test "foreach returns an enumerator if no block is provided" do
-    assert_kind_of(Enumerable::Enumerator, Dir.foreach(@pwd))
+    assert_kind_of(Enumerator, Dir.foreach)
+    assert_kind_of(Enumerator, Dir.foreach(@pwd))
   end
 
-  test "foreach requires one argument only" do
-    assert_raises(ArgumentError){ Dir.foreach }
-    assert_raises(ArgumentError){ Dir.foreach(@pwd, @pwd) }
+  test "foreach accepts an optional encoding argument" do
+    assert_nothing_raised{ Dir.foreach(@pwd, encoding: @enc) }
+  end
+
+  test "if an encoding is specified then the results are encoded" do
+    enum = Dir.foreach(@pwd, encoding: @enc)
+    enum.each{ |v| assert_true(v.encoding == @enc) }
+  end
+
+  test "foreach accepts a maximum of two arguments" do
+    enum = Dir.foreach(@pwd, true, false, nil)
+    assert_raises(ArgumentError){ enum.each{} }
   end
 
   test "foreach requires a string argument" do
@@ -47,6 +59,7 @@ class TC_Dir_Foreach_SingletonMethod < Test::Unit::TestCase
 
   def teardown
     @pwd     = nil
+    @enc     = nil
     @entries = nil
   end
 end
