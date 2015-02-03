@@ -10,6 +10,7 @@ class TC_Dir_New_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
+    @enc = Encoding::UTF_16LE
     @dir = base_file(__FILE__, "test")
     Dir.mkdir(@dir)
   end
@@ -23,7 +24,13 @@ class TC_Dir_New_SingletonMethod < Test::Unit::TestCase
     assert_kind_of(Dir, Dir.new(@dir))
   end
 
-  test "new requires one argument only" do
+  test "new allows optional encoding argument" do
+    dir = nil
+    assert_nothing_raised{ dir = Dir.new(@dir, encoding: @enc) }
+    dir.entries.each{ |e| assert_equal(@enc, e.encoding) }
+  end
+
+  test "new requires one argument" do
     assert_raise(ArgumentError){ Dir.new }
     assert_raise(ArgumentError){ Dir.new(@dir, @dir) }
   end
@@ -39,5 +46,7 @@ class TC_Dir_New_SingletonMethod < Test::Unit::TestCase
 
   def teardown
     Dir.rmdir(@dir) if File.exist?(@dir)
+    @enc = nil
+    @dir = nil
   end
 end
