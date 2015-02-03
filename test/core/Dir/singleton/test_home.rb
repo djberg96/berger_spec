@@ -8,7 +8,7 @@ require 'etc'
 require 'test/helper'
 require 'test-unit'
 
-class TC_Dir_Getwd_SingletonMethod < Test::Unit::TestCase
+class TC_Dir_Home_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
