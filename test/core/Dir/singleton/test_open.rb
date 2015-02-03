@@ -9,6 +9,7 @@ require 'test/unit'
 class TC_Dir_Open_SingletonMethod < Test::Unit::TestCase
   def setup
     @dir = 'test'
+    @enc = Encoding::UTF_16LE
     @pwd = Dir.pwd
     @handle = nil
   end
@@ -29,6 +30,11 @@ class TC_Dir_Open_SingletonMethod < Test::Unit::TestCase
     Dir.open(@pwd){ |dir| assert_kind_of(Dir, dir) }
   end
 
+  test "open allows an optional encoding argument" do
+    assert_nothing_raised{ Dir.open(@pwd, encoding: @enc) }
+    assert_nothing_raised{ Dir.open(@pwd, encoding: @enc){} }
+  end
+
   test "open returns a Dir object if no block is provided" do
     assert_nothing_raised{ @handle = Dir.open(@pwd) }
     assert_kind_of(Dir, @handle)
@@ -39,7 +45,7 @@ class TC_Dir_Open_SingletonMethod < Test::Unit::TestCase
     assert_raises(TypeError){ Dir.open([]) }
   end
 
-  test "open requires one argument only" do
+  test "open requires one argument" do
     assert_raises(ArgumentError){ Dir.open }
     assert_raises(ArgumentError){ Dir.open(@pwd, @pwd) }
   end
@@ -49,5 +55,6 @@ class TC_Dir_Open_SingletonMethod < Test::Unit::TestCase
 
     @dir = nil
     @pwd = nil
+    @enc = nil
   end
 end
