@@ -235,12 +235,14 @@ module Test
     #
     def get_home
       home = ENV['HOME'] || ENV['USERPROFILE']
+
       if WINDOWS
-        home ||= "C:\\Documents and Settings\\" + get_user
+        home ||= "C:/Users/" + get_user
       else
         home ||= Etc.getpwuid(Process.uid).dir
       end
-      home
+
+      home.tr("\\", "/")
     end
 
     # Returns the current umask of the process.
