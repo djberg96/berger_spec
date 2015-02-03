@@ -29,7 +29,6 @@ class TC_Dir_Tell_InstanceMethod < Test::Unit::TestCase
     assert_true(@dir.tell > initial)
   end
 
-  # Synonym (bug) in MRI.
   test "pos is an alias for tell" do
     assert_alias_method(@dir, :tell, :pos)
   end
