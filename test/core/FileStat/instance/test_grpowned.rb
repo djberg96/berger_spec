@@ -46,7 +46,7 @@ class TC_FileStat_GrpOwned_InstanceMethod < Test::Unit::TestCase
   end
 
   def teardown
-    File.delete(@file) if File.exists?(@file)
+    File.delete(@file) if File.exist?(@file)
 
     @stat = nil
     @bool = nil
