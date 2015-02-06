@@ -52,14 +52,15 @@ class TC_Array_Transpose_InstanceMethod < Test::Unit::TestCase
   end
 
   test "transpose handles nil, false and true elements properly" do
-    assert_equal([[nil, false], [nil, true]], [[nil, nil], [false, true]].transpose) 
+    assert_equal([[nil, false], [nil, true]], [[nil, nil], [false, true]].transpose)
   end
 
   test "transpose can handle recursive arrays" do
     array = []
     array << array << array
+    expected = "[[[[...], [...]], [[...], [...]]], [[[...], [...]], [[...], [...]]]]"
     assert_nothing_raised{ array.transpose }
-    assert_equal("[...][...][...][...][...][...][...][...]", array.transpose.to_s)
+    assert_equal(expected, array.transpose.to_s)
   end
 
   test "transpose raises an error if it does not contain nested arrays" do
