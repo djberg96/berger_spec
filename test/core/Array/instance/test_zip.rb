@@ -86,10 +86,13 @@ class Test_Array_Zip_InstanceMethod < Test::Unit::TestCase
     assert_equal([[nil,nil],[nil,nil]], [nil,nil].zip([nil,nil]))
   end
 
+  test "zip handles hash argument as expected" do
+    assert_equal([[1, [1, 2]], [2, [3, 4]], [3, nil]], @arr_int.zip(Hash[1,2,3,4]))
+  end
+
   test "passing the wrong type of argument raises an error" do
     assert_raise(TypeError){ @arr_int.zip(1) }
     assert_raise(TypeError){ @arr_int.zip(nil) }
-    assert_raise(TypeError){ @arr_int.zip(Hash[1,2,3,4]) }
   end
 
   def teardown
