@@ -90,6 +90,17 @@ namespace "test" do
       t.warning = true
     end
 
+    namespace "comparable" do
+      Dir['test/core/Comparable/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
+    end
+
     desc "Runs the test suite for the Dir class"
     Rake::TestTask.new('dir') do |t|
       t.libs << 'lib'
