@@ -111,10 +111,9 @@ class Test_Array_Aref_InstanceMethod < Test::Unit::TestCase
     assert_raise_message("no implicit conversion of Symbol into Integer"){ @basic['1'.to_sym] }
   end
 
-  # SAPPHIRE: Make slice and [] true aliases
   test "slice is a synonym for aref" do
     assert_respond_to(@basic, :slice)
-    # assert_true(@basic.method(:slice) == @basic.method(:[]))
+    assert_alias_method(@basic, :slice, :[])
   end
 
   test "aref requires at least one argument" do
@@ -125,7 +124,6 @@ class Test_Array_Aref_InstanceMethod < Test::Unit::TestCase
     assert_raise(ArgumentError){ @basic[1, 1, 1] }
   end
 
-  # SAPPHIRE: Raise an error if the second argument is negative
   test "a negative length returns nil in the second form" do
     assert_nil(@basic[1, -1])
     assert_nil(@basic[-2, -1])
