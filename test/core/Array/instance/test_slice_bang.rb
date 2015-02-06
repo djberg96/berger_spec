@@ -65,7 +65,7 @@ class Test_Array_SliceBang_InstanceMethod < Test::Unit::TestCase
   test "slice bang with a start and length works as expected" do
     assert_equal(['foo', /^$/], [1, 'foo', /^$/].slice!(1, 2))
     assert_equal([1, 'foo'], [1, 'foo', /^$/].slice!(0, 2))
-    assert_equal([1, 'foo'], [1, 'foo', /^$/].slice!(-3, 2))     
+    assert_equal([1, 'foo'], [1, 'foo', /^$/].slice!(-3, 2))
   end
 
   test "slice bang with a start out of range returns nil" do
@@ -80,7 +80,7 @@ class Test_Array_SliceBang_InstanceMethod < Test::Unit::TestCase
     assert_equal(['foo', /^$/], @multi.slice!(1.5, 2.5))
     assert_equal([1], @multi.slice!(0.3, 2.1))
     assert_equal([], @multi.slice!(0.3, 2.1))
-    assert_nil(@multi.slice!(-3.9, 2.0))     
+    assert_nil(@multi.slice!(-3.9, 2.0))
   end
 
   test "slice bang with a range works as expected" do
@@ -112,25 +112,24 @@ class Test_Array_SliceBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "error message if a second argument is passed when a range is used" do
-    msg = "can't convert Range into Integer"
+    msg = "no implicit conversion of Range into Integer"
     assert_raise_message(msg){ [1, 2, 3].slice!(1..3, 1) }
   end
 
-  # SAPPHIRE: Raise a TypeError. Ruby 1.9.x does, too.
-  test "slice bang returns nil if a symbol is provided" do
-    assert_nil([1, 2, 3].slice!('1'.to_sym))
-    assert_nil([1, 2, 3].slice!('1'.to_sym, 2))
-    assert_nil([1, 2, 3].slice!('1'.to_sym, '2'.to_sym))
+  test "slice bang raises an error is a symbol is used" do
+    assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym) }
+    assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym, 2) }
+    assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym, '2'.to_sym) }
   end
 
   test "slice bang raises an error if second argument is an invalid type" do
     assert_raise(TypeError){ [1, 2, 3].slice!('1'.to_sym, '2') }
   end
 
-  # SAPPHIRE: Have an error message
-  #test "error message if a symbol is used as an index" do
-  #  assert_raise_message("symbol as array index"){ [1, 2, 3].slice!('1'.to_sym) }
-  #end
+  test "error message if a symbol is used as an index" do
+    msg = "no implicit conversion of Symbol into Integer"
+    assert_raise_message(msg){ [1, 2, 3].slice!('1'.to_sym) }
+  end
 
   test "slice bang requires at least one argument" do
     assert_raise(ArgumentError){ [1, 2, 3].slice! }
@@ -140,18 +139,12 @@ class Test_Array_SliceBang_InstanceMethod < Test::Unit::TestCase
     assert_raise(ArgumentError){ [1, 2, 3].slice!(1, 1, 1) }
   end
 
-  # SAPPHIRE: Raise an IndexError
   test "a negative length returns nil in the second form" do
     assert_nil(@basic.slice!(1, -1))
     assert_nil(@basic.slice!(-2, -1))
     assert_nil(@basic.slice!(-1, -2))
   end
 
-  # SAPPHIRE: Have an error message
-  #test "error message if a negative length is used in the second form" do
-  #  assert_raise_message("negative length (-1)"){ @basic.slice!(1, -1) }
-  #end
-   
   def teardown
     @empty = nil
     @basic = nil
