@@ -48,7 +48,7 @@ class Test_Array_FlattenBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "flatten bang returns expected result when an argument is provided" do
-    assert_equal([1,[2,[3,4]]], [1,[2,[3,4]]].flatten!(0))
+    assert_nil([1,[2,[3,4]]].flatten!(0))
     assert_equal([1,2,[3,4]], [1,[2,[3,4]]].flatten!(1))
     assert_equal([1,2,3,4], [1,[2,[3,4]]].flatten!(2))
     assert_equal([1,2,3,4], [1,[2,[3,4]]].flatten!(9))
