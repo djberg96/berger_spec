@@ -45,7 +45,7 @@ class Test_Array_IsEql_InstanceMethod < Test::Unit::TestCase
     recursive1 = @array1 << @array1
     recursive2 = @array2 << @array2
     assert_true(recursive1.eql?(recursive1))
-    assert_false(recursive1.eql?(recursive2))
+    assert_true(recursive1.eql?(recursive2))
   end
 
   test "is eql raises an error if the wrong number of arguments are passed" do
