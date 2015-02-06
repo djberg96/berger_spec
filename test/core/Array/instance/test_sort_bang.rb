@@ -60,9 +60,14 @@ class Test_Array_SortBang_InstanceMethod < Test::Unit::TestCase
     assert_equal([custom2, custom1], array.sort!)
   end
 
-  test "sort on objects that do no implement comparison operator raises an error" do
-    assert_raise(NoMethodError, ArgumentError){ [nil, nil].sort! }
+  test "sort with only explicit nils works as expected" do
+    assert_nothing_raised{ [nil, nil].sort! }
+  end
+
+  test "sort on objects that cannot be compared raises an error" do
     assert_raise(NoMethodError, ArgumentError){ [1, false].sort! }
+    assert_raise(NoMethodError, ArgumentError){ [1, nil].sort! }
+    assert_raise(NoMethodError, ArgumentError){ [1, 'a'].sort! }
   end
 
   test "passing the wrong number of arguments raises an error" do
