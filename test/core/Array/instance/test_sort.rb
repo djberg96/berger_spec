@@ -60,8 +60,12 @@ class Test_Array_Sort_InstanceMethod < Test::Unit::TestCase
     assert_equal([custom2, custom1], array.sort)
   end
 
+  test "sort with only explicit nils works as expected" do
+    assert_nothing_raised{ [nil, nil].sort! }
+    assert_equal([nil, nil], [nil, nil].sort)
+  end
+
   test "sort on objects that do no implement comparison operator raises an error" do
-    assert_raise(NoMethodError, ArgumentError){ [nil, nil].sort }
     assert_raise(NoMethodError, ArgumentError){ [1, false].sort }
   end
 

@@ -62,6 +62,7 @@ class Test_Array_SortBang_InstanceMethod < Test::Unit::TestCase
 
   test "sort with only explicit nils works as expected" do
     assert_nothing_raised{ [nil, nil].sort! }
+    assert_equal([nil, nil], [nil, nil].sort)
   end
 
   test "sort on objects that cannot be compared raises an error" do
