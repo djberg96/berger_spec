@@ -32,7 +32,7 @@ class TC_Dir_Home_SingletonMethod < Test::Unit::TestCase
 
   test "home with argument returns the expected value" do
     omit_if(WINDOWS)
-    assert_equal("/", Dir.home('root'))
+    assert_equal(get_root_path, Dir.home('root'))
   end
 
   test "home with argument raises an error if account does not exist" do
