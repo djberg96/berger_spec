@@ -48,18 +48,6 @@ class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
     assert_equal([1, 2, 3], @array1)
   end
 
-  # Array#replace is illegal in $SAFE level 4 or higher
-  def test_replace_in_safe_mode
-    omit_if(JRUBY, "safe level test skipped on JRuby")
-
-    assert_nothing_raised{
-      proc do
-        $SAFE = 3
-        @array1.replace(['a', 'b'])
-      end.call
-    }
-  end
-
   test "an error is raised if the wrong number of arguments are passed" do
     assert_raise(ArgumentError){ @array1.replace }
     assert_raise(ArgumentError){ @array1.replace("x","y") }
