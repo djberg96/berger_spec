@@ -14,19 +14,19 @@ class TC_Dir_Fileno_InstanceMethod < Test::Unit::TestCase
   end
 
   test "fileno basic functionality" do
-    omit_if(WINDOWS)
+    omit_unless(LINUX)
     assert_respond_to(@dir, :fileno)
     assert_nothing_raised{ @dir.fileno }
     assert_kind_of(Numeric, @dir.fileno)
   end
 
   test "fileno returns expected results" do
-    omit_if(WINDOWS)
+    omit_unless(LINUX)
     assert_true(@dir.fileno > 0)
   end
 
   test "fileno does not accept any parameters" do
-    omit_if(WINDOWS)
+    omit_unless(LINUX)
     assert_raises(ArgumentError){ @dir.fileno('foo') }
   end
 
