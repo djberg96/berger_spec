@@ -46,7 +46,7 @@ class Test_Array_ReverseEach_InstanceMethod < Test::Unit::TestCase
   end
 
   test "reverse_each without a block returns an Enumerator object" do
-    assert_kind_of(Enumerable::Enumerator, @array.reverse_each)
+    assert_kind_of(Enumerator, @array.reverse_each)
   end
 
   test "reverse_each with the wrong number of arguments raises an error" do
