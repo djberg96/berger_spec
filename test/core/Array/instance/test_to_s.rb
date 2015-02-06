@@ -21,15 +21,15 @@ class Test_Array_InspectMethod_InstanceMethod < Test::Unit::TestCase
   end
 
   test "to_s on a simple array works as expected" do
-    assert_equal('1a2', @normal.to_s)
+    assert_equal('[1, "a", 2]', @normal.to_s)
   end
 
-  test "to_s on an empty array returns an empty string" do
-    assert_equal('', @empty.to_s)
+  test "to_s on an empty array returns expected value" do
+    assert_equal('[]', @empty.to_s)
   end
 
   test "to_s on a recursive array works as expected" do
-    assert_equal('1a2[...]', @recursive.to_s)
+    assert_equal('[1, "a", 2, [...]]', @recursive.to_s)
   end
 
   test "passing the wrong number of arguments raises an error" do
