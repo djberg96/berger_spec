@@ -85,29 +85,17 @@ class Test_Array_Fill_InstanceMethod < Test::Unit::TestCase
   end
 
   test "error message raised if both a range and a length are passed as arguments" do
-    msg = "can't convert Range into Integer"
+    msg = "no implicit conversion of Range into Integer"
     assert_raise_message(msg){ @array.fill('x', 0..1, 1) }
   end
 
-  # SAPPHIRE: Raise an error
   test "fill is a no-op if the start value exceeds the array length" do
     assert_equal(@array, @array.fill('x', 99))
   end
 
-  # SAPPHIRE: Have an error message
-  #test "error messge raised if the start value exceeds the array length" do
-  #  assert_raise("starting point exceeds array size"){ @array.fill('x', 99) }
-  #end
-
-  # SAPPHIRE: Raise en error
   test "passing fill a negative length is effectively a no-op" do
     assert_equal(@array, @array.fill('x', 0, -1))
   end
-
-  # SAPPHIRE: Have an error message
-  #test "error message raised if the length is negative" do
-  #  assert_raise("negative length illegal"){ @array.fill('x', 1, -1) }
-  #end
 
   def teardown
     @array = nil
