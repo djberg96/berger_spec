@@ -7,7 +7,7 @@ require 'test/helper'
 require 'test/unit'
 
 class Test_Array_Index_InstanceMethod < Test::Unit::TestCase
-  def setup   
+  def setup
     @array = [1, "two", nil, false, true]
   end
 
@@ -36,7 +36,7 @@ class Test_Array_Index_InstanceMethod < Test::Unit::TestCase
   end
 
   test "index returns an enumerator object if no arguments are provided" do
-    assert_kind_of(Enumerable::Enumerator, @array.index)
+    assert_kind_of(Enumerator, @array.index)
   end
 
   test "passing the wrong number of arguments raises an error" do
