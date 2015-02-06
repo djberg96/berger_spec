@@ -39,7 +39,7 @@ class Test_Array_RIndex_InstanceMethod < Test::Unit::TestCase
   end
 
   test "rindex returns an Enumerator object if no argument is passed" do
-    assert_kind_of(Enumerable::Enumerator, @array.rindex)
+    assert_kind_of(Enumerator, @array.rindex)
   end
 
   def teardown
