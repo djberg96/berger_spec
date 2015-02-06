@@ -24,7 +24,7 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     @bignum1     = 2**63
     @bignum2     = 2**64
     @uu_array    = ["M$0H<25%u#pY=^$(W25ET)&"]
-    @null        = "\x000\x000\x000\x000"
+    @null        = "\x00\x00\x00\x00"
   end
 
   # Helper method for dealing with endian issues.  The +data+ argument can
@@ -226,9 +226,12 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal(endian("\001\000\000\000\a\000\000\000c\000\000\000"), [1, 7, 99].pack("I_*"))
   end
 
-  def test_pack_I_expected_errors
+  test "pack 'I' with an exceedingly large value returns a null string" do
+    assert_equal("\x00\x00\x00\x00", [@bignum2].pack("I"))
+  end
+
+  test "pack 'I' raises expected errors" do
     assert_raises(TypeError){ @char_array.pack("I") }
-    assert_raises(RangeError){ [@bignum2].pack("I") }
   end
 
   # Integer
@@ -242,8 +245,8 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal(endian("\001\000\000\000\a\000\000\000c\000\000\000"), [1, 7, 99].pack("i_*"))
   end
 
-  test "pack 'i' with exceedingly large number returns a null quad" do
-    assert_raises(RangeError){ [@bignum2].pack("i") }
+  test "pack 'i' with exceedingly large number returns a null string" do
+    assert_equal(@null, [@bignum2].pack("i"))
   end
 
   test "pack 'i' raises expected errors" do
@@ -268,9 +271,12 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     end
   end
 
-  def test_pack_L_expected_errors
+  test "pack 'L' with an exceedingly large value returns a null string" do
+    assert_equal("\x00\x00\x00\x00", [@bignum2].pack("L"))
+  end
+
+  test "pack 'L' raises expected errors" do
     assert_raises(TypeError){ @char_array.pack("L") }
-    assert_raises(RangeError){ [@bignum2].pack("L") }
   end
 
   # Long
@@ -291,7 +297,7 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     end
   end
 
-  test "pack 'l' with exceedingly large number returns a null quad" do
+  test "pack 'l' with exceedingly large number returns a null string" do
     assert_equal(@null, [@bignum2].pack("l"))
   end
 
@@ -376,8 +382,8 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal(endian("\000\000\000\000\000\000\000\200", 8), [@bignum1].pack("Q"))
   end
 
-  test "pack 'Q' with exceedingly large value returns a null quad" do
-    assert_equal(@null, [(2**128)].pack("Q"))
+  test "pack 'Q' with exceedingly large value returns a null string" do
+    assert_equal("\x00\x00\x00\x00\x00\x00\x00\x00", [(2**128)].pack("Q"))
   end
 
   test "pack 'Q' raises expected errors" do
@@ -394,8 +400,8 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal(endian("\000\000\000\000\000\000\000\200", 8), [@bignum1].pack("q"))
   end
 
-  test "pack 'q' with exceedingly large number returns a null quad" do
-    assert_raises(RangeError){ [(2**128)].pack("q") }
+  test "pack 'q' with exceedingly large number returns a null string" do
+    assert_equal("\x00\x00\x00\x00\x00\x00\x00\x00", [(2**128)].pack("q"))
   end
 
   test "pack 'q' raises expected errors" do
@@ -420,8 +426,8 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal(endian("\000\000\a\000c\000", 2), [0, 7, 99].pack("S_*"))
   end
 
-  test "pack 'S' with exceedingly large number returns a null quad" do
-    assert_equal(@null, [@bignum2].pack("S"))
+  test "pack 'S' with exceedingly large number returns a null string" do
+    assert_equal("\x00\x00", [@bignum2].pack("S"))
   end
 
   test "pack 'S' raises expected errors" do
@@ -447,8 +453,8 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal(endian("\000\000\a\000c\000", 2), [0, 7, 99].pack("s_*"))
   end
 
-  test "pack 's' with bignum returns a null quad" do
-    assert_equal(@null, [@bignum2].pack("s"))
+  test "pack 's' with bignum returns a null string" do
+    assert_equal("\x00\x00", [@bignum2].pack("s"))
   end
 
   test "pack 's' expected errors" do
@@ -489,8 +495,8 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal("\377\377\377\377\000\000\000\000", @float_array.pack("V2"))
   end
 
-  test "pack 'V' with exceedingly large value returns a null quad" do
-    assert_raises(RangeError){ [@bignum2].pack('V') }
+  test "pack 'V' with exceedingly large value returns a null string" do
+    assert_equal(@null, [@bignum2].pack('V'))
   end
 
   test "pack 'V' raises expected errors" do
@@ -512,8 +518,8 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
     assert_equal("\377\377\000\000", @float_array.pack("v2"))
   end
 
-  test "pack 'v' with bignum returns null quad" do
-    assert_equal(@null, [@bignum2].pack('v'))
+  test "pack 'v' with bignum returns a null string" do
+    assert_equal("\x00\x00", [@bignum2].pack('v'))
   end
 
   test "pack 'v' raises expected errors" do
