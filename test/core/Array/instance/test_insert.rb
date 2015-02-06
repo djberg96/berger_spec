@@ -52,15 +52,9 @@ class Test_Array_Insert_InstanceMethod < Test::Unit::TestCase
     assert_raise(ArgumentError){ @array.insert }
   end
 
-  # SAPPHIRE: Raise an error
   test "providing an index with no values is effectively a no-op" do
     assert_equal(@array, @array.insert(0))
   end
-
-  # SAPPHIRE: Have an error message
-  #test "error message raised if no values are provided" do
-  #  assert_raise_message("no objects provided (minimum one)"){ @array.insert(0) }
-  #end
 
   test "an error is raised if the index is out of bounds on the left side" do
     assert_raise(IndexError){ @array.insert(-9, 7) }
