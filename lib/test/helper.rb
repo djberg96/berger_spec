@@ -143,7 +143,13 @@ module Test
 
     # Returns the root path. On Windows this is "C:\\". Otherwise it's "/".
     def get_root_path
-      WINDOWS ? "C:\\" : "/"
+      if WINDOWS
+        "C:\\"
+      elsif OSX
+        "/var/root"
+      else
+        "/"
+      end
     end
 
     # Returns the UTF offset/bias.
