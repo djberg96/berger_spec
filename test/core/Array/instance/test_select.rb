@@ -35,13 +35,8 @@ class TC_Array_Select_InstanceMethod < Test::Unit::TestCase
   end
 
   test "calling select on an empty array returns expected result" do
-    if PRE187
-      assert_equal([], [].select)
-      assert_equal([], [].select{})
-    else
-      assert_equal(0, [].select.count)
-      assert_equal(0, [].select{}.count)
-    end
+    assert_equal(0, [].select.count)
+    assert_equal(0, [].select{}.count)
   end
 
   test "select returns the original object if non-false object is yielded" do
@@ -50,11 +45,7 @@ class TC_Array_Select_InstanceMethod < Test::Unit::TestCase
   end
 
   test "select with no block exhibits the expected behavior" do
-    if PRE187
-      assert_raise(LocalJumpError){ @array.select }
-    else
-      assert_kind_of(Enumerable::Enumerator, @array.select)
-    end
+    assert_kind_of(Enumerator, @array.select)
   end
 
   test "select does not take any arguments" do
