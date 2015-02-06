@@ -6,11 +6,11 @@
 # methods properly.
 ##############################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
-   
+
   class AReplace
     def to_ary
       [1,2,3]
@@ -23,7 +23,7 @@ class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
     @custom = AReplace.new
     @frozen = [1, 2, 3].freeze
   end
-   
+
   test "replace basic functionality" do
     assert_respond_to(@array1, :replace)
     assert_nothing_raised{ @array1.replace([]) }
@@ -58,13 +58,6 @@ class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
         @array1.replace(['a', 'b'])
       end.call
     }
-
-    assert_raise(SecurityError){
-      proc do
-        $SAFE = 4
-        @array1.replace(['a', 'b'])
-      end.call
-    }
   end
 
   test "an error is raised if the wrong number of arguments are passed" do
@@ -77,7 +70,8 @@ class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
   end
 
   test "an error is raised if an attempt is made to replace a frozen array" do
-    assert_raise(TypeError){ @frozen.replace([4, 5, 6]) }
+    assert_raise(RuntimeError){ @frozen.replace([4, 5, 6]) }
+    assert_raise_message("can't modify frozen Array"){ @frozen.replace([4,5,6]) }
   end
 
   def teardown
