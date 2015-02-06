@@ -26,7 +26,6 @@ class Test_Array_Hash_InstanceMethod < Test::Unit::TestCase
 
   test "hash of array of integers expected results" do
     assert_kind_of(Numeric, @array_int.hash)
-    assert_true(@array_int.hash > 0)
   end
 
   # We cannot be more specific due to platform specifics
