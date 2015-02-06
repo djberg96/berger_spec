@@ -33,16 +33,16 @@ class Test_Array_Join_InstanceMethod < Test::Unit::TestCase
     assert_equal('1-2-3-a-b', @nested.join('-'))
     assert_equal('123ab', @nested.join(nil))
   end
-   
+
   test "join results for empty arrays" do
     assert_equal('', [].join)
     assert_equal('', [[], []].join)
   end
 
-  test "join results for recursive arrays" do
+  test "calling join on a recursive array raises an error" do
     @array = @array << @array
-    assert_equal('"abc[...]"', @array.join.inspect)
-    assert_equal('"a-b-c-[...]"', @array.join('-').inspect)
+    assert_raise(ArgumentError){ @array.join }
+    assert_raise(ArgumentError){ @array.join('-') }
   end
 
   test "join results for arrays containing explicit nil, true and false values" do
