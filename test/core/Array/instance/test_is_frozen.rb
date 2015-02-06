@@ -21,14 +21,14 @@ class Test_Array_IsFrozen_InstanceMethod < Test::Unit::TestCase
   end
 
   test "frozen expected results" do
-    assert_equal(false, @array.frozen?)
+    assert_false(@array.frozen?)
     assert_nothing_raised{ @array.freeze }
-    assert_equal(true, @array.frozen?)
+    assert_true(@array.frozen?)
   end
 
-  test "self modifying arrays are frozen automatically" do
+  test "self modifying arrays are not frozen automatically" do
     @array.sort!{ |a,b| @bool = @array.frozen? ; a <=> b }
-    assert_true(@bool)
+    assert_false(@bool)
   end
 
   test "arrays that are not self modifying are not frozen automatically" do
