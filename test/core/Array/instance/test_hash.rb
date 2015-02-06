@@ -8,7 +8,7 @@
 require 'test/unit'
 
 class Test_Array_Hash_InstanceMethod < Test::Unit::TestCase
-  def setup   
+  def setup
     @array_chr = ['a', 'b', 'c']
     @array_int = [1, 2, 3]
     @array_mix = ['a', 1, 3.5]
@@ -21,18 +21,19 @@ class Test_Array_Hash_InstanceMethod < Test::Unit::TestCase
   end
 
   test "hash of array of characters expected results" do
-    assert_equal(292, @array_chr.hash)
+    assert_kind_of(Numeric, @array_chr.hash)
   end
 
   test "hash of array of integers expected results" do
-    assert_equal(25, @array_int.hash)
+    assert_kind_of(Numeric, @array_int.hash)
+    assert_true(@array_int.hash > 0)
   end
 
   # We cannot be more specific due to platform specifics
   test "hash of floats possible" do
     assert_nothing_raised{ [1.1, 2.2, 3.3].hash }
   end
-   
+
   test "hash equality" do
     assert_true([1,2,3].hash == [1,2,3].hash)
     assert_true(['a','b','c'].hash == ['a','b','c'].hash)
@@ -40,7 +41,8 @@ class Test_Array_Hash_InstanceMethod < Test::Unit::TestCase
 
   test "a recursive array can be hashed" do
     @array_int = @array_int << @array_int
-    assert_equal(66, @array_int.hash)
+    assert_nothing_raised{ @array_int.hash }
+    assert_kind_of(Numeric, @array_int.hash)
   end
 
   test "an error is raised if the wrong number of arguments are passed" do
