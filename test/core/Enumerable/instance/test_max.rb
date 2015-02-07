@@ -7,7 +7,7 @@
 # version of the method.
 ########################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Enumerable_Max_InstanceMethod < Test::Unit::TestCase
   def setup
@@ -39,12 +39,6 @@ class TC_Enumerable_Max_InstanceMethod < Test::Unit::TestCase
   test "calling max on an array with a single element returns that element" do
     assert_equal(nil, [nil].max)
     assert_equal(false, [false].max)
-  end
-
-  test "the <=> method must be defined for at least one element in multi-element arrays" do
-    assert_raise(NoMethodError){ [nil, nil].max }
-    assert_raise(NoMethodError){ [false, nil].max }
-    assert_raise(NoMethodError){ [1, nil].max }
   end
 
   def teardown
