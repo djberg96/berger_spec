@@ -5,7 +5,7 @@
 # Enumerable#find alias.
 #########################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class MyEnumDetect
   include Enumerable
@@ -73,11 +73,7 @@ class TC_Enumerable_Detect_InstanceMethod < Test::Unit::TestCase
   end
 
   test "detect without a block behaves as expected" do
-    if PRE187
-      assert_raise(LocalJumpError){ @enum.detect }
-    else
-      assert_kind_of(Enumerable::Enumerator, @enum.detect)
-    end
+    assert_kind_of(Enumerator, @enum.detect)
   end
 
   test "detect accepts only one argument" do
