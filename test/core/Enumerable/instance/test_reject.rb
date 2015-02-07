@@ -1,5 +1,5 @@
 #########################################################################
-# tc_reject.rb
+# test_reject.rb
 #
 # Test suite for the Enumerable#reject instance method.
 #########################################################################
@@ -25,38 +25,44 @@ class MyEnumReject
 end
 
 class TC_Enumerable_Reject_InstanceMethod < Test::Unit::TestCase
-   def setup
-      @enum = MyEnumReject.new(1,2,3)
-   end
+  def setup
+    @enum = MyEnumReject.new(1,2,3)
+  end
 
-   def test_reject_basic
-      assert_respond_to(@enum, :reject)
-      assert_nothing_raised{ @enum.reject{} }
-   end
+  test "reject basic functionality" do
+    assert_respond_to(@enum, :reject)
+    assert_nothing_raised{ @enum.reject{} }
+  end
 
-   def test_reject
-      assert_equal([1,2,3], @enum.reject{ |e| e > 7 })
-      assert_equal([1], @enum.reject{ |e| e > 1 })
-   end
+  test "reject returns expected results" do
+    assert_equal([1,2,3], @enum.reject{ |e| e > 7 })
+    assert_equal([1], @enum.reject{ |e| e > 1 })
+  end
 
-   def test_reject_explicit_false_and_nil
-      @enum = MyEnumReject.new(nil, nil, false) 
-      assert_equal([false], @enum.reject{ |e| e.nil? })
-      assert_equal([nil, nil], @enum.reject{ |e| e == false })
-      assert_equal([nil, nil, false], @enum.reject{})
-   end
+  test "reject with explicit false and nil works as expected" do
+    @enum = MyEnumReject.new(nil, nil, false)
+    assert_equal([false], @enum.reject{ |e| e.nil? })
+    assert_equal([nil, nil], @enum.reject{ |e| e == false })
+    assert_equal([nil, nil, false], @enum.reject{})
+  end
 
-   def test_reject_edge_cases
-      assert_equal([], @enum.reject{ true })
-      assert_equal([1,2,3], @enum.reject{})
-   end
+  test "reject returns an empty array if true is sent to block" do
+    assert_equal([], @enum.reject{ true })
+  end
 
-   def test_reject_expected_errors
-      assert_raise(LocalJumpError){ @enum.reject }
-      assert_raise(ArgumentError){ @enum.reject(5) }
-   end
+  test "reject returns original object if block is empty" do
+    assert_equal([1,2,3], @enum.reject{})
+  end
 
-   def teardown
-      @enum   = nil
-   end
+  test "reject returns an Enumerator object if no block is given" do
+    assert_kind_of(Enumerator, @enum.reject)
+  end
+
+  test "reject does not accept any arguments" do
+    assert_raise(ArgumentError){ @enum.reject(5) }
+  end
+
+  def teardown
+    @enum   = nil
+  end
 end
