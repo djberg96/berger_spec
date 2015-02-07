@@ -71,7 +71,7 @@ class TC_Enumerable_FindAll_InstanceMethod < Test::Unit::TestCase
     if PRE187
       assert_raise(LocalJumpError){ @enum.find_all }
     else
-      assert_kind_of(Enumerable::Enumerator, @enum.find_all)
+      assert_kind_of(Enumerator, @enum.find_all)
     end
   end
 
