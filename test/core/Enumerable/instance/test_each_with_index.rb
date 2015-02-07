@@ -50,16 +50,16 @@ class TC_Enumerable_EachWithIndex_InstanceMethod < Test::Unit::TestCase
     assert_equal(@enum, @enum.each_with_index{})
   end
 
-  test "each_with_index does not accept any arguments" do
-    assert_raise(ArgumentError){ @enum.each_with_index(true) }
+  test "each_with_index does not raise an error with bogus arguments if no block is provided" do
+    assert_nothing_raised{ @enum.each_with_index(1, 2) }
   end
 
-  test "each_with_index behaves as expected when no block is provided" do
-    if PRE187
-      assert_raise(LocalJumpError){ @enum.each_with_index }
-    else
-      assert_kind_of(Enumerable::Enumerator, @enum.each_with_index)
-    end
+  test "each_with_index returns an Enumerator if no block is provided" do
+    assert_kind_of(Enumerator, @enum.each_with_index)
+  end
+
+  test "each_with_index does not accept any arguments if each doesn't" do
+    assert_raise(ArgumentError){ @enum.each_with_index(1,2){} }
   end
 
   def teardown
