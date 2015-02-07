@@ -6,7 +6,7 @@
 # I use arrays here because array.c doesn't implement its own version.
 ########################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Enumerable_Min_InstanceMethod < Test::Unit::TestCase
   def setup
@@ -39,12 +39,6 @@ class TC_Enumerable_Min_InstanceMethod < Test::Unit::TestCase
     assert_equal(nil, [nil].min)
     assert_equal(false, [false].min)
     assert_equal(0, [0].min)
-  end
-
-  test "the <=> method must be defined for at least one element in multi-element arrays" do
-    assert_raise(NoMethodError){ [nil, nil].min }
-    assert_raise(NoMethodError){ [false, nil].min }
-    assert_raise(NoMethodError){ [1, nil].min }
   end
 
   def teardown
