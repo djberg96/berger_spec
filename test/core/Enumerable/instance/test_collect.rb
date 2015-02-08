@@ -51,14 +51,13 @@ class TC_Enumerable_Collect_InstanceMethod < Test::Unit::TestCase
     assert_equal([nil, nil, nil], @enum.collect{})
   end
 
-  test "collect with no block returns the original object" do
-    assert_equal([1, 2, 3], @enum.collect)
+  test "collect with no block returns an enumerator" do
+    assert_kind_of(Enumerator, @enum.collect)
   end
 
   test "map is an alias for collect" do
-    msg = '=> Known issue in MRI'
     assert_respond_to(@enum, :map)
-    assert_alias_method(@enum, :collect, :map, msg)
+    assert_alias_method(@enum, :collect, :map)
   end
 
   test "collect does not accept any arguments" do
