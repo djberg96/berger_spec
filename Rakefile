@@ -584,6 +584,11 @@ namespace "bench" do
     ruby "bench/core/bench_dir.rb"
   end
 
+  desc "Run the File benchmarks"
+  task :file do
+    ruby "bench/core/bench_file.rb"
+  end
+
   desc "Run the File::Stat benchmarks"
   task :file_stat do
     ruby "bench/core/bench_file_stat.rb"
