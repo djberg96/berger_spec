@@ -84,7 +84,7 @@ class TC_File_Basename_Class < Test::Unit::TestCase
   test "basename with an empty suffix is treated as if no argument were provided" do
     assert_equal("foo.txt", File.basename("/foo.txt", ""))
     assert_equal("", File.basename("", ""))
-    assert_equal("foo.txt   ", File.basename("foo.txt   ", ""))
+    assert_equal("foo.txt", File.basename("foo.txt   ", ""))
   end
 
   test "basename returns a tainted string if its argument is tainted" do
@@ -108,7 +108,14 @@ class TC_File_Basename_Class < Test::Unit::TestCase
     assert_equal("bar", File.basename("C:/foo/bar"))
     assert_equal("bar", File.basename("C:/foo/bar/"))
     assert_equal("bar", File.basename("C:/foo/bar//"))
-    assert_equal("C:/", File.basename("C:/"))
+  end
+
+  test "basename of a root path strips the drive letter on Windows" do
+    omit_unless(WINDOWS)
+    assert_equal("/", File.basename("C:/"))
+    assert_equal("/", File.basename("D:/"))
+    assert_equal("/", File.basename("//foo"))
+    assert_equal("/", File.basename("//foo/bar"))
   end
 
   test "basename returns expected results for standard Windows style paths" do
@@ -117,15 +124,12 @@ class TC_File_Basename_Class < Test::Unit::TestCase
     assert_equal("bar", File.basename("C:\\foo\\bar"))
     assert_equal("bar", File.basename("C:\\foo\\bar\\"))
     assert_equal("foo", File.basename("C:\\foo"))
-    assert_equal("C:\\", File.basename("C:\\"), @msg)
   end
 
   test "basename returns expected results for Windows UNC paths" do
     omit_unless(WINDOWS, "basename tests for Windows style paths skipped except on Windows")
     assert_equal("baz.txt", File.basename("\\\\foo\\bar\\baz.txt"))
     assert_equal("baz", File.basename("\\\\foo\\bar\\baz"))
-    assert_equal("\\\\foo", File.basename("\\\\foo"), @msg)
-    assert_equal("\\\\foo\\bar", File.basename("\\\\foo\\bar"))
   end
 
   test "basename returns expected results for Windows style paths with a suffix" do
