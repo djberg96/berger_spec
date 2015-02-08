@@ -280,9 +280,9 @@ module Test
         GetShortPathName.call(file, buf, buf.size)
         file = buf.unpack("A*").first
         file.tr!('/', '\\')
-        system("del /f /q #{file}") if File.exists?(file)
+        system("del /f /q #{file}") if File.exist?(file)
       else
-        system("rm -f #{file}") if File.exists?(file)
+        system("rm -f #{file}") if File.exist?(file)
       end
     end
 
