@@ -3,9 +3,9 @@
   classes and the standard library. A series of benchmarks are also included.
 
 = WARNING
-  This test suite is very much out of date and should not be used. Please do
-  not send me pull requests. I've decided to leave it up as more of a personal
-  historical archive than anything else.
+  This is my personal test suite for Ruby. There are many like it, but this one
+  is mine. I am not interested in comments, opinions or pull requests unless
+  I specifically request them.
 
 = Prerequisites
   * rake 0.9.2 or later.
@@ -87,6 +87,13 @@
   * Ditto for class variables in the shutdown method.
   * Use the Test::Helper methods where appropriate.
 
+== Branches
+  Each major release of Ruby will have its own branch. I do not make separate
+  branches for point/teeny releases.
+
+  Once a new major release of Ruby is released, I do not go back and work
+  on older branches.
+
 == Benchmark suites
   The benchmark library shall be "benchmark", the library that comes bundled
   as part of the Ruby standard library.
@@ -114,12 +121,6 @@
 
   See the output of 'rake -T' to see all available tests.
 
-== Disagreements
-  In a few cases I've written the tests to reflect the behavior that I
-  think ought to be implemented rather than what MRI currently does, e.g.
-  File.join with no arguments ought to raise an ArgumentError. In such cases
-  I append the string "[BERGER]" to the failure message.
-
 == On JRuby
   As of 25-May-2007 I've decided to go ahead and tailor some of the tests
   for JRuby. This is easy enough to do by checking the value of the JRUBY
@@ -128,26 +129,16 @@
   should be skipped. Generally speaking this means $SAFE tests, and some of
   the Process methods.
    
-== On Sapphire
-  Sapphire is a custom fork of Ruby. You can find more information at
-  http://www.sapphire-lang.org. I have added an SAPPHIRE constant (set to
-  true or false) in the Test::Helper module.
-   
 == Miscellaneous
   The Object and Kernel methods are separated in the same manner as the
-  Pickaxe (2nd Edition) breaks them out, for clarity.
+  Pickaxe breaks them out, for clarity.
 
 == TODO
   Many of the individual tests have 'TODO' markers in them to indicate that
   more and/or better tests need to be added.
 
-  (Obviously, any method that hasn't been tested is a 'TODO' item)
+  Obviously, any method that hasn't been tested is a 'TODO' item.
 
-  Generally speaking, most of the String tests could use additional tests
-  that include tests that use extended ASCII and/or $KCODE testing.
-
-  - I'll add more to this section as I think of it.
-   
 == Acknowledgements
   Some tests shamelessly plagiarized from rubyspec, Rubicon, Rubinius,
   BFTS, or the JRuby test suite.
