@@ -51,7 +51,6 @@ class TC_Enumerable_Include_InstanceMethod < Test::Unit::TestCase
   end
 
   test "member? is an alias for include?" do
-    msg = '=> Known issue in MRI'
     assert_respond_to(@enum, :member?)
     assert_alias_method(@enum, :member?, :include?)
   end

@@ -45,7 +45,6 @@ class TC_Enumerable_ToA_InstanceMethod < Test::Unit::TestCase
   end
 
   test "entries is an alias for to_a" do
-    msg = '=> Known issue in MRI'
     assert_respond_to(@enum, :entries)
     assert_alias_method(@enum, :to_a, :entries)
   end

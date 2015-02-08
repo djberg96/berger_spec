@@ -67,7 +67,6 @@ class TC_Enumerable_Detect_InstanceMethod < Test::Unit::TestCase
   end
 
   test "find is an alias for detect" do
-    msg = "=> Known issue in MRI"
     assert_respond_to(@enum, :find)
     assert_alias_method(@enum, :find, :detect)
   end
