@@ -1,12 +1,12 @@
 #####################################################################
-# test_directory.rb
+# test_is_directory.rb
 #
 # Test case for the File.directory? class method.
 #####################################################################
 require 'test/helper'
 require 'test-unit'
 
-class TC_File_Directory_SingletonMethod < Test::Unit::TestCase
+class TC_File_IsDirectory_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
