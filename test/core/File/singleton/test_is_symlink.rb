@@ -1,48 +1,51 @@
 ########################################################################
-# tc_is_symlink.rb
+# test_is_symlink.rb
 #
-# Test case for the File.symlink? class method.
-#
-# TODO: This will have to be updated for Vista.
+# Test case for the File.symlink? singleton method. Note that although
+# Windows has supported symlinks since Windows Vista, MRI does not
+# support it.
 ########################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
-class TC_File_IsSymlink_ClassMethod < Test::Unit::TestCase
-   include Test::Helper
+class TC_File_IsSymlink_SingletonMethod < Test::Unit::TestCase
+  include Test::Helper
 
-   def setup
-      @file = 'tc_is_symlink.txt'
-      @link = 'link_to_tc_is_symlink.txt'
+  def setup
+    @file = 'test_is_symlink.txt'
+    @link = 'link_to_test_is_symlink.txt'
 
-      touch(@file)
+    touch(@file)
 
-      File.symlink(@file, @link) unless WINDOWS
-   end
+    File.symlink(@file, @link) unless WINDOWS
+  end
 
-   def test_is_symlink_basic
-      assert_respond_to(File, :symlink?)
-   end
+  test "symlink? basic functionality" do
+    assert_respond_to(File, :symlink?)
+  end
 
-   def test_is_symlink
-      if WINDOWS
-         assert_equal(false, File.symlink?(@file))
-         assert_equal(false, File.symlink?(@link))
-      else
-         assert_equal(false, File.symlink?(@file))
-         assert_equal(true, File.symlink?(@link))
-      end
-   end
+  test "symlink? returns expected result" do
+    if WINDOWS
+      assert_false(File.symlink?(@file))
+      assert_false(File.symlink?(@link))
+    else
+      assert_false(File.symlink?(@file))
+      assert_true(File.symlink?(@link))
+    end
+  end
 
-   # The TypeError check will have to be updated for Vista
-   def test_is_symlink_expected_errors
-      assert_raise(ArgumentError){ File.symlink? }
-      assert_raise(ArgumentError){ File.symlink?(@file, @link) }
-      assert_raise(TypeError){ File.symlink?(1) } unless WINDOWS
-   end
+  test "symlink? requires a single argument" do
+    assert_raise(ArgumentError){ File.symlink? }
+    assert_raise(ArgumentError){ File.symlink?(@file, @link) }
+  end
 
-   def teardown
-      File.delete(@link) if File.exists?(@link)
-      File.delete(@file) if File.exists?(@file)
-   end
+  test "argument to symlink? must be a string" do
+    omit_if(WINDOWS)
+    assert_raise(TypeError){ File.symlink?(1) }
+  end
+
+  def teardown
+    File.delete(@link) if File.exist?(@link)
+    File.delete(@file) if File.exist?(@file)
+  end
 end
