@@ -1,53 +1,61 @@
 ########################################################################
-# tc_symlink.rb
+# test_symlink.rb
 #
-# Test case for the File.symlink class method.
-#
-# TODO: Most of these tests are skipped on MS Windows, but will need
-# to be updated for Vista.
+# Test case for the File.symlink singleton method. Note that MRI does
+# not support symlinks on MS Windows.
 ########################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_File_Symlink_ClassMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   def setup
-      @file = 'tc_symlink.txt'
-      @link = 'link_to_tc_symlink.txt'
+  def setup
+    @file = 'tc_symlink.txt'
+    @link = 'link_to_tc_symlink.txt'
+    touch(@file)
+  end
 
-      touch(@file)
-   end
+  test "symlink basic functionality" do
+    assert_respond_to(File, :symlink)
+  end
 
-   def test_symlink_basic
-      assert_respond_to(File, :symlink)
-   end
+  test "symlink creates a new linked file and leaves original intact" do
+    omit_if(WINDOWS)
+    assert_nothing_raised{ File.symlink(@file, @link) }
+    assert_true(File.exist?(@link))
+    assert_true(File.symlink?(@link))
+  end
 
-   unless WINDOWS
-      def test_symlink
-         assert_nothing_raised{ File.symlink(@file, @link) }
-         assert_equal(true, File.exists?(@link))
-         assert_equal(true, File.symlink?(@link))
-      end
+  test "symlinked file refers to same file" do
+    omit_if(WINDOWS)
+    File.symlink(@file, @link)
+    assert_equal(File.stat(@file).ino, File.stat(@link).ino)
+  end
 
-      def test_link_already_exists
-         assert_nothing_raised{ File.symlink(@file, @link) }
-         assert_raise(Errno::EEXIST){ File.symlink(@link, @link) }
-      end
+  test "symlink raises an error if the link already exists" do
+    omit_if(WINDOWS)
+    File.symlink(@file, @link)
+    assert_raise(Errno::EEXIST){ File.symlink(@link, @link) }
+  end
 
-      def test_symlink_expected_errors
-         assert_raise(ArgumentError){ File.symlink }
-         assert_raise(ArgumentError){ File.symlink(@file) }
-         assert_raise(ArgumentError){ File.symlink(@file, @link, @link) }
-      end
-   end
+  test "symlink requires two arguments" do
+    omit_if(WINDOWS)
+    assert_raise(ArgumentError){ File.symlink }
+    assert_raise(ArgumentError){ File.symlink(@file) }
+    assert_raise(ArgumentError){ File.symlink(@file, @link, @link) }
+  end
 
-   # Be sure to delete the link first
-   def teardown
-      File.delete(@link) if File.exists?(@link)
-      File.delete(@file) if File.exists?(@file)
+  test "arguments to symlink must be strings" do
+    omit_if(WINDOWS)
+    assert_raise(TypeError){ File.symlink(@file, 1) }
+    assert_raise(TypeError){ File.symlink(1, @file) }
+  end
 
-      @file = nil
-      @link = nil
-   end
+  def teardown
+    File.delete(@link) if File.exist?(@link)
+    File.delete(@file) if File.exist?(@file)
+    @file = nil
+    @link = nil
+  end
 end
