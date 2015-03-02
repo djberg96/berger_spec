@@ -84,7 +84,7 @@ class TC_File_Basename_Class < Test::Unit::TestCase
   test "basename with an empty suffix is treated as if no argument were provided" do
     assert_equal("foo.txt", File.basename("/foo.txt", ""))
     assert_equal("", File.basename("", ""))
-    assert_equal("foo.txt", File.basename("foo.txt   ", ""))
+    assert_equal("foo.txt", File.basename("foo.txt", ""))
   end
 
   test "basename returns a tainted string if its argument is tainted" do
