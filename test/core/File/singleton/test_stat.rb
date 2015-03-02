@@ -64,7 +64,7 @@ class TC_File_Stat_SingletonMethod < Test::Unit::TestCase
 
   def teardown
     unless WINDOWS
-      File.delete(@link) if File.exists?(@link)
+      File.delete(@link) if File.exist?(@link)
     end
     @file = nil
     @stat = nil
