@@ -77,6 +77,7 @@ class TC_File_Open_SingletonMethod < Test::Unit::TestCase
   end
 
   test "open with invalid numeric mode on windows defaults to 0644" do
+    omit_unless(WINDOWS)
     File.delete(@file)
     assert_nothing_raised{ @fh = File.open(@file, @flags, 0777) }
     assert_kind_of(File, @fh)
