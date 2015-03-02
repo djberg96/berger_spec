@@ -13,56 +13,64 @@ class TC_File_Truncate_InstanceMethod < Test::Unit::TestCase
     @file.write('1234567890')
   end
 
-  def test_truncate_basic
+  test "truncate basic functionality" do
     assert_respond_to(@file, :truncate)
     assert_equal(0, @file.truncate(0))
   end
 
-  def test_truncate
-    assert_nothing_raised{ @file.close }
+  test "truncate works as expected" do
+    @file.close
     assert_equal(10, File.size(@name))
-    assert_nothing_raised{ File.open(@name, 'ab'){ |fh| fh.truncate(5) } }
+
+    File.open(@name, 'ab'){ |fh| fh.truncate(5) }
     assert_equal(5, File.size(@name))
     assert_equal('12345', IO.read(@name))
   end
 
-  def test_truncate_larger_than_original_file
-    assert_nothing_raised{ @file.close }
+  test "setting a value larger than the current size pads the file" do
+    @file.close
     assert_equal(10, File.size(@name))
-    assert_nothing_raised{ File.open(@name, 'ab'){ |fh| fh.truncate(12) } }
+
+    File.open(@name, 'ab'){ |fh| fh.truncate(12) }
     assert_equal(12, File.size(@name))
     assert_equal("1234567890\000\000", IO.read(@name))
   end
 
-  def test_truncate_same_size_as_original_file
-    assert_nothing_raised{ @file.close }
+  test "setting the truncate value to the same size as the file is effectively a no-op" do
+    @file.close
     assert_equal(10, File.size(@name))
-    assert_nothing_raised{ File.open(@name, 'ab'){ |fh| fh.truncate(10) } }
+
+    File.open(@name, 'ab'){ |fh| fh.truncate(10) }
     assert_equal(10, File.size(@name))
     assert_equal("1234567890", IO.read(@name))
   end
 
-  def test_truncate_zero
-    assert_nothing_raised{ @file.close }
+  test "setting the truncate value to zero empties a file's contents" do
+    @file.close
     assert_equal(10, File.size(@name))
-    assert_nothing_raised{ File.open(@name, 'ab'){ |fh| fh.truncate(0) } }
+
+    File.open(@name, 'ab'){ |fh| fh.truncate(0) }
     assert_equal(0, File.size(@name))
     assert_equal("", IO.read(@name))
   end
 
-  # There is a bug in the chsize() in MS VC++ 6.0 that may cause these
-  # assertions to fail. They are fixed in MS VC++ 8.0.
-  #
-  def test_truncate_expected_errors
-    msg = '=> Known issue with on MS Windows/VC++ 6 and earlier'
+  test "truncate requires a single argument" do
     assert_raise(ArgumentError){ @file.truncate }
-    assert_raise(Errno::EINVAL, msg){ @file.truncate(-1) }
+    assert_raise(ArgumentError){ @file.truncate(1,2) }
+  end
+
+  test "the value sent to truncate must be non-negative" do
+    assert_raise(Errno::EINVAL){ @file.truncate(-1) }
+  end
+
+  test "truncate requires a numeric argument" do
     assert_raise(TypeError){ @file.truncate(nil) }
+    assert_raise(TypeError){ @file.truncate('bogus') }
   end
 
   def teardown
     @file.close unless @file.closed?
-    File.delete(@name) if File.exists?(@name)
+    File.delete(@name) if File.exist?(@name)
     @file = nil
     @name = nil
   end
