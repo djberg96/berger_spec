@@ -66,12 +66,10 @@ class TC_File_Lchown_ClassMethod < Test::Unit::TestCase
     assert_equal(@uid, File.lstat(@link1).uid)
   end
 
-  test "lchown requires at least three arguments" do
+  test "lchown requires at least two arguments" do
     omit_unless(@@lchown_support, @@lchown_message)
-    msg = "=> Incorrect behavior [BERGER]"
     assert_raises(ArgumentError){ File.lchown }
     assert_raises(ArgumentError){ File.lchown(-1) }
-    assert_raises(ArgumentError, msg){ File.lchown(-1, -1) }
   end
 
   test "first and second arguments to lchown must be numeric" do
@@ -88,10 +86,10 @@ class TC_File_Lchown_ClassMethod < Test::Unit::TestCase
 
   def teardown
     if @@lchown_support
-      File.delete(@link1) if File.exists?(@link1)
-      File.delete(@link2) if File.exists?(@link2)
-      File.delete(@file1) if File.exists?(@file1)
-      File.delete(@file2) if File.exists?(@file2)
+      File.delete(@link1) if File.exist?(@link1)
+      File.delete(@link2) if File.exist?(@link2)
+      File.delete(@file1) if File.exist?(@file1)
+      File.delete(@file2) if File.exist?(@file2)
       @file = nil
       @uid  = nil
       @gid  = nil
