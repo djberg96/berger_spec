@@ -54,7 +54,7 @@ class TC_File_Join_SingletonMethod < Test::Unit::TestCase
   test "join on unix returns the expected results" do
     omit_if(WINDOWS, "join test skipped on MS Windows")
     assert_equal("usr/local/bin", File.join(*@dirs))
-    assert_equal("/usr/local/bin", File.join(@root, *@dirs))
+    assert_equal("#{@root}/usr/local/bin", File.join(@root, *@dirs))
   end
 
   test "join returns a tainted string if any argument is tainted" do
