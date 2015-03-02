@@ -44,7 +44,7 @@ class TC_File_Flock_InstanceMethod < Test::Unit::TestCase
 
   def teardown
     @file.close unless @file.closed?
-    File.delete(@name) if File.exists?(@name)
+    File.delete(@name) if File.exist?(@name)
 
     @file  = nil
     @name  = nil
