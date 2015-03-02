@@ -40,9 +40,9 @@ class TC_File_Dirname_SingletonMethod < Test::Unit::TestCase
     assert_equal("/", File.dirname("/foo/"))
   end
 
-  test "dirname with multiple leading slashes returns the expected result" do
-    assert_equal("//foo", File.dirname("//foo"))
-    assert_equal("//foo", File.dirname("//foo//"))
+  test "dirname with multiple leading or trailing slashes returns the expected result" do
+    assert_equal("/", File.dirname("//foo"))
+    assert_equal("/", File.dirname("//foo//"))
   end
 
   test "dirname returns a tainted string if its argument is tainted" do
