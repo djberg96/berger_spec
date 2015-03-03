@@ -5,9 +5,9 @@
 # issues with File.basename on MS Windows. See ruby-core: 10321.
 ##############################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
-class TC_File_Basename_Class < Test::Unit::TestCase
+class TC_File_Basename_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
