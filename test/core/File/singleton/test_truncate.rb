@@ -10,9 +10,8 @@ class TC_File_Truncate_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @file = 'test_truncate.txt'
-    @fh  = File.open(@file, 'w')
-    File.open(@file, 'wb'){ |fh| fh.write("1234567890") }
+    @file = File.join(File.dirname(File.expand_path(__FILE__)), 'test_truncate.txt')
+    File.open(@file, 'w'){ |fh| fh.write("1234567890") }
   end
 
   test "truncate basic functionality" do
@@ -58,9 +57,7 @@ class TC_File_Truncate_SingletonMethod < Test::Unit::TestCase
   end
 
   def teardown
-    @fh.close if @fh && !@fh.closed?
     File.delete(@file) if File.exist?(@file)
     @file = nil
-    @fh = nil
   end
 end
