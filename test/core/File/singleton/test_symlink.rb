@@ -17,6 +17,7 @@ class TC_File_Symlink_ClassMethod < Test::Unit::TestCase
   end
 
   test "symlink basic functionality" do
+    omit_if(WINDOWS)
     assert_respond_to(File, :symlink)
   end
 
