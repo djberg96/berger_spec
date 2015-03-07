@@ -64,8 +64,8 @@ class TC_File_Constants < Test::Unit::TestCase
     assert_not_nil(File::WRONLY)
   end
 
-  test "open mode NOCTTY is defined on windows" do
-    omit_unless(WINDOWS)
+  test "open mode NOCTTY is defined" do
+    omit_if(WINDOWS)
     assert_not_nil(File::NOCTTY)
   end
 
