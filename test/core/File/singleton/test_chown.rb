@@ -25,13 +25,15 @@ class TC_File_Chown_ClassMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @file1 = "temp1.txt"
-    @file2 = "temp2.txt"
-    @root  = Process.euid == 0
-    @uid   = Etc.getpwnam('nobody').uid
-    @gid   = Etc.getgrnam('nobody').gid
-    touch(@file1)
-    touch(@file2)
+    unless WINDOWS
+      @file1 = "temp1.txt"
+      @file2 = "temp2.txt"
+      @root  = Process.euid == 0
+      @uid   = Etc.getpwnam('nobody').uid
+      @gid   = Etc.getgrnam('nobody').gid
+      touch(@file1)
+      touch(@file2)
+    end
   end
 
   test "chown basic functionality" do
@@ -66,21 +68,25 @@ class TC_File_Chown_ClassMethod < Test::Unit::TestCase
 
 
   test "chown requires at least two arguments" do
+    omit_if(WINDOWS)
     assert_raises(ArgumentError){ File.chown(-1) }
   end
 
   test "first two arguments to chown must be numeric if not nil" do
+    omit_if(WINDOWS)
     assert_raises(TypeError){ File.chown('bogus', -1) }
     assert_raises(TypeError){ File.chown(-1, 'bogus') }
   end
 
   def teardown
-    File.delete(@file1) if File.exist?(@file1)
-    File.delete(@file2) if File.exist?(@file2)
+    unless WINDOWS
+      File.delete(@file1) if File.exist?(@file1)
+      File.delete(@file2) if File.exist?(@file2)
 
-    @file = nil
-    @root = nil
-    @uid  = nil
-    @gid  = nil
+      @file = nil
+      @root = nil
+      @uid  = nil
+      @gid  = nil
+    end
   end
 end
