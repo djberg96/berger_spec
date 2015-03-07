@@ -18,7 +18,6 @@ class TC_File_File_SingletonMethod < Test::Unit::TestCase
       @dir  = "/bin"
     end
 
-    @msg  = '=> May fail on MS Windows'
     @file = "test.txt"
     touch(@file)
   end
@@ -32,7 +31,16 @@ class TC_File_File_SingletonMethod < Test::Unit::TestCase
   test "file? returns expected results" do
     assert_true(File.file?(@file))
     assert_false(File.file?(@dir))
-    assert_false(File.file?(@null), @msg)
+  end
+
+  test "file? returns false for null devices on unixy platforms" do
+    omit_if(WINDOWS)
+    assert_false(File.file?(@null))
+  end
+
+  test "file? returns true for null devices on windows" do
+    omit_unless(WINDOWS)
+    assert_true(File.file?(@null))
   end
 
   test "file? requires a single string argument" do
@@ -45,6 +53,5 @@ class TC_File_File_SingletonMethod < Test::Unit::TestCase
     remove_file(@file)
     @null = nil
     @file = nil
-    @msg  = nil
   end
 end
