@@ -21,19 +21,22 @@ class TC_File_Chown_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @name1 = "temp1.txt"
-    @name2 = "temp2.txt"
+    unless WINDOWS
+      @name1 = "temp1.txt"
+      @name2 = "temp2.txt"
 
-    touch(@name1)
-    touch(@name2)
+      touch(@name1)
+      touch(@name2)
 
-    @file1 = File.open(@name1)
-    @file2 = File.open(@name2)
-    @uid   = Etc.getpwnam('nobody').uid
-    @gid   = Etc.getgrnam('nobody').gid
+      @file1 = File.open(@name1)
+      @file2 = File.open(@name2)
+      @uid   = Etc.getpwnam('nobody').uid
+      @gid   = Etc.getgrnam('nobody').gid
+    end
   end
 
   def test_chown_basic
+    omit_if(WINDOWS)
     assert_respond_to(@file1, :chown)
     assert_nothing_raised{ @file2.chown(-1, -1) }
   end
@@ -52,28 +55,33 @@ class TC_File_Chown_InstanceMethod < Test::Unit::TestCase
   end
 
   test "chown raises an error if the handle is closed" do
+    omit_if(WINDOWS)
     @file1.close
     assert_raise(IOError){ @file1.chown(-1, -1) }
   end
 
   test "chown raises an error if the numeric argument is invalid" do
+    omit_if(WINDOWS)
     assert_raises(ArgumentError){ @file1.chown(-1) }
   end
 
   test "arguments to chown must be numeric" do
+    omit_if(WINDOWS)
     assert_raises(TypeError){ @file1.chown('bogus', -1) }
     assert_raises(TypeError){ @file1.chown(-1, 'bogus') }
   end
 
   def teardown
-    @file1.close unless @file1.closed?
-    @file2.close unless @file2.closed?
+    unless WINDOWS
+      @file1.close unless @file1.closed?
+      @file2.close unless @file2.closed?
 
-    File.delete(@name1) if File.exist?(@name1)
-    File.delete(@name2) if File.exist?(@name2)
+      File.delete(@name1) if File.exist?(@name1)
+      File.delete(@name2) if File.exist?(@name2)
 
-    @file = nil
-    @uid  = nil
-    @gid  = nil
+      @file = nil
+      @uid  = nil
+      @gid  = nil
+    end
   end
 end
