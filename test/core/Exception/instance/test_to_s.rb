@@ -22,9 +22,10 @@ class TC_Exception_ToS_InstanceMethod < Test::Unit::TestCase
     assert_equal('hello', @err2.to_s)
   end
 
-  test "if the exception is tainted, so is its message" do
-    assert_nothing_raised{ @err2.taint }
-    assert_true(@err2.message.tainted?)
+  test "if the exception is tainted, its message is not automatically tainted" do
+    assert_false(@err2.to_s.tainted?)
+    @err2.taint
+    assert_false(@err2.to_s.tainted?)
   end
 
   test "to_s does not accept any arguments" do
