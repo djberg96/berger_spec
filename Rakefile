@@ -335,6 +335,19 @@ namespace "test" do
       t.warning = true
     end
 
+    namespace :math do
+      namespace :singleton do
+        Dir['test/core/Math/singleton/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
+    end
+
     desc "Runs the test suite for the Method class"
     Rake::TestTask.new('method') do |t|
       t.test_files = FileList['test/core/Method/*/*.rb']
