@@ -6,13 +6,13 @@
 # the tests for Object#inspect.
 ###############################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_Inspect_InstanceMethod < Test::Unit::TestCase
   def setup
     @empty     = {}
-    @normal    = {1, 'a', 2, 'b'}
-    @recursive = {1, 'a'}
+    @normal    = Hash[1, 'a', 2, 'b']
+    @recursive = {1 => 'a'}
     @recursive[@recursive] = 2
     @recursive[3] = @recursive
   end
