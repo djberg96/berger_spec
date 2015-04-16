@@ -44,7 +44,7 @@ class Test_Hash_Shift_InstanceMethod < Test::Unit::TestCase
     hash = {:a => 1}
     hash[:b] = hash
     assert_nothing_raised{ hash.shift }
-    assert_equal([:a, 1], hash.shift)
+    assert_equal([:b, {}], hash.shift)
     assert_nil(hash.shift)
   end
 
