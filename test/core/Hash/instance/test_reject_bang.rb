@@ -4,13 +4,13 @@
 # Test suite for the Hash#reject! instance method.
 ####################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_RejectBang_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
+    @hash = Hash[:foo, 1, "bar", 2, nil, 3, false, 4]
   end
 
   test "reject_bang basic functionality" do
@@ -19,17 +19,13 @@ class TC_Hash_RejectBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "reject_bang returns the expected results" do
-    assert_equal({:foo, 1, "bar", 2}, @hash.reject!{ |k,v| v > 2 })
+    assert_equal(Hash[:foo, 1, "bar", 2], @hash.reject!{ |k,v| v > 2 })
     assert_nil(@hash.reject!{ |k,v| v > 5 })
     assert_nil(@hash.reject!{})
   end
 
   test "reject_bang without a block behaves as expected" do
-    if PRE187
-      assert_raise(LocalJumpError){ @hash.reject! }
-    else
-      assert_kind_of(Enumerable::Enumerator, @hash.reject!)
-    end
+    assert_kind_of(Enumerator, @hash.reject!)
   end
 
   test "reject_bang does not accept any arguments" do
