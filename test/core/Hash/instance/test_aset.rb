@@ -8,7 +8,7 @@ require 'test/unit'
 
 class TC_Hash_Aset_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {"foo", 1, :bar, 2, nil, 3, false, 4}
+    @hash = Hash["foo", 1, :bar, 2, nil, 3, false, 4]
   end
 
   test "aset basic functionality" do
