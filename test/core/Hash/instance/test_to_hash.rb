@@ -4,13 +4,13 @@
 # Test suite for the Hash#to_hash instance method.
 ############################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_ToHash_InstanceMethod < Test::Unit::TestCase
   # Used to validate to_hash
   class TestHash
     def to_hash
-      {"a",1,"b",2}
+      {"a" => 1,"b" => 2}
     end
   end
 
@@ -28,7 +28,7 @@ class TC_Hash_ToHash_InstanceMethod < Test::Unit::TestCase
   test "implicit to_hash works as expected" do
     assert_equal({}, @hash)
     assert_nothing_raised{ @hash.replace(@foo) }
-    assert_equal({'a',1,'b',2}, @hash)
+    assert_equal(Hash['a',1,'b',2], @hash)
   end
 
   test "to_hash raises an error if object doesn't implement to_hash method" do
