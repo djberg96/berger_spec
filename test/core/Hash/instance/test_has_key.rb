@@ -4,11 +4,11 @@
 # Tests for the Hash#has_key? instance method.
 #####################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_HasKey_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
+    @hash = Hash[:foo, 1, "bar", 2, nil, 3, false, 4]
   end
 
   test "has_key? basic functionality" do
