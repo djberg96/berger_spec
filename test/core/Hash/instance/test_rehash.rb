@@ -9,7 +9,7 @@ require 'test/unit'
 class Test_Hash_Rehash_InstanceMethod < Test::Unit::TestCase
   def setup
     @array = ['a', 'b']
-    @hash  = {@array, 100}
+    @hash  = {@array => 100}
   end
 
   test "rehash basic functionality" do
