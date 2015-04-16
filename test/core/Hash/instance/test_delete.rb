@@ -4,11 +4,11 @@
 # Test suite for the Hash#delete instance method.
 ###########################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_Delete_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {:a, 1, :b, true, :c, false, :d, nil}
+    @hash = Hash[:a, 1, :b, true, :c, false, :d, nil]
   end
 
   test "delete basic functionality" do

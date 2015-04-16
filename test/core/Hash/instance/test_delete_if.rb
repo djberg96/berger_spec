@@ -4,13 +4,13 @@
 # Test suite for the Hash#delete_if instance method.
 ###########################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_DeleteIf_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
+    @hash = Hash[:foo, 1, "bar", 2, nil, 3, false, 4]
   end
 
   test "delete_if basic functionality" do
@@ -19,8 +19,8 @@ class TC_Hash_DeleteIf_InstanceMethod < Test::Unit::TestCase
   end
 
   test "delete_if returns the expected results" do
-    assert_equal({:foo, 1, "bar", 2}, @hash.delete_if{ |k,v| v > 2 })
-    assert_equal({:foo, 1, "bar", 2}, @hash.delete_if{ |k,v| v > 5 })
+    assert_equal({:foo => 1, "bar" => 2}, @hash.delete_if{ |k,v| v > 2 })
+    assert_equal({:foo => 1, "bar" => 2}, @hash.delete_if{ |k,v| v > 5 })
   end
 
   test "delete_if returns an empty hash if the proc conditions are not met" do
@@ -28,11 +28,7 @@ class TC_Hash_DeleteIf_InstanceMethod < Test::Unit::TestCase
   end
 
   test "delete_if with no block behaves as expected" do
-    if PRE187
-      assert_raise(LocalJumpError){ @hash.delete_if }
-    else
-      assert_kind_of(Enumerable::Enumerator, @hash.delete_if)
-    end
+    assert_kind_of(Enumerator, @hash.delete_if)
   end
 
   test "delete_if does not accept any arguments" do
