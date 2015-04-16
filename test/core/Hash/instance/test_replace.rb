@@ -8,9 +8,9 @@ require 'test/unit'
 
 class TC_Hash_Replace_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash1  = {1,2,3,4}
+    @hash1  = Hash[1,2,3,4]
     @hash2  = @hash1
-    @frozen = {'a', 1, 'b', 2}.freeze
+    @frozen = Hash['a', 1, 'b', 2].freeze
   end
 
   test "replace basic functionality" do
@@ -20,8 +20,8 @@ class TC_Hash_Replace_InstanceMethod < Test::Unit::TestCase
   end
 
   test "replace expected results" do
-    assert_equal({1,2,3,4}, @hash1.replace({1,2,3,4}))
-    assert_equal({1,2,3,4}, @hash1)
+    assert_equal(Hash[1,2,3,4], @hash1.replace({1 => 2, 3 => 4}))
+    assert_equal(Hash[1,2,3,4], @hash1)
   end
 
   test "replacing a hash with itself returns itself" do
@@ -39,7 +39,7 @@ class TC_Hash_Replace_InstanceMethod < Test::Unit::TestCase
   end
 
   test "replace does not work on frozen hashes" do
-    assert_raise(TypeError){ @frozen.replace(@hash1) }
+    assert_raise(RuntimeError){ @frozen.replace(@hash1) }
   end
 
   def teardown
