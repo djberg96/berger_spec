@@ -4,11 +4,11 @@
 # Tests for the Hash#fetch instance method.
 ###########################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_Fetch_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
+    @hash = Hash[:foo, 1, "bar", 2, nil, 3, false, 4]
     @default = Hash.new(0)
   end
 
@@ -31,12 +31,12 @@ class TC_Hash_Fetch_InstanceMethod < Test::Unit::TestCase
   end
 
   test "fetch raises an IndexError if the key is not found" do
-    assert_raise(IndexError){ @hash.fetch("bogus") }
-    assert_raise(IndexError){ @hash.fetch(1) }
+    assert_raise(KeyError){ @hash.fetch("bogus") }
+    assert_raise(KeyError){ @hash.fetch(1) }
   end
 
   test "constructor default value is ignored if the key is not found" do
-    assert_raise(IndexError){ @default.fetch(1) }
+    assert_raise(KeyError){ @default.fetch(1) }
   end
 
   test "fetch requires at least one argument" do
