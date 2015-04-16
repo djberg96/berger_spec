@@ -8,7 +8,7 @@ require 'test/unit'
 
 class Test_Hash_Aref_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {:foo, 1, 'bar', 2, nil, 3, false, 4, 'foo', 5, 3.7, 6.0}
+    @hash = Hash[:foo, 1, 'bar', 2, nil, 3, false, 4, 'foo', 5, 3.7, 6.0]
   end
 
   test "aref basic functionality" do
@@ -36,8 +36,8 @@ class Test_Hash_Aref_InstanceMethod < Test::Unit::TestCase
   end
 
   test "aref with nested hash returns expected result" do
-    hash = {{:a, 1}, {:b, 2}}
-    assert_equal({:b, 2}, hash[{:a, 1}])
+    hash = Hash[{:a => 1}, {:b => 2}]
+    assert_equal({:b => 2}, hash[{:a => 1}])
   end
 
   test "aref requires at least on argument" do
