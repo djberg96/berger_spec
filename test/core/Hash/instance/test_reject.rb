@@ -10,7 +10,7 @@ class TC_Hash_Reject_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
+    @hash = Hash[:foo, 1, "bar", 2, nil, 3, false, 4]
   end
 
   test "reject basic functionality" do
@@ -20,7 +20,7 @@ class TC_Hash_Reject_InstanceMethod < Test::Unit::TestCase
   end
 
   test "reject returns the expected results" do
-    assert_equal({:foo, 1, "bar", 2}, @hash.reject{ |k,v| v > 2 })
+    assert_equal(Hash[:foo, 1, "bar", 2], @hash.reject{ |k,v| v > 2 })
     assert_equal(@hash, @hash.reject{ |k,v| v > 5 })
     assert_equal({}, @hash.reject{ |k,v| v >= 0 })
   end
@@ -31,11 +31,7 @@ class TC_Hash_Reject_InstanceMethod < Test::Unit::TestCase
   end
 
   test "reject without a block behaves as expected" do
-    if PRE187
-      assert_raise(LocalJumpError){ @hash.reject }
-    else
-      assert_kind_of(Enumerable::Enumerator, @hash.reject)
-    end
+    assert_kind_of(Enumerator, @hash.reject)
   end
 
   test "reject does not accept any arguments" do
