@@ -10,7 +10,7 @@ class TC_Hash_EachValue_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @hash = {"ant", 1, "bat", 2, "cat", 3, "dog", 4}
+    @hash = Hash["ant", 1, "bat", 2, "cat", 3, "dog", 4]
   end
 
   test "each_value basic functionality" do
@@ -42,11 +42,7 @@ class TC_Hash_EachValue_InstanceMethod < Test::Unit::TestCase
   end
 
   test "each_value without a block behaves as expected" do
-    if PRE187
-      assert_raise(LocalJumpError){ @hash.each_value }
-    else
-      assert_kind_of(Enumerable::Enumerator, @hash.each_value)
-    end
+    assert_kind_of(Enumerator, @hash.each_value)
   end
 
   def teardown
