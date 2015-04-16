@@ -8,7 +8,7 @@ require 'test/unit'
 
 class TC_Hash_Invert_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {:foo, 1, "bar", 2, nil, 3, false, 4}
+    @hash = Hash[:foo, 1, "bar", 2, nil, 3, false, 4]
   end
 
   test "invert basic functionality" do
@@ -18,12 +18,12 @@ class TC_Hash_Invert_InstanceMethod < Test::Unit::TestCase
   end
 
   test "invert returns expected results" do
-    assert_equal({1, :foo, 2, "bar", 3, nil, 4, false}, @hash.invert)
+    assert_equal(Hash[1, :foo, 2, "bar", 3, nil, 4, false], @hash.invert)
   end
 
   test "invert does not modify the receiver" do
     @hash.invert
-    assert_equal({:foo, 1, "bar", 2, nil, 3, false, 4}, @hash)
+    assert_equal(Hash[:foo, 1, "bar", 2, nil, 3, false, 4], @hash)
   end
 
   test "calling invert on an empty hash return an empty hash" do
@@ -31,7 +31,7 @@ class TC_Hash_Invert_InstanceMethod < Test::Unit::TestCase
   end
 
   test "calling invert on a hash with multiple identical values only returns one of them" do
-    assert_equal(1, {"a",1,"b",1,"c",1}.invert.size)
+    assert_equal(1, Hash["a",1,"b",1,"c",1].invert.size)
   end
 
   test "invert does not accept any arguments" do
