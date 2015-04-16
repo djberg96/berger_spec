@@ -8,7 +8,7 @@ require 'test/unit'
 
 class TC_Hash_Sort_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {'c', 3, 'd', 4, 'a', 1, 'b', 2}
+    @hash = Hash['c', 3, 'd', 4, 'a', 1, 'b', 2]
   end
 
   test "sort basic functionality" do
