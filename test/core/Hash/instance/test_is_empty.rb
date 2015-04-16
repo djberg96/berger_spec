@@ -8,8 +8,8 @@ require 'test/unit'
 
 class TC_Hash_IsEmpty_InstanceMethod < Test::Unit::TestCase
   def setup
-    @falses = {false, false}
-    @nils   = {nil, nil}
+    @falses = {false => false}
+    @nils   = {nil => nil}
     @empty  = {}
   end
 
