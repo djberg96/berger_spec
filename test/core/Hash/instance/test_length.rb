@@ -4,11 +4,11 @@
 # Test suite for the Hash#length instance method and the Hash#size alias.
 ############################################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_Length_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {"a", 1, "b", 2, "c", 3}
+    @hash = Hash["a", 1, "b", 2, "c", 3]
   end
 
   test "length basic functionality" do
@@ -19,14 +19,15 @@ class TC_Hash_Length_InstanceMethod < Test::Unit::TestCase
 
   test "length returns expected results" do
     assert_equal(3, @hash.length)
-    assert_equal(1, {"a",1,"a",2}.length)
+    assert_equal(1, {"a" => 1, "a" => 2}.length)
+    assert_equal(2, {"a" => 1, :a => 2}.length)
     assert_equal(0, {}.length)
   end
 
   test "length returns expected results for hashes with multiple identical keys" do
-    assert_equal(1, {'a', 1, 'a', 2, 'a', 3}.length)
-    assert_equal(1, {nil,nil}.length)
-    assert_equal(1, {true, true, true, true}.length)
+    assert_equal(1, Hash['a', 1, 'a', 2, 'a', 3].length)
+    assert_equal(1, {nil => nil}.length)
+    assert_equal(1, {true => true, true => true}.length)
   end
 
   test "size is an alias for length" do
