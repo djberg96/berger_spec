@@ -4,13 +4,13 @@
 # Test suite for the Hash#each_key instance method.
 ###########################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class TC_Hash_EachKey_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @hash = {'ant', 1, 'bat', 2, 'cat', 3, 'dog', 4}
+    @hash = Hash['ant', 1, 'bat', 2, 'cat', 3, 'dog', 4]
   end
 
   test 'each_key basic functionality' do
@@ -42,11 +42,7 @@ class TC_Hash_EachKey_InstanceMethod < Test::Unit::TestCase
   end
 
   test "each_key without a block behaves as expected" do
-    if PRE187
-      assert_raise(LocalJumpError){ @hash.each_key }
-    else
-      assert_kind_of(Enumerable::Enumerator, @hash.each_key)
-    end
+    assert_kind_of(Enumerator, @hash.each_key)
   end
 
   def teardown
