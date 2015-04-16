@@ -10,7 +10,7 @@ class TC_Hash_Each_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @hash = {"ant", 1, "bat", 2, "cat", 3, "dog", 4}
+    @hash = Hash["ant", 1, "bat", 2, "cat", 3, "dog", 4]
     @int  = 0
   end
 
@@ -46,11 +46,7 @@ class TC_Hash_Each_InstanceMethod < Test::Unit::TestCase
   end
 
   test "each with no block behaves as expected" do
-    if PRE187
-      assert_raise(LocalJumpError){ @hash.each }
-    else
-      assert_kind_of(Enumerable::Enumerator, @hash.each)
-    end
+    assert_kind_of(Enumerator, @hash.each)
   end
 
   def teardown
