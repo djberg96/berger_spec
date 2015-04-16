@@ -37,12 +37,12 @@ class TC_Math_Log_SingletonMethod < Test::Unit::TestCase
   end
 
   test "log with zero argument returns infinity" do
-    omit_if(OSX || JRUBY)
+    omit_if(OSX)
     assert_equal('-Infinity', Math.log(0).to_s)
   end
 
   test "invalid argument to log raises an error" do
-    omit_unless(OSX || JRUBY)
+    omit_unless(OSX)
     assert_raises(Errno::ERANGE){ Math.log(0) }
     assert_raises(Errno::EDOM){ Math.log(-1) }
   end

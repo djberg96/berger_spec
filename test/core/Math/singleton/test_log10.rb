@@ -27,12 +27,12 @@ class TC_Math_Log10_SingletonMethod < Test::Unit::TestCase
   end
 
   test "log10 returns Infinity" do
-    omit_unless(OSX || JRUBY)
+    omit_unless(OSX)
     assert_equal('-Infinity', Math.log10(0).to_s)
   end
 
   test "log10 with invalid argument raises an error" do
-    omit_unless(OSX || JRUBY)
+    omit_unless(OSX)
     assert_raises(Errno::ERANGE){ Math.log10(0) }
     assert_raises(Errno::EDOM){ Math.log10(-1) }
   end
