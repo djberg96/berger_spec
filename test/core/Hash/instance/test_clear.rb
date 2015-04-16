@@ -4,11 +4,11 @@
 # Test suite for the Hash#clear instance method.
 ###########################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class Test_Hash_Clear_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash  = {"foo"=>1, :bar=>2}
+    @hash  = Hash["foo"=>1, :bar=>2]
     @empty = {}
   end
 
