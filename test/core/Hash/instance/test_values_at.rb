@@ -4,12 +4,12 @@
 # Test suite for the Hash#values_at instance method.
 ###########################################################
 require 'test/helper'
-require 'test/unit'
+require 'test-unit'
 
 class Test_Hash_ValuesAt_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash1 = {'a',1,'b',2,'c',3}
-    @hash2 = {'a',1,'b',2,'c',3}
+    @hash1 = Hash['a',1,'b',2,'c',3]
+    @hash2 = Hash['a',1,'b',2,'c',3]
     @hash2.default = 7
   end
 
