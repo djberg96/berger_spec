@@ -8,7 +8,7 @@ require 'test/unit'
 
 class TC_Hash_ToS_InstanceMethod < Test::Unit::TestCase
   def setup
-    @hash = {"a", 1, :b, 2, nil, 3, false, 4}
+    @hash = Hash["a", 1, :b, 2, nil, 3, false, 4]
   end
 
   test "to_s basic functionality" do
@@ -17,10 +17,10 @@ class TC_Hash_ToS_InstanceMethod < Test::Unit::TestCase
   end
 
   test "to_s returns the expected results" do
-    assert_equal("a1b23false4".length, @hash.to_s.length)
-    assert_equal("", {}.to_s)
-    assert_equal("1", {nil,1}.to_s)
-    assert_equal("false1", {false, 1}.to_s)
+    assert_equal("{:a=>1, 'b'=>2, nil=>3, false=>4}".length, @hash.to_s.length)
+    assert_equal("{}", {}.to_s)
+    assert_equal("{nil=>1}", {nil => 1}.to_s)
+    assert_equal("{false=>1}", {false => 1}.to_s)
   end
 
   test "to_s does not accept any arguments" do
