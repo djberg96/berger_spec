@@ -55,30 +55,43 @@ class TC_IO_Foreach_ClassMethod < Test::Unit::TestCase
     assert_nil(@array[1])
   end
 
+  test "foreach with length argument returns the expected results" do
+    assert_nothing_raised{ IO.foreach(@filename, 3){ |line| @array << line } }
+    assert_equal("hel", @array[0])
+    assert_equal("lo\n", @array[1])
+    assert_equal("wor", @array[2])
+    assert_equal("ld\n", @array[3])
+  end
+
+  test "foreach accepts open args" do
+    assert_nothing_raised{ IO.foreach(@filename, nil, mode: 'rb'){} }
+    assert_nothing_raised{ IO.foreach(@filename, nil, mode: 'rb', encoding: Encoding::UTF_16LE){} }
+  end
+
   test "foreach yields tainted strings" do
     IO.foreach(@filename){ |line| @array << line }
     assert_true(@array[0].tainted?)
   end
 
   test "foreach without a block" do
-    if PRE187
-      assert_raise(LocalJumpError){ IO.foreach(@filename) }
-    else
-      assert_kind_of(Enumerable::Enumerator, IO.foreach(@filename))
-    end
+    assert_kind_of(Enumerator, IO.foreach(@filename))
   end
 
   test "foreach requires at least one argument" do
     assert_raise(ArgumentError){ IO.foreach }
   end
 
-  test "foreach accepts a maximum of two arguments" do
-    assert_raise(ArgumentError){ IO.foreach(@filename, '', 1) }
+  test "the first argument to foreach must be a string" do
+    assert_raise(TypeError){ IO.foreach(9999){} }
   end
 
-  test "the arguments to foreach must be strings" do
-    assert_raise(TypeError){ IO.foreach(9999){} }
-    assert_raise(TypeError){ IO.foreach(@filename, 1){} }
+  test "the second argument to foreach must be a string or number" do
+    assert_raise(TypeError){ IO.foreach(@filename, false){} }
+  end
+
+  test "the third argument to foreach must be a hash" do
+    assert_raise(TypeError){ IO.foreach(@filename, 1, 'rb'){} }
+    assert_raise(TypeError){ IO.foreach(@filename, 1, true){} }
   end
 
   def teardown
