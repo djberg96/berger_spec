@@ -17,7 +17,7 @@ class TC_IO_Isatty_InstanceMethod < Test::Unit::TestCase
 
     unless WINDOWS
       @tty  = '/dev/tty'
-      @th = File.new(@tty) if File.exists?(@tty)
+      @th = File.new(@tty) if File.exist?(@tty)
     end
   end
 
@@ -33,18 +33,14 @@ class TC_IO_Isatty_InstanceMethod < Test::Unit::TestCase
 
   test "isatty returns expected results" do
     assert_false(@fh.isatty)
-
-    if WINDOWS
-      assert_true(@nh.isatty)
-    else
-      assert_false(@nh.isatty)
-      assert_true(@th.isatty) if @th
-    end
+    assert_false(@nh.isatty)
+    omit_if(WINDOWS)
+    assert_true(@th.isatty)
   end
 
   # I'm assuming you don't run your test cases via cron...
   test "isatty returns true for STDOUT" do
-    notify("This may be incorrect. See http://tinyurl.com/248kem9") if WINDOWS
+  #  notify("This may be incorrect. See http://tinyurl.com/248kem9") if WINDOWS
     assert_true(STDOUT.isatty)
   end
 
