@@ -6,7 +6,7 @@
 require 'test/helper'
 require 'test-unit'
 
-class TC_IO_Lineno_InstanceMethod < Test::Unit::TestCase
+class TC_IO_LinenoGet_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
