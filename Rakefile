@@ -229,6 +229,19 @@ namespace "test" do
       t.test_files = FileList['test/core/Fixnum/*/*.rb']
     end
 
+    namespace "fixnum" do
+      namespace "instance" do
+        Dir['test/core/Fixnum/instance/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
+    end
+
     desc "Runs the test suite for the Float class"
     Rake::TestTask.new('float') do |t|
       t.libs << 'lib'
