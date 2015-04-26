@@ -433,6 +433,19 @@ namespace "test" do
       t.warning = true
     end
 
+    namespace :object do
+      namespace :instance do
+        Dir['test/core/Module/instance/*.rb'].each{ |file|
+          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+          Rake::TestTask.new(name) do |t|
+            t.test_files = [file]
+            t.warning = true
+            t.verbose = true
+          end
+        }
+      end
+    end
+
     desc "Runs the test suite for the ObjectSpace class"
     Rake::TestTask.new('objectspace') do |t|
       t.test_files = FileList['test/core/ObjectSpace/*/*.rb']
