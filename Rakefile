@@ -435,7 +435,7 @@ namespace "test" do
 
     namespace :object do
       namespace :instance do
-        Dir['test/core/Module/instance/*.rb'].each{ |file|
+        Dir['test/core/Object/instance/*.rb'].each{ |file|
           name = File.basename(file, '.rb').split('_')[1..-1].join('_')
           Rake::TestTask.new(name) do |t|
             t.test_files = [file]
