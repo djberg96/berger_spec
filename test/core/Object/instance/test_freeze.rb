@@ -1,5 +1,5 @@
 ########################################################################
-# tc_freeze.rb
+# test_freeze.rb
 #
 # Test case for the Object#freeze instance method.
 ########################################################################
@@ -7,49 +7,36 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_Object_Freeze_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
-   
-   def setup
-      @object = Object.new
-   end
+  include Test::Helper
 
-   def test_freeze_basic
-      assert_respond_to(@object, :freeze)
-      assert_nothing_raised{ @object.freeze }
-   end
+  def setup
+    @object = Object.new
+  end
 
-   def test_freeze
-      assert_equal(@object, @object.freeze)
-      assert_equal(@object, @object.freeze) # Duplicate intentional
-      assert_equal(true, @object.frozen?)
-   end
+  test "freeze basic functionality" do
+    assert_respond_to(@object, :freeze)
+    assert_nothing_raised{ @object.freeze }
+    assert_equal(@object, @object.freeze)
+  end
 
-   unless JRUBY
-      # You can freeze an object at $SAFE level 4 only if it's tainted
-      def test_freeze_safe_environment
-         assert_raise(SecurityError){
-            proc do
-               $SAFE = 4
-               @object.freeze
-            end.call
-         }
+  test "freeze works as expected" do
+    assert_false(@object.frozen?)
+    assert_nothing_raised{ @object.freeze }
+    assert_true(@object.frozen?)
+  end
 
-         assert_nothing_raised{ @object.taint }
+  test "calling freeze multiple times is ok" do
+    assert_nothing_raised{ @object.freeze }
+    assert_nothing_raised{ @object.freeze }
+    assert_nothing_raised{ @object.freeze }
+    assert_true(@object.frozen?)
+  end
 
-         assert_nothing_raised{
-            proc do
-               $SAFE = 4
-               @object.freeze
-            end.call
-         }
-      end
-   end
-   
-   def test_freeze_expected_errors
-      assert_raise(ArgumentError){ @object.freeze(true) }
-   end
+  test "test freeze does not accept any arguments" do
+    assert_raise(ArgumentError){ @object.freeze(true) }
+  end
 
-   def teardown
-      @object = nil
-   end
+  def teardown
+    @object = nil
+  end
 end
