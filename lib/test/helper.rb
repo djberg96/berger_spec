@@ -138,6 +138,8 @@ module Test
         path
       else
         path = ENV['TMPDIR'] || ENV['TMP'] || ENV['TEMP'] || '/tmp'
+        path = path.dup.chop! if path[-1] == '/'
+        path
       end
     end
 
