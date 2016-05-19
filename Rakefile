@@ -643,6 +643,13 @@ namespace "test" do
       t.warning = true
       t.test_files = FileList['test/stdlib/Tmpdir/*.rb']
     end
+
+    desc "Run the test suite for the weakref library"
+    Rake::TestTask.new('weakref') do |t|
+      t.libs << 'lib'
+      t.warning = true
+      t.test_files = FileList['test/stdlib/Weakref/*.rb']
+    end
   end
 end
 
