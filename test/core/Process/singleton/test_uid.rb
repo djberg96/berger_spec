@@ -11,17 +11,17 @@ class TC_Process_Uid_SingletonMethod < Test::Unit::TestCase
 
   def setup
     @uid  = nil
-    @user = Etc.getpwnam('nobody')
+    @etc = Etc.getpwnam(ENV['USER'])
   end
 
   test "uid basic functionality" do
     assert_respond_to(Process, :uid)
+    assert_nothing_raised{ Process.uid }
+    assert_kind_of(Fixnum, Process.uid)
   end
 
   test "uid returns the expected results" do
-    assert_nothing_raised{ Process.uid }
-    assert_kind_of(Fixnum, Process.uid)
-    assert_true(Process.uid < 100000)
+    assert_true(Process.uid == @etc.uid)
   end
 
   test "uid does not accept any arguments" do
@@ -30,6 +30,6 @@ class TC_Process_Uid_SingletonMethod < Test::Unit::TestCase
 
   def teardown
     @uid = nil
-    @user = nil
+    @etc = nil
   end
 end
