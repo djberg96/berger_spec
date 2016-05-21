@@ -6,7 +6,7 @@
 require 'test/helper'
 require 'test/unit'
 
-class TC_Process_Maxgroups_SingletonMethod < Test::Unit::TestCase
+class TC_Process_MaxgroupsSet_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
