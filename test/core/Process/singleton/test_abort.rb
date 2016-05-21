@@ -48,6 +48,6 @@ class TC_Process_Abort_ModuleMethod < Test::Unit::TestCase
   def teardown
     @fh.close if @fh && !@fh.closed?
     STDERR.reopen(@stderr)
-    File.delete(@file) if File.exists?(@file)
+    File.delete(@file) if File.exist?(@file)
   end
 end
