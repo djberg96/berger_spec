@@ -10,6 +10,7 @@ class TC_Process_Groups_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   test "groups basic functionality" do
+    omit_if_windows('Process.groups')
     assert_respond_to(Process, :groups)
   end
 
@@ -25,6 +26,7 @@ class TC_Process_Groups_SingletonMethod < Test::Unit::TestCase
   end
 
   test "groups does not accept any arguments" do
+    omit_if_windows('Process.groups')
     assert_raises(ArgumentError){ Process.groups(0) }
   end
 end
