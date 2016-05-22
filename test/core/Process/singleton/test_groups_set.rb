@@ -20,6 +20,7 @@ class TC_Process_GroupsSet_SingletonMethod < Test::Unit::TestCase
   end
 
   test "groups= basic functionality" do
+    omit_if_windows('Process.groups=')
     assert_respond_to(Process, :groups=)
   end
 
