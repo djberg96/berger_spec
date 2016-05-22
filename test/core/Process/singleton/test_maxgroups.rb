@@ -19,12 +19,14 @@ class TC_Process_Maxgroups_SingletonMethod < Test::Unit::TestCase
   end
 
   test "maxgroups basic functionality" do
+    omit_if_windows('Process.maxgroups')
     assert_respond_to(Process, :maxgroups)
     assert_nothing_raised{ Process.maxgroups }
     assert_kind_of(Fixnum, Process.maxgroups)
   end
 
   test "maxgroups returns expected results" do
+    omit_if_windows('Process.maxgroups')
     if OSX
       assert_equal(@max, Process.maxgroups)
     else
@@ -33,6 +35,7 @@ class TC_Process_Maxgroups_SingletonMethod < Test::Unit::TestCase
   end
 
   test "maxgroups does not accept any arguments" do
+    omit_if_windows('Process.maxgroups')
     assert_raise(ArgumentError){ Process.maxgroups(1) }
   end
 
