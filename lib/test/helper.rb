@@ -307,10 +307,20 @@ module Test
       omit_if(WINDOWS, "#{test_name} test skipped on MS Windows", &block)
     end
 
+    def omit_if_osx(test_name, &block)
+      omit_if(OSX, "#{test_name} test skipped on OSX", &block)
+    end
+
     # Shortcut for skipping tests that are not run while root.
     #
     def omit_unless_root(test_name, &block)
       omit_unless(ROOT, "#{test_name} test skipped unless run as root", &block)
+    end
+
+    # Shortcut for skipping tests when run as root.
+    #
+    def omit_if_root(test_name, &block)
+      omit_if(ROOT, "#{test_name} test skipped unless run as root", &block)
     end
   end
 end
