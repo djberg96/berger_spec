@@ -14,6 +14,7 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
     unless WINDOWS
       @local_gid = Etc.getgrnam('nobody').gid
       @login_gid = Etc.getpwnam(Etc.getlogin).gid
+      @current_gid = Etc.getpwnam(ENV['USER']).gid
     end
   end
 
@@ -27,6 +28,9 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
 
     assert_nothing_raised{ Process.gid = @local_gid }
     assert_equal(@local_gid, Process.gid)
+
+    assert_nothing_raised{ Process.gid = @current_gid }
+    assert_equal(@current_gid, Process.gid)
   end
 
   test "gid= returns the value that was assigned" do
@@ -34,6 +38,7 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
     omit_unless_root('Process.gid=')
 
     assert_equal(@local_gid, Process.gid = @local_gid)
+    assert_equal(@current_gid, Process.gid = @current_gid)
   end
 
   test "gid= requires a numeric argument" do
