@@ -15,12 +15,13 @@ class TC_Process_Euid_Set_SingletonMethod < Test::Unit::TestCase
   end
 
   test "euid= basic functionality" do
+    omit_if_windows('Process.euid=')
     assert_respond_to(Process, :euid=)
   end
 
   test "euid= works as expected" do
-    omit_if(WINDOWS, "Process.euid= tests skipped on MS Windows")
-    omit_unless(ROOT, "Process.euid= tests skipped unless run as root")
+    omit_if_windows('Process.euid=')
+    omit_unless_root('Process.euid=')
 
     @euid = Process.euid
     assert_nothing_raised{ Process.euid = @user.gid }
@@ -31,13 +32,13 @@ class TC_Process_Euid_Set_SingletonMethod < Test::Unit::TestCase
   end
 
   test "euid= returns the assigned value" do
-    omit_if(WINDOWS, "Process.euid= tests skipped on MS Windows")
+    omit_if_windows('Process.euid=')
     @euid = Process.euid
     assert_equal(@euid, Process.euid = @euid)
   end
 
   test "euid= requires a valid user" do
-    omit_if(WINDOWS, "Process.euid= tests skipped on MS Windows")
+    omit_if_windows('Process.euid=')
     assert_raise(ArgumentError){ Process.euid = "bogus" }
   end
 
