@@ -19,6 +19,7 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
   end
 
   test "gid= basic functionality" do
+    omit_if_windows('Process.gid=')
     assert_respond_to(Process, :gid=)
   end
 
