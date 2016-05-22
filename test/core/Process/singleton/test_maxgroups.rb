@@ -25,7 +25,11 @@ class TC_Process_Maxgroups_SingletonMethod < Test::Unit::TestCase
   end
 
   test "maxgroups returns expected results" do
-    assert_equal(@max, Process.maxgroups)
+    if OSX
+      assert_equal(@max, Process.maxgroups)
+    else
+      assert_true(Process.maxgroups > 16)
+    end
   end
 
   test "maxgroups does not accept any arguments" do
