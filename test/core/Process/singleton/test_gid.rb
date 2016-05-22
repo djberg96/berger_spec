@@ -11,7 +11,7 @@ class TC_Process_Gid_SingletonMethod < Test::Unit::TestCase
 
   def setup
     unless WINDOWS
-      @local_gid = Etc.getgrnam('staff').gid
+      @local_gid = Etc.getgrnam('nobody').gid
       @login_gid = Etc.getpwnam(Etc.getlogin).gid
     end
   end
