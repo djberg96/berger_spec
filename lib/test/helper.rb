@@ -96,7 +96,7 @@ module Test
     # I use this where I don't want to use Ruby's Dir.pwd method.
     #
     def pwd_n
-      WINDOWS ? `cd`.chomp : `pwd`.chomp
+      WINDOWS ? `cd`.chomp : `pwd -P`.chomp
     end
 
     # Returns the null device for the given platform
