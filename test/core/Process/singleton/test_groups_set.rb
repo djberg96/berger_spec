@@ -24,49 +24,53 @@ class TC_Process_GroupsSet_SingletonMethod < Test::Unit::TestCase
   end
 
   test "groups_set accepts an array of integers" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
-    omit_unless(ROOT, "Process.groups= test skipped unless run as root")
+    omit_if_windows('Process.groups=')
+    omit_unless_root('Process.groups=')
+
     assert_nothing_raised{ Process.groups = @gids[0..3] }
   end
 
   test "groups_set accepts an array of strings" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
-    omit_unless(ROOT, "Process.groups= test skipped unless run as root")
+    omit_if_windows('Process.groups=')
+    omit_unless_root('Process.groups=')
+
     assert_nothing_raised{ Process.groups = @names[0..3] }
   end
 
   test "groups_set returns an array of groups that were assigned" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
-    omit_unless(ROOT, "Process.groups= test skipped unless run as root")
+    omit_if_windows('Process.groups=')
+    omit_unless_root('Process.groups=')
+
     assert_equal(@gids[0..3], Process.groups = @gids[0..3])
     assert_equal(@names[0..3], Process.groups = @names[0..3])
   end
 
   test "groups_get method returns groups that were set" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
-    omit_unless(ROOT, "Process.groups= test skipped unless run as root")
+    omit_if_windows('Process.groups=')
+    omit_unless_root('Process.groups=')
+
     assert_nothing_raised{ Process.groups = @gids[0..3] }
     assert_equal(@gids[0..3], Process.groups)
   end
 
   test "groups_set only accepts an array as an argument" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
+    omit_if_windows('Process.groups=')
+    omit_unless_root('Process.groups=')
+
     assert_raises(TypeError){ Process.groups = 'test' }
   end
 
-  test "groups_set accepts a maximum of 32 groups" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
-    arr = (1..33).to_a
-    assert_raises(ArgumentError){ Process.groups = arr }
-  end
-
   test "groups_set must contain numbers or strings only" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
+    omit_if_windows('Process.groups=')
+    omit_unless_root('Process.groups=')
+
     assert_raises(TypeError){ Process.groups = [true, 1, [], 2] }
   end
 
   test "groups_set raises an error if a group cannot be found for the group name" do
-    omit_if(WINDOWS, "Process.groups= test skipped on Windows")
+    omit_if_windows('Process.groups=')
+    omit_unless_root('Process.groups=')
+
     assert_raises(ArgumentError){ Process.groups = ["bogusxxx"] }
   end
 

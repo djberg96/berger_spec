@@ -12,7 +12,7 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
 
   def setup
     unless WINDOWS
-      @local_gid = Etc.getgrnam('staff').gid
+      @local_gid = Etc.getgrnam('nobody').gid
       @login_gid = Etc.getpwnam(Etc.getlogin).gid
     end
   end
@@ -22,25 +22,24 @@ class TC_Process_GidSet_SingletonMethod < Test::Unit::TestCase
   end
 
   test "gid= sets the gid as expected" do
-    omit_if(WINDOWS, "Process.gid= tests skipped on MS Windows")
-    omit_unless(ROOT, "Process.gid= tests skipped except when root")
+    omit_if_windows('Process.gid=')
+    omit_unless_root('Process.gid=')
 
     assert_nothing_raised{ Process.gid = @local_gid }
     assert_equal(@local_gid, Process.gid)
-    assert_nothing_raised{ Process.gid = @login_gid }
-    assert_equal(@login_gid, Process.gid)
   end
 
   test "gid= returns the value that was assigned" do
-    omit_if(WINDOWS, "Process.gid= tests skipped on MS Windows")
-    omit_unless(ROOT, "Process.gid= tests skipped except when root")
+    omit_if_windows('Process.gid=')
+    omit_unless_root('Process.gid=')
 
     assert_equal(@local_gid, Process.gid = @local_gid)
   end
 
   test "gid= requires a numeric argument" do
-    omit_unless(ROOT, "Process.gid= tests skipped except when root")
-    assert_raises(TypeError){ Process.gid = "bogus" }
+    omit_if_windows('Process.gid=')
+    omit_unless_root('Process.gid=')
+    assert_raises(ArgumentError){ Process.gid = "bogus" }
   end
 
   def teardown
