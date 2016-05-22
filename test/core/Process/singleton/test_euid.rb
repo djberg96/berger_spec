@@ -19,7 +19,6 @@ class TC_Process_Euid_SingletonMethod < Test::Unit::TestCase
   end
 
   test "euid returns the expected results" do
-    omit_if(WINDOWS, "Process.euid test skipped on MS Windows")
     assert_nothing_raised{ Process.euid }
     assert_kind_of(Fixnum, Process.euid)
     assert_true(Process.euid < 100000)
