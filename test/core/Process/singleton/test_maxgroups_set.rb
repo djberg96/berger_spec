@@ -18,22 +18,24 @@ class TC_Process_MaxgroupsSet_SingletonMethod < Test::Unit::TestCase
     end
   end
 
-  test "maxgroups_set basic functionality" do
+  test "maxgroups= basic functionality" do
+    omit_if_windows('Process.maxgroups=')
     assert_respond_to(Process, :maxgroups=)
   end
 
-  test "maxgroups_set accepts and returns a numeric argument" do
+  test "maxgroups= accepts and returns a numeric argument" do
+    omit_if_windows('Process.maxgroups=')
     assert_nothing_raised{ Process.maxgroups = 64 }
     assert_equal(43, Process.maxgroups = 43)
   end
 
-  test "maxgroups_set requires a positive numeric argument" do
+  test "maxgroups= requires a positive numeric argument" do
     omit_if(WINDOWS, "Process.maxgroups= tests skipped on MS Windows")
     assert_raise(TypeError){ Process.maxgroups = "test" }
     assert_raise(ArgumentError){ Process.maxgroups = -1 }
   end
 
   def teardown
-    @max
+    @max = nil
   end
 end
