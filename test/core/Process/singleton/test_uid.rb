@@ -10,7 +10,11 @@ class TC_Process_Uid_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @uid = Etc.getpwnam(ENV['USER']) || 0 # Windows
+    if WINDOWS
+      @uid = 0
+    else
+      @uid = Etc.getpwnam(ENV['USER']).uid
+    end
   end
 
   test "uid basic functionality" do
@@ -20,7 +24,7 @@ class TC_Process_Uid_SingletonMethod < Test::Unit::TestCase
   end
 
   test "uid returns the expected results" do
-    assert_true(Process.uid == @uid)
+    assert_equal(Process.uid, @uid)
   end
 
   test "uid does not accept any arguments" do
