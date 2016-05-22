@@ -47,7 +47,7 @@ class TC_Process_Uid_Set_SingletonMethod < Test::Unit::TestCase
 
   test "uid= raises an error without proper privileges" do
     omit_if_root('Process.uid=')
-    assert_raise(Errno::EPERM){ Process.uid = @uid }
+    assert_raise(Errno::EPERM){ Process.uid = 0 }
   end
 
   def teardown
