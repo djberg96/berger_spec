@@ -322,5 +322,9 @@ module Test
     def omit_if_root(test_name, &block)
       omit_if(ROOT, "#{test_name} test skipped unless run as root", &block)
     end
+
+    def omit_if_jruby(test_name, &block)
+      omit_if(JRUBY, "#{test_name} test skipped on JRuby", &block)
+    end
   end
 end
