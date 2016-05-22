@@ -18,6 +18,7 @@ class TC_Process_Initgroups_SingletonMethod < Test::Unit::TestCase
   end
 
   test "initgroups basic functionality" do
+    omit_if_windows('Process.initgroups')
     assert_respond_to(Process, :initgroups)
   end
 
