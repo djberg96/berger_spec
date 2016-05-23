@@ -24,9 +24,8 @@ class TC_Dir_Close_Instance < Test::Unit::TestCase
     assert_equal(nil, @dir.close)
   end
 
-  test "calling close on a closed dir object raises an IO error" do
-    assert_nothing_raised{ @dir.close }
-    assert_raises(IOError){ @dir.close }
+  test "calling close on a closed dir object has no effect" do
+    assert_nothing_raised{ 3.times{ @dir.close } }
   end
 
   test "close does not accept any parameters" do
