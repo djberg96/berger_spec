@@ -68,11 +68,7 @@ class TC_Enumerable_FindAll_InstanceMethod < Test::Unit::TestCase
   end
 
   test "find_all behavior when no block is provided" do
-    if PRE187
-      assert_raise(LocalJumpError){ @enum.find_all }
-    else
-      assert_kind_of(Enumerator, @enum.find_all)
-    end
+    assert_kind_of(Enumerator, @enum.find_all)
   end
 
   def teardown
