@@ -13,6 +13,7 @@ class TC_Dir_PosSet_InstanceMethod < Test::Unit::TestCase
   def setup
     @pwd = pwd_n
     @dir = Dir.new(@pwd)
+    @pos = nil
   end
 
   test "pos= basic functionality" do
@@ -22,7 +23,8 @@ class TC_Dir_PosSet_InstanceMethod < Test::Unit::TestCase
 
   test "pos= returns the expected values" do
     assert_nothing_raised{ @dir.read }
-    assert_equal(1, @dir.pos = 1)
+    @pos = @dir.tell
+    assert_equal(@pos, @dir.pos = @pos)
   end
 
   test "pos= behaves as expected" do
@@ -32,16 +34,9 @@ class TC_Dir_PosSet_InstanceMethod < Test::Unit::TestCase
     assert_equal(first, @dir.read)
   end
 
-  test "specifying a negative number of any value resets the pointer to the beginning" do
-    10.times{ @dir.read }
+  test "specifying a negative number does not raise an error" do
     assert_nothing_raised{ @dir.pos = -3 }
-    assert_equal('.', @dir.read)
-  end
-
-  test "specifying a negative value that is out of bounds resets the pointer to the beginning" do
-    @dir.read
-    assert_nothing_raised{ @dir.pos = -100 }
-    assert_equal('.', @dir.read)
+    assert_nothing_raised{ @dir.pos = -300 }
   end
 
   test "pos requires a numeric argument" do
@@ -51,5 +46,6 @@ class TC_Dir_PosSet_InstanceMethod < Test::Unit::TestCase
   def teardown
     @pwd = nil
     @dir = nil
+    @pos = nil
   end
 end
