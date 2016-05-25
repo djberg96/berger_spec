@@ -24,8 +24,8 @@ class TC_String_Aref_InstanceMethod < Test::Unit::TestCase
 
   # First form: str[int]
   test "aref with one argument returns the expected result" do
-    assert_equal(113, @string1[0])
-    assert_equal(121, @string1[-1])
+    assert_equal('q', @string1[0])
+    assert_equal('y', @string1[-1])
     assert_nil(@string1[99])
     assert_nil(@string1[-99])
   end
@@ -81,12 +81,12 @@ class TC_String_Aref_InstanceMethod < Test::Unit::TestCase
 
   test "aref using stringified number works as expected" do
     assert_equal("0", "0"['0'])
-    assert_equal(48, "0"[0])
+    assert_equal("0", "0"[0])
   end
 
   # This test was added as a result of ruby-core: 10805
   test "aref honors to_int implementation" do
-    assert_equal(101, @string1[StringArefTemp.new])
+    assert_equal("e", @string1[StringArefTemp.new])
   end
 
   # Inspired by JRUBY-1721
