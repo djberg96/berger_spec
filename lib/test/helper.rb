@@ -301,6 +301,14 @@ module Test
       end
     end
 
+    # Temporarily suppress warnings for code within block.
+    def suppress_warning
+      verbose, $VERBOSE = $VERBOSE, nil
+      yield
+    ensure
+      $VERBOSE = verbose
+    end
+
     # Shortcut for skipping tests on MS Windows.
     #
     def omit_if_windows(test_name, &block)
