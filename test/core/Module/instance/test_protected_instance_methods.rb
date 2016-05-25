@@ -28,25 +28,25 @@ class ProtInstMethC < ProtInstMethB
 end
 
 class TC_Module_ProtectedInstanceMethods_InstanceMethod < Test::Unit::TestCase
-   def test_protected_instance_methods_basic
-      assert_respond_to(ProtInstMethA, :protected_instance_methods)
-      assert_nothing_raised{ ProtInstMethA.protected_instance_methods }
-      assert_kind_of(Array, ProtInstMethA.protected_instance_methods)
-   end
+  def test_protected_instance_methods_basic
+    assert_respond_to(ProtInstMethA, :protected_instance_methods)
+    assert_nothing_raised{ ProtInstMethA.protected_instance_methods }
+    assert_kind_of(Array, ProtInstMethA.protected_instance_methods)
+  end
 
-   def test_protected_instance_methods
-      assert_equal(['m_protected'], ProtInstMethA.protected_instance_methods)
-      assert_equal(true, ProtInstMethB.protected_instance_methods.include?('m_protected'))
-      assert_equal(true, ProtInstMethC.protected_instance_methods.include?('m_protected'))
-   end
+  def test_protected_instance_methods
+    assert_equal([:m_protected], ProtInstMethA.protected_instance_methods)
+    assert_true(ProtInstMethB.protected_instance_methods.include?(:m_protected))
+    assert_true(ProtInstMethC.protected_instance_methods.include?(:m_protected))
+  end
 
-   def test_protected_instance_methods_with_super
-      assert_equal(['m_protected'], ProtInstMethA.protected_instance_methods(false))
-      assert_equal([], ProtInstMethB.protected_instance_methods(false))
-      assert_equal([], ProtInstMethC.protected_instance_methods(false))
-   end
+  def test_protected_instance_methods_with_super
+    assert_equal([:m_protected], ProtInstMethA.protected_instance_methods(false))
+    assert_equal([], ProtInstMethB.protected_instance_methods(false))
+    assert_equal([], ProtInstMethC.protected_instance_methods(false))
+  end
 
-   def test_protected_instance_methods_expected_errors
-      assert_raise(ArgumentError){ ProtInstMethA.protected_instance_methods(true, false) }
-   end
+  def test_protected_instance_methods_expected_errors
+    assert_raise(ArgumentError){ ProtInstMethA.protected_instance_methods(true, false) }
+  end
 end
