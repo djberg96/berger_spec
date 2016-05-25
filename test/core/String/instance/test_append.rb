@@ -74,9 +74,9 @@ class TC_String_Append_InstanceMethod < Test::Unit::TestCase
     assert_raise(TypeError){ @string << false }
   end
 
-  test "only numbers in the range 0 to 255 may be appended" do
-    assert_raise(TypeError){ @string << 256 }
-    assert_raise(TypeError){ @string << -1 }
+  test "only valid code points may be appended" do
+    assert_raise(RangeError){ @string << 99999999 }
+    assert_raise(RangeError){ @string << -1 }
   end
 
   def teardown
