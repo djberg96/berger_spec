@@ -60,19 +60,6 @@ class TC_String_Replace_InstanceMethod < Test::Unit::TestCase
     }
   end
   
-  test "attempting a replace a string in $SAFE mode 3 or less does not raise an error" do
-    omit_if_jruby('String#replace')
-    assert_nothing_raised{
-      suppress_warning{
-        proc do
-          $SAFE = 3
-          @string1.taint
-          @string1.replace('test')
-        end.call
-      }
-    }
-  end
-
   test "replace accepts a single string argument only" do
     assert_raise(ArgumentError){ @string1.replace("x","y") }
     assert_raise(TypeError){ @string1.replace(1) }
