@@ -26,12 +26,9 @@ class TC_String_Strip_InstanceMethod < Test::Unit::TestCase
     assert_equal('hello', @string2.strip)
   end
 
-  test "strip removes trailing octal zero if it's the last character" do
+  test "strip removes trailing octal zero" do
     assert_equal('hello', @string3.strip)
-  end
-
-  test "strip does not remove a trailing octal zero if it's not the last character" do
-    assert_equal("hello  \000world\000", @string4.strip)
+    assert_equal("hello  \000world", @string4.strip)
   end
 
   test "strip does not modify the receiver" do
