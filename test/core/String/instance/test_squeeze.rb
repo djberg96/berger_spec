@@ -1,63 +1,53 @@
 ###########################################################################
 # test_squeeze.rb
 #
-# Test case for the String#squeeze and String#squeeze! instance methods.
+# Test case for the String#squeeze instance method. For String#squeeze!
+# see test_squeeze_bang.rb.
 ###########################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_String_Squeeze_InstanceMethod < Test::Unit::TestCase
-   def setup
-      @string = "yellow   moon"
-   end
+  def setup
+    @string = "yellow   moon"
+  end
 
-   def test_squeeze_basic
-      assert_respond_to(@string, :squeeze)
-      assert_respond_to(@string, :squeeze!)
-      assert_nothing_raised{ @string.squeeze }
-      assert_nothing_raised{ @string.squeeze! }
-   end
+  test "squeez basic functionality" do
+    assert_respond_to(@string, :squeeze)
+    assert_nothing_raised{ @string.squeeze }
+    assert_kind_of(String, @string.squeeze)
+  end
 
-   def test_squeeze
-      assert_equal("yelow mon", @string.squeeze)
-      assert_equal("yellow   moon", @string)
-      assert_equal("'", "''''''''".squeeze)
-      assert_equal('', ''.squeeze)
-      assert_equal('\\', '\\\\\\\\\\'.squeeze)
-   end
+  test "squeeze returns the expected results" do
+    assert_equal("yelow mon", @string.squeeze)
+    assert_equal("'", "''''''''".squeeze)
+    assert_equal('', ''.squeeze)
+    assert_equal('\\', '\\\\\\\\\\'.squeeze)
+  end
 
-   def test_squeeze_with_args
-      assert_equal("yelow   moon", @string.squeeze("l"))
-      assert_equal("yelow moon", @string.squeeze("l "))
-      assert_equal("yelow   mon", @string.squeeze("l-p"))
-      assert_equal('\\', '\\\\\\\\\\'.squeeze('\\'))
-   end
+  test "squeeze does not modify its receiver" do
+    @string.squeeze
+    assert_equal("yellow   moon", @string)
+  end
 
-   def test_squeeze_bang
-      assert_equal("yelow mon", @string.squeeze!)
-      assert_equal(nil, @string.squeeze!)
-      assert_equal("yelow mon", @string)
-   end
+  test "squeeze with single character argument returns expected result" do
+    assert_equal("yelow   moon", @string.squeeze("l"))
+    assert_equal('\\', '\\\\\\\\\\'.squeeze('\\'))
+  end
 
-   def test_squeeze_bang_with_args
-      assert_equal("yelow   moon", @string.squeeze!("l"))
-      assert_equal("yelow   moon", @string)
+  test "squeeze with multi character argument returns expected result" do
+    assert_equal("yelow moon", @string.squeeze("l "))
+  end
 
-      assert_equal("yelow moon", @string.squeeze!("l "))
-      assert_equal("yelow moon", @string)
+  test "squeeze with range argument return expected result" do
+    assert_equal("yelow   mon", @string.squeeze("l-p"))
+  end
 
-      assert_equal("yelow mon", @string.squeeze!("l-p"))
-      assert_equal("yelow mon", @string)
+  test "squeeze requires a valid argument if present" do
+    assert_raise(TypeError){ @string.squeeze(1) }
+  end
 
-      assert_equal(nil, @string.squeeze!("a-z?!\\"))
-   end
-
-   def test_squeeze_expected_errors
-      assert_raise(TypeError){ @string.squeeze(1) }
-      assert_raise(TypeError){ @string.freeze.squeeze!('l') }
-   end
-
-   def teardown
-      @string = nil
-   end
+  def teardown
+    @string = nil
+  end
 end
