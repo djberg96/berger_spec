@@ -2,7 +2,7 @@
 # test_strip_bang.rb
 #
 # Test case for the String#strip! instance method. The tests for
-# the String#strip method can be found in tc_strip.rb
+# the String#strip method can be found in test_strip.rb
 #####################################################################
 require 'test/helper'
 require 'test/unit'
@@ -41,12 +41,9 @@ class TC_String_StripBang_InstanceMethod < Test::Unit::TestCase
     assert_true(string.strip!.object_id != string.object_id)
   end
 
-  test "strip_bang removes trailing octal zero if it is the last character" do
+  test "strip_bang removes trailing octal zero" do
     assert_equal('hello', @string3.strip!)
-  end
-
-  test "strip_bang does not remove trailing octal zero if it is not the last character" do
-    assert_equal("hello  \000world\000", @string4.strip!)
+    assert_equal("hello  \000world", @string4.strip!)
   end
 
   test "strip_bang returns nil if called on an empty string" do
@@ -62,7 +59,7 @@ class TC_String_StripBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "strip_bang raises an error if called on a frozen string" do
-    assert_raises(TypeError){ @string1.freeze.strip! }
+    assert_raises(RuntimeError){ @string1.freeze.strip! }
   end
 
   def teardown
