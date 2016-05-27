@@ -6,93 +6,76 @@
 require 'test/helper'
 require "test/unit"
 
-class TC_String_RIndex_Instance < Test::Unit::TestCase
-   def setup
-      @simple  = "hello"
-      @complex = "p1031'/> <b><c n='field'/><c n='fl"
-   end
+class TC_String_RIndex_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @simple  = "hello"
+    @complex = "p1031'/> <b><c n='field'/><c n='fl"
+  end
 
-   def test_rindex_basic
-      assert_respond_to(@simple, :rindex)
-      assert_nothing_raised{ @simple.rindex(0) }
-      assert_nothing_raised{ @simple.rindex("l") }
-      assert_nothing_raised{ @simple.rindex(/\w+/) }
-   end
+  test "rindex basic functionality" do
+    assert_respond_to(@simple, :rindex)
+    assert_nothing_raised{ @simple.rindex("l") }
+    assert_nothing_raised{ @simple.rindex(/\w+/) }
+  end
 
-   def test_rindex_string_complex
-      assert_equal(27, @complex.rindex("c"))
-      assert_equal(9, @complex.rindex("<b><c n='field'/><c n='fl"))
-   end
+  test "rindex returns the expected result for simple strings" do
+    assert_equal(3, @simple.rindex("l"))
+    assert_equal(1, @simple.rindex("ell"))
+    assert_nil(@simple.rindex("z"))
+  end
 
-   def test_rindex_string
-      assert_equal(3, @simple.rindex("l"))
-      assert_equal(1, @simple.rindex("ell"))
-      assert_nil(@simple.rindex("z"))
-   end
+  test "rindex returns the expected result for complex strings" do
+    assert_equal(27, @complex.rindex("c"))
+    assert_equal(9, @complex.rindex("<b><c n='field'/><c n='fl"))
+  end
 
-   def test_rindex_string_with_position
-      assert_equal(2, @simple.rindex("l",2))
-      assert_equal(3, @simple.rindex("l",-1))
-      assert_nil(@simple.rindex("l",1))
-      assert_nil(@simple.rindex("z",1))
-      assert_nil(@simple.rindex("z",99))
-   end
 
-   def test_rindex_int
-      assert_equal(3, @simple.rindex(?l))
-      assert_nil(@simple.rindex(?z))
-   end
+  test "rindex returns the expected result when position is provided" do
+    assert_equal(2, @simple.rindex("l",2))
+    assert_equal(3, @simple.rindex("l",-1))
+    assert_nil(@simple.rindex("l",1))
+    assert_nil(@simple.rindex("z",1))
+    assert_nil(@simple.rindex("z",99))
+  end
 
-   # JRUBY-1732
-   def test_rindex_integer_mod_256
-      assert_nil(@simple.rindex(256 * 3 + ?e))
-      assert_nil(@simple.rindex(-(256 - ?e)))
-   end
+  test "rindex returns expected results for regex argument" do
+    assert_equal(0, @simple.rindex(/h/))
+    assert_equal(2, @simple.rindex(/ll./))
+    assert_nil(@simple.rindex(/z./))
+  end
 
-   def test_rindex_int_with_position
-      assert_equal(0, @simple.rindex(?h,0))
-      assert_equal(3, @simple.rindex(?l,3))
-      assert_nil(@simple.rindex(?l,1))
-      assert_nil(@simple.rindex(?e,0))
-      assert_nil(@simple.rindex(?z,0))
-   end
+  # JRUBY-1731
+  test "rindex returns expected result for minimum regex" do
+    assert_equal(5, @simple.rindex(/.{0}/))
+    assert_equal(4, @simple.rindex(/.{1}/))
+    assert_equal(3, @simple.rindex(/.{2}/))
+  end
 
-   def test_rindex_regex
-      assert_equal(0, @simple.rindex(/h/))
-      assert_equal(2, @simple.rindex(/ll./))
-      assert_nil(@simple.rindex(/z./))
-   end
+  test "rindex returns expected result for regex with position" do
+    assert_equal(0, @simple.rindex(/h/, 0))
+    assert_equal(2, @simple.rindex(/ll./, 3))
+    assert_nil(@simple.rindex(/ll./, 0))
+    assert_nil(@simple.rindex(/z./, 0))
+  end
 
-   # JRUBY-1731
-   def test_rindex_regex_with_minimum
-      assert_equal(5, @simple.rindex(/.{0}/))
-      assert_equal(4, @simple.rindex(/.{1}/))
-      assert_equal(3, @simple.rindex(/.{2}/))
-   end
+  # Some strangeness here
+  test "rindex returns the expected result for edge cases" do
+    assert_equal(0, @simple.rindex("", 0))
+    assert_equal(5, @simple.rindex("", 99))
+    assert_nil(@simple.rindex("", -99))
+  end
 
-   def test_rindex_regex_with_offset
-      assert_equal(0, @simple.rindex(/h/, 0))
-      assert_equal(2, @simple.rindex(/ll./, 3))
-      assert_nil(@simple.rindex(/ll./, 0))
-      assert_nil(@simple.rindex(/z./, 0))
-   end
+  test "rindex does not accept an integer or range argument" do
+    assert_raises(TypeError){ @simple.rindex(1) }
+    assert_raises(TypeError){ @simple.rindex(1..3) }
+  end
 
-   # The handling of empty strings appears to be somewhat arbitrary
-   # and inconsistent.
-   #
-   def test_rindex_edge_cases
-      assert_equal(0, @simple.rindex("", 0))
-      assert_equal(5, @simple.rindex("", 99))
-      assert_equal(nil, @simple.rindex("", -99)) # Strange
-   end
+  test "rindex takes a maximum of two arguments" do
+    assert_raises(ArgumentError){ @simple.rindex(1,2,3) }
+  end
 
-   def test_rindex_expected_errors
-      assert_raises(TypeError){ @simple.rindex(1..3) }
-      assert_raises(ArgumentError){ @simple.rindex(1,2,3) }
-   end
-
-   def teardown
-      @simple  = nil
-      @complex = nil
-   end
+  def teardown
+    @simple  = nil
+    @complex = nil
+  end
 end
