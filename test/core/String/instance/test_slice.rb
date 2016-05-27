@@ -13,9 +13,10 @@ class TC_String_Slice_InstanceMethod < Test::Unit::TestCase
     @string2 = '<strong>hello</strong>'
   end
 
-  def test_slice_basic
+  test "slice basic functionality" do
     assert_respond_to(@string1, :slice)
-    assert_respond_to(@string1, :slice!)
+    assert_nothing_raised{ @string1.slice(0) }
+    assert_kind_of(String, @string1.slice(0))
   end
 
   test "slice does not modify its receiver" do
@@ -96,6 +97,10 @@ class TC_String_Slice_InstanceMethod < Test::Unit::TestCase
     assert_equal('q', @string1.slice(0.9))
     assert_equal('y', @string1.slice(-1.2))
     assert_equal('qw', @string1.slice(0.9, 2.2))
+  end
+
+  test "slice requires at least one argument" do
+    assert_raises(ArgumentError){ @string1.slice }
   end
 
   test "slice raises an error if the argument is invalid" do
