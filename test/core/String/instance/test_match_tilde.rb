@@ -14,42 +14,42 @@
 require 'test/helper'
 require "test/unit"
 
-class TC_String_MatchTilde_Instance < Test::Unit::TestCase
-   def setup
-      @simple  = "hello"
-      @complex = "p1031'/> <b><c n='field'/><c n='fl"
-   end
+class TC_String_MatchTilde_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @simple  = "hello"
+    @complex = "p1031'/> <b><c n='field'/><c n='fl"
+  end
 
-   def test_match_tilde_basic
-      assert_respond_to(@simple, :=~)
-      assert_nothing_raised{ @simple =~ /\w+/ }
-      assert_kind_of(Fixnum, @complex =~ /\d/) # Note, not a MatchData object
-   end
+  def test_match_tilde_basic
+    assert_respond_to(@simple, :=~)
+    assert_nothing_raised{ @simple =~ /\w+/ }
+    assert_kind_of(Fixnum, @complex =~ /\d/) # Note, not a MatchData object
+  end
 
-   def test_match_tilde
-      assert_equal(0, @simple =~ /h/)
-      assert_equal(9, @complex =~ /<b><c n='field'\/><c n='fl/)
-      assert_nil(@simple =~ /\d/)
-      assert_nil(@complex =~ /z/)
-   end
+  def test_match_tilde
+    assert_equal(0, @simple =~ /h/)
+    assert_equal(9, @complex =~ /<b><c n='field'\/><c n='fl/)
+    assert_nil(@simple =~ /\d/)
+    assert_nil(@complex =~ /z/)
+  end
 
-   def test_match_tilde_edge_cases
-      assert_equal(0, @simple =~ //)
-   end
+  def test_match_tilde_edge_cases
+    assert_equal(0, @simple =~ //)
+  end
 
-   # Resorts to Object#=~ default
-   def test_match_tilde_against_non_regex
-      assert_equal(false, @simple =~ 0)
-      assert_equal(false, @complex =~ 0)
-      assert_equal(false, @simple =~ Hash[1,2,3,4])
-   end
+  # Resorts to Object#=~ default
+  def test_match_tilde_against_non_regex
+    assert_nil(@simple =~ 0)
+    assert_nil(@complex =~ 0)
+    assert_nil(@simple =~ Hash[1,2,3,4])
+  end
 
-   def test_match_tilde_expected_errors
-      assert_raises(TypeError){ @simple =~ "hello" }
-   end
+  def test_match_tilde_expected_errors
+    assert_raises(TypeError){ @simple =~ "hello" }
+  end
 
-   def teardown
-      @simple  = nil
-      @complex = nil
-   end
+  def teardown
+    @simple  = nil
+    @complex = nil
+  end
 end
