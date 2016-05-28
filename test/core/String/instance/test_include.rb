@@ -6,43 +6,37 @@
 require 'test/helper'
 require "test/unit"
 
-class TC_String_Include_Instance < Test::Unit::TestCase
-   def setup
-      @string = "a\/\t\n\r\"789"
-   end
+class TC_String_Include_InstanceMethod < Test::Unit::TestCase
+  def setup
+    @string = "a\/\t\n\r\"789"
+  end
 
-   def test_include_basic
-      assert_respond_to(@string, :include?)
-      assert_nothing_raised{ @string.include?("a") }
-   end
+  test "include? basic functionality" do
+    assert_respond_to(@string, :include?)
+    assert_nothing_raised{ @string.include?("a") }
+  end
 
-   def test_include_string_expected_true
-      assert_equal(true, @string.include?("a"))
-      assert_equal(true, @string.include?("/"))
-      assert_equal(true, @string.include?("\t"))
-      assert_equal(true, @string.include?("\n"))
-      assert_equal(true, @string.include?("\r"))
-      assert_equal(true, @string.include?('"'))
-      assert_equal(true, @string.include?(97))
-   end
+  test "include? returns true when expected" do
+    assert_true(@string.include?("a"))
+    assert_true(@string.include?("/"))
+    assert_true(@string.include?("\t"))
+    assert_true(@string.include?("\n"))
+    assert_true(@string.include?("\r"))
+    assert_true(@string.include?('"'))
+  end
 
-   def test_include_string_expected_false
-      assert_equal(false, @string.include?("b"))
-      assert_equal(false, @string.include?("\\"))
-      assert_equal(false, @string.include?(789))
-   end
+  test "include? returns false when expected" do
+    assert_false(@string.include?("b"))
+    assert_false(@string.include?("\\"))
+  end
 
-   def test_include_int
-      assert_equal(true, @string.include?(?a))
-      assert_equal(false, @string.include?(?b))
-   end
+  test "include? requires a single string argument" do
+    assert_raises(TypeError){ @string.include?(97) }
+    assert_raises(ArgumentError){ @string.include? }
+    assert_raises(ArgumentError){ @string.include?(1,2) }
+  end
 
-   def test_include_expected_errors
-      assert_raises(ArgumentError){ @string.include? }
-      assert_raises(ArgumentError){ @string.include?(1,2) }
-   end
-
-   def teardown
-      @string = nil
-   end
+  def teardown
+    @string = nil
+  end
 end
