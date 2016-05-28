@@ -1,53 +1,56 @@
 ############################################################################
-# test_downcase_bang_bang.rb
+# test_downcase_bang.rb
 #
 # Test case for the String#downcase! instance method. Tests for the
 # String#downcase instance method can be found in tc_downcase.rb.
-#
-# TODO: Add Unicode tests.
 ############################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_String_DowncaseBang_InstanceMethod < Test::Unit::TestCase
-   def setup
-      @str = '<HTML><B>HELLO</B></HTML>'
-   end
+  def setup
+    @str_a = "<HTML><B>HELLO</B></HTML>"
+    @str_w = "고맙습니다"
+  end
 
-   def test_downcase_bang_basic
-      assert_respond_to(@str, :downcase)
-      assert_nothing_raised{ @str.downcase! }
-      assert_kind_of(String, 'HELLO'.downcase!)
-   end
+  test "downcase! basic functionality" do
+    assert_respond_to(@str_a, :downcase)
+    assert_nothing_raised{ @str_a.downcase! }
+    assert_kind_of(String, 'HELLO'.downcase!)
+  end
 
-   def test_downcase
-      assert_equal('<html><b>hello</b></html>', @str.downcase!)
-      assert_equal(nil, 'hello'.downcase!)
-   end
+  test "downcase! returns expected results for ANSI strings" do
+    assert_equal('<html><b>hello</b></html>', @str_a.downcase!)
+    assert_nil('hello'.downcase!)
+  end
+  
+  test "downcase! returns expected results for non-alphanumeric strings" do
+    assert_nil(@str_w.downcase!)
+    assert_nil('123'.downcase!)
+    assert_nil('!@#$%^&*()'.downcase!)
+  end
 
-   def test_downcase_bang_non_alpha
-      assert_equal(nil, '123'.downcase!)
-      assert_equal(nil, '!@#$%^&*()'.downcase!)
-   end
+  test "downcase! modifies its receiver" do
+    @str_a = 'HELLO'
+    @str_a.downcase!
+    assert_equal('hello', @str_a)
+  end
 
-   def test_downcase_bang_original_modified
-      @str = 'HELLO'
-      assert_nothing_raised{ @str.downcase! }
-      assert_equal('hello', @str)
-   end
+  test "downcase! works as expected for empty or null strings" do
+    assert_nil(''.downcase!)
+    assert_nil(' '.downcase!)
+    assert_nil("\000\000".downcase!)
+  end
 
-   def test_downcase_bang_edge_cases
-      assert_equal(nil, ''.downcase!)
-      assert_equal(nil, ' '.downcase!)
-      assert_equal(nil, "\000\000".downcase!)
-   end
+  test "downcase! does not accept any arguments" do
+    assert_raise(ArgumentError){ @str_a.downcase!('test') }
+  end
 
-   def test_downcase_bang_expected_errors
-      assert_raise(ArgumentError){ @str.downcase!('test') }
-      assert_raise(TypeError){ @str.freeze.downcase! }
-   end
+  test "downcase! raises an error on a frozen string" do
+    assert_raise(RuntimeError){ @str_a.freeze.downcase! }
+  end
 
-   def teardown
-      @str = nil
-   end
+  def teardown
+    @str_a = nil
+  end
 end
