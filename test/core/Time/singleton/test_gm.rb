@@ -1,211 +1,117 @@
 ########################################################################
-# tc_gm.rb
+# test_gm.rb
 #
 # Test case for the Time.gm class method and the Time.utc alias.
 ########################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_Time_GM_ClassMethod < Test::Unit::TestCase
-   include Test::Helper
+class TC_Time_GM_SingletonMethod < Test::Unit::TestCase
+  include Test::Helper
 
-   def setup
-      @year, @mon, @dow, @day, @hour, @min, @sec, @usec = *get_datetime
+  def setup
+    @year, @mon, @dow, @day, @hour, @min, @sec, @usec = *get_datetime
 
-      @gmt = nil
+    @gmt = nil
 
-      @day  = "0#{@day}" if @day.to_i < 10
-      @hour = "0#{@hour}" if @hour.to_i < 10
-      @min  = "0#{@min}" if @min.to_i < 10
-      @sec  = "0#{@sec}" if @sec.to_i < 10
-      @usec = "0#{@usec}" if @usec.to_i < 10
-   end
+    @mon  = "0#{@mon}" if @mon.to_i < 10
+    @day  = "0#{@day}" if @day.to_i < 10
+    @hour = "0#{@hour}" if @hour.to_i < 10
+    @min  = "0#{@min}" if @min.to_i < 10
+    @sec  = "0#{@sec}" if @sec.to_i < 10
+    @usec = "0#{@usec}" if @usec.to_i < 10
+  end
 
-   def test_gm_basic
-      assert_respond_to(Time, :gm)
-      assert_nothing_raised{ Time.gm(@year) }
-   end
+  test "gm basic functionality" do
+    assert_respond_to(Time, :gm)
+    assert_nothing_raised{ Time.gm(@year) }
+    assert_kind_of(Time, Time.gm(2000))
+  end
 
-   def test_utc_alias_basic
-      assert_respond_to(Time, :gm)
-      assert_nothing_raised{ Time.gm(@year) }
-   end
+  test "utc is an alias for gm" do
+    assert_alias_method(Time, :utc, :gm)
+  end
 
-   def test_gm_year_only
-      dow = Time.local(Time.now.year).strftime('%a')
-      assert_nothing_raised{ @gmt = Time.gm(@year) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#{dow} Jan 01 00:00:00 UTC #{@year}", @gmt.to_s)
-      assert_equal(Time.gm(@year), Time.gm(@year, nil))
-   end
+  test "gm with year only works as expected" do
+    assert_nothing_raised{ @gmt = Time.gm(@year) }
+    assert_equal("#@year-01-01 00:00:00 UTC", @gmt.to_s)
+    assert_equal(Time.gm(@year), Time.gm(@year, nil))
+  end
 
-   def test_utc_alias_year_only
-      dow = Time.local(Time.now.year).strftime('%a')
-      assert_nothing_raised{ @gmt = Time.utc(@year) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#{dow} Jan 01 00:00:00 UTC #{@year}", @gmt.to_s)
-      assert_equal(Time.utc(@year), Time.utc(@year, nil))
-   end
+  test "gm with year and month returns expected result" do
+    assert_nothing_raised{ @gmt = Time.gm(@year, @mon) }
+    assert_equal("#@year-#@mon-01 00:00:00 UTC", @gmt.to_s)
+    assert_equal(Time.gm(@year, @mon), Time.gm(@year, @mon, nil))
+  end
 
-   def test_gm_year_and_month
-      assert_nothing_raised{ @dow = Time.local(@year, @mon, 1).strftime('%a') }
-      assert_nothing_raised{ @gmt = Time.gm(@year, @mon) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#{@dow} #{@mon} 01 00:00:00 UTC #{@year}", @gmt.to_s)
-      assert_equal(Time.gm(@year, @mon), Time.gm(@year, @mon, nil))
-   end
+  test "gm with year, month and day returns expected result" do
+    assert_nothing_raised{ @gmt = Time.gm(@year, @mon, @day) }
+    assert_equal("#@year-#@mon-#@day 00:00:00 UTC", @gmt.to_s)
+    assert_equal(Time.gm(@year, @mon, @day), Time.gm(@year, @mon, @day, nil))
+  end
 
-   def test_utc_alias_year_and_month
-      assert_nothing_raised{ @dow = Time.local(@year, @mon, 1).strftime('%a') }
-      assert_nothing_raised{ @gmt = Time.utc(@year, @mon) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#{@dow} #{@mon} 01 00:00:00 UTC #{@year}", @gmt.to_s)
-      assert_equal(Time.utc(@year, @mon), Time.utc(@year, @mon, nil))
-   end
+  test "gm with year, month, day and hour returns expected result" do
+    assert_nothing_raised{ @gmt = Time.gm(@year, @mon, @day, @hour) }
+    assert_equal("#@year-#@mon-#@day #@hour:00:00 UTC", @gmt.to_s)
+    assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, nil))
+  end
 
-   def test_gm_year_month_and_day
-      assert_nothing_raised{ @gmt = Time.gm(@year, @mon, @day) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#{@dow} #{@mon} #{@day} 00:00:00 UTC #{@year}", @gmt.to_s)
-      assert_equal(Time.gm(@year, @mon, @day), Time.gm(@year, @mon, @day, nil))
-   end
+  test "gm with year, month, day, hour and minute returns expected result" do
+    assert_nothing_raised{ @gmt = Time.gm(@year, @mon, @day, @hour, @min) }
+    assert_equal("#@year-#@mon-#@day #@hour:#@min:00 UTC", @gmt.to_s)
+    assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, @min, nil))
+  end
 
-   def test_utc_alias_year_month_and_day
-      assert_nothing_raised{ @gmt = Time.utc(@year, @mon, @day) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#{@dow} #{@mon} #{@day} 00:00:00 UTC #{@year}", @gmt.to_s)
-      assert_equal(Time.utc(@year, @mon, @day), Time.utc(@year, @mon, @day, nil))
-   end
+  test "gm with year, month, day, hour, minute and second returns expected result" do
+    assert_nothing_raised{ @gmt = Time.gm(@year,@mon,@day,@hour,@min,@sec) }
+    assert_equal("#@year-#@mon-#@day #@hour:#@min:#@sec UTC", @gmt.to_s)
+    assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, @min, @sec, nil))
+  end
 
-   def test_gm_year_month_day_and_hour
-      assert_nothing_raised{ @gmt = Time.gm(@year, @mon, @day, @hour) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#@dow #@mon #@day #@hour:00:00 UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, nil))
-   end
+  test "gm with year, month, day, hour, minute, second and usec returns expected result" do
+    assert_nothing_raised{ @gmt = Time.gm(@year,@mon,@day,@hour,@min,@sec,@usec) }
+    assert_equal("#@year-#@mon-#@day #@hour:#@min:#@sec UTC", @gmt.to_s)
+    assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, @min, @sec, @usec))
+  end
 
-   def test_utc_alias_year_month_day_and_hour
-      assert_nothing_raised{ @gmt = Time.utc(@year, @mon, @day, @hour) }
-      assert_kind_of(Time, @gmt)
-      assert_equal("#@dow #@mon #@day #@hour:00:00 UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.utc(@year, @mon, @day, @hour, nil))
-   end
+  test "gm with TZ" do
+    assert_nothing_raised{ @gmt = Time.gm(1,2,3,14,10,2007,'Sun',287,true,'MDT') }
+    assert_equal("2007-10-14 03:02:01 UTC", @gmt.to_s)
+  end
 
-   def test_gm_year_month_day_hour_and_minute
-      assert_nothing_raised{ @gmt = Time.gm(@year, @mon, @day, @hour, @min) }
-      assert_kind_of(Time, @gmt)
+  test "gm with float values is acceptable" do
+    assert_nothing_raised{ Time.gm(2007.0) }
+    assert_nothing_raised{ Time.gm(2007.0, 10.1) }
+    assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2) }
+    assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3) }
+    assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3, 5.4) }
+    assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3, 5.4, 3.9) }
+    assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3, 5.4, 3.9, 0.2) }    
+  end
 
-      assert_equal("#@dow #@mon #@day #@hour:#@min:00 UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, @min, nil))
-   end
+  test "gm requires at least one argument" do
+    assert_raise(ArgumentError){ Time.gm }
+  end
 
-   def test_utc_alias_year_month_day_hour_and_minute
-      assert_nothing_raised{ @gmt = Time.utc(@year, @mon, @day, @hour, @min) }
-      assert_kind_of(Time, @gmt)
+  test "gm accepts a maximum of ten arguments" do
+    assert_raise(ArgumentError){ Time.gm(0,1,2,3,4,5,6,7,8,9,10) }
+  end
 
-      assert_equal("#@dow #@mon #@day #@hour:#@min:00 UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.utc(@year, @mon, @day, @hour, @min, nil))
-   end
+  test "gm raises an error for most negative values" do
+    assert_raise(ArgumentError){ Time.gm(@year, -1) }
+    assert_raise(ArgumentError){ Time.gm(@year, @mon, -1) }
+    assert_raise(ArgumentError){ Time.gm(@year, @mon, @day, -1) }
+    assert_raise(ArgumentError){ Time.gm(@year, @mon, @day, @hour, -1) }
+    assert_raise(ArgumentError){ Time.gm(@year, @mon, @day, @hour, @min, -1) }
+  end
 
-   def test_gm_year_month_day_hour_minute_and_second
-      assert_nothing_raised{ @gmt = Time.gm(@year,@mon,@day,@hour,@min,@sec) }
-      assert_kind_of(Time, @gmt)
-
-      assert_equal("#@dow #@mon #@day #@hour:#@min:#@sec UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, @min, @sec, nil))
-   end
-
-   def test_utc_alias_year_month_day_hour_minute_and_second
-      assert_nothing_raised{ @gmt = Time.utc(@year,@mon,@day,@hour,@min,@sec) }
-      assert_kind_of(Time, @gmt)
-
-      assert_equal("#@dow #@mon #@day #@hour:#@min:#@sec UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.utc(@year, @mon, @day, @hour, @min, @sec, nil))
-   end
-
-   def test_gm_year_month_day_hour_minute_second_and_usec
-      assert_nothing_raised{ @gmt = Time.gm(@year,@mon,@day,@hour,@min,@sec,@usec) }
-      assert_kind_of(Time, @gmt)
-
-      assert_equal("#@dow #@mon #@day #@hour:#@min:#@sec UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.gm(@year, @mon, @day, @hour, @min, @sec, @usec))
-   end
-
-   def test_utc_alias_year_month_day_hour_minute_second_and_usec
-      assert_nothing_raised{ @gmt = Time.utc(@year,@mon,@day,@hour,@min,@sec,@usec) }
-      assert_kind_of(Time, @gmt)
-
-      assert_equal("#@dow #@mon #@day #@hour:#@min:#@sec UTC #@year", @gmt.to_s)
-      assert_equal(@gmt, Time.utc(@year, @mon, @day, @hour, @min, @sec, @usec))
-   end
-   
-   def test_gm_with_tz
-      assert_nothing_raised{ @gmt = Time.gm(1,2,3,14,10,2007,'Sun',287,true,'MDT') }
-      assert_kind_of(Time, @gmt)
-      assert_equal('Sun Oct 14 03:02:01 UTC 2007', @gmt.to_s)
-   end
-
-   def test_utc_alias_with_tz
-      assert_nothing_raised{ @gmt = Time.utc(1,2,3,14,10,2007,'Sun',287,true,'MDT') }
-      assert_kind_of(Time, @gmt)
-      assert_equal('Sun Oct 14 03:02:01 UTC 2007', @gmt.to_s)
-   end
-   
-   def test_gm_with_floats
-      assert_nothing_raised{ Time.gm(2007.0) }
-      assert_nothing_raised{ Time.gm(2007.0, 10.1) }
-      assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2) }
-      assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3) }
-      assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3, 5.4) }
-      assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3, 5.4, 3.9) }
-      assert_nothing_raised{ Time.gm(2007.0, 10.1, 14.2, 7.3, 5.4, 3.9, 0.2) }    
-   end
-
-   def test_utc_alias_with_floats
-      assert_nothing_raised{ Time.utc(2007.0) }
-      assert_nothing_raised{ Time.utc(2007.0, 10.1) }
-      assert_nothing_raised{ Time.utc(2007.0, 10.1, 14.2) }
-      assert_nothing_raised{ Time.utc(2007.0, 10.1, 14.2, 7.3) }
-      assert_nothing_raised{ Time.utc(2007.0, 10.1, 14.2, 7.3, 5.4) }
-      assert_nothing_raised{ Time.utc(2007.0, 10.1, 14.2, 7.3, 5.4, 3.9) }
-      assert_nothing_raised{ Time.utc(2007.0, 10.1, 14.2, 7.3, 5.4, 3.9, 0.2) }    
-   end
-
-   # The type checking for MRI's Time.gm is poor because of the two forms
-   # accepted. Also, it seems to allow negative usec's.
-   def test_gm_expected_errors
-      assert_raise(ArgumentError){ Time.gm }
-      assert_raise(ArgumentError){ Time.gm(0,1,2,3,4,5,6,7,8,9,10) }
-      assert_raise(ArgumentError){ Time.gm(-1) }
-      assert_raise(ArgumentError){ Time.gm(999999999) }
-      assert_raise(ArgumentError){ Time.gm(@year, -1) }
-      assert_raise(ArgumentError){ Time.gm(@year, @mon, -1) }
-      assert_raise(ArgumentError){ Time.gm(@year, @mon, @day, -1) }
-      assert_raise(ArgumentError){ Time.gm(@year, @mon, @day, @hour, -1) }
-      assert_raise(ArgumentError){ Time.gm(@year, @mon, @day, @hour, @min, -1) }
-      #assert_raise(ArgumentError){ Time.gm(@year, @mon, @day, @hour, @min, @sec, -1) }
-   end
-
-   def test_utc_alias_expected_errors
-      assert_raise(ArgumentError){ Time.utc }
-      assert_raise(ArgumentError){ Time.utc(0,1,2,3,4,5,6,7,8,9,10) }
-      assert_raise(ArgumentError){ Time.utc(-1) }
-      assert_raise(ArgumentError){ Time.utc(999999999) }
-      assert_raise(ArgumentError){ Time.utc(@year, -1) }
-      assert_raise(ArgumentError){ Time.utc(@year, @mon, -1) }
-      assert_raise(ArgumentError){ Time.utc(@year, @mon, @day, -1) }
-      assert_raise(ArgumentError){ Time.utc(@year, @mon, @day, @hour, -1) }
-      assert_raise(ArgumentError){ Time.utc(@year, @mon, @day, @hour, @min, -1) }
-      #assert_raise(ArgumentError){ Time.utc(@year, @mon, @day, @hour, @min, @sec, -1) }
-   end
-
-   def teardown
-      @year = nil
-      @mon  = nil
-      @day  = nil
-      @hour = nil
-      @min  = nil
-      @sec  = nil
-      @gmt  = nil
-   end
+  def teardown
+    @year = nil
+    @mon  = nil
+    @day  = nil
+    @hour = nil
+    @min  = nil
+    @sec  = nil
+    @gmt  = nil
+  end
 end
