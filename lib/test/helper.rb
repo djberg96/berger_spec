@@ -203,7 +203,7 @@ module Test
            buf[14,2].unpack('S')[0]
         )
       else
-        temp = `date +'%Y %b %a %d %H %M %S'`.chomp.split
+        temp = `date +'%Y %m %a %d %H %M %S'`.chomp.split
         temp.each_with_index{ |e, i|
            if e =~ /[a-zA-Z]/i
               array[i] = e
