@@ -555,6 +555,17 @@ namespace "test" do
       t.test_files = FileList['test/core/Thread/*/*.rb']
     end
 
+    namespace "thread" do
+      Dir['test/core/Thread/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
+    end
+
     desc "Runs the test suite for the Time class"
     Rake::TestTask.new('time') do |t|
       files = FileList['test/core/Time/*/*.rb']
