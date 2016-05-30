@@ -1,51 +1,49 @@
 ######################################################################
-# tc_seteuid.rb
+# test_seteuid.rb
 #
 # Test case for the Process::Sys.seteuid module method.
 #
 # Most of these tests will only run on Unix systems, and then only
 # as root.
-#
-# TODO: Figure out why these tests always fail.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_ProcessSys_Seteuid_ModuleMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   unless WINDOWS
-      def setup
-         @nobody_uid = Etc.getpwnam('nobody').uid
-         @login_uid  = Etc.getpwnam(Etc.getlogin).uid
-      end
-   end
+  def setup
+    @ruid = Process.uid
+    @euid = Process.euid
+  end
 
-   def test_seteuid_basic
-      assert_respond_to(Process::Sys, :seteuid)
-   end
+  def test_seteuid_basic
+    assert_respond_to(Process::Sys, :seteuid)
+  end
 
-   #if ROOT
-   #   def test_seteuid
-   #      assert_nothing_raised{ Process::Sys.seteuid(@nobody_uid) }
-   #      assert_equal(@nobody_uid, Process.euid)
-   #      assert_nothing_raised{ Process::Sys.seteuid(@login_uid) }
-   #      assert_equal(@login_uid, Process.euid)
-   #   end
-   #end
+  test "seteuid works as expected" do
+    omit_if_windows('Process::Sys.seteuid')
+    omit_unless_root('Process::Sys.seteuid')
 
-   def test_uid_expected_errors
-      if WINDOWS       
-         assert_raises(NotImplementedError){ Process::Sys.seteuid(1) }
-      else
-         assert_raises(TypeError){ Process::Sys.seteuid('bogus') }
-      end
-   end
+    assert_nothing_raised{ Process::Sys.seteuid(@ruid) }
+    assert_equal(@ruid, Process.euid)
+    assert_nothing_raised{ Process::Sys.seteuid(@euid) }
+    assert_equal(@euid, Process.euid)
+  end
 
-   unless WINDOWS
-      def teardown
-         @nobody_uid = nil
-         @login_uid  = nil
-      end
-   end
+  test "seteuid is not implemented on MS Windows" do
+    omit_unless_windows('Process::Sys.seteuid')
+    assert_raises(NotImplementedError){ Process::Sys.seteuid(1) }
+  end
+
+  test "seteuid raises an ArgumentError if the argument is invalid" do
+    omit_if_windows('Process::Sys.seteuid')
+    omit_unless_root('Process::Sys.seteuid')
+    assert_raises(ArgumentError){ Process::Sys.seteuid('bogus') }
+  end
+
+  def teardown
+    @ruid = nil
+    @euid = nil
+  end
 end
