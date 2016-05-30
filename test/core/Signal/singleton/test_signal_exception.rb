@@ -25,7 +25,7 @@ class TC_Signal_Exception_Class < Test::Unit::TestCase
   test "signm returns the expected value" do
     assert_equal(@full_name, @sig_exc.signm)
     assert_equal(@full_name, SignalException.new(@full_name).signm)
-    assert_equal(@sig_name, SignalException.new(@sig_name).signm)
+    assert_equal(@full_name, SignalException.new(@sig_name).signm)
   end
 
   test "signo returns the expected value" do
