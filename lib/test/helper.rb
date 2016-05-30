@@ -316,7 +316,7 @@ module Test
     end
 
     def omit_unless_windows(test_name, &block)
-      omit_unless(WINDOWS, "#{test_name} test skipped on MS Windows", &block)
+      omit_unless(WINDOWS, "#{test_name} test skipped unless MS Windows", &block)
     end
 
     def omit_if_osx(test_name, &block)
