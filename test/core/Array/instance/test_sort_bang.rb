@@ -8,6 +8,8 @@ require 'test/helper'
 require 'test/unit'
 
 class Test_Array_SortBang_InstanceMethod < Test::Unit::TestCase
+  include Test::Helper
+
   class ArySort
     attr_accessor :str
     def initialize(str); @str = str; end
@@ -66,9 +68,11 @@ class Test_Array_SortBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "sort on objects that cannot be compared raises an error" do
-    assert_raise(NoMethodError, ArgumentError){ [1, false].sort! }
-    assert_raise(NoMethodError, ArgumentError){ [1, nil].sort! }
-    assert_raise(NoMethodError, ArgumentError){ [1, 'a'].sort! }
+    suppress_warning{
+      assert_raise(NoMethodError, ArgumentError){ [1, false].sort! }
+      assert_raise(NoMethodError, ArgumentError){ [1, nil].sort! }
+      assert_raise(NoMethodError, ArgumentError){ [1, 'a'].sort! }
+    }
   end
 
   test "passing the wrong number of arguments raises an error" do
