@@ -12,29 +12,32 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_IO_Close_InstanceMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
    
-   def setup
-      @file = 'tc_close.txt'
-      @stream = File.new(@file, 'wb')
-      @val = nil
-   end
+  def setup
+    @file = 'test_io_close.txt'
+    @stream = File.new(@file, 'wb')
+    @val = nil
+  end
 
-   def test_close
-      assert_respond_to(@stream, :close)
-      assert_nothing_raised{ @val = @stream.close }
-      assert_nil(@val)
-      assert_raise(IOError){ @stream.close }
-   end
+  test "close basic functionality" do
+    assert_respond_to(@stream, :close)
+    assert_nothing_raised{ @val = @stream.close }
+    assert_nil(@val)
+  end
 
-   def test_close_expected_errors
-      assert_raise(ArgumentError){ @stream.close(2) }
-   end
+  test "calling close on an already closed IO object has no effect" do
+    assert_nothing_raised{ 10.times{ @stream.close } }
+  end
 
-   def teardown
-      @stream.close if @stream && !@stream.closed?
-      remove_file(@file)
-      @stream = nil
-      @val = nil
-   end
+  test "close does not accept any arguments" do
+    assert_raise(ArgumentError){ @stream.close(2) }
+  end
+
+  def teardown
+    @stream.close if @stream && !@stream.closed?
+    remove_file(@file)
+    @stream = nil
+    @val = nil
+  end
 end
