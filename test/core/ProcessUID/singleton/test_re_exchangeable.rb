@@ -16,7 +16,7 @@ class TC_ProcessUID_ReExchangeable_ModuleMethod < Test::Unit::TestCase
   end
 
   test "re_exchangeable? returns the expected value" do
-    omit_if_windows('Process::UID.re_exchangeable?')
+    omit_unless_linux('Process::UID.re_exchangeable?')
     assert_true(Process::UID.re_exchangeable?)
   end
 
