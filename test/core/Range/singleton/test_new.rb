@@ -80,7 +80,9 @@ class TC_Range_New_SingletonMethod < Test::Unit::TestCase
   end
 
   test "new with arguments of differing types causes an error" do
-    assert_raises(ArgumentError){ Range.new('z', 0) }
+    suppress_warning do
+      assert_raises(ArgumentError){ Range.new('z', 0) }
+    end
   end
 
   def teardown
