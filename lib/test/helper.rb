@@ -323,6 +323,10 @@ module Test
       omit_if(OSX, "#{test_name} test skipped on OSX", &block)
     end
 
+    def omit_unless_linux(test_name, &block)
+      omit_unless(LINUX, "#{test_name} test skipped unless Linux", &block)
+    end
+
     # Shortcut for skipping tests that are not run while root.
     #
     def omit_unless_root(test_name, &block)
