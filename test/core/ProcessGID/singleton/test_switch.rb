@@ -1,16 +1,17 @@
 ######################################################################
-# tc_switch.rb
+# test_switch.rb
 #
 # Test case for the Process::GID.switch module method. Most of these
 # tests only run on Unix systems, and then only as root.
 #
 # Note: I am not convinced that this method actually works, and it
-# has unusual (bad) behavior when the egid is the same as the gid.
+# has unusual (bad) behavior when the euid is the same as the uid.
 #
 # TODO: Update this as more information becomes available.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
+require 'etc'
 
 class TC_ProcessGID_Switch_ModuleMethod < Test::Unit::TestCase
   include Test::Helper
@@ -18,32 +19,28 @@ class TC_ProcessGID_Switch_ModuleMethod < Test::Unit::TestCase
   def setup
     @gid  = Process.gid
     @egid = Process.egid
-
-    if ROOT && !WINDOWS && @gid == @egid
-      Process.egid = Etc.getgrnam('nobody').gid
-      @egid = Process.egid
-    end
+    @group = 'nobody'
   end
 
-  def test_switch_basic
+  test "switch basic functionality" do
     assert_respond_to(Process::GID, :switch)
   end
 
-  def test_switch
-    notify("switch tests unfinished until correct behavior can be determined")
-    omit_if(WINDOWS, "switch tests skipped on MS Windows")
-    omit_unless(ROOT, "switch tests skipped unless run as root")
-    assert_nothing_raised{ Process::GID.switch }
-    #assert_equal(@egid, Process.gid)
-    #assert_equal(@gid, Process.egid)
-  end
+  test "switch behaves as expected" do
+    omit_if_windows('Process::GID.switch')
+    omit_unless_root('Process::GID.switch')
+    Process.egid = Etc.getgrnam(@group).gid
 
-  def test_switch_with_block
-    pend("switch_with_block tests pending")
+    assert_nothing_raised{ Process::GID.switch }
   end
 
   def teardown
+    if ROOT && !WINDOWS
+      Process.egid = @gid
+    end
+
     @gid  = nil
     @egid = nil
+    @group = nil
   end
 end
