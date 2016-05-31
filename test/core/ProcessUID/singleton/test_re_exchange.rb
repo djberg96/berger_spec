@@ -1,43 +1,38 @@
 ######################################################################
-# tc_re_exchange.rb
+# test_re_exchange.rb
 #
 # Test case for the Process::UID.re_exchange module method. This test
-# case is useful only if run as root, and only on Unix systems.
+# case is useful only if run as root, and only on Linux.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_ProcessUID_ReExchange_ModuleMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   def setup
-      unless WINDOWS
-         @uid  = Process.uid
-         @euid = Process.euid
-      end
-   end
+  def setup
+    @uid  = Process.uid
+    @euid = Process.euid
+  end
 
-   def test_re_exchange_basic
-      assert_respond_to(Process::UID, :re_exchange)
-   end
+  test "re_exchange basic functionality" do
+    assert_respond_to(Process::UID, :re_exchange)
+  end
 
-   if ROOT && !WINDOWS
-      def test_re_exchange
-         assert_nothing_raised{ Process::UID.re_exchange }
-         assert_equal(@uid, Process.euid)
-         assert_equal(@euid, Process.uid)
-      end
+  test "re_exchange returns the expected value" do
+    omit_unless_linux('Process::UID.re_exchange')
+    assert_nothing_raised{ Process::UID.re_exchange }
+    assert_equal(@uid, Process.euid)
+    assert_equal(@euid, Process.uid)
+  end
 
-      def test_re_exchange_expected_failures
-         assert_raises(ArgumentError){ Process::UID.re_exchange(1) }
-         assert_raises(ArgumentError){ Process::UID.re_exchange(1, 2) }
-      end
-   end
+  test "re_exchange does not accept any arguments" do
+    assert_raises(ArgumentError){ Process::UID.re_exchange(1) }
+    assert_raises(ArgumentError){ Process::UID.re_exchange(1, 2) }
+  end
 
-   def teardown
-      unless WINDOWS
-         @uid  = nil
-         @euid = nil
-      end
-   end
+  def teardown
+    @uid  = nil
+    @euid = nil
+  end
 end
