@@ -1,5 +1,5 @@
 ######################################################################
-# tc_change_privilege.rb
+# test_change_privilege.rb
 #
 # Test case for the Process::GID.change_privilege module method.
 #
@@ -13,34 +13,36 @@ class TC_ProcessGID_ChangePrivilege_ModuleMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    unless WINDOWS
-      @nobody_gid = Etc.getgrnam('nobody').gid
-      @login_gid  = Etc.getpwnam(Etc.getlogin).gid
-    end
+    @ruid = Process.uid
+    @euid = Process.euid
   end
 
-  def test_change_privilege_basic
-    omit_if(WINDOWS, "change_privilege test skipped on MS Windows")
+  test "change_privilege basic functionality" do
+    omit_if_windows('Process::GID.change_privilege')
     assert_respond_to(Process::GID, :change_privilege)
   end
 
-  def test_change_privilege
-    omit_if(WINDOWS, "change_privilege tests skipped on MS Windows")
-    omit_unless(ROOT, "change_privilege test skipped unless run as root")
-    assert_nothing_raised{ Process::GID.change_privilege(@nobody_gid) }
-    assert_equal(@nobody_gid, Process::GID.eid)
-    assert_nothing_raised{ Process::GID.change_privilege(@login_gid) }
-    assert_equal(@login_gid, Process::GID.eid)
+  test "change_privilege works as expected" do
+    omit_if_windows('Process::GID.change_privilege')
+    omit_unless_root('Process::GID.change_privilege')
+
+    assert_nothing_raised{ Process::GID.change_privilege(@euid) }
+    assert_equal(@euid, Process::GID.eid)
+    assert_nothing_raised{ Process::GID.change_privilege(@ruid) }
+    assert_equal(@ruid, Process::GID.eid)
   end
 
-  def test_gid_expected_errors
-    assert_raises(TypeError){ Process::GID.change_privilege("x") }
+  test "change_privilege is not supported on MS Windows" do
+    omit_unless_windows('Process::GID.change_privilege')
+    assert_raises(NotImplementedError){ Process::GID.change_privilege("x") }
+  end
+
+  test "change_privilege raises an error if the argument is invalid" do
+    assert_raises(ArgumentError){ Process::GID.change_privilege("x") }
   end
 
   def teardown
-    unless WINDOWS
-       @nobody_gid = nil
-       @login_gid  = nil
-    end
+    @euid = nil
+    @ruid = nil
   end
 end
