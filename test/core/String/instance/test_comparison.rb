@@ -14,6 +14,8 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_String_Comparison_InstanceMethod < Test::Unit::TestCase
+  include Test::Helper
+
   class StringCompare
     include Comparable
     attr :str
@@ -58,11 +60,13 @@ class TC_String_Comparison_InstanceMethod < Test::Unit::TestCase
   end
 
   test "comparison of strings against non-strings works as expected" do
-    assert_nil(@long <=> 1)
-    assert_nil(@long <=> [1,2,3])
-    assert_nil(@long <=> nil)
-    assert_nil(@long <=> true)
-    assert_nil(@long <=> false)
+    suppress_warning do
+      assert_nil(@long <=> 1)
+      assert_nil(@long <=> [1,2,3])
+      assert_nil(@long <=> nil)
+      assert_nil(@long <=> true)
+      assert_nil(@long <=> false)
+    end
   end
 
   test "caseless comparison against custom object" do
