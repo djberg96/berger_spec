@@ -21,10 +21,9 @@ class TC_ProcessGID_GrantPrivilege_ModuleMethod < Test::Unit::TestCase
     assert_respond_to(Process::GID, :grant_privilege)
   end
 
-  # The eid= alias wasn't defined properly until 1.8.7 
   test "eid= is an alias for grant_privilege" do
-    omit_if(PRE187, "eid= test skipped on 1.8.6 and earlier")
     assert_respond_to(Process::GID, :eid=)
+    assert_alias_method(Process::GID, :eid=, :grant_privilege)
   end
 
   test "grant_privilege" do
