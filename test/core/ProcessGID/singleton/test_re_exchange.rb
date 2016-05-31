@@ -1,8 +1,8 @@
 ######################################################################
-# tc_re_exchange.rb
+# test_re_exchange.rb
 #
 # Test case for the Process::GID.re_exchange module method. This test
-# case is useful only if run as root, and only on Unix systems.
+# case is useful only if run as root, and only on Linux.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
@@ -11,33 +11,28 @@ class TC_ProcessGID_ReExchange_ModuleMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    unless WINDOWS
-      @gid  = Process.gid
-      @egid = Process.egid
-    end
+    @gid  = Process.gid
+    @egid = Process.egid
   end
 
-  def test_re_exchange_basic
+  test "re_exchange basic functionality" do
     assert_respond_to(Process::GID, :re_exchange)
   end
 
-  def test_re_exchange
-    omit_if(WINDOWS, "re_exchange tests skipped on MS Windows")
-    omit_unless(ROOT, "re_exchange tests skipped unless run as root")
+  test "re_exchange returns the expected value" do
+    omit_unless_linux('Process::GID.re_exchange')
     assert_nothing_raised{ Process::GID.re_exchange }
     assert_equal(@gid, Process.egid)
     assert_equal(@egid, Process.gid)
   end
 
-  def test_re_exchange_expected_failures
+  test "re_exchange does not accept any arguments" do
     assert_raises(ArgumentError){ Process::GID.re_exchange(1) }
     assert_raises(ArgumentError){ Process::GID.re_exchange(1, 2) }
   end
 
   def teardown
-    unless WINDOWS
-      @gid  = nil
-      @egid = nil
-    end
+    @gid  = nil
+    @egid = nil
   end
 end
