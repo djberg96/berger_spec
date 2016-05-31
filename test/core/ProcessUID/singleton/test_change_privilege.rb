@@ -1,55 +1,48 @@
 ######################################################################
-# tc_change_privilege.rb
+# test_change_privilege.rb
 #
 # Test case for the Process::UID.change_privilege module method.
 #
 # NOTE: Most tests will only run with root privileges, and then only
 # on Unix systems.
-#
-# TODO: figure out why this method always fails, even when run as
-# the superuser.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
 class TC_ProcessUID_ChangePrivilege_ModuleMethod < Test::Unit::TestCase
-   include Test::Helper
+  include Test::Helper
 
-   def setup
-      unless WINDOWS
-         @nobody_uid = Etc.getpwnam('nobody').uid
-         @login_uid  = Etc.getpwnam(Etc.getlogin).uid
-      end
-   end
+  def setup
+    @ruid = Process.uid
+    @euid = Process.euid
+  end
 
-   unless WINDOWS
-      def test_change_privilege_basic
-         assert_respond_to(Process::UID, :change_privilege)
-      end
+  test "change_privilege basic functionality" do
+    omit_if_windows('Process::UID.change_privilege')
+    assert_respond_to(Process::UID, :change_privilege)
+  end
 
-      # This method appears to be broken, as it always returns an Errno::EPERM
-      #if ROOT
-      #   def test_change_privilege
-      #      assert_nothing_raised{ Process::UID.change_privilege(@nobody_uid) }
-      #      assert_equal(@nobody_uid, Process::UID.eid)
-      #      assert_nothing_raised{ Process::UID.change_privilege(@login_uid) }
-      #      assert_equal(@login_uid, Process::UID.eid)
-      #   end
-      #end
-   end
+  test "change_privilege works as expected" do
+    omit_if_windows('Process::UID.change_privilege')
+    omit_unless_root('Process::UID.change_privilege')
 
-   def test_uid_expected_errors
-      if WINDOWS
-         assert_raises(TypeError, NotImplementedError){ Process::UID.change_privilege("x") }
-      else
-         assert_raises(TypeError){ Process::UID.change_privilege("x") }
-      end
-   end
+    assert_nothing_raised{ Process::UID.change_privilege(@euid) }
+    assert_equal(@euid, Process::UID.eid)
+    assert_nothing_raised{ Process::UID.change_privilege(@ruid) }
+    assert_equal(@ruid, Process::UID.eid)
+  end
 
-   def teardown
-      unless WINDOWS
-         @nobody_uid = nil
-         @login_uid  = nil
-      end
-   end
+  test "change_privilege is not supported on MS Windows" do
+    omit_unless_windows('Process::UID.change_privilege')
+    assert_raises(NotImplementedError){ Process::UID.change_privilege("x") }
+  end
+
+  test "change_privilege raises an error if the argument is invalid" do
+    assert_raises(ArgumentError){ Process::UID.change_privilege("x") }
+  end
+
+  def teardown
+    @euid = nil
+    @ruid = nil
+  end
 end
