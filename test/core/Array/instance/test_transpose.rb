@@ -37,11 +37,13 @@ class TC_Array_Transpose_InstanceMethod < Test::Unit::TestCase
     assert_equal([['a','b'],['c','d'],['e','f'],['g','h']], @array.transpose.transpose)
   end
 
+=begin
   test "transpose responds to custom to_ary methods" do
     pend("transpose tests for custom to_ary method awaiting clarification")
     assert_nothing_raised{ @custom.transpose }
     assert_equal([[1,3], [2,4]], @custom.transpose)
   end
+=end
 
   test "calling transpose on an empty array returns an empty array" do
     assert_equal([], [].transpose)
