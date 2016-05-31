@@ -13,8 +13,8 @@ class TC_ProcessGID_ChangePrivilege_ModuleMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @ruid = Process.uid
-    @euid = Process.euid
+    @rgid = Process.gid
+    @egid = Process.egid
   end
 
   test "change_privilege basic functionality" do
@@ -26,10 +26,10 @@ class TC_ProcessGID_ChangePrivilege_ModuleMethod < Test::Unit::TestCase
     omit_if_windows('Process::GID.change_privilege')
     omit_unless_root('Process::GID.change_privilege')
 
-    assert_nothing_raised{ Process::GID.change_privilege(@euid) }
-    assert_equal(@euid, Process::GID.eid)
-    assert_nothing_raised{ Process::GID.change_privilege(@ruid) }
-    assert_equal(@ruid, Process::GID.eid)
+    assert_nothing_raised{ Process::GID.change_privilege(@egid) }
+    assert_equal(@egid, Process::GID.eid)
+    assert_nothing_raised{ Process::GID.change_privilege(@rgid) }
+    assert_equal(@rgid, Process::GID.eid)
   end
 
   test "change_privilege is not supported on MS Windows" do
@@ -42,7 +42,7 @@ class TC_ProcessGID_ChangePrivilege_ModuleMethod < Test::Unit::TestCase
   end
 
   def teardown
-    @euid = nil
-    @ruid = nil
+    @egid = nil
+    @rgid = nil
   end
 end
