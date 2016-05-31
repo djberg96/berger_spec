@@ -506,6 +506,17 @@ namespace "test" do
       t.warning = true
     end
 
+    namespace "range" do
+      Dir['test/core/Range/instance/*.rb'].each{ |file|
+        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
+        Rake::TestTask.new(name) do |t|
+          t.test_files = [file]
+          t.warning = true
+          t.verbose = true
+        end
+      }
+    end
+
     desc "Runs the test suite for the Regexp class"
     Rake::TestTask.new('regexp') do |t|
       t.test_files = FileList['test/core/Regexp/*/*.rb']
