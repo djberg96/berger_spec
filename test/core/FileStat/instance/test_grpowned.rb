@@ -18,7 +18,7 @@ class TC_FileStat_GrpOwned_InstanceMethod < Test::Unit::TestCase
     if WINDOWS
       @bool = nil
     else
-      @bool = ROOT || OSX ? true : false
+      @bool = ROOT ? true : false
     end
   end
 
