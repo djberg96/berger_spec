@@ -1,35 +1,35 @@
 ######################################################################
-# tc_setuid.rb
+# test_setuid.rb
 #
 # Test case for the FileStat#setuid? instance method.
 ######################################################################
 require 'test/helper'
 require 'test/unit'
 
-class TC_FileStat_Setuid_Instance < Test::Unit::TestCase
-   include Test::Helper
+class TC_FileStat_Setuid_InstanceMethod < Test::Unit::TestCase
+  include Test::Helper
    
-   def setup
-      @stat = File::Stat.new(__FILE__)
-      @pass = `which passwd`.chomp unless WINDOWS
-   end
+  def setup
+    @stat = File::Stat.new(__FILE__)
+    @sudo = `which sudo`.chomp unless WINDOWS
+  end
 
-   def test_setuid_basic
-      assert_respond_to(@stat, :setuid?)
-   end
+  test "setuid? basic functionality" do
+    assert_respond_to(@stat, :setuid?)
+  end
 
-   # Windows always returns true
-   def test_setuid
-      assert_equal(false, @stat.setuid?)
-      assert_equal(true, File::Stat.new(@pass).setuid?) unless WINDOWS
-   end
+  test "setuid? returns expected value" do
+    omit_if_windows('setuid?')
+    assert_false(@stat.setuid?)
+    assert_true(File::Stat.new(@sudo).setuid?)
+  end
 
-   def test_setuid_expected_errors
-      assert_raises(ArgumentError){ @stat.setuid?(1) }
-   end
+  test "setuid? does not accept any arguments" do
+    assert_raises(ArgumentError){ @stat.setuid?(1) }
+  end
 
-   def teardown
-      @stat = nil
-      @pass = nil unless WINDOWS
-   end
+  def teardown
+    @stat = nil
+    @sudo = nil
+  end
 end
