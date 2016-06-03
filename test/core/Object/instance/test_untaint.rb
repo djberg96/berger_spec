@@ -38,23 +38,6 @@ class TC_Object_Untaint_InstanceMethod < Test::Unit::TestCase
     assert_raise(RuntimeError){ @object.untaint }
   end
 
-  test "calling untaint in a $SAFE environment works as expected" do
-    omit_if(JRUBY, "untaint tests in $SAFE environment skipped on JRuby")
-    assert_nothing_raised{ @object.taint }
-    assert_nothing_raised{
-      proc do
-        $SAFE = 2
-        @object.untaint
-      end.call
-    }
-    assert_raise(SecurityError){
-      proc do
-        $SAFE = 3
-        @object.untaint
-      end.call
-    }
-  end
-
   test "untaint does not accept any arguments" do
     assert_raise(ArgumentError){ @object.untaint(true) }
   end

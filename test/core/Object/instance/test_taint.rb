@@ -37,17 +37,6 @@ class TC_Object_Taint_InstanceMethod < Test::Unit::TestCase
     assert_raise(RuntimeError){ @object.taint }
   end
 
-  test "calling taint in a $SAFE environment works as expected" do
-    omit_if(JRUBY)
-
-    assert_nothing_raised{
-      proc do
-        $SAFE = 3
-        @object.taint
-      end.call
-    }
-  end
-
   test "taint does not accept any arguments" do
     assert_raise(ArgumentError){ @object.taint(true) }
   end
