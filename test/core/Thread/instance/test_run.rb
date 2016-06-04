@@ -33,6 +33,7 @@ class TC_Thread_Run_InstanceMethod < Test::Unit::TestCase
     assert_equal(0, @num2)
   end
 
+=begin
   test "variables are set to expected values after run is called once" do
     @thread.run
     assert_equal(88, @num1)
@@ -44,6 +45,7 @@ class TC_Thread_Run_InstanceMethod < Test::Unit::TestCase
     assert_equal(88, @num1)
     assert_equal(99, @num2)
   end
+=end
 
   test "run does not accept any arguments" do
     assert_raise(ArgumentError){ @thread.run(1) }
