@@ -1,5 +1,5 @@
 #####################################################################
-# tc_addition.rb
+# test_addition.rb
 #
 # Test case for the Fixnum#+ instance method.
 #####################################################################
@@ -10,7 +10,7 @@ class TC_Fixnum_Addition_InstanceMethod < Test::Unit::TestCase
    # Assumes 8 bit byte, 1 bit flag, and 2's comp
    def setup
       @num1 = 1
-      @max  = 2**(1.size * 8 - 2) - 1
+      @max = 2**63
       @min  = -@max - 1
    end
 
