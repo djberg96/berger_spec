@@ -1,8 +1,8 @@
-= A list of bugs and other things discovered as a result of this test suite,
-  either directly or indirectly.
+A list of bugs and other things discovered as a result of this test suite, either directly or indirectly.
 
-== Bugs
-=== Core
+# Bugs
+
+## Core
 * Dir.chdir and '/'. See ruby-core: 8914.
 * String#slice! documentation. See ruby-core: 9754.
 * String#upto infinite loop bug. See ruby-core: 9864.
@@ -15,15 +15,15 @@
   case. It isn't backed by an actual POSIX call, making it useless since the
   OS wouldn't enforce it anyway. Redmine bug #4467.
 
-=== Core (Indirectly)
+## Core (Indirectly)
 * Bug in eval.c where rb_define_alias could fail. See ruby-talk:279538.
 * Almost all of Ruby's "aliases" will fail a Method#== check because they're
   declared internally as synonyms instead of aliases. See ruby-core: 13301.
 
-=== Stdlib
+## Stdlib
 * Etc.getgrgid broken. Independently verified ruby-dev: 30586.
 
-== Quirks, Inconsistencies and Other Stuff
+## Quirks, Inconsistencies and Other Stuff
 * Math.atanh(1), and similar edge cases, raise different errors on different
   platforms (ERANGE vs EDOM). On MS Windows, no error is raised and Infinity
   is returned instead. See ruby-core: 10174.
@@ -44,7 +44,7 @@
   See ruby-core: 9926.
 * Array#fill and negative indices. See ruby-core:12950.
 
-== From Left Field
+## From Left Field
 * The documentation for the IO#clone method in "Programming Ruby, 2nd ed." is,
   as far as I can tell, totally false. There may have once been a separate
   implementation for IO#clone in io.c at some point but, if there was, there's
@@ -52,7 +52,7 @@
   share a common file pointer. IO just uses the inherited Object#clone method,
   and dup's the file pointer.
 
-== JRuby, Rubinius, etc
+## JRuby, Rubinius, etc
   The majority of the bugs reported by me for other implementations of Ruby
   are the direct result of this test suite. For JRuby, that's over 100 bug
   reports at this point.
