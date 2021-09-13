@@ -45,27 +45,27 @@ means they don't match MRI. Catch 22, baby.
 * test/stdlib  - toplevel directory for tests of stdlib.
 * test/lib     - contains helper modules that can be used in your test cases.
    
-Under test/core there is a folder for each of the core classes. Under
-those folders are one or two subdirectories - 'singleton' and/or 'instance'.
+Under `test/core` there is a folder for each of the core classes. Under
+those folders are one or two subdirectories - `singleton` and/or `instance`.
    
-Under the 'singleton' folders are the tests for the class methods of the
-class in question. Under the 'instance' folders are the tests for the instance
+Under the `singleton` folders are the tests for the class methods of the
+class in question. Under the `instance` folders are the tests for the instance
 methods of the class in question, if applicable.
    
 ## Test suites
-The test program shall be test-unit 2.
+The test program shall be `test-unit 2`.
 
 All test files shall start with "test_", and end with the name of the method,
 or an analogue based on the internal method name, e.g. "aref" to refer to
-Array#[].
+`Array#[]`.
    
 All test class names shall start with "Test_", followed by the class name,
 followed by the class or instance method (capitalized), followed by the word
 "SingletonMethod" or "InstanceMethod", as appropriate.
    
-For example, Test_Dir_Getwd_SingletonMethod < Test::Unit::TestCase
+For example, `Test_Dir_Getwd_SingletonMethod < Test::Unit::TestCase`
 
-The Test::Helper module is mandatory in all tests, and must be
+The `Test::Helper` module is mandatory in all tests, and must be
 required in all test files.
  
 Running the tests should be handled via tasks in the Rakefile. Some tests
@@ -80,11 +80,11 @@ such as JRuby.
 * Test basic functionality using most likely real world uses.
 * Test for expected errors.
 * Test edge cases (nil, 0, true, false, empty string).
-* Validate $SAFE behavior if appropriate.
+* Validate `$SAFE` behavior if appropriate.
 * Validate taint behavior if appropriate.
 * Go out of your way to break things. :)
    
-Any bugs found as a result of the test suite should be marked in the SCORECARD.
+Any bugs found as a result of the test suite should be marked in the `SCORECARD`.
    
 ## Coding guidelines for writers
 * Two space indentation.
@@ -93,7 +93,7 @@ Any bugs found as a result of the test suite should be marked in the SCORECARD.
 * Avoid tests that depend on other tests.
 * Always reset your instance variables to nil in the teardown method.
 * Ditto for class variables in the shutdown method.
-* Use the Test::Helper methods where appropriate.
+* Use the `Test::Helper` methods where appropriate.
 
 ## Branches
 Each major release of Ruby will have its own branch. I do not make separate
@@ -119,15 +119,15 @@ any pathological slowdowns, and to find methods that can be optimized.
    
 ## Running the tests
 Use the Rake tasks to run the various tests. You can run the individual
-test suites by using the name of the class or package, e.g. 'rake
-test:core:array'.
+test suites by using the name of the class or package, e.g. `rake
+test:core:array`.
   
-To perform all core tests run 'rake test:core'. Likewise, to perform all
-of the stdlib tests run 'rake test:stdlib'.
+To perform all core tests run `rake test:core`. Likewise, to perform all
+of the stdlib tests run `rake test:stdlib`.
  
-To perform all tests run 'rake test'.
+To perform all tests run `rake test`.
 
-See the output of 'rake -T' to see all available tests.
+See the output of `rake -T` to see all available tests.
 
 ## On JRuby
 As of 25-May-2007 I've decided to go ahead and tailor some of the tests
