@@ -5,7 +5,7 @@
 ###############################################################
 require "benchmark"
 
-MAX = ARGV[0].chomp.to_i rescue 200000
+MAX = ARGV[0].chomp.to_i rescue 2000000
 
 Benchmark.bm(30) do |x|
    x.report("String.new"){
@@ -176,11 +176,6 @@ Benchmark.bm(30) do |x|
       MAX.times{ string.dump }
    }
 
-   x.report("String#each"){
-      string = "hello\nworld"
-      MAX.times{ string.each{ |e| } }
-   }
-
    x.report("String#each_byte"){
       string = "hello"
       MAX.times{ string.each_byte{ |e| } }
@@ -232,16 +227,6 @@ Benchmark.bm(30) do |x|
       MAX.times{ string.index("e", -1) }
    }
 
-   x.report("String#index(int)"){
-      string = "hello"
-      MAX.times{ string.index(1) }
-   }
-
-   x.report("String#index(int, offset)"){
-      string = "hello"
-      MAX.times{ string.index(1, -1) }
-   }
-
    x.report("String#index(regexp)"){
       string = "hello"
       MAX.times{ string.index(/[aeiou]/) }
@@ -252,9 +237,10 @@ Benchmark.bm(30) do |x|
       MAX.times{ string.index(/[aeiou]/, -1) }
    }
 
+   # Let's reduce the count here since this is expensive
    x.report("String#insert"){
       string = "hello"
-      MAX.times{ string.insert(2, "world") }
+      (MAX/10).times{ string.insert(2, "world") }
    }
 
    x.report("String#intern"){
@@ -291,7 +277,7 @@ Benchmark.bm(30) do |x|
       string = "hello"
       MAX.times{ string.match("lo") }
    }
-   
+
    x.report("String#oct"){
       string = "123"
       MAX.times{ string.oct }
@@ -320,11 +306,6 @@ Benchmark.bm(30) do |x|
    x.report("String#rindex(string, int)"){
       string = "hello"
       MAX.times{ string.rindex("e",1) }
-   }
-
-   x.report("String#rindex(int, int)"){
-      string = "hello"
-      MAX.times{ string.rindex(1,1) }
    }
 
    x.report("String#rindex(regexp)"){
@@ -546,7 +527,7 @@ Benchmark.bm(30) do |x|
       string = "hello"
       MAX.times{ string.tr_s!("l","r") }
    }
-   
+
    # TODO: Add more variations for String#unpack
    x.report("String#unpack"){
       string = "hello"
