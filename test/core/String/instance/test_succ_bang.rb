@@ -52,7 +52,7 @@ class TC_String_SuccBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "succ! fails if the string is frozen" do
-    assert_raise(RuntimeError){ @string_lower.freeze.succ! }
+    assert_raise(FrozenError){ @string_lower.freeze.succ! }
   end
 
   def teardown

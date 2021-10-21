@@ -44,15 +44,6 @@ class TC_String_Sub_InstanceMethod < Test::Unit::TestCase
       assert_equal('hello723', @basic.sub(/\d/, '7'){ |m| m += 'x' }) #ignored
    end
 
-   def test_sub_with_tainted_replacement
-      str = 'x'
-      assert_equal(false, @basic.tainted?)
-      assert_equal(false, @basic.sub('l', str).tainted?)
-      
-      str.taint
-      assert_equal(true, @basic.sub!('l', str).tainted?)
-   end
-
    def test_sub_edge_cases
       assert_equal('123_hello123', @basic.sub(//, '123_'))
       assert_equal('world', @basic.sub(/.*/, 'world'))

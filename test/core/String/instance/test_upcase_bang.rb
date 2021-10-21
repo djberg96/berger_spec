@@ -56,7 +56,7 @@ class TC_String_UpcaseBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "upcase! cannot be called on a frozen string" do
-    assert_raise(RuntimeError){ @str.freeze.upcase! }
+    assert_raise(FrozenError){ @str.freeze.upcase! }
   end
 
   def teardown

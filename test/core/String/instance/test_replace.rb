@@ -8,7 +8,7 @@ require 'test/unit'
 
 class TC_String_Replace_InstanceMethod < Test::Unit::TestCase
   include Test::Helper
-   
+
   def setup
     @string1 = '<html><b>hello</b></html>'
     @string2 = @string1
@@ -33,7 +33,7 @@ class TC_String_Replace_InstanceMethod < Test::Unit::TestCase
     assert_equal(@string2, @string1)
     assert_equal(@string2.object_id, @string1.object_id)
   end
- 
+
   test "replacing a string with itself is legal" do
     assert_nothing_raised{ @string1.replace(@string1) }
     assert_equal('<html><b>hello</b></html>', @string1)
@@ -43,11 +43,6 @@ class TC_String_Replace_InstanceMethod < Test::Unit::TestCase
     assert_equal(@string1.object_id, @string1.replace(@string1).object_id)
   end
 
-  test "replacing a string with a tainted string makes it tainted" do
-    assert_false(@string1.replace('world').tainted?)
-    assert_true(@string1.replace('world'.taint).tainted?)
-  end
-   
   test "attempting a replace a string in $SAFE mode 4 raises an error" do
     omit_if_jruby('String#replace')
     assert_raise(ArgumentError){
@@ -59,14 +54,10 @@ class TC_String_Replace_InstanceMethod < Test::Unit::TestCase
       }
     }
   end
-  
+
   test "replace accepts a single string argument only" do
     assert_raise(ArgumentError){ @string1.replace("x","y") }
     assert_raise(TypeError){ @string1.replace(1) }
-  end
-
-  test "replace raises an error on a frozen string" do
-    assert_raise(RuntimeError){ @string1.freeze.replace('') }
   end
 
   def teardown

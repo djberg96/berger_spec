@@ -25,11 +25,6 @@ class TC_String_Reverse_InstanceMethod < Test::Unit::TestCase
       assert_equal('321', '123'.reverse)
    end
 
-   def test_reverse_tainted_string
-      assert_equal(false, 'hello'.reverse.tainted?)
-      assert_equal(true, 'hello'.taint.reverse.tainted?)
-   end
-
    def test_reverse_edge_cases
       assert_equal('', ''.reverse)
       assert_equal(' ', ' '.reverse)

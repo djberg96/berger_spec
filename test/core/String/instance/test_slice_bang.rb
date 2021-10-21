@@ -84,12 +84,6 @@ class TC_String_SliceBang_InstanceMethod < Test::Unit::TestCase
     assert_equal('0', '0'.slice!('0'))
     assert_equal('0', '0'.slice!(0))
   end
-   
-  # JRUBY-1721
-  test "slice! returns a tainted string if the receiver was tainted" do
-    @string1.taint
-    assert_true(@string1.slice!(0,1).tainted?)
-  end
 
   # JRUBY-1745
   test "slice! returns expected results with float arguments" do

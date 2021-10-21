@@ -59,7 +59,7 @@ class TC_String_StripBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "strip_bang raises an error if called on a frozen string" do
-    assert_raises(RuntimeError){ @string1.freeze.strip! }
+    assert_raises(FrozenError){ @string1.freeze.strip! }
   end
 
   def teardown

@@ -69,17 +69,6 @@ class TC_String_SubBang_InstanceMethod < Test::Unit::TestCase
       assert_equal('hello723xxx', @basic)
    end
 
-   def test_sub_with_tainted_replacement
-      str = 'x'
-      assert_equal(false, @basic.tainted?)
-      assert_nothing_raised{ @basic.sub!('l', str) }
-      assert_equal(false, @basic.tainted?)
-      
-      str.taint
-      assert_nothing_raised{ @basic.sub!('l', str) }
-      assert_equal(true, @basic.tainted?)
-   end
-
    def test_sub_edge_cases
       assert_equal('123_hello123', @basic.sub!(//, '123_'))
       assert_equal('world', @basic.sub!(/.*/, 'world'))

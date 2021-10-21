@@ -41,7 +41,7 @@ class TC_String_SwapcaseBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "calling swapcase! on a frozen string raises an error" do
-    assert_raise(RuntimeError){ @string_basic.freeze.swapcase! }
+    assert_raise(FrozenError){ @string_basic.freeze.swapcase! }
   end
 
   def teardown
