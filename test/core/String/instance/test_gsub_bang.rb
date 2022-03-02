@@ -69,18 +69,6 @@ class TC_String_GsubBang_InstanceMethod < Test::Unit::TestCase
       assert_equal('hello777xxx', @basic)
    end
 
-   def test_gsub_with_tainted_replacement
-      str = 'x'
-      assert_equal(false, @basic.tainted?)
-      assert_nothing_raised{ @basic.gsub!('l', str) }
-      assert_equal(false, @basic.tainted?)
-      
-      @basic = 'hello123' # reset
-      str.taint
-      assert_nothing_raised{ @basic.gsub!('l', str) }
-      assert_equal(true, @basic.tainted?)
-   end
-
    def test_gsub_edge_cases
       assert_equal('xhxexlxlxox1x2x3x', @basic.gsub!(//, 'x'))
       assert_equal('worldworld', @basic.gsub!(/.*/, 'world'))

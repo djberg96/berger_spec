@@ -54,7 +54,7 @@ class TC_String_CapitalizeBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "capitalize! raises an error if the string is frozen" do
-    assert_raise(RuntimeError){ @string_basic.freeze.capitalize! }
+    assert_raise(FrozenError){ @string_basic.freeze.capitalize! }
   end
 
   def teardown

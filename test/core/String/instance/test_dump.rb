@@ -76,11 +76,6 @@ class TC_String_Dump_InstanceMethod < Test::Unit::TestCase
     assert_equal('"x\\x03y\\x03"', "x\003y\003".dump)
   end
 
-  def test_dump_tainted_string
-    assert_false("abc".dump.tainted?)
-    assert_true("abc".taint.dump.tainted?)
-  end
-
   def test_dump_edge_cases
     assert_equal('""', "".dump)
     assert_equal('" "', " ".dump)

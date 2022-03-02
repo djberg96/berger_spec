@@ -34,7 +34,7 @@ class TC_String_Lstrip_Instance < Test::Unit::TestCase
 
    def test_lstrip_edge_cases
       assert_nothing_raised{ "".lstrip }
-      assert_equal("\0\0\0hello", @string2.lstrip)
+      assert_equal("hello", @string2.lstrip)
       assert_equal("X hello \0 \0", @string3.lstrip)
       assert_equal("hello", @string4.lstrip)
    end

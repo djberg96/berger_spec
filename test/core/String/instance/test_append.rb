@@ -24,11 +24,6 @@ class TC_String_Append_InstanceMethod < Test::Unit::TestCase
     assert_kind_of(String, @string << 'abc')
   end
 
-  test "concat is an alias for <<" do
-    assert_respond_to(@string, :concat)
-    assert_alias_method(@string, :concat, :<<)
-  end
-
   test "append works as expected" do
     assert_equal('helloabc', @string << 'abc')
     assert_equal('helloabc ', @string << ' ')

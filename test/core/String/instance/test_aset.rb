@@ -78,17 +78,6 @@ class TC_String_Aset_InstanceMethod < Test::Unit::TestCase
     assert_equal('qwerty', @string1)
   end
 
-  test "original string becomes tainted if replacement string is tainted" do
-    str = 'x'
-    assert_equal(false, @string1.tainted?)
-    assert_nothing_raised{ @string1['q'] = str }
-    assert_equal(false, @string1.tainted?)
-
-    str.taint
-    assert_nothing_raised{ @string1['x'] = str }
-    assert_equal(true, @string1.tainted?)
-  end
-
   test "aset edge cases" do
     assert_nothing_raised{ @string1[''] = '' }
     assert_nothing_raised{ @string1[''] = 'hello' }

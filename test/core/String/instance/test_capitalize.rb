@@ -56,11 +56,7 @@ class TC_String_Capitalize_InstanceMethod < Test::Unit::TestCase
   test "capitalize only works on ascii characters" do
     str = "ελληνικά" # Greek
     assert_nothing_raised{ str.capitalize }
-    assert_equal(str, str.capitalize)
-  end
-
-  test "capitalize works as expected with tainted strings" do
-    assert_equal("Hello", @string.taint.capitalize)
+    assert_equal("Ελληνικά", str.capitalize)
   end
 
   test "capitalize does not accept any arguments" do

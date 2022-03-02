@@ -89,13 +89,6 @@ class TC_String_Aref_InstanceMethod < Test::Unit::TestCase
     assert_equal("e", @string1[StringArefTemp.new])
   end
 
-  # Inspired by JRUBY-1721
-  test "aref works as expected with tainted strings" do
-    assert_nothing_raised{ @string1.taint }
-    assert_true(@string1.tainted?)
-    assert_true(@string1[0,1].tainted?)
-  end
-
   test "passing an invalid type raises an error" do
     assert_raise(TypeError){ @string1[nil] }
     assert_raise(TypeError){ @string1[1, nil] }

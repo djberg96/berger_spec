@@ -73,11 +73,6 @@ class TC_String_Inspect_InstanceMethod < Test::Unit::TestCase
     assert_equal('"x\\u0003y\\u0003"', "x\003y\003".inspect)
   end
 
-  def test_inspect_tainted_string
-    assert_false("abc".inspect.tainted?)
-    assert_true("abc".taint.inspect.tainted?)
-  end
-
   def test_inspect_edge_cases
     assert_equal('""', "".inspect)
     assert_equal('" "', " ".inspect)

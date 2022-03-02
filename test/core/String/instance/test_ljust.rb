@@ -38,13 +38,6 @@ class TC_String_Ljust_InstanceMethod < Test::Unit::TestCase
     assert_equal("hello\0\0\0xx", "hello\0\0\0".ljust(10, 'x'))
   end
 
-  def test_ljust_tainted_string
-    assert_false('hello'.ljust(8).tainted?)
-    assert_true('hello'.taint.ljust(8).tainted?)
-    assert_false('hello'.ljust(4, 'X'.taint).tainted?) # Not > length
-    assert_true('hello'.ljust(8, 'X'.taint).tainted?)
-  end
-
   def test_ljust_expected_errors
     assert_raises(ArgumentError){ @string.ljust }
     assert_raises(ArgumentError){ @string.ljust(0, '') }

@@ -44,15 +44,6 @@ class TC_String_Gsub_InstanceMethod < Test::Unit::TestCase
       assert_equal('hello777', @basic.gsub(/\d/, '7'){ |m| m += 'x' }) #ignored
    end
 
-   def test_gsub_with_tainted_replacement
-      str = 'x'
-      assert_equal(false, @basic.tainted?)
-      assert_equal(false, @basic.gsub('l', str).tainted?)
-      
-      str.taint
-      assert_equal(true, @basic.gsub!('l', str).tainted?)
-   end
-
    def test_gsub_edge_cases
       assert_equal('xhxexlxlxox1x2x3x', @basic.gsub(//, 'x'))
       assert_equal('worldworld', @basic.gsub(/.*/, 'world'))

@@ -23,7 +23,7 @@ class TC_String_DowncaseBang_InstanceMethod < Test::Unit::TestCase
     assert_equal('<html><b>hello</b></html>', @str_a.downcase!)
     assert_nil('hello'.downcase!)
   end
-  
+
   test "downcase! returns expected results for non-alphanumeric strings" do
     assert_nil(@str_w.downcase!)
     assert_nil('123'.downcase!)
@@ -47,7 +47,7 @@ class TC_String_DowncaseBang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "downcase! raises an error on a frozen string" do
-    assert_raise(RuntimeError){ @str_a.freeze.downcase! }
+    assert_raise(FrozenError){ @str_a.freeze.downcase! }
   end
 
   def teardown

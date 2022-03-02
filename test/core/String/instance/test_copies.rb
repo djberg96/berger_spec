@@ -33,9 +33,11 @@ class TC_String_Copies_InstanceMethod < Test::Unit::TestCase
    end
 
    # JRUBY-1752
-   def test_copies_returns_subclass
+   #
+   # Apparently this changed at some point
+   def test_copies_returns_basic_string_class
       assert_nothing_raised{ @string = MyString.new('hello') }
-      assert_kind_of(MyString, @string * 3)
+      assert_kind_of(String, @string * 3)
    end
 
    def test_copies_expected_errors
