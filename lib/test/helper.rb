@@ -49,12 +49,6 @@ module Test
     # True if tests are run on a big endian platform
     BIG_ENDIAN = [1].pack('I') == [1].pack('N')
 
-    # True if tests are run in 64-bit mode
-    BIT_64 = (2**33).is_a?(Fixnum)
-
-    # True if tests are run in 32-bit mode
-    BIT_32 = (2**33).is_a?(Bignum)
-
     # True if the current process is running as root
     ROOT = Process.euid == 0
 

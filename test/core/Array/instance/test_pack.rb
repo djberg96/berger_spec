@@ -264,11 +264,7 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
 
   def test_pack_L_native
     result = [1.5, 9.7].pack("L_2")
-    if BIT_64
-      assert_equal(endian("\001\000\000\000\000\000\000\000\t\000\000\000\000\000\000\000"), result)
-    else
-      assert_equal(endian("\001\000\000\000\t\000\000\000"), result)
-    end
+    assert_equal(endian("\001\000\000\000\000\000\000\000\t\000\000\000\000\000\000\000"), result)
   end
 
   test "pack 'L' with an exceedingly large value returns a null string" do
@@ -290,11 +286,7 @@ class TC_Array_Pack_Instance < Test::Unit::TestCase
 
   def test_pack_l_native
     result = [1.5, 9.7].pack("L_2")
-    if BIT_64
-      assert_equal(endian("\001\000\000\000\000\000\000\000\t\000\000\000\000\000\000\000"), result)
-    else
-      assert_equal(endian("\001\000\000\000\t\000\000\000"), result)
-    end
+    assert_equal(endian("\001\000\000\000\000\000\000\000\t\000\000\000\000\000\000\000"), result)
   end
 
   test "pack 'l' with exceedingly large number returns a null string" do
