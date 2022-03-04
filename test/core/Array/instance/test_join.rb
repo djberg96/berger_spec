@@ -50,12 +50,6 @@ class Test_Array_Join_InstanceMethod < Test::Unit::TestCase
     assert_equal('true-false', [true, false].join('-'))
   end
 
-  test "a tainted string is returned if the array was tainted" do
-    assert_false(@array.join.tainted?)
-    assert_nothing_raised{ @array.taint }
-    assert_true(@array.join.tainted?)
-  end
-
   test "join honors OFS value" do
     $, = ','
     assert_equal('a,b,c', @array.join)

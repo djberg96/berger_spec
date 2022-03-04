@@ -58,8 +58,8 @@ class Test_Array_Replace_InstanceMethod < Test::Unit::TestCase
   end
 
   test "an error is raised if an attempt is made to replace a frozen array" do
-    assert_raise(RuntimeError){ @frozen.replace([4, 5, 6]) }
-    assert_raise_message("can't modify frozen Array"){ @frozen.replace([4,5,6]) }
+    assert_raise(FrozenError){ @frozen.replace([4, 5, 6]) }
+    assert_raise_message("can't modify frozen Array: [1, 2, 3]"){ @frozen.replace([4,5,6]) }
   end
 
   def teardown

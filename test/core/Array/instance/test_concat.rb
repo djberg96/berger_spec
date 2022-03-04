@@ -40,7 +40,7 @@ class Test_Array_Concat_InstanceMethod < Test::Unit::TestCase
   test "concat works with a range as expected" do
     assert_equal([1, 2, 4, 5], @array1[0..1].concat(@array2[0, 2]))
   end
-  
+
   test "passing an empty array returns the original array" do
     assert_equal(@array1, @array1.concat([]))
     assert_equal(@array1.object_id, @array1.concat([]).object_id)
@@ -58,8 +58,10 @@ class Test_Array_Concat_InstanceMethod < Test::Unit::TestCase
     assert_equal([1, 2, 3, 0, 0], @array1.concat([0, 0]))
   end
 
-  test "passing the wrong number of arguments raises an error" do
-    assert_raise(ArgumentError){ @array1.concat([], []) }
+  test "concat accepts multiple arguments, including none" do
+    assert_equal(@array1, @array1.concat)
+    assert_equal(@array1, @array1.concat([], []))
+    assert_equal([1,2,3,4,5], @array1.concat([4], [5]))
   end
 
   test "passing the wrong type of argument raises an error" do

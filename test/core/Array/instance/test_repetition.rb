@@ -49,13 +49,7 @@ class Test_Array_Repetition_InstanceMethod < Test::Unit::TestCase
 
   test "passing an argument of 0 returns an empty array" do
     assert_nothing_raised{ @array_nums * 0 }
-    assert_equal([], @array_nums * 0) 
-  end
-
-  test "if original array is tainted then result is tainted" do
-    @array_nums.taint
-    assert_nothing_raised{ @array_nums = @array_nums * 2 }
-    assert_true(@array_nums.tainted?)
+    assert_equal([], @array_nums * 0)
   end
 
   test "passing anything other than a string or numeric raises an error" do
@@ -64,7 +58,7 @@ class Test_Array_Repetition_InstanceMethod < Test::Unit::TestCase
     assert_raise(TypeError){ @array_nums * false }
   end
 
-  test "passing the wrong number of arguments raises an error" do 
+  test "passing the wrong number of arguments raises an error" do
     assert_raise(ArgumentError){ @array_nums.send(:*, @array_nums, @array_word) }
   end
 
@@ -75,11 +69,11 @@ class Test_Array_Repetition_InstanceMethod < Test::Unit::TestCase
   test "passing a value that is too large raises an error" do
     assert_raise(ArgumentError, RangeError){ @array_nums * (256**64) }
   end
-   
+
   def teardown
     @array_nums = nil
     @array_word = nil
-    @array_edge = nil 
+    @array_edge = nil
     @array_nest = nil
   end
 end
