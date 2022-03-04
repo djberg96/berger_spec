@@ -39,7 +39,7 @@ class TC_Hash_Replace_InstanceMethod < Test::Unit::TestCase
   end
 
   test "replace does not work on frozen hashes" do
-    assert_raise(RuntimeError){ @frozen.replace(@hash1) }
+    assert_raise(FrozenError){ @frozen.replace(@hash1) }
   end
 
   def teardown

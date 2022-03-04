@@ -55,7 +55,7 @@ class Test_Hash_Merge_Bang_InstanceMethod < Test::Unit::TestCase
   end
 
   test "merge_bang fails on a frozen hash" do
-    assert_raise(RuntimeError){ @hash1.freeze.merge!(@hash2) }
+    assert_raise(FrozenError){ @hash1.freeze.merge!(@hash2) }
   end
 
   def teardown

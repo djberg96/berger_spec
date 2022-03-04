@@ -11,6 +11,7 @@ class TC_Hash_Merge_InstanceMethod < Test::Unit::TestCase
   def setup
     @hash1 = {"a" => 1, "b" => 2}
     @hash2 = {"c" => 3, "d" => 4}
+    @hash3 = {"e" => 5, "f" => 6}
   end
 
   test "merge basic functionality" do
@@ -24,6 +25,10 @@ class TC_Hash_Merge_InstanceMethod < Test::Unit::TestCase
     assert_equal(Hash["a",1,"b",2], @hash1.merge({}))
     assert_equal(Hash["b",2,"a",4], @hash1.merge({"a" => 4}))
     assert_equal(Hash["a",1,"b",2,nil,1], @hash1.merge({nil => 1}))
+  end
+
+  test "merge accepts multiple arguments" do
+    assert_equal(Hash["a",1,"b",2,"c",3,"d",4,"e",5,"f",6], @hash1.merge(@hash2, @hash3))
   end
 
   test "merge does not modify the receiver" do
@@ -56,9 +61,9 @@ class TC_Hash_Merge_InstanceMethod < Test::Unit::TestCase
     assert_raise(TypeError){ @hash1.merge([]) }
   end
 
-  test "merge requires one argument only" do
-    assert_raise(ArgumentError){ @hash1.merge }
-    assert_raise(ArgumentError){ @hash1.merge({}, {}) }
+  test "merge accepts any number of arguments, including none" do
+    assert_nothing_raised{ @hash1.merge }
+    assert_nothing_raised{ @hash1.merge({}, {}, {}, {}) }
   end
 
   def teardown
