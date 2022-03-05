@@ -20,7 +20,7 @@ class TC_Process_Euid_SingletonMethod < Test::Unit::TestCase
 
   test "euid returns the expected results" do
     assert_nothing_raised{ Process.euid }
-    assert_kind_of(Fixnum, Process.euid)
+    assert_kind_of(Integer, Process.euid)
     assert_true(Process.euid < 100000)
   end
 

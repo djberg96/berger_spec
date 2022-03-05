@@ -1,5 +1,5 @@
 ######################################################################
-# tc_pid.rb
+# test_pid.rb
 #
 # Test case for the Process.pid module method. It also tests the $$
 # special variable.
@@ -8,13 +8,13 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_Process_Pid_ModuleMethod < Test::Unit::TestCase
-   def test_pid
-      assert_respond_to(Process, :pid)
-      assert_kind_of(Fixnum, Process.pid)
-   end
+  test "pid basic functionality" do
+    assert_respond_to(Process, :pid)
+    assert_kind_of(Integer, Process.pid)
+  end
 
-   def test_pid_global
-      assert_kind_of(Fixnum, $$)
-      assert_equal(Process.pid, $$)
-   end
+  test "pid global variable is set to the expected value" do
+    assert_kind_of(Fixnum, $$)
+    assert_equal(Process.pid, $$)
+  end
 end

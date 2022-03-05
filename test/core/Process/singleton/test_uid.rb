@@ -20,7 +20,7 @@ class TC_Process_Uid_SingletonMethod < Test::Unit::TestCase
   test "uid basic functionality" do
     assert_respond_to(Process, :uid)
     assert_nothing_raised{ Process.uid }
-    assert_kind_of(Fixnum, Process.uid)
+    assert_kind_of(Integer, Process.uid)
   end
 
   test "uid returns the expected results" do

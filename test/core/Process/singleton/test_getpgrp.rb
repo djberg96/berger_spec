@@ -13,7 +13,7 @@ class TC_Process_Getpgrp_SingletonMethod < Test::Unit::TestCase
     omit_if(WINDOWS, "Process.getpgrp tests skipped on MS Windows")
     assert_respond_to(Process, :getpgrp)
     assert_nothing_raised{ Process.getpgrp }
-    assert_kind_of(Fixnum, Process.getpgrp)
+    assert_kind_of(Integer, Process.getpgrp)
   end
 
   test "getpgrp returns expected results" do

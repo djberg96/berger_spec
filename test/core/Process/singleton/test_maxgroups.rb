@@ -22,7 +22,7 @@ class TC_Process_Maxgroups_SingletonMethod < Test::Unit::TestCase
     omit_if_windows('Process.maxgroups')
     assert_respond_to(Process, :maxgroups)
     assert_nothing_raised{ Process.maxgroups }
-    assert_kind_of(Fixnum, Process.maxgroups)
+    assert_kind_of(Integer, Process.maxgroups)
   end
 
   test "maxgroups returns expected results" do
