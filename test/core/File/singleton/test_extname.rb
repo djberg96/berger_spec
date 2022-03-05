@@ -37,20 +37,12 @@ class TC_File_Extname_SingletonMethod < Test::Unit::TestCase
     assert_equal("", File.extname("foo-bar"))
   end
 
-  test "extname returns tainted string if argument is tainted" do
-    assert_false(File.extname(@file).tainted?)
-    assert_nothing_raised{ @file.taint }
-    assert_true(File.extname(@file).tainted?)
-  end
-
   test "extname returns empty string for empty or unusual arguments" do
     assert_equal("", File.extname(""))
     assert_equal("", File.extname("."))
     assert_equal("", File.extname("/"))
     assert_equal("", File.extname("/."))
     assert_equal("", File.extname(".."))
-    assert_equal("", File.extname(".foo."))
-    assert_equal("", File.extname("foo."))
   end
 
   test "extname requires a string argument" do
@@ -58,6 +50,11 @@ class TC_File_Extname_SingletonMethod < Test::Unit::TestCase
     assert_raises(TypeError){ File.extname(0) }
     assert_raises(TypeError){ File.extname(true) }
     assert_raises(TypeError){ File.extname(false) }
+  end
+
+  test "extname returns expected result for edge cases" do
+    assert_equal(".", File.extname(".foo."))
+    assert_equal(".", File.extname("foo."))
   end
 
   test "extnamee only takes one argument" do

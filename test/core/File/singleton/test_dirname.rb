@@ -51,12 +51,6 @@ class TC_File_Dirname_SingletonMethod < Test::Unit::TestCase
     assert_equal("C:/", File.dirname("C:/foo///"))
   end
 
-  test "dirname returns a tainted string if its argument is tainted" do
-    assert_false(File.dirname(@path).tainted?)
-    assert_nothing_raised{ @path.taint }
-    assert_true(File.dirname(@path).tainted?)
-  end
-
   test "dirname requires a string argument" do
     assert_raises(TypeError){ File.dirname(nil) }
     assert_raises(TypeError){ File.dirname(0) }

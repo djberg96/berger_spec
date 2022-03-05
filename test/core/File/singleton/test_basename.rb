@@ -87,11 +87,6 @@ class TC_File_Basename_SingletonMethod < Test::Unit::TestCase
     assert_equal("foo.txt", File.basename("foo.txt", ""))
   end
 
-  test "basename returns a tainted string if its argument is tainted" do
-    assert_false(File.basename(@path).tainted?)
-    assert_true(File.basename(@path.taint).tainted?)
-  end
-
   test "the arguments to basename must be strings" do
     assert_raises(TypeError){ File.basename(nil) }
     assert_raises(TypeError){ File.basename(1) }

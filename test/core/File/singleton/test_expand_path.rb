@@ -100,10 +100,6 @@ class TC_File_ExpandPath_SingletonMethod < Test::Unit::TestCase
     assert_equal(File.join(@@home, 'bin'), File.expand_path("~#{@@user}/bin", '/tmp'))
   end
 
-  test "expand_path returns a tainted string" do
-    assert_true(File.expand_path(__FILE__).tainted?)
-  end
-
   test "expand_path requires a string argument" do
     assert_raises(ArgumentError){ File.expand_path }
     assert_raises(TypeError){ File.expand_path(1) }

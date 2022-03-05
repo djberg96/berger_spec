@@ -57,11 +57,6 @@ class TC_File_Join_SingletonMethod < Test::Unit::TestCase
     assert_equal("#{@root}/usr/local/bin", File.join(@root, *@dirs))
   end
 
-  test "join returns a tainted string if any argument is tainted" do
-    assert_false(File.join("test1", "test2").tainted?)
-    assert_true(File.join(Dir.pwd, "test1").tainted?) # Dir.pwd tainted
-  end
-
   test "arguments to join must be strings" do
     assert_raises(TypeError){ File.join(true, false) }
     assert_raises(TypeError){ File.join(nil, nil) }

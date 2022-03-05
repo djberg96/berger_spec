@@ -33,11 +33,6 @@ class TC_File_Path < Test::Unit::TestCase
     assert_equal(File.join(@pwd, "/./test3"), @fh_with_extra.path)
   end
 
-  test "a tainted path returns a tainted string" do
-    assert_nothing_raised{ @fh_with_path.taint }
-    assert_true(@fh_with_path.path.tainted?)
-  end
-
   test "calling path on a closed handle does not raise an error" do
     @fh_no_path.close
     assert_nothing_raised{ @fh_no_path.path }

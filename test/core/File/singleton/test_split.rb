@@ -60,13 +60,6 @@ class TC_File_Split_SingletonMethod < Test::Unit::TestCase
     assert_equal(['/', 'baz.rb'], File.split('/baz.rb'))
   end
 
-  test "split returns an untainted array, but its elements are tainted" do
-    assert_false(File.split(@path).tainted?)
-    assert_nothing_raised{ @path.taint }
-    assert_false(File.split(@path).tainted?)
-    assert_true(File.split(@path)[0].tainted?)
-  end
-
   test "split ignores extra slashes on unix style paths" do
     omit_if(WINDOWS)
     assert_equal(['/', '/'], File.split('/')) # POSIX? Maybe.
