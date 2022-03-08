@@ -1,7 +1,7 @@
 ######################################################################
 # test_english.rb
 #
-# Test case for the English library. 
+# Test case for the English library.
 ######################################################################
 require 'test/unit'
 require 'test/helper'
@@ -11,9 +11,11 @@ class TC_English_Stdlib < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    $\ = "\n"
-    $; = "--"
-    $, = "++"
+    suppress_warning do
+      $\ = "\n"
+      $; = "--"
+      $, = "++"
+    end
   end
 
   test "$ARGV maps to $*" do
@@ -22,7 +24,7 @@ class TC_English_Stdlib < Test::Unit::TestCase
   end
 
   test "$CHILD_STATUS maps to $?" do
-    omit_if_jruby("$CHILD_STATUS")
+    omit_if_java("$CHILD_STATUS")
     Process.waitpid(fork{})
     assert_not_nil($CHILD_STATUS)
     assert_equal($?, $CHILD_STATUS)
@@ -86,7 +88,7 @@ class TC_English_Stdlib < Test::Unit::TestCase
     assert_equal($\, $INPUT_RECORD_SEPARATOR)
   end
 
-  test "$LAST_MATCH_INFO maps to $~" do 
+  test "$LAST_MATCH_INFO maps to $~" do
     "foo" =~ /foo/
     assert_not_nil($LAST_MATCH_INFO)
     assert_equal($~, $LAST_MATCH_INFO)

@@ -23,6 +23,9 @@ module Test
 
     JRUBY    = defined?(JRUBY_VERSION) ? true : false
     RUBINIUS = defined?(Rubinius) ? true : false
+    TRUFFLE  = defined?(TruffleRuby) ? true : false
+    JAVA     = JRUBY || TRUFFLE
+
 
     # Neither JRuby nor Rubinius attempt to implement all (or any) $SAFE rules.
     IGNORE_SAFE = JRUBY || RUBINIUS
@@ -335,6 +338,10 @@ module Test
 
     def omit_if_jruby(test_name, &block)
       omit_if(JRUBY, "#{test_name} test skipped on JRuby", &block)
+    end
+
+    def omit_if_java(test_name, &block)
+      omit_if(JAVA, "#{test_name} test skipped on JRuby and TruffleRuby", &block)
     end
   end
 end
