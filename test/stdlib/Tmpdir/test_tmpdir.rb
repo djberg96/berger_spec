@@ -112,10 +112,11 @@ class Test_Tmpdir_Stdlib < Test::Unit::TestCase
   end
 
   test "tmpdir defaults to systmpdir if $SAFE level is greater than zero" do
+    omit_if_java("tmpdir with $SAFE > 0")
     remove_env_tmpdirs
     proc do
       $SAFE = 1
-      assert_equal(Etc.systmpdir, Dir.tmpdir)
+      assert_equal(File.expand_path(Etc.systmpdir), Dir.tmpdir)
     end.call
   end
 
