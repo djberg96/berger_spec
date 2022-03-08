@@ -410,39 +410,6 @@ class TestPathname < Test::Unit::TestCase
     assert_raise(ArgumentError) { Pathname.new("\0") }
   end
 
-  def test_taint
-    obj = Pathname.new("a"); assert_same(obj, obj.taint)
-    obj = Pathname.new("a"); assert_same(obj, obj.untaint)
-
-    assert_equal(false, Pathname.new("a"      )           .tainted?)
-    assert_equal(false, Pathname.new("a"      )      .to_s.tainted?)
-    assert_equal(true,  Pathname.new("a"      ).taint     .tainted?)
-    assert_equal(true,  Pathname.new("a"      ).taint.to_s.tainted?)
-    assert_equal(true,  Pathname.new("a".taint)           .tainted?)
-    assert_equal(true,  Pathname.new("a".taint)      .to_s.tainted?)
-    assert_equal(true,  Pathname.new("a".taint).taint     .tainted?)
-    assert_equal(true,  Pathname.new("a".taint).taint.to_s.tainted?)
-
-    str = "a"
-    path = Pathname.new(str)
-    str.taint
-    assert_equal(false, path     .tainted?)
-    assert_equal(false, path.to_s.tainted?)
-  end
-
-  def test_untaint
-    obj = Pathname.new("a"); assert_same(obj, obj.untaint)
-
-    assert_equal(false, Pathname.new("a").taint.untaint     .tainted?)
-    assert_equal(false, Pathname.new("a").taint.untaint.to_s.tainted?)
-
-    str = "a".taint
-    path = Pathname.new(str)
-    str.untaint
-    assert_equal(true, path     .tainted?)
-    assert_equal(true, path.to_s.tainted?)
-  end
-
   def test_freeze
     obj = Pathname.new("a"); assert_same(obj, obj.freeze)
 
