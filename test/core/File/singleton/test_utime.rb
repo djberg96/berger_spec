@@ -23,7 +23,7 @@ class TC_File_Utime_SingletonMethod < Test::Unit::TestCase
     assert_nothing_raised{ File.utime(0, 0, @file1) }
     assert_nothing_raised{ File.utime(0, @time, @file1) }
     assert_nothing_raised{ File.utime(@time, @time, @file1) }
-    assert_kind_of(Fixnum, File.utime(0, 0, @file1))
+    assert_kind_of(Integer, File.utime(0, 0, @file1))
   end
 
   test "utime returns the expected results" do
