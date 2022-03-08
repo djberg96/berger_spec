@@ -95,7 +95,7 @@ class Test_Stdlib_OStruct < Test::Unit::TestCase
   end
 
   test "hash returns a hashed number" do
-    assert_kind_of(Fixnum, @ostruct1.hash)
+    assert_kind_of(Integer, @ostruct1.hash)
   end
 
   test "openstruct implements custom inspect method" do
