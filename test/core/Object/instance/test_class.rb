@@ -1,5 +1,5 @@
 #######################################################################
-# tc_class.rb
+# test_class.rb
 #
 # Test case for the Object#class instance method.
 #######################################################################
@@ -18,7 +18,7 @@ class TC_Object_Class_InstanceMethod < Test::Unit::TestCase
 
    def test_class
       assert_equal(Object, @obj.class)
-      assert_equal(Fixnum, 1.class)
+      assert_equal(Integer, 1.class)
       assert_equal(Float, 1.0.class)
       assert_equal(Array, [].class)
    end

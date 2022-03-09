@@ -9,17 +9,19 @@ require 'test/helper'
 require 'test/unit'
 
 class TC_Object_Match_InstanceMethod < Test::Unit::TestCase
+  include Test::Helper
+
   def setup
     @object = Object.new
   end
 
   test "=~ basic functionality" do
     assert_respond_to(@object, :=~)
-    assert_nothing_raised{ @object =~ @object }
+    suppress_warning{ assert_nothing_raised{ @object =~ @object } }
   end
 
   test "=~ returns the expected result" do
-    assert_nil(@object =~ @object)
+    suppress_warning{ assert_nil(@object =~ @object) }
   end
 
   test "=~ accepts one argument only" do
