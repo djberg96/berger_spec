@@ -25,11 +25,6 @@ class TC_Object_Inspect_InstanceMethod < Test::Unit::TestCase
       assert_equal('main', $object_inspect_main)
    end
 
-   def test_inspect_tainted
-      assert_nothing_raised{ @object.taint }
-      assert_equal(true, @object.inspect.tainted?)
-   end
-
    def test_inspect_expected_errors
       assert_raise(ArgumentError){ @object.inspect(1) }
    end

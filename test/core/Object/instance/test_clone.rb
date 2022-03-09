@@ -45,13 +45,6 @@ class TC_Object_Clone_InstanceMethod < Test::Unit::TestCase
       assert_equal(true, @clone.frozen?)
    end
 
-   def test_clone_keeps_tainted_state
-      assert_nothing_raised{ @custom.taint }
-      assert_nothing_raised{ @clone = @custom.clone }
-      assert_equal(true, @custom.tainted?)
-      assert_equal(true, @clone.tainted?)
-   end
-
    def test_clone_expected_errors
       assert_raise(ArgumentError){ @object.clone(true) }
       assert_raise(TypeError){ 7.clone }

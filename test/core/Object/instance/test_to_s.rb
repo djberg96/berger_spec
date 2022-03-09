@@ -25,11 +25,6 @@ class TC_Object_ToS_InstanceMethod < Test::Unit::TestCase
       assert_equal('main', $object_to_s_main)
    end
 
-   def test_to_s_tainted
-      assert_nothing_raised{ @object.taint }
-      assert_equal(true, @object.to_s.tainted?)
-   end
-
    def test_to_s_expected_errors
       assert_raise(ArgumentError){ @object.to_s(1) }
    end

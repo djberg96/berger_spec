@@ -45,13 +45,6 @@ class TC_Object_Dup_InstanceMethod < Test::Unit::TestCase
       assert_equal(true, @dup.frozen?)
    end
 
-   def test_dup_keeps_tainted_state
-      assert_nothing_raised{ @custom.taint }
-      assert_nothing_raised{ @dup = @custom.clone }
-      assert_equal(true, @custom.tainted?)
-      assert_equal(true, @dup.tainted?)
-   end
-
    def test_dup_expected_errors
       assert_raise(ArgumentError){ @object.dup(true) }
       assert_raise(TypeError){ 7.dup }
