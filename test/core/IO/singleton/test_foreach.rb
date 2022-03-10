@@ -68,11 +68,6 @@ class TC_IO_Foreach_ClassMethod < Test::Unit::TestCase
     assert_nothing_raised{ IO.foreach(@filename, nil, mode: 'rb', encoding: Encoding::UTF_16LE){} }
   end
 
-  test "foreach yields tainted strings" do
-    IO.foreach(@filename){ |line| @array << line }
-    assert_true(@array[0].tainted?)
-  end
-
   test "foreach without a block" do
     assert_kind_of(Enumerator, IO.foreach(@filename))
   end

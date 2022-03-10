@@ -18,7 +18,7 @@ class TC_IO_Sysopen_ClassMethod < Test::Unit::TestCase
    def test_sysopen
       assert_respond_to(IO, :sysopen)
       assert_nothing_raised{ @fd1 = IO.sysopen(@file) }
-      assert_kind_of(Fixnum, @fd1)
+      assert_kind_of(Integer, @fd1)
       assert_equal(true, @fd1 > 2)
    end
 

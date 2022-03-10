@@ -17,7 +17,7 @@ class TC_IO_PosSet_InstanceMethod < Test::Unit::TestCase
   test "pos= basic functionality" do
     assert_respond_to(@handle, :pos=)
     assert_nothing_raised{ @handle.pos = 0 }
-    assert_kind_of(Fixnum, @handle.pos = 0)
+    assert_kind_of(Integer, @handle.pos = 0)
   end
 
   test "pos= returns expected result" do

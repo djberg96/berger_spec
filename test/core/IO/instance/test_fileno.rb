@@ -16,7 +16,7 @@ class TC_IO_Fileno_InstanceMethod < Test::Unit::TestCase
 
   test "fileno basic functionality" do
     assert_respond_to(@handle, :fileno)
-    assert_kind_of(Fixnum, @handle.fileno)
+    assert_kind_of(Integer, @handle.fileno)
     assert_true(@handle.fileno > 2)
   end
 
