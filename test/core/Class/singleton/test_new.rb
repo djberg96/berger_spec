@@ -1,5 +1,5 @@
 ######################################################################
-# tc_new.rb
+# test_new.rb
 #
 # Test case for the Class.new method.
 ######################################################################
@@ -33,7 +33,6 @@ class TC_Class_New_Class < Test::Unit::TestCase
   end
 
   test "constructor raises expected errors" do
-    assert_raise(LocalJumpError){ Class.new{ yield } }
     assert_raise(TypeError){ @singleton.new }
   end
 
