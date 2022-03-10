@@ -16,7 +16,7 @@ class TC_MatchData_Begin_InstanceMethod < Test::Unit::TestCase
   test "begin basic functionality" do
     assert_respond_to(@match, :begin)
     assert_nothing_raised{ @match.begin(0) }
-    assert_kind_of(Fixnum, @match.begin(0))
+    assert_kind_of(Integer, @match.begin(0))
   end
 
   test "begin returns expected results" do

@@ -17,13 +17,13 @@ class TC_MatchData_Length_InstanceMethod < Test::Unit::TestCase
    def test_length_basic
       assert_respond_to(@match, :length)
       assert_nothing_raised{ @match.length }
-      assert_kind_of(Fixnum, @match.length)
+      assert_kind_of(Integer, @match.length)
    end
 
    def test_size_alias
       assert_respond_to(@match, :size)
       assert_nothing_raised{ @match.size }
-      assert_kind_of(Fixnum, @match.size)
+      assert_kind_of(Integer, @match.size)
    end
 
    # The length includes the full match, i.e. index 0, as well as the

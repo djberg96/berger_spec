@@ -16,7 +16,7 @@ class TC_MatchData_End_InstanceMethod < Test::Unit::TestCase
   test "end basic functionality" do
     assert_respond_to(@match, :end)
     assert_nothing_raised{ @match.end(0) }
-    assert_kind_of(Fixnum, @match.end(0))
+    assert_kind_of(Integer, @match.end(0))
   end
 
   test "end returns expected results" do
