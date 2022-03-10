@@ -44,23 +44,6 @@ namespace "test" do
       end
     end
 
-    desc "Runs the test suite for the Bignum class"
-    Rake::TestTask.new('bignum') do |t|
-      t.test_files = FileList['test/core/Bignum/*/*.rb']
-      t.warning = true
-    end
-
-    namespace "bignum" do
-      Dir['test/core/Bignum/instance/*.rb'].each{ |file|
-        name = File.basename(file, '.rb').split('_')[1..-1].join('_')
-        Rake::TestTask.new(name) do |t|
-          t.test_files = [file]
-          t.warning = true
-          t.verbose = true
-        end
-      }
-    end
-
     desc "Runs the test suite for the Binding class"
     Rake::TestTask.new('binding') do |t|
       t.test_files = FileList['test/core/Binding/*/*.rb']
@@ -220,26 +203,6 @@ namespace "test" do
           t.verbose = true
         end
       }
-    end
-
-    desc "Runs the test suite for the Fixnum class"
-    Rake::TestTask.new('fixnum') do |t|
-      t.libs << 'lib'
-      t.warning = true
-      t.test_files = FileList['test/core/Fixnum/*/*.rb']
-    end
-
-    namespace "fixnum" do
-      namespace "instance" do
-        Dir['test/core/Fixnum/instance/*.rb'].each{ |file|
-          name = File.basename(file, '.rb').split('_')[1..-1].join('_')
-          Rake::TestTask.new(name) do |t|
-            t.test_files = [file]
-            t.warning = true
-            t.verbose = true
-          end
-        }
-      end
     end
 
     desc "Runs the test suite for the Float class"
