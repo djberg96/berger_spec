@@ -15,7 +15,7 @@ class TC_FileStat_Dev_InstanceMethod < Test::Unit::TestCase
 
    def test_dev_basic
       assert_respond_to(@stat, :dev)
-      assert_kind_of(Fixnum, @stat.dev)
+      assert_kind_of(Integer, @stat.dev)
    end
 
    def test_dev

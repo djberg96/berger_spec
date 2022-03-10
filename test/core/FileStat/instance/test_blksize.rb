@@ -18,7 +18,7 @@ class TC_FileStat_Blksize_Instance < Test::Unit::TestCase
       if WINDOWS
          assert_nil(@stat.blksize)
       else      
-         assert_kind_of(Fixnum, @stat.blksize)
+         assert_kind_of(Integer, @stat.blksize)
       end
    end
 

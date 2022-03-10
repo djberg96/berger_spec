@@ -20,7 +20,7 @@ class TC_FileStat_Size_InstanceMethod < Test::Unit::TestCase
    end
 
    def test_size
-      assert_kind_of(Fixnum, @stat.size)
+      assert_kind_of(Integer, @stat.size)
       assert_equal(true, @stat.size > 0)
    end
 

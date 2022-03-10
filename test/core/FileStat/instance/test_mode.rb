@@ -14,7 +14,7 @@ class TC_FileStat_Mode_Instance < Test::Unit::TestCase
 
    def test_mode_basic
       assert_respond_to(@stat, :mode)
-      assert_kind_of(Fixnum, @stat.mode)
+      assert_kind_of(Integer, @stat.mode)
    end
 
    def test_mode

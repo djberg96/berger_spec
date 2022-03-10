@@ -13,7 +13,7 @@ class TC_FileStat_Uid_Instance < Test::Unit::TestCase
 
    def test_uid_basic
       assert_respond_to(@stat, :uid)
-      assert_kind_of(Fixnum, @stat.uid)
+      assert_kind_of(Integer, @stat.uid)
    end
 
    def test_uid_expected_errors

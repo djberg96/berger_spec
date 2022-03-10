@@ -19,7 +19,7 @@ class TC_FileStat_RdevMinor_InstanceMethod < Test::Unit::TestCase
   end
 
   test "rdev_minor returns expected type of value" do
-    expected_type = WINDOWS ? NilClass : Fixnum
+    expected_type = WINDOWS ? NilClass : Integer
     assert_kind_of(expected_type, @stat.rdev_minor)
   end
 

@@ -13,7 +13,7 @@ class TC_FileStat_NLink_Instance < Test::Unit::TestCase
 
    def test_nlink_basic
       assert_respond_to(@stat, :nlink)
-      assert_kind_of(Fixnum, @stat.nlink)
+      assert_kind_of(Integer, @stat.nlink)
    end
 
    def test_nlink

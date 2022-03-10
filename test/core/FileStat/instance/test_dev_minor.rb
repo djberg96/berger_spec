@@ -19,7 +19,7 @@ class TC_FileStat_DevMinor_InstanceMethod < Test::Unit::TestCase
       if WINDOWS
          assert_nil(@stat.dev_minor)
       else
-         assert_kind_of(Fixnum, @stat.dev_minor)
+         assert_kind_of(Integer, @stat.dev_minor)
       end
    end
 

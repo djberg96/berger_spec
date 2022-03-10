@@ -15,7 +15,7 @@ class TC_FileStat_Ino_Instance < Test::Unit::TestCase
 
    def test_ino_basic
       assert_respond_to(@stat, :ino)
-      assert_kind_of(Fixnum, @stat.ino)
+      assert_kind_of(Integer, @stat.ino)
    end
 
    def test_ino

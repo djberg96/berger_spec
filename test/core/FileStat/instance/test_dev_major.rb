@@ -18,7 +18,7 @@ class TC_FileStat_DevMajor_InstanceMethod < Test::Unit::TestCase
       if WINDOWS
          assert_nil(@stat.dev_major)
       else
-         assert_kind_of(Fixnum, @stat.dev_major)
+         assert_kind_of(Integer, @stat.dev_major)
       end
    end
 

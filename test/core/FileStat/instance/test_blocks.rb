@@ -18,7 +18,7 @@ class TC_FileStat_Blocks_InstanceMethod < Test::Unit::TestCase
       if WINDOWS
          assert_nil(@stat.blocks)
       else
-         assert_kind_of(Fixnum, @stat.blocks)
+         assert_kind_of(Integer, @stat.blocks)
       end
    end
 

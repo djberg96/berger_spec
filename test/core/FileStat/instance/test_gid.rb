@@ -13,7 +13,7 @@ class TC_FileStat_Gid_Instance < Test::Unit::TestCase
 
    def test_gid_basic
       assert_respond_to(@stat, :gid)
-      assert_kind_of(Fixnum, @stat.gid)
+      assert_kind_of(Integer, @stat.gid)
    end
 
    def test_gid_expected_errors

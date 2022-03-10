@@ -15,7 +15,7 @@ class TC_FileStat_Rdev_InstanceMethod < Test::Unit::TestCase
 
    def test_rdev_basic
       assert_respond_to(@stat, :rdev)
-      assert_kind_of(Fixnum, @stat.rdev)
+      assert_kind_of(Integer, @stat.rdev)
    end
 
    def test_rdev
