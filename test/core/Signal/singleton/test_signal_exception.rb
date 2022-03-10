@@ -9,7 +9,7 @@ require 'test/unit'
 
 class TC_Signal_Exception_Class < Test::Unit::TestCase
   include Test::Helper
-    
+
   def setup
     @sig_name  = WINDOWS ? 'ABRT' : 'USR1'
     @full_name = 'SIG' + @sig_name
@@ -56,10 +56,10 @@ class TC_Signal_Exception_Class < Test::Unit::TestCase
   end
 
   test "signal constructor requires a string or numeric argument" do
-    assert_raise(TypeError){ SignalException.new({1 => 2}) }
-    assert_raise(TypeError){ SignalException.new([]) }
+    assert_raise(ArgumentError){ SignalException.new({1 => 2}) }
+    assert_raise(ArgumentError){ SignalException.new([]) }
   end
-   
+
   def teardown
     @sig_exc   = nil
     @sig_num   = nil
