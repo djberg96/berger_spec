@@ -170,7 +170,7 @@ module Test
           buf[84,64].tr("\000", '')
         end
       else
-        `date`.chomp.split[4]
+        `TZ=EDT5EST date`.chomp.split[4]
       end
     end
 
