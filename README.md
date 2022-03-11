@@ -16,6 +16,8 @@ implementations to conform to, but I think days are now long past.
 I will leave this repo up for historical purposes, but in an archived state.
 You are free to copy any bits that find useful.
 
+[Note that I may sometimes temporarily unarchive it to putter about.]
+
 ## Prerequisites
 * rake 0.9.2 or later.
 * test-unit 2.4 or later.
