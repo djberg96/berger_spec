@@ -25,7 +25,7 @@ class TC_ProcessUID_Eid_ModuleMethod < Test::Unit::TestCase
    unless WINDOWS
       def test_eid
          assert_nothing_raised{ Process::UID.eid }
-         assert_kind_of(Fixnum, Process::UID.eid)
+         assert_kind_of(Integer, Process::UID.eid)
       end
    end
 

@@ -17,7 +17,7 @@ class TC_Process_Getpgid_SingletonMethod < Test::Unit::TestCase
     omit_if_windows('Process.getpgid')
     assert_respond_to(Process, :getpgid)
     assert_nothing_raised{ Process.getpgid(@pid) }
-    assert_kind_of(Fixnum, Process.getpgid(@pid))
+    assert_kind_of(Integer, Process.getpgid(@pid))
   end
 
   test "getpgid returns expected results" do

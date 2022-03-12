@@ -19,7 +19,7 @@ class TC_File_Chmod_ClassMethod < Test::Unit::TestCase
   test "chmod basic functionality" do
     assert_respond_to(File, :chmod)
     assert_nothing_raised{ File.chmod(0644, @file1) }
-    assert_kind_of(Fixnum, File.chmod(0644, @file1))
+    assert_kind_of(Integer, File.chmod(0644, @file1))
   end
 
   test "chmod can be called on multiple files" do

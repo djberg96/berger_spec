@@ -20,7 +20,7 @@ class TC_File_Lchmod_SingletonMethod < Test::Unit::TestCase
     omit_if(WINDOWS)
     assert_respond_to(File, :lchmod)
     assert_nothing_raised{ File.lchmod(0644, @file1) }
-    assert_kind_of(Fixnum, File.lchmod(0644, @file1))
+    assert_kind_of(Integer, File.lchmod(0644, @file1))
   end
 
   test "lchmod can be called on multiple files" do

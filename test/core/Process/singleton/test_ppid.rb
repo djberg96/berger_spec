@@ -12,7 +12,7 @@ class TC_Process_Ppid_SingletonMethod < Test::Unit::TestCase
   test "ppid basic functionality" do
     assert_respond_to(Process, :ppid)
     assert_nothing_raised{ Process.ppid }
-    assert_kind_of(Fixnum, Process.ppid)
+    assert_kind_of(Integer, Process.ppid)
   end
 
   test "ppid returns expected results" do

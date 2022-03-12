@@ -43,7 +43,7 @@ class TC_String_Comparison_InstanceMethod < Test::Unit::TestCase
   test "comparison basic functionality" do
     assert_respond_to(@long, :<=>)
     assert_nothing_raised{ @long <=> @short }
-    assert_kind_of(Fixnum, @long <=> @short)
+    assert_kind_of(Integer, @long <=> @short)
   end
 
   test "comparison of strings against other strings works as expected" do

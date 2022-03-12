@@ -17,7 +17,7 @@ class Test_Array_Hash_InstanceMethod < Test::Unit::TestCase
   test "hash basic functionality" do
     assert_respond_to(@array_chr, :hash)
     assert_nothing_raised{ @array_chr.hash }
-    assert_kind_of(Fixnum, @array_chr.hash)
+    assert_kind_of(Integer, @array_chr.hash)
   end
 
   test "hash of array of characters expected results" do

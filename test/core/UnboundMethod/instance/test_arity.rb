@@ -28,7 +28,7 @@ class TC_UnboundMethod_Arity_InstanceMethod < Test::Unit::TestCase
    def test_arity_basic
       assert_respond_to(@one, :arity)
       assert_nothing_raised{ @one.arity }
-      assert_kind_of(Fixnum, @one.arity)
+      assert_kind_of(Integer, @one.arity)
    end
 
    def test_arity

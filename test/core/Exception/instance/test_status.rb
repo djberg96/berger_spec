@@ -15,7 +15,7 @@ class TC_Exception_Status_InstanceMethod < Test::Unit::TestCase
   test "status method basic functionality" do
     assert_respond_to(@err, :status)
     assert_nothing_raised{ @err.status }
-    assert_kind_of(Fixnum, @err.status)
+    assert_kind_of(Integer, @err.status)
   end
 
   test "status method returns the expected results" do

@@ -14,7 +14,7 @@ class TC_Process_Pid_ModuleMethod < Test::Unit::TestCase
   end
 
   test "pid global variable is set to the expected value" do
-    assert_kind_of(Fixnum, $$)
+    assert_kind_of(Integer, $$)
     assert_equal(Process.pid, $$)
   end
 end

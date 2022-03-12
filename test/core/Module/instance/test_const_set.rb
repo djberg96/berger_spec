@@ -19,7 +19,7 @@ class TC_Module_ConstSet_InstanceMethod < Test::Unit::TestCase
    def test_const_set_basic
       assert_respond_to(CSet_Mod_A, :const_set)
       assert_nothing_raised{ CSet_Mod_A.const_set('TEST_A', 7) }
-      assert_kind_of(Fixnum, CSet_Mod_A.const_set('TEST_B', 8))
+      assert_kind_of(Integer, CSet_Mod_A.const_set('TEST_B', 8))
    end
 
    def test_const_set

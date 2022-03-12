@@ -18,7 +18,7 @@ class TC_Process_Gid_SingletonMethod < Test::Unit::TestCase
 
   test "gid basic functionality" do
     assert_respond_to(Process, :gid)
-    assert_kind_of(Fixnum, Process.gid)
+    assert_kind_of(Integer, Process.gid)
     assert_true(Process.gid < 100000)
   end
 

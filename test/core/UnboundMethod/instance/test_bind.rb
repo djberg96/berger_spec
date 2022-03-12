@@ -47,7 +47,7 @@ class TC_UnboundMethod_Bind_InstanceMethod < Test::Unit::TestCase
 
    def test_bind_expected_failures
       assert_raise(TypeError){ @bm = @meth.bind(@baz) }
-      assert_raise(TypeError){ @bm = @meth.bind(Fixnum) }
+      assert_raise(TypeError){ @bm = @meth.bind(Integer) }
       assert_raise(TypeError){ @bm = @meth.bind(77) }
    end
 

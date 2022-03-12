@@ -24,7 +24,7 @@ class TC_Errno_Module < Test::Unit::TestCase
   end
 
   test "Errno class constants are operating system error numbers" do
-    assert_kind_of(Fixnum, Errno::EINVAL::Errno)
-    assert_kind_of(Fixnum, Errno::EACCES::Errno)
+    assert_kind_of(Integer, Errno::EINVAL::Errno)
+    assert_kind_of(Integer, Errno::EACCES::Errno)
   end
 end

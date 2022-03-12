@@ -25,7 +25,7 @@ class TC_ProcessGID_Eid_ModuleMethod < Test::Unit::TestCase
   def test_eid
     omit_if(WINDOWS, "eid test skipped on MS Windows")
     assert_nothing_raised{ Process::GID.eid }
-    assert_kind_of(Fixnum, Process::GID.eid)
+    assert_kind_of(Integer, Process::GID.eid)
   end
 
   def teardown

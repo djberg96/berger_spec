@@ -21,7 +21,7 @@ class TC_Process_Egid_SingletonMethod < Test::Unit::TestCase
   test "egid returns the expected results" do
     omit_if(WINDOWS, "Process.egid test skipped on MS Windows")
     assert_nothing_raised{ Process.egid }
-    assert_kind_of(Fixnum, Process.egid)
+    assert_kind_of(Integer, Process.egid)
     assert_true(Process.egid < 100000)
   end
 

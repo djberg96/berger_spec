@@ -23,7 +23,7 @@ class TC_String_MatchTilde_InstanceMethod < Test::Unit::TestCase
   def test_match_tilde_basic
     assert_respond_to(@simple, :=~)
     assert_nothing_raised{ @simple =~ /\w+/ }
-    assert_kind_of(Fixnum, @complex =~ /\d/) # Note, not a MatchData object
+    assert_kind_of(Integer, @complex =~ /\d/) # Note, not a MatchData object
   end
 
   def test_match_tilde

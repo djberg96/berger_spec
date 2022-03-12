@@ -13,7 +13,7 @@ class Test_Array_Length_InstanceMethod < Test::Unit::TestCase
   test "length basic functionality" do
     assert_respond_to(@array, :length)
     assert_nothing_raised{ @array.length }
-    assert_kind_of(Fixnum, @array.length)
+    assert_kind_of(Integer, @array.length)
   end
 
   test "length expected results" do

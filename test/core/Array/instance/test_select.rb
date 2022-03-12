@@ -22,7 +22,7 @@ class TC_Array_Select_InstanceMethod < Test::Unit::TestCase
 
   test "select returns an array when a match is found" do
     assert_equal(['alpha', 'beta'], @array.select{ |e| e =~ /\w/i })
-    assert_equal([1], @array.select{ |e| e.kind_of?(Fixnum) })
+    assert_equal([1], @array.select{ |e| e.kind_of?(Integer) })
   end
 
   test "select returns an empty array when no match is found" do

@@ -21,7 +21,7 @@ class TC_Process_Getpriority_SingletonMethod < Test::Unit::TestCase
   test "getpriority returns expected results" do
     omit_if_windows('Process.getpriority')
 
-    assert_kind_of(Fixnum, Process.getpriority(@kind, 0))
+    assert_kind_of(Integer, Process.getpriority(@kind, 0))
     assert_true(Process.getpriority(@kind, Process.pid) >= 0)
     assert_true(Process.getpriority(@kind, Process.pid) <= 100000)
   end

@@ -21,7 +21,7 @@ class TC_ObjectSpace_Id2ref_ClassMethod < Test::Unit::TestCase
 
    def test_id2ref
       assert_kind_of(String, ObjectSpace._id2ref(@string.object_id))
-      assert_kind_of(Fixnum, ObjectSpace._id2ref(@fixnum.object_id))
+      assert_kind_of(Integer, ObjectSpace._id2ref(@fixnum.object_id))
 
       assert_equal(@string, ObjectSpace._id2ref(@string.object_id))
       assert_equal(@fixnum, ObjectSpace._id2ref(@fixnum.object_id))

@@ -14,7 +14,7 @@ class Test_Array_RIndex_InstanceMethod < Test::Unit::TestCase
   test "rindex basic functionality" do
     assert_respond_to(@array, :rindex)
     assert_nothing_raised{ @array.rindex(1) }
-    assert_kind_of([Fixnum, NilClass], @array.rindex(1))
+    assert_kind_of([Integer, NilClass], @array.rindex(1))
   end
 
   test "rindex returns expected value if match is found" do

@@ -14,7 +14,7 @@ class Test_Array_Index_InstanceMethod < Test::Unit::TestCase
   test "index basic functionality" do
     assert_respond_to(@array, :index)
     assert_nothing_raised{ @array.index(1) }
-    assert_kind_of(Fixnum, @array.index(1))
+    assert_kind_of(Integer, @array.index(1))
   end
 
   test "index where a result is found" do

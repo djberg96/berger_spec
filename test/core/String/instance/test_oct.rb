@@ -17,7 +17,7 @@ class TC_String_Oct_InstanceMethod < Test::Unit::TestCase
    def test_oct_basic
       assert_respond_to(@pos_num, :oct)
       assert_nothing_raised{ @pos_num.oct }
-      assert_kind_of(Fixnum, @pos_num.oct)
+      assert_kind_of(Integer, @pos_num.oct)
    end
 
    def test_oct

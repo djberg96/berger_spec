@@ -110,7 +110,7 @@ class TC_Rational_Stdlib < Test::Unit::TestCase
     assert_respond_to(@rat1, :hash)
     assert_nothing_raised{ @rat1.hash }
     assert_nothing_raised{ @rat4.hash }
-    assert_kind_of(Fixnum, @rat1.hash)
+    assert_kind_of(Integer, @rat1.hash)
   end
 
   test "equality operator basic functionality" do

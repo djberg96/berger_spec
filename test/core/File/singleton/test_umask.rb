@@ -24,7 +24,7 @@ class TC_File_Umask_SingletonMethod < Test::Unit::TestCase
   test "umask basic functionality" do
     assert_respond_to(File, :umask)
     assert_nothing_raised{ File.umask }
-    assert_kind_of(Fixnum, File.umask)
+    assert_kind_of(Integer, File.umask)
   end
 
   test "umask returns expected default value unixy platforms" do

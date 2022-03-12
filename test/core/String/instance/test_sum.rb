@@ -15,7 +15,7 @@ class TC_String_Sum_Instance < Test::Unit::TestCase
    def test_sum_basic
       assert_respond_to(@string1, :sum)
       assert_nothing_raised{ @string1.sum }
-      assert_kind_of(Fixnum, @string1.sum)
+      assert_kind_of(Integer, @string1.sum)
    end
 
    def test_sum
