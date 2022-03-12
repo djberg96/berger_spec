@@ -42,8 +42,13 @@ class TC_Enumerable_Any_InstanceMethod < Test::Unit::TestCase
     assert_equal(false, [].any?)
   end
 
-  test "any? does not accept any parameters" do
-    assert_raise(ArgumentError){ [1, 2, 3].any?(1) }
+  test "any? with an argument works as expected" do
+    assert_true([1, 2, 3].any?(1))
+    assert_false([1, 2, 3].any?(4))
+  end
+
+  test "any? accepts only one argument" do
+    assert_raise(ArgumentError){ [1, 2, 3].any?(1, 2) }
   end
 
   def teardown

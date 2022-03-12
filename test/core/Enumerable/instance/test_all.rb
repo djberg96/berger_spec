@@ -45,8 +45,13 @@ class TC_Enumerable_All_InstanceMethod < Test::Unit::TestCase
     assert_equal(true, [true].all?)
   end
 
-  test "all? does not accept any arguments" do
-    assert_raise(ArgumentError){ [1, 2, 3].all?(1) }
+  test "all? with an argument returns the expected results" do
+    assert_true([1, 1, 1].all?(1))
+    assert_false([1, 1, 1].all?(2))
+  end
+
+  test "all? does not accept more than one argument" do
+    assert_raise(ArgumentError){ [1, 2, 3].all?(1, 2) }
   end
 
   def teardown
