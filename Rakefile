@@ -537,7 +537,7 @@ namespace "test" do
 
     namespace "thread" do
       namespace "singleton" do
-        Dir['test/core/Thread/instance/*.rb'].each{ |file|
+        Dir['test/core/Thread/singleton/*.rb'].each{ |file|
           name = File.basename(file, '.rb').split('_')[1..-1].join('_')
           Rake::TestTask.new(name) do |t|
             t.test_files = [file]
