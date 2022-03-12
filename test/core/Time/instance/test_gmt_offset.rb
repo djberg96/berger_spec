@@ -19,7 +19,7 @@ class TC_Time_GmtOffset_InstanceMethod < Test::Unit::TestCase
    def test_gmt_offset_basic
       assert_respond_to(@local, :gmt_offset)
       assert_nothing_raised{ @local.gmt_offset }
-      assert_kind_of(Fixnum, @local.gmt_offset)
+      assert_kind_of(Integer, @local.gmt_offset)
    end
 
    def test_gmt_offset
