@@ -60,10 +60,6 @@ class TC_Kerel_GlobalVariables_ModuleMethod < Test::Unit::TestCase
     assert_true(Kernel.global_variables.include?(:$LOAD_PATH))
   end
 
-  test "$SAFE is included in global_variables" do
-    assert_true(Kernel.global_variables.include?(:$SAFE))
-  end
-
   test "the global_variables method does not take an argument" do
     assert_raise(ArgumentError){ Kernel.global_variables(true) }
   end
