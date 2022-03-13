@@ -42,6 +42,10 @@ class Test_Float_Floor_InstanceMethod < Test::Unit::TestCase
     assert_raise(TypeError){ 0.555.floor(nil) }
   end
 
+  test "floor method only accepts one argument" do
+    assert_raise(ArgumentError){ @float_pos.floor(1,2) }
+  end
+
   def teardown
     @float_pos = nil
     @float_neg = nil
