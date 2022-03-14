@@ -18,9 +18,9 @@ class TC_Dir_Glob_SingletonMethod < Test::Unit::TestCase
   end
 
   def setup
-    @foo_files = %w/a.c a.cpp b.c b.h g.rb d/
-    @bar_files = %w/a.c a2.cpp a3.h a4.rb/
-    @dot_files = %w/.a.p .abc .p a a.p/
+    @foo_files = %w[a.c a.cpp b.c b.h g.rb d]
+    @bar_files = %w[a.c a2.cpp a3.h a4.rb]
+    @dot_files = %w[.a.p .abc .p a a.p]
 
     FileUtils.mkdir_p('foo/bar/baz')
     FileUtils.mkdir_p('dot')
@@ -43,7 +43,7 @@ class TC_Dir_Glob_SingletonMethod < Test::Unit::TestCase
 
   test "glob with dotmatch" do
     assert_equal(
-      %w[. .. .a.p .abc .p a a.p],
+      %w[. .a.p .abc .p a a.p],
       base(Dir.glob('dot/*', File::FNM_DOTMATCH))
     )
 
@@ -54,38 +54,38 @@ class TC_Dir_Glob_SingletonMethod < Test::Unit::TestCase
   end
 
   test "glob with casefold" do
-    assert_equal(%w/a.c a.cpp/, base(Dir.glob('foo/A*', File::FNM_CASEFOLD)))
-    assert_equal(%w/a.c a.cpp/, base(Dir.glob('foo/a*', File::FNM_CASEFOLD)))
-    assert_equal(%w/a a.p/, base(Dir.glob('dot/A*', File::FNM_CASEFOLD)))
+    assert_equal(%w[a.c a.cpp], base(Dir.glob('foo/A*', File::FNM_CASEFOLD)))
+    assert_equal(%w[a.c a.cpp], base(Dir.glob('foo/a*', File::FNM_CASEFOLD)))
+    assert_equal(%w[a a.p], base(Dir.glob('dot/A*', File::FNM_CASEFOLD)))
     assert_equal([], base(Dir.glob('dot/P*', File::FNM_CASEFOLD)))
   end
 
   test "glob with escape characters" do
     omit_if(WINDOWS, "glob with escape skipped on this platform")
-    assert_equal(%w/a*/, base(Dir.glob('foo/bar/baz/a\*')))
-    assert_equal(%w/a**/, base(Dir.glob('foo/bar/baz/a\*\*')))
-    assert_equal(%w/a* a**/, base(Dir.glob('foo/bar/baz/a\**')))
-    assert_equal(%w/a?/, base(Dir.glob('foo/bar/baz/a\?')))
-    assert_equal(%w/a^/, base(Dir.glob('foo/bar/baz/a\^')))
-    assert_equal(%w/a^/, base(Dir.glob('foo/bar/baz/a[\^]')))
+    assert_equal(%w[a*], base(Dir.glob('foo/bar/baz/a\*')))
+    assert_equal(%w[a**], base(Dir.glob('foo/bar/baz/a\*\*')))
+    assert_equal(%w[a* a**], base(Dir.glob('foo/bar/baz/a\**')))
+    assert_equal(%w[a?], base(Dir.glob('foo/bar/baz/a\?')))
+    assert_equal(%w[a^], base(Dir.glob('foo/bar/baz/a\^')))
+    assert_equal(%w[a^], base(Dir.glob('foo/bar/baz/a[\^]')))
   end
 
   test "glob with basic pattern" do
-    assert_equal(%w/a.c a.cpp b.c b.h bar d g.rb/, base(Dir.glob('foo/{*}')))
-    assert_equal(%w/g.rb/, base(Dir.glob('foo/{*.rb}')))
-    assert_equal(%w/a.cpp g.rb/, base(Dir.glob('foo/*.{rb,cpp}')))
-    assert_equal(%w/a.cpp g.rb/, base(Dir.glob('foo/*.{rb,cp}*')))
+    assert_equal(%w[a.c a.cpp b.c b.h bar d g.rb], base(Dir.glob('foo/{*}')))
+    assert_equal(%w[g.rb], base(Dir.glob('foo/{*.rb}')))
+    assert_equal(%w[a.cpp g.rb], base(Dir.glob('foo/*.{rb,cpp}')))
+    assert_equal(%w[a.cpp g.rb], base(Dir.glob('foo/*.{rb,cp}*')))
     assert_equal([], base(Dir.glob('foo/*.{}')))
   end
 
   test "glob with character list" do
-    assert_equal(%w/d/, base(Dir.glob('foo/[a-d]')))
-    assert_equal(%w/a.c a.cpp/, base(Dir.glob('foo/[a]*')))
-    assert_equal(%w/a.c a.cpp b.c b.h bar d/, base(Dir.glob('foo/[a-d]*')))
-    assert_equal(%w/d g.rb/, base(Dir.glob('foo/[^a-b]*')))
+    assert_equal(%w[d], base(Dir.glob('foo/[a-d]')))
+    assert_equal(%w[a.c a.cpp], base(Dir.glob('foo/[a]*')))
+    assert_equal(%w[a.c a.cpp b.c b.h bar d], base(Dir.glob('foo/[a-d]*')))
+    assert_equal(%w[d g.rb], base(Dir.glob('foo/[^a-b]*')))
 
-    if WINDOWS
-      assert_equal(%w/a.c a.cpp b.c b.h bar d g.rb/, base(Dir.glob('foo/[A-Z]*')))
+    if File.identical?(Dir.home, Dir.home.swapcase)
+      assert_equal(%w[a.c a.cpp b.c b.h bar d g.rb], base(Dir.glob('foo/[A-Z]*')))
     else
       assert_equal([], base(Dir.glob('foo/[A-Z]*')))
     end
@@ -97,10 +97,10 @@ class TC_Dir_Glob_SingletonMethod < Test::Unit::TestCase
   end
 
   test "glob with single character match" do
-    assert_equal(%w/a.c/, base(Dir.glob('foo/a.?')))
-    assert_equal(%w/a.cpp/, base(Dir.glob('foo/a.c?p')))
-    assert_equal(%w/a.c b.c b.h bar/, base(Dir.glob('foo/???')))
-    assert_equal(%w/a.c b.c b.h/, base(Dir.glob('foo/?.?')))
+    assert_equal(%w[a.c], base(Dir.glob('foo/a.?')))
+    assert_equal(%w[a.cpp], base(Dir.glob('foo/a.c?p')))
+    assert_equal(%w[a.c b.c b.h bar], base(Dir.glob('foo/???')))
+    assert_equal(%w[a.c b.c b.h], base(Dir.glob('foo/?.?')))
   end
 
   test "glob accepts metacharacters properly" do
