@@ -52,7 +52,7 @@ A list of bugs and other things discovered as a result of this test suite, eithe
   share a common file pointer. IO just uses the inherited Object#clone method,
   and dup's the file pointer.
 
-## JRuby, Rubinius, etc
+## JRuby, Rubinius, Truffleruby, etc
   The majority of the bugs reported by me for other implementations of Ruby
   are the direct result of this test suite. For JRuby, that's over 100 bug
   reports at this point.
