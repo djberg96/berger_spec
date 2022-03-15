@@ -43,7 +43,7 @@ class TC_Dir_Glob_SingletonMethod < Test::Unit::TestCase
 
   test "glob with dotmatch" do
     assert_equal(
-      %w[. .a.p .abc .p a a.p],
+      %w[. .. .a.p .abc .p a a.p],
       base(Dir.glob('dot/*', File::FNM_DOTMATCH))
     )
 
