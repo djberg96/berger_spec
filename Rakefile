@@ -535,6 +535,12 @@ namespace "test" do
       t.warning = true
     end
 
+    desc "Runs the test suite for the Thread class"
+    Rake::TestTask.new('thread') do |t|
+      t.test_files = FileList['test/core/Thread/*/*.rb']
+      t.warning = true
+    end
+
     namespace "thread" do
       namespace "singleton" do
         Dir['test/core/Thread/singleton/*.rb'].each{ |file|
