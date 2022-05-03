@@ -32,13 +32,13 @@ class TC_Math_Atanh_SingletonMethod < Test::Unit::TestCase
 
   # This is arguably a platform bug. See ruby-core:10174.
   test "atanh edge cases" do
-    if WINDOWS || OSX
+    if WINDOWS || OSX || TRUFFLE
       assert_nothing_raised{ Math.atanh(1) }
       assert_nothing_raised{ Math.atanh(-1) }
       assert_equal(1, Math.atanh(1).infinite?)
       assert_equal(-1, Math.atanh(-1).infinite?)
     else
-     assert_raises(Errno::ERANGE, Errno::EDOM){ Math.atanh(1) }
+      assert_raises(Errno::ERANGE, Errno::EDOM){ Math.atanh(1) }
       assert_raises(Errno::ERANGE, Errno::EDOM){ Math.atanh(-1) }
     end
   end
