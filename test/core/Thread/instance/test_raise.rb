@@ -9,7 +9,6 @@ require 'test/unit'
 class TC_Thread_Raise_InstanceMethod < Test::Unit::TestCase
   def setup
     @thread = Thread.new{ sleep }
-    @stderr = $stderr.dup
     Thread.pass until @thread.status == 'sleep'
   end
 
