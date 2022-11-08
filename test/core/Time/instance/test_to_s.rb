@@ -27,7 +27,7 @@ class TC_Time_ToS_InstanceMethod < Test::Unit::TestCase
   end
 
   test "to_s returns the expected string" do
-    assert_equal("2007-02-03 04:05:06 -0700", @time.to_s)
+    assert_equal("2007-02-03 04:05:06 #{@offset}", @time.to_s)
     assert_equal("1970-01-01 00:00:00 UTC", Time.gm(1970).to_s)
   end
 
