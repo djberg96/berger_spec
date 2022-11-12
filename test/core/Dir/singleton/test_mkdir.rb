@@ -55,7 +55,7 @@ class TC_Dir_Mkdir_Class < Test::Unit::TestCase
     assert_raise(TypeError){ Dir.mkdir(true) }
   end
 
-  test "the second arguement to mkdir must be a number" do
+  test "the second argument to mkdir must be a number" do
     assert_raise(TypeError){ Dir.mkdir(@dir1, true) }
   end
 
@@ -67,7 +67,6 @@ class TC_Dir_Mkdir_Class < Test::Unit::TestCase
   def teardown
     remove_dir(@dir1) if File.exist?(@dir1)
     remove_dir(@dir2) if File.exist?(@dir2)
-
     @dir1 = nil
     @dir2 = nil
   end
