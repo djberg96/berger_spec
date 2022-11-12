@@ -20,8 +20,8 @@ class TC_Env_Global_Constant < Test::Unit::TestCase
     @cmd = WINDOWS ? 'set' : 'env'
     @env = {}
     `#{@cmd}`.split("\n").each{ |str|
-      key, value = str.split("=")
-      @env[key] = value.to_s
+      str =~ /(.*?)\=(.*)/
+      @env[$1] = $2.to_s
     }
   end
 
@@ -29,15 +29,16 @@ class TC_Env_Global_Constant < Test::Unit::TestCase
     assert_not_nil(ENV)
   end
 
-  # This could fail if you've messed with your shell environment
+  # These could fail if you've messed with your shell environment
   test "ENV keys should match shell environment" do
     assert_equal(@env.keys.sort, ENV.keys.sort)
-    assert_equal(@env.values.sort, ENV.values.sort)
   end
 
-  # Because ENV is not technically a hash, we validate all of the custom
-  # methods here.
-  #
+  test "ENV values should match shell environment" do
+    assert_equal(@env.values.sort, ENV.values.sort, @env.values.sort - ENV.values.sort)
+  end
+
+  # Because ENV is not technically a hash, we validate all of the custom methods here.
   test "basic check for various ENV methods" do
     assert_respond_to(ENV, :[])
     assert_respond_to(ENV, :[]=)
