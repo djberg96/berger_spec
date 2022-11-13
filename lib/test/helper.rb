@@ -26,7 +26,6 @@ module Test
     TRUFFLE  = defined?(TruffleRuby) ? true : false
     JAVA     = JRUBY || TRUFFLE
 
-
     # Neither JRuby nor Rubinius attempt to implement all (or any) $SAFE rules.
     IGNORE_SAFE = JRUBY || RUBINIUS
 

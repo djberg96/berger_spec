@@ -10,8 +10,8 @@ class TC_Process_Detach_SingletonMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @pid  = nil
-    @skip = WINDOWS || JRUBY
+    @pid = nil
+    @waiter = nil
   end
 
   test "detach basic functionality" do
@@ -19,9 +19,9 @@ class TC_Process_Detach_SingletonMethod < Test::Unit::TestCase
   end
 
   test "detach behaves as expected" do
-    omit_if(@skip, "Process.detach tests skipped on MS Windows and/or JRuby")
-    @pid = fork
-    assert_nothing_raised{ Process.detach(@pid) } if @pid
+    @pid = Process.spawn(RbConfig.ruby, "sleep 2")
+    assert_nothing_raised{ @waiter = Process.detach(@pid) }
+    assert_kind_of(Thread, @waiter)
   end
 
   test "detach requires a single argument" do
@@ -35,7 +35,8 @@ class TC_Process_Detach_SingletonMethod < Test::Unit::TestCase
 
   def teardown
     Process.kill(9, @pid) rescue nil
-    @pid  = nil
-    @skip = nil
+    @waiter.join if @waiter
+    @pid = nil
+    @waiter = nil
   end
 end

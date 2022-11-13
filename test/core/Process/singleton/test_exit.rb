@@ -12,7 +12,7 @@ class TC_Process_Exit_ModuleMethod < Test::Unit::TestCase
 
   def skip_check
     omit_if(WINDOWS, "exit test skipped on MS Windows")
-    omit_if(JRUBY, "exit test skipped on JRuby")
+    omit_if(JAVA, "exit test skipped on Java based platforms")
   end
 
   test "exit method is defined" do

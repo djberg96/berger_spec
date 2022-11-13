@@ -11,7 +11,7 @@ class TC_Process_Abort_ModuleMethod < Test::Unit::TestCase
   include Test::Helper
 
   def setup
-    @skip   = WINDOWS || JRUBY
+    @skip   = WINDOWS || JAVA
     @stderr = STDERR.clone
     @file   = File.join(Dir.pwd, 'test_abort.txt')
     @fh     = File.open(@file, "w")
